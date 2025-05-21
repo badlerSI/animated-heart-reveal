@@ -106,14 +106,14 @@ const AnimatedLogo = () => {
         transition={{ duration: 0.7, ease: "easeInOut", delay: 2.0 }}
       />
 
-      {/* Heart Kanji (z-index 60) - With cyan glow effect, now appears last */}
+      {/* Heart Kanji (z-index 60) - With cyan glow effect, appears last */}
       <motion.img 
         src="/lovable-uploads/040980d6-36c8-4c96-85be-427c43ddbd76.png"
         alt="Heart Symbol"
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-[300px] z-60"
         initial={{ opacity: 0, filter: "drop-shadow(0 0 0px #33C3F0)" }}
         animate={{ 
-          opacity: 1, 
+          opacity: [0, 0, 1], 
           filter: [
             "drop-shadow(0 0 0px #33C3F0)",
             "drop-shadow(0 0 15px #33C3F0)",
@@ -121,7 +121,7 @@ const AnimatedLogo = () => {
           ]
         }}
         transition={{ 
-          opacity: { duration: 0.7, ease: "easeInOut" },
+          opacity: { duration: 0.7, times: [0, 0.7, 1], ease: "easeInOut" },
           filter: { duration: 1.5, times: [0, 0.5, 1] },
           delay: 2.5 
         }}
