@@ -46,6 +46,29 @@ const AnimatedLogo = () => {
     }
   }, [animationPlayed, prefersReducedMotion]);
 
+  // Animation variants for heart glow effect
+  const heartVariants = {
+    initial: { 
+      scale: 1.3,
+      opacity: 0 
+    },
+    animate: { 
+      scale: 1,
+      filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.9))",
+      opacity: 1,
+      transition: { duration: 0.2 }
+    },
+    glow: {
+      filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.65))",
+      transition: { 
+        duration: 2, 
+        repeat: Infinity, 
+        repeatType: "reverse", 
+        ease: "easeInOut" 
+      }
+    }
+  };
+
   return (
     <div className="relative w-full max-w-md mx-auto h-[300px]">
       {/* Audio elements */}
@@ -124,21 +147,9 @@ const AnimatedLogo = () => {
           src="/lovable-uploads/040980d6-36c8-4c96-85be-427c43ddbd76.png"
           alt="Heart Symbol"
           className="w-auto h-auto"
-          initial={{ scale: 1.3 }}
-          animate={!prefersReducedMotion ? [
-            { scale: 1, filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.9))" },
-            { filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.65))" }
-          ] : { scale: 1 }}
-          transition={[
-            { duration: 0.2, delay: 2.5 },
-            { 
-              duration: 2, 
-              delay: 2.7, 
-              repeat: Infinity, 
-              repeatType: "reverse", 
-              ease: "easeInOut" 
-            }
-          ]}
+          initial="initial"
+          animate={!prefersReducedMotion ? ["animate", "glow"] : "animate"}
+          variants={heartVariants}
         />
       </motion.div>
     </div>
