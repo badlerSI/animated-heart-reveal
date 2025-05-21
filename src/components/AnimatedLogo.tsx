@@ -25,12 +25,12 @@ const AnimatedLogo = () => {
     if (!animationPlayed) {
       setAnimationPlayed(true);
       
-      // Define the animation sequence with specific timing
+      // Define the animation sequence with specific timing - UPDATED ORDER
       const sequence = [
-        { element: "soul", delay: 0 },
-        { element: "connect", delay: 500 },
-        { element: "line", delay: 1000 },
-        { element: "interface", delay: 1500 },
+        { element: "connect", delay: 0 },
+        { element: "line", delay: 500 },
+        { element: "interface", delay: 1000 },
+        { element: "soul", delay: 1500 },
         { element: "wave", delay: 2000 },
         { element: "heart", delay: 2500 }
       ];
@@ -65,7 +65,7 @@ const AnimatedLogo = () => {
         <source src="/sounds/electric-crackle.mp3" type="audio/mp3" />
       </audio>
       
-      {/* Soul.png (z-index 10) - Base layer */}
+      {/* Soul.png (z-index 10) - Base layer - NOW APPEARS AFTER INTERFACE */}
       <AnimatePresence>
         {visibleElements.includes("soul") && (
           <motion.img 
