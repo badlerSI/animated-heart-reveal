@@ -47,7 +47,7 @@ const AnimatedLogo = () => {
           }
           
           if (item.element === "heart" && electricCrackleRef.current && !prefersReducedMotion) {
-            electricCrackleRef.current.volume = an0.3;
+            electricCrackleRef.current.volume = 0.3;
             electricCrackleRef.current.play().catch(err => console.log("Audio play error:", err));
           }
         }, item.delay);
