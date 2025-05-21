@@ -46,6 +46,30 @@ const AnimatedLogo = () => {
     }
   }, [animationPlayed, prefersReducedMotion]);
 
+  // Animation variants for wave animation
+  const waveVariants = {
+    hidden: {
+      x: "-100%",
+      opacity: 0
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeInOut"
+      }
+    },
+    wiggle: {
+      y: [0, -4, 4, -4, 4, 0],
+      rotate: [0, 2, -2, 2, -2, 0],
+      transition: {
+        duration: 0.35,
+        times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      }
+    }
+  };
+
   // Animation variants for heart glow effect
   const heartVariants = {
     initial: { 
@@ -54,12 +78,12 @@ const AnimatedLogo = () => {
     },
     animate: { 
       scale: 1,
-      filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.9))",
+      filter: "drop-shadow(0 0 20px rgba(0, 255, 255, 0.9))",
       opacity: 1,
       transition: { duration: 0.2 }
     },
     glow: {
-      filter: "drop-shadow(0 0 16px rgba(0, 255, 255, 0.65))",
+      filter: "drop-shadow(0 0 20px rgba(0, 255, 255, 0.65))",
       transition: { 
         duration: 2, 
         repeat: Infinity, 
@@ -70,7 +94,7 @@ const AnimatedLogo = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-[300px]">
+    <div className="relative w-full max-w-md mx-auto h-[300px] bg-[#0d0d12] rounded-lg">
       {/* Audio elements */}
       <audio ref={softWhooshRef} preload="auto">
         <source src="/sounds/soft-whoosh.mp3" type="audio/mp3" />
@@ -99,21 +123,17 @@ const AnimatedLogo = () => {
         transition={{ duration: 0.5, ease: "easeInOut", delay: 1.4 }}
       />
       
-      {/* Wave.png (z-index 30) */}
+      {/* Wave.png (z-index 30) - Now with snake entry animation */}
       <motion.img 
         src="/lovable-uploads/432c1313-f040-42ca-8f57-f49784ba30b1.png"
         alt="Wave"
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-auto z-30"
-        initial={{ opacity: 1 }}
-        animate={!prefersReducedMotion ? {
-          y: [0, -4, 4, -4, 4, 0],
-          rotate: [0, 2, -2, 2, -2, 0],
-        } : {}}
-        transition={!prefersReducedMotion ? {
-          duration: 0.35,
-          delay: 1.9,
-          times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-        } : {}}
+        initial="hidden"
+        animate={!prefersReducedMotion ? ["visible", "wiggle"] : "visible"}
+        variants={waveVariants}
+        transition={{
+          wiggle: { delay: 1.9 }
+        }}
       />
       
       {/* Connect Kanji (z-index 40) */}
@@ -136,7 +156,7 @@ const AnimatedLogo = () => {
         transition={{ duration: 0.6, ease: "easeInOut", delay: 0.8 }}
       />
       
-      {/* Heart Kanji (z-index 60) */}
+      {/* Heart Kanji (z-index 60) - Improved size, flash and glow */}
       <motion.div
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-60"
         initial={{ opacity: 0 }}
@@ -146,7 +166,7 @@ const AnimatedLogo = () => {
         <motion.img 
           src="/lovable-uploads/040980d6-36c8-4c96-85be-427c43ddbd76.png"
           alt="Heart Symbol"
-          className="w-auto h-auto"
+          className="w-auto h-auto scale-125"
           initial="initial"
           animate={!prefersReducedMotion ? ["animate", "glow"] : "animate"}
           variants={heartVariants}
