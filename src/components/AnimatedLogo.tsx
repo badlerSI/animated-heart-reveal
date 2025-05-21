@@ -106,7 +106,7 @@ const AnimatedLogo = () => {
         transition={{ duration: 0.7, ease: "easeInOut", delay: 2.0 }}
       />
 
-      {/* Heart Kanji (z-index 60) - With cyan glow effect */}
+      {/* Heart Kanji (z-index 60) - With cyan glow effect, now appears last */}
       <motion.img 
         src="/lovable-uploads/040980d6-36c8-4c96-85be-427c43ddbd76.png"
         alt="Heart Symbol"
