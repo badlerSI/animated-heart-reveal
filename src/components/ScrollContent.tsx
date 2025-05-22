@@ -94,7 +94,7 @@ const ScrollContent = () => {
       </Section>
 
       <Section title="Forge the Soul of Your Ride">
-        Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load instantly.
+        Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
       </Section>
 
       <Section title="An Intelligent Interface">
