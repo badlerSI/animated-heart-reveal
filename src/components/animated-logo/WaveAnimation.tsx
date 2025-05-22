@@ -7,7 +7,7 @@ interface WaveAnimationProps {
   onPlaySound: () => void;
 }
 
-/* final full-width PNG */
+/* full-wave PNG shown at the end */
 const STATIC_WAVE_SRC =
   "/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png";
 
@@ -64,12 +64,14 @@ const WaveAnimation = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [staticShown, setStaticShown] = useState(false);
 
-  /* resize helper ------------------------------------------------------- */
+  /* helper: scale wrapper so it fits its parent (.aspect-video) --------- */
   const fitToParent = (w: number, h: number) => {
     const parent = wrapperRef.current!.parentElement!.getBoundingClientRect();
     const scale = Math.min(parent.width / w, parent.height / h);
     wrapperRef.current!.style.transform =
       `translate(-50%, -50%) scale(${scale})`;
+    wrapperRef.current!.style.width  = `${w}px`;
+    wrapperRef.current!.style.height = `${h}px`;
   };
 
   /* build slices once --------------------------------------------------- */
@@ -79,16 +81,16 @@ const WaveAnimation = ({
     const container = containerRef.current!;
     container.innerHTML = "";
 
-    SLICE_SRC.forEach((src, i) => {
+    SLICE_SRC.forEach((src, idx) => {
       const img = document.createElement("img");
       img.src = src;
-      img.alt = `wave slice ${i + 1}`;
+      img.alt = `wave slice ${idx + 1}`;
       img.className = "wave-slice";
-      img.style.setProperty("--i", i.toString());
+      img.style.setProperty("--i", idx.toString());
       container.appendChild(img);
 
       /* measure first slice */
-      if (i === 0) {
+      if (idx === 0) {
         img.onload = () => {
           const sliceW = img.naturalWidth;
           const sliceH = img.naturalHeight;
@@ -101,30 +103,25 @@ const WaveAnimation = ({
         };
       }
 
-      /* when last slice finishes swap to static PNG */
-      if (i === SLICE_SRC.length - 1) {
+      /* after last slice finishes swap */
+      if (idx === SLICE_SRC.length - 1) {
         img.addEventListener("animationend", () => setStaticShown(true));
       }
     });
 
     if (!prefersReducedMotion) onPlaySound();
-
-    const onResize = () => {
-      const w = parseFloat(container.style.width);
-      const h = parseFloat(container.style.height);
-      fitToParent(w, h);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
   }, [isVisible, staticShown, prefersReducedMotion, onPlaySound]);
 
-  /* when static PNG is shown, fit once more using its natural size */
+  /* when PNG replaces slices, fit again using its natural size ---------- */
   useEffect(() => {
     if (!staticShown) return;
     const img = new Image();
     img.src = STATIC_WAVE_SRC;
-    img.onload = () => fitToParent(img.naturalWidth, img.naturalHeight);
-    const onResize = () => fitToParent(img.naturalWidth, img.naturalHeight);
+    img.onload = () => {
+      fitToParent(img.naturalWidth, img.naturalHeight);
+    };
+    const onResize = () =>
+      fitToParent(img.naturalWidth, img.naturalHeight);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [staticShown]);
@@ -136,7 +133,9 @@ const WaveAnimation = ({
       {staticShown ? (
         <img src={STATIC_WAVE_SRC} alt="static wave" className="static-wave" />
       ) : (
-        <div id="wave-container" ref={containerRef} className="wave-container" />
+        <div id="wave-container"
+             ref={containerRef}
+             className="wave-container" />
       )}
     </div>
   );

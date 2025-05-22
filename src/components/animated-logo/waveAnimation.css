@@ -1,4 +1,3 @@
-/* wrapper: JS centers & scales -------------------------------- */
 #wave-wrapper {
   position: absolute;
   left: 50%;
@@ -8,16 +7,12 @@
   pointer-events: none;
 }
 
-/* static fallback PNG ----------------------------------------- */
 .static-wave {
   display: block;
-  width: 100%;
-  height: auto;
   object-fit: none;
   image-rendering: crisp-edges;
 }
 
-/* container + slices (during animation) ----------------------- */
 .wave-container {
   --fps: 30;
   --slice-w: 38px;
