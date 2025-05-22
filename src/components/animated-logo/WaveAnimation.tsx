@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
 interface WaveAnimationProps {
@@ -10,7 +10,6 @@ interface WaveAnimationProps {
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [animationStarted, setAnimationStarted] = useState(false);
   
   // Complete set of 40 frames for the wave animation
   const waveSlices = [
@@ -60,10 +59,8 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   useEffect(() => {
-    // Only start animation if component is visible and animation hasn't already been started
-    if (isVisible && containerRef.current && waveSlices.length > 0 && !animationStarted) {
+    if (isVisible && containerRef.current && waveSlices.length > 0) {
       console.log("Starting wave animation with all 40 frames");
-      setAnimationStarted(true);
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -76,43 +73,42 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
         containerRef.current?.appendChild(img);
-      });
-      
-      // Calculate dimensions after all images are created
-      const setDimensions = () => {
-        const container = containerRef.current;
-        if (container) {
-          const containerWidth = container.clientWidth;
-          const containerHeight = container.clientHeight;
-          const sliceCount = waveSlices.length;
-          
-          // Desktop: calculate based on container width and number of slices
-          if (window.innerWidth > 768) {
-            const sliceWidth = Math.min(Math.max(Math.floor(containerWidth / sliceCount), 30), 40);
-            container.style.setProperty('--slice-w', `${sliceWidth}px`);
-            container.style.setProperty('--slice-h', `${containerHeight}px`);
-            console.log(`Desktop optimization: Container: ${containerWidth}x${containerHeight}, Slice width: ${sliceWidth}px`);
-          } 
-          // Mobile layout is controlled by CSS media queries
+        
+        // Set dimensions based on the first image and device size
+        if (index === 0) {
+          img.onload = () => {
+            const container = containerRef.current;
+            if (container) {
+              const containerWidth = container.clientWidth;
+              const containerHeight = container.clientHeight;
+              const sliceCount = waveSlices.length;
+              
+              // Responsive slice width based on container size
+              let sliceWidth = Math.floor(containerWidth / sliceCount);
+              
+              // Ensure minimum size on small screens
+              sliceWidth = Math.max(sliceWidth, 10);
+              
+              // Set CSS custom property for slice width
+              container.style.setProperty('--slice-w', `${sliceWidth}px`);
+              
+              // Adjust height for different screen sizes
+              const heightRatio = window.innerWidth <= 768 ? 0.8 : 1.0;
+              container.style.setProperty('--slice-h', `${containerHeight * heightRatio}px`);
+              
+              console.log(`Mobile optimization: Container size: ${containerWidth}x${containerHeight}, Slice width: ${sliceWidth}px`);
+            }
+          };
         }
-      };
-      
-      // Set dimensions immediately and whenever window is resized
-      setDimensions();
-      window.addEventListener('resize', setDimensions);
+      });
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
         console.log("Playing wave sound effect");
         onPlaySound();
       }
-      
-      // Clean up event listener
-      return () => {
-        window.removeEventListener('resize', setDimensions);
-      };
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices, animationStarted]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
 
   if (!isVisible) {
     return null;
