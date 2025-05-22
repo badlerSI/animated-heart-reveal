@@ -1,6 +1,5 @@
 
 .wave-container {
-  --fps: 30;          
   position: absolute;
   inset: 0;
   width: 100%;
@@ -15,31 +14,16 @@
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* For the frame display */
-.wave-frames {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Individual frames - positioned horizontally in sequence */
+/* Individual frames - now with absolute positioning */
 .wave-container img.wave-frame {
-  position: relative; /* Changed from absolute to allow sequential layout */
-  width: 2.5%; /* Each frame is 1/40 of total width (100/40 = 2.5%) */
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  width: 2.5%; /* Each frame is 1/40 of total width */
+  height: auto;
+  object-fit: contain;
   opacity: 0;
   transition: opacity 30ms linear;
+  transform: translateX(-50%); /* Center each frame on its position */
 }
 
 .wave-container img.wave-frame.active {

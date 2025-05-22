@@ -59,6 +59,25 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     "/lovable-uploads/7f0b2c87-ab43-4627-ac48-d23bda5a7280.png"   // Wave_40
   ];
 
+  // Manual position adjustments for each frame to create a smooth wave
+  const framePositions = waveFrames.map((_, index) => {
+    // Calculate positions to form a smooth arc across the container
+    // Using a sine wave pattern to create a natural flow
+    const position = index / (waveFrames.length - 1); // 0 to 1
+    
+    // Calculate horizontal position (left to right)
+    const leftPos = `${position * 100}%`;
+    
+    // Calculate vertical position with a slight wave using sine
+    const verticalOffset = Math.sin(position * Math.PI) * 5;
+    const topPos = `calc(50% - ${verticalOffset}%)`;
+    
+    return {
+      left: leftPos,
+      top: topPos,
+    };
+  });
+
   useEffect(() => {
     // Only start animation when component becomes visible
     if (isVisible) {
@@ -115,17 +134,20 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     <div className="absolute inset-0 z-50">
       <div className="wave-container">
         <div className="wave-slice-container">
-          <div className="wave-frames">
-            {waveFrames.map((frame, index) => (
-              <img
-                key={`wave-frame-${index}`}
-                src={frame}
-                alt={`Wave Frame ${index + 1}`}
-                className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''}`}
-                style={{ order: index }} // Ensure proper sequence order
-              />
-            ))}
-          </div>
+          {waveFrames.map((frame, index) => (
+            <img
+              key={`wave-frame-${index}`}
+              src={frame}
+              alt={`Wave Frame ${index + 1}`}
+              className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''}`}
+              style={{
+                position: 'absolute',
+                left: framePositions[index].left,
+                top: framePositions[index].top,
+                zIndex: index
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>
