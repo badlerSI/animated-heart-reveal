@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
@@ -65,6 +64,13 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
       // Clear any existing content
       containerRef.current.innerHTML = '';
       
+      // Create a single container to hold all frames
+      const framesContainer = document.createElement('div');
+      framesContainer.style.position = 'relative';
+      framesContainer.style.width = '100%';
+      framesContainer.style.height = '100%';
+      containerRef.current.appendChild(framesContainer);
+      
       // Create and append all wave slice images
       waveSlices.forEach((slice, index) => {
         const img = document.createElement('img');
@@ -72,24 +78,15 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.alt = `Wave Slice ${index + 1}`;
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
-        containerRef.current?.appendChild(img);
         
-        // Set dimensions based on first image
-        if (index === 0) {
-          img.onload = () => {
-            const container = containerRef.current;
-            if (container) {
-              const containerWidth = container.clientWidth;
-              const containerHeight = container.clientHeight;
-              const sliceCount = waveSlices.length;
-              
-              const sliceWidth = Math.floor(containerWidth / sliceCount);
-              
-              container.style.setProperty('--slice-w', `${sliceWidth}px`);
-              container.style.setProperty('--slice-h', `${containerHeight}px`);
-            }
-          };
+        // Hide all frames except the first one initially
+        if (index > 0) {
+          img.style.opacity = '0';
+        } else {
+          img.style.opacity = '1';
         }
+        
+        framesContainer.appendChild(img);
       });
       
       // Play sound if animations are enabled

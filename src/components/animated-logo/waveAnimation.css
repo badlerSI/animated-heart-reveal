@@ -17,16 +17,18 @@
 
 /* styling for every img */
 .wave-container img.wave-slice {
-  flex: 0 0 var(--slice-w);  /* don't grow or shrink */
-  width: var(--slice-w);     /* exact width */
-  height: var(--slice-h);    /* exact height */
-  object-fit: cover;         /* fill the space while maintaining aspect ratio */
-  object-position: center;   /* center alignment */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* changed from cover to contain */
+  object-position: center;
   opacity: 0;
   animation: pop 0s steps(1, end) forwards;
-  animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
-  animation-fill-mode: forwards;  /* Stay in the end state */
-  animation-iteration-count: 1;   /* Explicitly run once only */
+  animation-delay: calc(var(--i) / var(--fps) * 1s);
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
   padding: 0;
   margin: 0;
   border: none;
