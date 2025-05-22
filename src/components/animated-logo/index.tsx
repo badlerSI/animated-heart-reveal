@@ -14,7 +14,7 @@ const AnimatedLogo = () => {
   const { audioRef: electricCrackleRef, play: playElectricCrackle } = useAudio('/sounds/electric-crackle.mp3');
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-[350px] bg-[#0d0d12] rounded-lg overflow-hidden">
+    <div className="relative w-full h-full aspect-video bg-[#0d0d12] rounded-lg overflow-hidden">
       {/* Audio elements */}
       <audio ref={softWhooshRef} preload="auto">
         <source src="/sounds/soft-whoosh.mp3" type="audio/mp3" />

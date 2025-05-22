@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
@@ -57,7 +56,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   useEffect(() => {
     if (isVisible && containerRef.current) {
-      console.log("Starting wave animation with original dimensions");
+      console.log("Starting wave animation with improved sizing");
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -70,18 +69,6 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
         containerRef.current?.appendChild(img);
-        
-        // Use the first image to set the container dimensions
-        if (index === 0) {
-          img.onload = () => {
-            const container = containerRef.current;
-            if (container) {
-              // Adjust variables based on natural image dimensions
-              container.style.setProperty('--slice-w', `${img.naturalWidth}px`);
-              container.style.setProperty('--slice-h', `${img.naturalHeight}px`);
-            }
-          };
-        }
       });
       
       // Play sound if animations are enabled
@@ -98,13 +85,12 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   return (
     <div 
-      className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
-      style={{ width: '100%', height: '100%' }}
+      className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full h-full flex items-center justify-center"
     >
       <div 
         id="wave-container"
         ref={containerRef} 
-        className="wave-container"
+        className="wave-container w-full h-full"
       ></div>
     </div>
   );

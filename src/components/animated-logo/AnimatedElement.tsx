@@ -21,15 +21,19 @@ const AnimatedElement = ({
   }
 
   return (
-    <img 
-      src={imageSrc}
-      alt={alt}
-      className={`absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1536px] h-[1024px] transition-opacity duration-700 ease-in-out ${withGlowEffect ? 'glow-effect' : ''}`}
-      style={{ 
-        zIndex,
-        filter: withGlowEffect ? 'drop-shadow(0 0 8px #33C3F0)' : 'none'
-      }}
-    />
+    <div 
+      className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center transition-opacity duration-700 ease-in-out"
+      style={{ zIndex }}
+    >
+      <img 
+        src={imageSrc}
+        alt={alt}
+        className={`max-w-full max-h-full object-contain ${withGlowEffect ? 'glow-effect' : ''}`}
+        style={{ 
+          filter: withGlowEffect ? 'drop-shadow(0 0 8px #33C3F0)' : 'none'
+        }}
+      />
+    </div>
   );
 };
 
