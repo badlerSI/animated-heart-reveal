@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -32,27 +31,27 @@ const AnimatedLogo = () => {
     "/lovable-uploads/982d0243-480d-4d98-916a-10f04f281028.png",
     "/lovable-uploads/4619c67f-6cda-4871-8814-65279fba0a0e.png",
     "/lovable-uploads/10ae94f5-8da8-4d84-bc98-a0c6bf4e5c80.png",
-    // Adding the rest of the 20 slices - these are placeholders, we need to get the actual uploaded filenames
-    "/lovable-uploads/wave-slice-21.png",
-    "/lovable-uploads/wave-slice-22.png",
-    "/lovable-uploads/wave-slice-23.png",
-    "/lovable-uploads/wave-slice-24.png",
-    "/lovable-uploads/wave-slice-25.png",
-    "/lovable-uploads/wave-slice-26.png",
-    "/lovable-uploads/wave-slice-27.png",
-    "/lovable-uploads/wave-slice-28.png",
-    "/lovable-uploads/wave-slice-29.png",
-    "/lovable-uploads/wave-slice-30.png",
-    "/lovable-uploads/wave-slice-31.png",
-    "/lovable-uploads/wave-slice-32.png",
-    "/lovable-uploads/wave-slice-33.png",
-    "/lovable-uploads/wave-slice-34.png",
-    "/lovable-uploads/wave-slice-35.png",
-    "/lovable-uploads/wave-slice-36.png",
-    "/lovable-uploads/wave-slice-37.png",
-    "/lovable-uploads/wave-slice-38.png",
-    "/lovable-uploads/wave-slice-39.png",
-    "/lovable-uploads/wave-slice-40.png",
+    // Adding the newly uploaded 20 slices (21-40)
+    "/lovable-uploads/ee8feb5c-8c1d-4632-859a-6564afe6a702.png",
+    "/lovable-uploads/c086a73b-66ce-4264-bd40-ecd097b23bd5.png",
+    "/lovable-uploads/38fd9be8-fa67-4026-ab4f-220eca8ccbcd.png",
+    "/lovable-uploads/21471639-46a4-465d-8789-4c7172df9377.png",
+    "/lovable-uploads/d0efb4e4-4971-49ba-81ee-2fa5eb8c4eab.png",
+    "/lovable-uploads/16d2e2d6-2122-43c9-a610-300b30df27cb.png",
+    "/lovable-uploads/e0147a6c-7c3b-4b84-9a5e-6667e9aa5946.png",
+    "/lovable-uploads/4debf835-93fd-4960-bf6a-7e5202d3085a.png",
+    "/lovable-uploads/a1f5c654-4561-442a-a5f0-5a1ad82fdfb3.png",
+    "/lovable-uploads/0edd779f-420d-4a82-ab69-dc04f793e273.png",
+    "/lovable-uploads/107f9490-bf06-424c-b7db-60fa1bcf469c.png",
+    "/lovable-uploads/2541e752-4092-4300-a16f-be1b77c3c131.png",
+    "/lovable-uploads/b6563b5f-96a4-4101-9c8c-d35ce14644c2.png",
+    "/lovable-uploads/d30ec800-8d20-41f7-9d21-64891c733e22.png",
+    "/lovable-uploads/fa29d50c-1bb3-49f2-8667-7ea4f79a33f8.png",
+    "/lovable-uploads/adbfe605-257a-4453-97a5-c4020d5153a2.png",
+    "/lovable-uploads/77db4f90-1fb3-4567-b2fd-b2d6785ea2df.png",
+    "/lovable-uploads/4cf1dffc-199d-4f90-8cfb-071afc596e59.png",
+    "/lovable-uploads/edfb016f-8d5c-4572-bbaa-1ce1c26b6549.png",
+    "/lovable-uploads/a03e77d4-21a0-4f1c-9d36-7a6fcef004cd.png",
   ];
 
   // Check for reduced motion preference
