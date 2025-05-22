@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
 interface WaveAnimationProps {
@@ -10,6 +10,7 @@ interface WaveAnimationProps {
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [animationStarted, setAnimationStarted] = useState(false);
   
   // Complete set of 40 frames for the wave animation
   const waveSlices = [
@@ -59,8 +60,10 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   useEffect(() => {
-    if (isVisible && containerRef.current && waveSlices.length > 0) {
+    // Only start animation if component is visible and animation hasn't already been started
+    if (isVisible && containerRef.current && waveSlices.length > 0 && !animationStarted) {
       console.log("Starting wave animation with all 40 frames");
+      setAnimationStarted(true);
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -84,7 +87,6 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
           const sliceCount = waveSlices.length;
           
           // Desktop: calculate based on container width and number of slices
-          // Make sure slices are wide enough to be visible but not too wide
           if (window.innerWidth > 768) {
             const sliceWidth = Math.min(Math.max(Math.floor(containerWidth / sliceCount), 30), 40);
             container.style.setProperty('--slice-w', `${sliceWidth}px`);
@@ -110,7 +112,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         window.removeEventListener('resize', setDimensions);
       };
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices, animationStarted]);
 
   if (!isVisible) {
     return null;

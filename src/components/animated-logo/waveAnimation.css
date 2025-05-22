@@ -34,9 +34,16 @@
 
 /* Media query for mobile devices */
 @media (max-width: 768px) {
+  .wave-container {
+    max-width: 94%;
+    max-height: 80%;
+  }
+  
   .wave-container img.wave-slice {
-    --slice-w: 20px;  /* Smaller slice width on mobile */
-    max-height: 70vh;  /* Limit height on mobile */
+    --slice-w: 16px;  /* Smaller slice width on mobile */
+    max-height: 75%;  /* Limit height on mobile */
+    object-fit: cover;
+    object-position: center 40%; /* Adjust vertical position to focus on the center part */
   }
 }
 
