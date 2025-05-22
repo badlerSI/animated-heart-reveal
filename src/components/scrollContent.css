@@ -1,58 +1,14 @@
-
-/* Base styles for reveal animations */
+/* ----------------------------------------------------
+   Fade / slide animation for .reveal blocks
+---------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
-  will-change: opacity, transform;
+  transform: translateY(24px);      /* subtle slide up */
+  transition: opacity 0.6s ease-out,
+              transform 0.6s ease-out;
 }
 
-.reveal-visible {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Adding fade-out animation when scrolling past */
-.reveal-hidden {
-  opacity: 0;
-  transform: translateY(-30px);
-  transition: opacity 0.6s ease, transform 0.8s ease;
-}
-
-/* Sequential reveal for elements within cards */
-.reveal-element {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.reveal-visible .reveal-element:nth-child(1) {
-  animation: reveal-up 0.8s ease-out 0.4s forwards;
-}
-
-.reveal-visible .reveal-element:nth-child(2) {
-  animation: reveal-up 0.8s ease-out 0.7s forwards;
-}
-
-/* Animation for revealing elements */
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Glow effect for links */
-.text-glow:hover {
-  text-shadow: 0 0 8px rgba(51, 195, 240, 0.6);
-  transition: text-shadow 0.3s ease;
-}
-
-/* Add custom font styles to body */
-body {
-  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: 0.01em;
 }
