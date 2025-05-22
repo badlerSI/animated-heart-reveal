@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -52,26 +51,25 @@ const ScrollContent = () => {
           (entry.target as HTMLElement).style.removeProperty('opacity');
         } else {
           // Element is completely out of view
-          if (boundingRect.top <= 0 && scrollDirection === 'down') {
-            // When scrolling down and element moves above viewport, fade out
+          if (boundingRect.top <= 0) {
+            // Element has scrolled above the viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
             
-            // Calculate opacity based on how far element has scrolled out
-            const distanceScrolledOut = -boundingRect.top;
-            const fadeOutDistance = windowHeight * 0.3; // Fade out over 30% of window height
-            const opacity = Math.max(0, 1 - (distanceScrolledOut / fadeOutDistance));
-            
-            (entry.target as HTMLElement).style.opacity = opacity.toString();
+            // Only apply opacity fade-out effect when scrolling down
+            if (scrollDirection === 'down') {
+              // Calculate opacity based on how far element has scrolled out
+              const distanceScrolledOut = -boundingRect.top;
+              const fadeOutDistance = windowHeight * 0.3; // Fade out over 30% of window height
+              const opacity = Math.max(0, 1 - (distanceScrolledOut / fadeOutDistance));
+              
+              (entry.target as HTMLElement).style.opacity = opacity.toString();
+            }
           } else if (boundingRect.top > windowHeight) {
-            // Element is below the viewport - reset for fade-in regardless of scroll direction
+            // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            entry.target.classList.remove("reveal-hidden"); // Remove hidden class
+            entry.target.classList.remove("reveal-hidden");
             (entry.target as HTMLElement).style.opacity = "0";
-          } else if (boundingRect.top <= 0 && scrollDirection === 'up') {
-            // When scrolling up, keep element hidden until it's about to enter viewport
-            entry.target.classList.remove("reveal-visible");
-            entry.target.classList.add("reveal-hidden");
           }
         }
       });
