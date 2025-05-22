@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -43,14 +44,12 @@ const ScrollContent = () => {
         const windowHeight = window.innerHeight;
         
         if (entry.isIntersecting) {
-          // Element is entering the viewport
+          // Element is entering the viewport - always show it regardless of scroll direction
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
           // Reset inline opacity to let CSS handle the fade in
-          if (scrollDirection === 'up') {
-            (entry.target as HTMLElement).style.removeProperty('opacity');
-          }
+          (entry.target as HTMLElement).style.removeProperty('opacity');
         } else {
           // Element is completely out of view
           if (boundingRect.top <= 0 && scrollDirection === 'down') {
@@ -64,9 +63,10 @@ const ScrollContent = () => {
             const opacity = Math.max(0, 1 - (distanceScrolledOut / fadeOutDistance));
             
             (entry.target as HTMLElement).style.opacity = opacity.toString();
-          } else if (boundingRect.top > windowHeight && scrollDirection === 'down') {
-            // Element is below the viewport - reset for fade-in
+          } else if (boundingRect.top > windowHeight) {
+            // Element is below the viewport - reset for fade-in regardless of scroll direction
             entry.target.classList.remove("reveal-visible");
+            entry.target.classList.remove("reveal-hidden"); // Remove hidden class
             (entry.target as HTMLElement).style.opacity = "0";
           } else if (boundingRect.top <= 0 && scrollDirection === 'up') {
             // When scrolling up, keep element hidden until it's about to enter viewport
