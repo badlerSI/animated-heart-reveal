@@ -1,62 +1,47 @@
 
-.wave-container {
-  --fps: 30;           /* target frame rate */
-  --slice-w: 38px;     /* default width - will be updated by JS */
-  --slice-h: 300px;    /* default height - will be updated by JS */
-  display: flex;
+/* ---------- wrapper for global scale on small screens ---------- */
+#wave-wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
 }
 
-/* styling for every img */
-.wave-container img.wave-slice {
-  flex: 0 0 var(--slice-w);  /* don't grow or shrink */
-  width: var(--slice-w);     /* exact width */
-  height: var(--slice-h);    /* exact height */
-  object-fit: cover;         /* fill the space while maintaining aspect ratio */
-  object-position: center;   /* center alignment */
-  opacity: 0;
-  animation: pop 0s steps(1, end) forwards, wave-glow 0.8s ease-out forwards;
-  animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
-  animation-fill-mode: forwards;  /* Stay in the end state */
-  animation-iteration-count: 1;   /* Explicitly run once only */
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-/* Media query for mobile devices */
 @media (max-width: 768px) {
-  .wave-container {
-    --slice-w: 20px;  /* Smaller slice width on mobile */
-    transform: translate(-50%, -55%); /* Adjust vertical position on mobile */
-  }
-  
-  .wave-container img.wave-slice {
-    max-height: 70vh;  /* Limit height on mobile */
-    object-position: center 40%; /* Adjust vertical alignment within slices */
+  #wave-wrapper {
+    transform: translate(-50%, -50%) scale(0.58); /* tweak factor as needed */
+    transform-origin: top center;
   }
 }
 
-@keyframes pop {
-  to { opacity: 1; }
+/* ---------- wave container (exact bit-map width / height) ------ */
+.wave-container {
+  --fps: 30;
+  --slice-w: 38px;           /* overwritten by JS */
+  --slice-h: 300px;          /* overwritten by JS */
+  display: flex;             /* packs slices flush, no sub-pixel gaps */
+  overflow: hidden;
 }
+
+/* ---------- every slice --------------------------------------- */
+.wave-container img.wave-slice {
+  flex: 0 0 var(--slice-w);
+  width: var(--slice-w);
+  height: var(--slice-h);
+  object-fit: none;                 /* NEVER scale bitmap           */
+  image-rendering: crisp-edges;     /* prevent blur                 */
+  opacity: 0;
+  animation:
+    pop       0s   steps(1,end) forwards,
+    wave-glow 0.8s ease-out forwards;
+  animation-delay: calc(var(--i) / var(--fps) * 1s);
+  animation-fill-mode: forwards;
+}
+
+@keyframes pop   { to { opacity: 1; } }
 
 @keyframes wave-glow {
-  0% {
-    filter: drop-shadow(0 0 10px #33F0F0);
-  }
-  50% {
-    filter: drop-shadow(0 0 15px #33F0F0);
-  }
-  100% {
-    filter: drop-shadow(0 0 0px transparent);
-  }
+  0%   { filter: drop-shadow(0 0 10px #33F0F0); }
+  50%  { filter: drop-shadow(0 0 15px #33F0F0); }
+  100% { filter: drop-shadow(0 0 0px  transparent); }
 }
