@@ -99,7 +99,7 @@ const ScrollContent = () => {
 
       <Section title="An Intelligent Interface">
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
-        can quote history, decode warning lights in plain language, and
+        can answer trivia, quote Mark Twain, decode warning lights in plain language, and
         suggest fixes before you open the hood. Need fresh traffic or weather?
         Drop in a one-way update from your phone—data flows in, never back out.
       </Section>
@@ -124,7 +124,7 @@ const ScrollContent = () => {
           </span>
         }
       >
-        Conversations among passengers flow freely: Soul Interface translates
+        Conversations among passengers from around the globe flow freely: Soul Interface translates
         speech across sixteen languages almost instantly, all offline.
         <br />
         <br />
