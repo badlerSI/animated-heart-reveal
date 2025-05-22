@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -9,7 +8,6 @@ interface WaveAnimationProps {
 }
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [currentFrame, setCurrentFrame] = useState(0);
   const animationRef = useRef<number | null>(null);
   
@@ -67,7 +65,11 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
-        onPlaySound();
+        try {
+          onPlaySound();
+        } catch (error) {
+          console.log("Audio play error:", error);
+        }
       }
 
       // Set up animation timing
@@ -104,12 +106,8 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   }
 
   return (
-    <div className="absolute inset-0 z-50 flex items-center justify-center">
-      <div 
-        id="wave-container"
-        ref={containerRef} 
-        className="wave-container"
-      >
+    <div className="absolute inset-0 z-50">
+      <div className="wave-container">
         <div className="wave-slice-container">
           {waveSlices.map((slice, index) => (
             <img
