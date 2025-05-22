@@ -25,6 +25,8 @@
   opacity: 0;
   animation: pop 0s steps(1, end) forwards;
   animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
+  animation-fill-mode: forwards;  /* Stay in the end state */
+  animation-iteration-count: 1;   /* Explicitly run once only */
   padding: 0;
   margin: 0;
   border: none;
