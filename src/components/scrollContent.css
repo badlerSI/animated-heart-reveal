@@ -3,21 +3,21 @@
 .reveal {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
   will-change: opacity, transform;
 }
 
 .reveal-visible {
   opacity: 1 !important; /* !important ensures it overrides inline styles when coming into view */
   transform: translateY(0);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* Adding fade-out animation when scrolling past */
 .reveal-hidden {
-  opacity: 0; /* Base opacity that will be modified by JS */
   transform: translateY(-30px);
-  transition: opacity 0.6s ease, transform 0.8s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  /* opacity controlled by inline styles for more precise control */
 }
 
 /* Sequential reveal for elements within cards */

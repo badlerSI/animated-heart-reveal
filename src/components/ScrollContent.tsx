@@ -9,7 +9,7 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "0px 0px -30% 0px", // Trigger when element is only 30% above bottom of viewport
+      rootMargin: "0px 0px -20% 0px", // Trigger when element is only 20% above bottom of viewport
       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // Multiple thresholds for smoother transitions
     };
     
@@ -25,28 +25,30 @@ const ScrollContent = () => {
           entry.target.classList.remove("reveal-hidden");
           
           // Reset opacity when element is in view
-          (entry.target as HTMLElement).style.opacity = "";
+          (entry.target as HTMLElement).style.opacity = "1";
+          console.log("Element visible", entry.target.classList);
         } else {
           // Check if element is above the viewport (scrolled past)
-          if (boundingRect.top <= windowHeight * 0.8) { // Changed from 0.6 to 0.8 - fade out when reaches 80% from top
+          if (boundingRect.top <= windowHeight * 0.2) { // Element has scrolled past 20% from top
             // Element has scrolled above the target point
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
             
-            // Calculate fade based on how far it's scrolled past the 80% mark
+            // Use a much simpler and more dramatic fade calculation
             const distanceFromTop = boundingRect.top;
-            const fadeStartPoint = windowHeight * 0.8; // Changed from 0.6 to 0.8
-            const fadeDistance = fadeStartPoint / 2; // Complete fade over half the fade start point
+            const maxVisibleTop = windowHeight * 0.2; // At 20% from top starts fading
             
-            const opacity = Math.max(0, (fadeStartPoint - distanceFromTop) / fadeDistance);
-            const fadeValue = Math.min(1, Math.max(0, 1 - opacity));
+            // Calculate opacity: 1 at 20% from top, 0 at top of viewport
+            const opacity = Math.max(0, distanceFromTop / maxVisibleTop);
+            console.log("Fading element, opacity:", opacity, boundingRect.top, maxVisibleTop);
             
-            (entry.target as HTMLElement).style.opacity = fadeValue.toString();
+            (entry.target as HTMLElement).style.opacity = opacity.toString();
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.remove("reveal-hidden");
             (entry.target as HTMLElement).style.opacity = "0";
+            console.log("Element below viewport, hiding");
           }
         }
       });
