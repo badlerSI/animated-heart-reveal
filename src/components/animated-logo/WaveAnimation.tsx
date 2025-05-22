@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
 interface WaveAnimationProps {
@@ -9,6 +10,8 @@ interface WaveAnimationProps {
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentFrame, setCurrentFrame] = useState(0);
+  const animationRef = useRef<number | null>(null);
   
   // Complete set of 40 frames for the wave animation
   const waveSlices = [
@@ -58,45 +61,44 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   useEffect(() => {
-    if (isVisible && containerRef.current && waveSlices.length > 0) {
-      console.log("Starting wave animation with all 40 frames");
-      
-      // Clear any existing content
-      containerRef.current.innerHTML = '';
-      
-      // Create a single container to hold all frames
-      const framesContainer = document.createElement('div');
-      framesContainer.style.position = 'relative';
-      framesContainer.style.width = '100%';
-      framesContainer.style.height = '100%';
-      containerRef.current.appendChild(framesContainer);
-      
-      // Create and append all wave slice images
-      waveSlices.forEach((slice, index) => {
-        const img = document.createElement('img');
-        img.src = slice;
-        img.alt = `Wave Slice ${index + 1}`;
-        img.className = 'wave-slice';
-        img.style.setProperty('--i', index.toString());
-        
-        // Hide all frames except the first one initially
-        if (index > 0) {
-          img.style.opacity = '0';
-        } else {
-          img.style.opacity = '1';
-        }
-        
-        framesContainer.appendChild(img);
-      });
+    // Only start animation when component becomes visible
+    if (isVisible) {
+      console.log("Starting wave animation with React-controlled frames");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
-        console.log("Playing wave sound effect");
         onPlaySound();
       }
-    }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
 
+      // Set up animation timing
+      const framesPerSecond = 30;
+      const frameDuration = 1000 / framesPerSecond;  // in milliseconds
+      let frameIndex = 0;
+
+      // Function to step through frames
+      const animateFrames = () => {
+        setCurrentFrame(frameIndex);
+        frameIndex++;
+
+        // Stop animation when we've shown all frames
+        if (frameIndex < waveSlices.length) {
+          animationRef.current = window.setTimeout(animateFrames, frameDuration);
+        }
+      };
+
+      // Start the animation
+      animateFrames();
+
+      // Cleanup function to clear the timeout if the component unmounts
+      return () => {
+        if (animationRef.current !== null) {
+          clearTimeout(animationRef.current);
+        }
+      };
+    }
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices.length]);
+
+  // Don't render anything if not visible
   if (!isVisible) {
     return null;
   }
@@ -107,7 +109,18 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         id="wave-container"
         ref={containerRef} 
         className="wave-container"
-      ></div>
+      >
+        <div className="wave-slice-container">
+          {waveSlices.map((slice, index) => (
+            <img
+              key={`wave-slice-${index}`}
+              src={slice}
+              alt={`Wave Slice ${index + 1}`}
+              className={`wave-slice ${index === currentFrame ? 'active' : ''}`}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
