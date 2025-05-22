@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -12,7 +13,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   const animationRef = useRef<number | null>(null);
   
   // Complete set of 40 frames for the wave animation
-  const waveSlices = [
+  const waveFrames = [
     // First 20 frames
     "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png", // Wave_01
     "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png", // Wave_02
@@ -61,7 +62,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   useEffect(() => {
     // Only start animation when component becomes visible
     if (isVisible) {
-      console.log("Starting wave animation with React-controlled frames");
+      console.log("Starting wave animation with full frames");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
@@ -83,7 +84,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         frameIndex++;
 
         // Continue animation until we've shown all frames
-        if (frameIndex < waveSlices.length) {
+        if (frameIndex < waveFrames.length) {
           animationRef.current = window.setTimeout(animateFrames, frameDuration);
         }
       };
@@ -98,7 +99,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         }
       };
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices.length]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveFrames.length]);
 
   // Don't render anything if not visible
   if (!isVisible) {
@@ -109,15 +110,16 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     <div className="absolute inset-0 z-50">
       <div className="wave-container">
         <div className="wave-slice-container">
-          {waveSlices.map((slice, index) => (
-            <img
-              key={`wave-slice-${index}`}
-              src={slice}
-              alt={`Wave Slice ${index + 1}`}
-              className={`wave-slice ${index <= currentFrame ? 'active' : ''}`}
-              style={{ order: index }}
-            />
-          ))}
+          <div className="wave-frames">
+            {waveFrames.map((frame, index) => (
+              <img
+                key={`wave-frame-${index}`}
+                src={frame}
+                alt={`Wave Frame ${index + 1}`}
+                className={`wave-frame ${index === currentFrame ? 'active' : ''}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
