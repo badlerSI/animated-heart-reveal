@@ -30,8 +30,8 @@ const ScrollContent = () => {
             const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
             (entry.target as HTMLElement).style.opacity = opacity.toString();
           } else {
-            // Element is coming into view from below - ensure full visibility
-            (entry.target as HTMLElement).style.opacity = "";
+            // Coming into view from below - always fully visible
+            (entry.target as HTMLElement).style.removeProperty("opacity");
           }
         } else {
           // Element is completely out of view
@@ -43,7 +43,7 @@ const ScrollContent = () => {
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            // Remove inline opacity to let CSS handle it
+            // Remove inline opacity to let CSS handle it 
             (entry.target as HTMLElement).style.removeProperty("opacity");
           }
         }
