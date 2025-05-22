@@ -24,31 +24,24 @@ const ScrollContent = () => {
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
-          // Reset opacity when element is in view
-          (entry.target as HTMLElement).style.opacity = "1";
-          console.log("Element visible", entry.target.classList);
+          // Calculate fade based on position
+          if (boundingRect.top < windowHeight * 0.5) {
+            const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
+            (entry.target as HTMLElement).style.opacity = opacity.toString();
+          } else {
+            (entry.target as HTMLElement).style.opacity = "1";
+          }
         } else {
-          // Check if element is above the viewport (scrolled past)
-          if (boundingRect.top <= windowHeight * 0.2) { // Element has scrolled past 20% from top
-            // Element has scrolled above the target point
+          // Element is completely out of view
+          if (boundingRect.top <= 0) {
+            // Ensure it's completely hidden when above viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
-            
-            // Use a much simpler and more dramatic fade calculation
-            const distanceFromTop = boundingRect.top;
-            const maxVisibleTop = windowHeight * 0.2; // At 20% from top starts fading
-            
-            // Calculate opacity: 1 at 20% from top, 0 at top of viewport
-            const opacity = Math.max(0, distanceFromTop / maxVisibleTop);
-            console.log("Fading element, opacity:", opacity, boundingRect.top, maxVisibleTop);
-            
-            (entry.target as HTMLElement).style.opacity = opacity.toString();
+            (entry.target as HTMLElement).style.opacity = "0";
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            entry.target.classList.remove("reveal-hidden");
             (entry.target as HTMLElement).style.opacity = "0";
-            console.log("Element below viewport, hiding");
           }
         }
       });
