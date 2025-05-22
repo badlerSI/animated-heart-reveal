@@ -1,4 +1,4 @@
-/* wrapper (z-index set from TSX) */
+/* wrapper sits above Soul (z-index 50 set in TSX) */
 #wave-wrapper {
   position: absolute;
   left: 50%;
@@ -8,31 +8,35 @@
   pointer-events: none;
 }
 
-/* static PNG sits ON TOP of slices, invisible until fade-in */
+/* static PNG (top layer) */
 .static-wave {
   position: absolute;
   left: 0;
   top: 0;
   image-rendering: crisp-edges;
   object-fit: none;
-  opacity: 0;
+  opacity: 0;            /* fade-in later */
 }
 
 .fade-in {
-  animation: fadeIn 0.15s ease-out forwards;
+  animation: fadeIn 0.18s ease-out forwards;
 }
 
-@keyframes fadeIn { to { opacity: 1; } }
-
-/* slice container and slices */
+/* slice container (lower layer) */
 .wave-container {
   --fps: 30;
   --slice-w: 38px;
   --slice-h: 300px;
   display: flex;
   overflow: hidden;
+  opacity: 1;
 }
 
+.fade-out {
+  animation: fadeOut 0.18s ease-out forwards;
+}
+
+/* individual slices */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
@@ -46,8 +50,10 @@
   animation-delay: calc(var(--i) / var(--fps) * 1s);
 }
 
-@keyframes pop { to { opacity: 1; } }
-
+/* keyframes */
+@keyframes pop       { to { opacity: 1; } }
+@keyframes fadeIn    { to { opacity: 1; } }
+@keyframes fadeOut   { to { opacity: 0; } }
 @keyframes wave-glow {
   0%   { filter: drop-shadow(0 0 10px #33F0F0); }
   50%  { filter: drop-shadow(0 0 15px #33F0F0); }
