@@ -10,7 +10,7 @@ const AnimatedLogo = () => {
   const softWhooshRef = useRef<HTMLAudioElement | null>(null);
   const electricCrackleRef = useRef<HTMLAudioElement | null>(null);
 
-  // Wave slices - paths to all 20 uploaded wave slice images
+  // Wave slices - paths to all 40 uploaded wave slice images
   const waveSlices = [
     "/lovable-uploads/0706c3d0-ffba-4897-8921-d48c49ed347d.png",
     "/lovable-uploads/1b5faba3-2377-4772-9b69-d5b7cbead5dc.png",
@@ -32,6 +32,27 @@ const AnimatedLogo = () => {
     "/lovable-uploads/982d0243-480d-4d98-916a-10f04f281028.png",
     "/lovable-uploads/4619c67f-6cda-4871-8814-65279fba0a0e.png",
     "/lovable-uploads/10ae94f5-8da8-4d84-bc98-a0c6bf4e5c80.png",
+    // Adding the rest of the 20 slices - these are placeholders, we need to get the actual uploaded filenames
+    "/lovable-uploads/wave-slice-21.png",
+    "/lovable-uploads/wave-slice-22.png",
+    "/lovable-uploads/wave-slice-23.png",
+    "/lovable-uploads/wave-slice-24.png",
+    "/lovable-uploads/wave-slice-25.png",
+    "/lovable-uploads/wave-slice-26.png",
+    "/lovable-uploads/wave-slice-27.png",
+    "/lovable-uploads/wave-slice-28.png",
+    "/lovable-uploads/wave-slice-29.png",
+    "/lovable-uploads/wave-slice-30.png",
+    "/lovable-uploads/wave-slice-31.png",
+    "/lovable-uploads/wave-slice-32.png",
+    "/lovable-uploads/wave-slice-33.png",
+    "/lovable-uploads/wave-slice-34.png",
+    "/lovable-uploads/wave-slice-35.png",
+    "/lovable-uploads/wave-slice-36.png",
+    "/lovable-uploads/wave-slice-37.png",
+    "/lovable-uploads/wave-slice-38.png",
+    "/lovable-uploads/wave-slice-39.png",
+    "/lovable-uploads/wave-slice-40.png",
   ];
 
   // Check for reduced motion preference
@@ -48,6 +69,7 @@ const AnimatedLogo = () => {
   // Wave animation controller
   useEffect(() => {
     if (visibleElements.includes("wave") && currentWaveSlice === -1) {
+      console.log("Starting wave animation");
       // Start the wave slice animation at 30fps (approximately 33.33ms per frame)
       const frameInterval = 33.33; // milliseconds
       let sliceIndex = 0;
@@ -62,16 +84,18 @@ const AnimatedLogo = () => {
       const interval = setInterval(() => {
         if (sliceIndex < waveSlices.length) {
           setCurrentWaveSlice(sliceIndex);
+          console.log(`Showing wave slice: ${sliceIndex}`);
           sliceIndex++;
         } else {
           // Animation complete, clear interval
+          console.log("Wave animation complete");
           clearInterval(interval);
         }
       }, frameInterval);
       
       return () => clearInterval(interval);
     }
-  }, [visibleElements, currentWaveSlice, prefersReducedMotion]);
+  }, [visibleElements, currentWaveSlice, prefersReducedMotion, waveSlices.length]);
 
   // Main animation sequence controller
   useEffect(() => {
@@ -92,6 +116,7 @@ const AnimatedLogo = () => {
       sequence.forEach(item => {
         setTimeout(() => {
           setVisibleElements(prev => [...prev, item.element]);
+          console.log(`Adding element: ${item.element}`);
           
           // Play heart sound
           if (item.element === "heart" && electricCrackleRef.current && !prefersReducedMotion) {
