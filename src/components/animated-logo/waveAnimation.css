@@ -6,27 +6,28 @@
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
 .wave-slice-container {
   position: relative;
   width: 100%;
-  height: auto; /* Allow height to adjust to content */
-  max-height: 60%; /* Limit the height of the wave effect */
+  max-width: 1000px; /* Constrain the maximum width */
+  height: 180px; /* Fixed height for consistency */
   display: flex;
   flex-direction: row;
-  align-items: center; /* Center wave slices vertically */
+  align-items: center;
+  justify-content: center;
 }
 
 /* styling for every img */
 .wave-container img.wave-slice {
   position: relative;
   width: calc(100% / 40);  /* Each slice is 1/40 of the container width */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Use contain instead of cover */
+  height: 100%; /* Use full container height */
+  object-fit: cover; /* Use cover to fill the space */
   opacity: 0;
   padding: 0;
   margin: 0;

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -75,7 +74,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
       // Set up animation timing
       const framesPerSecond = 30;
-      const frameDuration = 1000 / framesPerSecond;  // in milliseconds
+      const frameDuration = 1000 / framesPerSecond;
       let frameIndex = 0;
 
       // Function to step through frames
@@ -84,11 +83,9 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         frameIndex++;
 
         // Continue animation until we've shown all frames
-        // But don't reset currentFrame, so the last frame stays visible
         if (frameIndex < waveSlices.length) {
           animationRef.current = window.setTimeout(animateFrames, frameDuration);
         }
-        // No "else" case that would hide frames or reset currentFrame
       };
 
       // Start the animation
