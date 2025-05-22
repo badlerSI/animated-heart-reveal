@@ -2,51 +2,54 @@ import { useEffect, useRef } from "react";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
-  ScrollContent  •  fade+slide+pop; fade-out now starts earlier
+  ScrollContent
+  • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
+  • Fade-in on entry; fade-out begins much earlier so it’s visible
+  • intersectionRatio drives opacity; scroll-up bug is gone
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-useEffect(() => {
-  const handleIntersect: IntersectionObserverCallback = (entries) => {
-    entries.forEach((entry) => {
-      const el = entry.target as HTMLElement;
-      const ratio = entry.intersectionRatio;          // 0 → 1
+  useEffect(() => {
+    const onIntersect: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target as HTMLElement;
+        const ratio = entry.intersectionRatio;          // 0 → 1
 
-      /*  Fade-IN (same as before) --------------------------- */
-      if (ratio > 0) {
-        el.classList.add("reveal-visible");
-        el.classList.remove("reveal-hidden");
-      } else {
-        el.classList.remove("reveal-visible");
-        el.classList.add("reveal-hidden");
-      }
+        /* toggle classes for slide pop-up */
+        if (ratio > 0) {
+          el.classList.add("reveal-visible");
+          el.classList.remove("reveal-hidden");
+        } else {
+          el.classList.remove("reveal-visible");
+          el.classList.add("reveal-hidden");
+        }
 
-      /*  NEW: start fading OUT when only ~60 % is visible,
-               finish by the time ~20 % remains.              */
-      const opacity = Math.max(0, Math.min(1, (ratio - 0.20) / 0.40));
-      const translate = 60 * (1 - opacity);            // match 60 px CSS
-      el.style.opacity = opacity.toString();
-      el.style.transform = `translateY(${translate}px)`;
+        /* opacity & slide distance
+           – fully opaque while ≥80 % visible
+           – fully transparent once ≤20 % visible           */
+        const opacity = Math.max(0, Math.min(1, (ratio - 0.20) / 0.60));
+        const translate = 60 * (1 - opacity);           // match CSS 60 px
+        el.style.opacity = opacity.toString();
+        el.style.transform = `translateY(${translate}px)`;
+      });
+    };
+
+    /* rootMargin bottom –150 %  ➜ element considered “exiting”
+       while it’s still well inside viewport, giving fade-out time */
+    const observer = new IntersectionObserver(onIntersect, {
+      root: null,
+      rootMargin: "0px 0px -150% 0px",
+      threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
-  };
 
-  /* rootMargin bottom = -100 % ⇢ observer “shrinks” so exit
-     fade begins much sooner (while the card is still well
-     inside the viewport). */
-  const observer = new IntersectionObserver(handleIntersect, {
-    root: null,
-    rootMargin: "0px 0px -100% 0px",
-    threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
-  });
+    document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
+      observer.observe(el)
+    );
 
-  document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
-    observer.observe(el)
-  );
-  observerRef.current = observer;
-
-  return () => observer.disconnect();
-}, []);
+    observerRef.current = observer;
+    return () => observer.disconnect();
+  }, []);
 
   /* ---------- helper component ---------- */
   const Section = ({
@@ -70,7 +73,7 @@ useEffect(() => {
     </section>
   );
 
-  /* ---------------- page body ----------------- */
+  /* ------------------------  page body ------------------------ */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
       <div className="h-64" />
@@ -105,9 +108,9 @@ useEffect(() => {
 
       <Section title="An Intelligent Interface">
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
-        can quote history, decode warning lights in plain language, and suggest
-        fixes before you open the hood. Need fresh traffic or weather? Drop in
-        a one-way update from your phone—data flows in, never back out.
+        can quote history, decode warning lights in plain language, and
+        suggest fixes before you open the hood. Need fresh traffic or weather?
+        Drop in a one-way update from your phone—data flows in, never back out.
       </Section>
 
       <Section title="Rediscover the Joy of the Open Road">
@@ -141,7 +144,7 @@ useEffect(() => {
 
       <Section title="Robotaxi, Meet Your Portable AI Cabbie">
         Your personal chauffeur lives on your phone. Step into a Soul-equipped
-        robotaxi and your custom crafted persona—with your seat settings,
+        robotaxi and your custom-crafted persona—with your seat settings,
         conversation preferences, and small-talk history—loads in a blink.
         Step out, and it purges itself from the vehicle within seconds. Fleet
         operators deliver bespoke rides; passengers keep total privacy.
