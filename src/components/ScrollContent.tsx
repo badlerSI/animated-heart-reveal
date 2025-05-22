@@ -100,7 +100,7 @@ const ScrollContent = () => {
       <Section title="An Intelligent Interface">
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
         can answer trivia, quote Mark Twain, decode warning lights in plain language, and
-        suggest fixes before you open the hood. Need fresh traffic or weather?
+        suggest fixes before you even decide if you need to pull over. Need fresh traffic or weather?
         Drop in a one-way update from your phone—data flows in, never back out.
       </Section>
 
