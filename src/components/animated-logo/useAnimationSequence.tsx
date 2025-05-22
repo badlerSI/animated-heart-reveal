@@ -20,8 +20,8 @@ export const useAnimationSequence = (
         { element: "interface", delay: 1000 },
         { element: "soul", delay: 1500 },
         { element: "wave", delay: 2000 },
-        // Heart now appears after a delay to match with wave frame 21 (approximately halfway through the wave sequence)
-        { element: "heart", delay: 2500 } // Adjusted to appear with Wave_21 (middle of sequence)
+        // Heart now appears after a delay to match with wave frame 25
+        { element: "heart", delay: 2800 } // Adjusted to appear with Wave_25 (around frame 25)
       ];
       
       // Show elements in sequence

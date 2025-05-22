@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -11,6 +10,7 @@ interface WaveAnimationProps {
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const [activeFrames, setActiveFrames] = useState<number[]>([]);
   const animationRef = useRef<number | null>(null);
+  const [framesLoaded, setFramesLoaded] = useState<Record<number, boolean>>({});
   
   // Complete set of 40 frames for the wave animation
   const waveFrames = [
@@ -127,12 +127,38 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
       // Reset active frames
       setActiveFrames([]);
+      
+      // Preload critical frames (12-17)
+      const preloadCriticalFrames = () => {
+        const criticalFrameIndices = [11, 12, 13, 14, 15, 16];
+        criticalFrameIndices.forEach(index => {
+          const img = new Image();
+          img.onload = () => {
+            console.log(`Preloaded frame ${index + 1}`);
+            setFramesLoaded(prev => ({...prev, [index]: true}));
+          };
+          img.onerror = () => {
+            console.error(`Failed to preload frame ${index + 1}`);
+          };
+          img.src = waveFrames[index];
+        });
+      };
+      
+      preloadCriticalFrames();
 
       // Function to step through frames
       const animateFrames = () => {
+        // Wait for critical frames to load if we're approaching them
+        if (frameIndex >= 11 && frameIndex <= 16 && !framesLoaded[frameIndex]) {
+          console.log(`Waiting for frame ${frameIndex + 1} to load...`);
+          // Retry after a short delay
+          animationRef.current = window.setTimeout(() => animateFrames(), 50);
+          return;
+        }
+        
         // Add the current frame to active frames and log it for debugging
         setActiveFrames(prev => {
-          console.log(`Activating frame: ${frameIndex + 1}`); // Log frame activation
+          console.log(`Activating frame: ${frameIndex + 1}`);
           return [...prev, frameIndex];
         });
         
@@ -146,8 +172,8 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         }
       };
 
-      // Start the animation
-      animateFrames();
+      // Start the animation after a brief delay to allow preloading
+      animationRef.current = window.setTimeout(animateFrames, 100);
 
       // Cleanup function to clear the timeout if the component unmounts
       return () => {
@@ -182,8 +208,17 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
                   top: framePositions[index].top,
                   zIndex: index
                 }}
-                onLoad={() => isSpecialFrame && console.log(`Frame ${index + 1} loaded successfully`)}
-                onError={() => isSpecialFrame && console.log(`Frame ${index + 1} failed to load`)}
+                onLoad={() => {
+                  if (isSpecialFrame) {
+                    console.log(`Frame ${index + 1} loaded successfully`);
+                    setFramesLoaded(prev => ({...prev, [index]: true}));
+                  }
+                }}
+                onError={() => {
+                  if (isSpecialFrame) {
+                    console.log(`Frame ${index + 1} failed to load`);
+                  }
+                }}
               />
             );
           })}
