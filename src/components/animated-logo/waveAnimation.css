@@ -16,10 +16,10 @@
   height: 100%;
 }
 
-/* Individual frames - reverting to original width */
+/* Individual frames - ensuring complete coverage with slight overlap */
 .wave-container img.wave-frame {
   position: absolute;
-  width: 2.5%; /* Reverted to original width */
+  width: 2.6%; /* Slightly wider to prevent gaps */
   height: auto;
   object-fit: contain;
   opacity: 0;
