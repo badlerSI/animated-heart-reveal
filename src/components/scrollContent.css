@@ -11,6 +11,13 @@
   transform: translateY(0);
 }
 
+/* Adding fade-out animation when scrolling past */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
 /* Sequential reveal for elements within cards */
 .reveal-element {
   opacity: 0;

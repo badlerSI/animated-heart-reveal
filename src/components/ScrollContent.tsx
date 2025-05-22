@@ -18,7 +18,13 @@ const ScrollContent = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("reveal-visible");
-          observerRef.current?.unobserve(entry.target); // Stop observing once revealed
+          entry.target.classList.remove("reveal-hidden");
+        } else {
+          // Add fade-out when scrolling past
+          if (entry.target.classList.contains("reveal-visible")) {
+            entry.target.classList.remove("reveal-visible");
+            entry.target.classList.add("reveal-hidden");
+          }
         }
       });
     }, options);
@@ -74,13 +80,12 @@ const ScrollContent = () => {
       <section className="mb-24">
         <QuoteCard>
           "To have another language is to possess a second soul" -Charlemagne
+          <div className="mt-4 text-base">
+            Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
+            <br /><br />
+            Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
+          </div>
         </QuoteCard>
-        
-        <TextCard title="" className="mt-8">
-          Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
-          <br /><br />
-          Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
-        </TextCard>
       </section>
       
       <section className="mb-24">
@@ -101,31 +106,31 @@ const ScrollContent = () => {
 // Card component for text sections
 const TextCard = ({ title, children, className = "" }) => {
   return (
-    <Card className={`reveal bg-opacity-10 bg-cyan-900 border-cyan-800/30 overflow-hidden ${className}`}>
+    <div className={`reveal overflow-hidden ${className}`}>
       <div className="p-6 md:p-8">
         {title && (
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-cyan-50 tracking-wide reveal-element">
+          <h2 className="text-2xl md:text-3xl font-outfit font-semibold mb-4 text-cyan-white tracking-wide reveal-element">
             {title}
           </h2>
         )}
-        <p className="text-lg md:text-xl text-cyan-50/90 leading-relaxed reveal-element">
+        <p className="text-lg md:text-xl text-cyan-white/90 leading-relaxed reveal-element">
           {children}
         </p>
       </div>
-    </Card>
+    </div>
   );
 };
 
 // Card component for quotes
 const QuoteCard = ({ children }) => {
   return (
-    <Card className="reveal bg-opacity-20 bg-cyan-900 border-cyan-800/30">
+    <div className="reveal">
       <div className="p-6 md:p-8">
-        <blockquote className="text-xl md:text-2xl italic font-medium text-cyan-50 text-center reveal-element">
+        <blockquote className="text-xl md:text-2xl italic font-outfit font-medium text-cyan-white reveal-element">
           {children}
         </blockquote>
       </div>
-    </Card>
+    </div>
   );
 };
 
