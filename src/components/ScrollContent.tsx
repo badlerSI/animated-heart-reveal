@@ -10,7 +10,7 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "0px 0px -30% 0px", // Trigger when element is 30% above bottom of viewport
+      rootMargin: "0px 0px -20% 0px", // Trigger when element is only 20% above bottom of viewport
       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // Multiple thresholds for smoother transitions
     };
     
@@ -62,6 +62,9 @@ const ScrollContent = () => {
   
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
+      {/* Add extra space before the first section */}
+      <div className="h-64"></div>
+      
       <section className="mb-96">
         <TextCard title="Soul Inside the Car — Not the Cloud">
           Step in and your co-pilot is already awake. All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.
