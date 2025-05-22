@@ -8,8 +8,9 @@
 }
 
 .reveal-visible {
-  opacity: 1;
+  opacity: 1 !important; /* Added !important to ensure it overrides inline styles */
   transform: translateY(0);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 /* Adding fade-out animation when scrolling past */
