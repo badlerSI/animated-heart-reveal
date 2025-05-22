@@ -23,7 +23,7 @@
   object-fit: cover;         /* fill the space while maintaining aspect ratio */
   object-position: center;   /* center alignment */
   opacity: 0;
-  animation: pop 0s steps(1, end) forwards;
+  animation: pop 0s steps(1, end) forwards, wave-glow 0.8s ease-out forwards;
   animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
   animation-fill-mode: forwards;  /* Stay in the end state */
   animation-iteration-count: 1;   /* Explicitly run once only */
@@ -45,4 +45,16 @@
 
 @keyframes pop {
   to { opacity: 1; }
+}
+
+@keyframes wave-glow {
+  0% {
+    filter: drop-shadow(0 0 10px #33F0F0);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #33F0F0);
+  }
+  100% {
+    filter: drop-shadow(0 0 0px transparent);
+  }
 }

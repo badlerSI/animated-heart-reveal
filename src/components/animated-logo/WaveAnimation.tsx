@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
@@ -14,8 +13,8 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   // Complete set of 40 frames for the wave animation
   const waveSlices = [
     // First 20 frames
-    "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png", // Wave_01
-    "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png", // Wave_02
+    "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png", // Wave_01 (index 0)
+    "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png", // Wave_02 (index 1)
     "/lovable-uploads/a4d45b17-3873-466b-bb1d-b4e309aeb413.png", // Wave_03
     "/lovable-uploads/d0bedd4d-e14e-4b25-9f74-979bb3a90047.png", // Wave_04
     "/lovable-uploads/3dee6079-aed4-431f-93ea-b4d9b359bb19.png", // Wave_05
@@ -40,7 +39,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     "/lovable-uploads/24f4f7f3-66a4-42a5-8709-80febbdeeafa.png", // Wave_22
     "/lovable-uploads/348f3e01-e000-45d9-a59a-5312e3bc13a2.png", // Wave_23
     "/lovable-uploads/5ee59a29-f433-4eb9-b59d-bc8514490bb6.png", // Wave_24
-    "/lovable-uploads/2d8a1b97-4560-4c29-b367-e9878e907578.png", // Wave_25
+    "/lovable-uploads/2d8a1b97-4560-4c29-b367-e9878e907578.png", // Wave_25 (index 24) - Heart appears with this frame
     "/lovable-uploads/095bc20c-a7bd-4323-947a-6b9e88e4c68c.png", // Wave_26
     "/lovable-uploads/37aee880-36fa-41bb-b249-e189d02e4939.png", // Wave_27
     "/lovable-uploads/282caff0-90c8-4495-8410-f240e92d6626.png", // Wave_28
