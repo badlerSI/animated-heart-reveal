@@ -1,62 +1,51 @@
 import { useEffect, useRef } from "react";
-import { Card } from "./ui/card";
 import "./scrollContent.css";
 
-/* ---------------------------------------------------------
-   ScrollContent
-   — cards pop-up (translateY) via CSS classes you already
-     defined, but JS now drives *opacity* symmetrically
-     with intersectionRatio so they never stay half-faded
-     when you scroll back up.
---------------------------------------------------------- */
+/*──────────────────────────────────────────────────────────────
+  ScrollContent  •  fade+slide+pop; fade-out now starts earlier
+──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    /* Intersection-observer callback */
     const handleIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         const el = entry.target as HTMLElement;
-        const ratio = entry.intersectionRatio;      // 0 → 1
+        const r = entry.intersectionRatio;                  // 0 → 1
 
-        if (ratio > 0) {
-          /* element is (at least partly) in view ------------- */
+        /* Start fade when ≤30 % visible, finish by r ≈ 0 */
+        const opacity = Math.max(0, Math.min(1, (r - 0.30) / 0.70));
+        const translate = 24 * (1 - opacity);               // px slide
+        const scale = 0.9 + 0.15 * opacity;                 // 0.90 → 1.05
+
+        if (r > 0) {
           el.classList.add("reveal-visible");
           el.classList.remove("reveal-hidden");
-
-          /* Map intersectionRatio → opacity
-             - start fading in at ~5 % visible
-             - fully opaque once ≥95 % visible             */
-          const opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.90));
-          el.style.opacity = opacity.toString();
         } else {
-          /* element is 100 % out of view --------------------- */
           el.classList.remove("reveal-visible");
           el.classList.add("reveal-hidden");
-          el.style.opacity = "0";
         }
+
+        el.style.setProperty("--revealOpacity", opacity.toString());
+        el.style.setProperty("--revealTranslate", translate.toString());
+        el.style.setProperty("--revealScale", scale.toString());
       });
     };
 
-    /* thresholds every 5 % for smooth fade */
-    const thresholds = Array.from({ length: 21 }, (_, i) => i / 20); // 0, .05 … 1
-
     observerRef.current = new IntersectionObserver(handleIntersect, {
       root: null,
-      rootMargin: "0px 0px -20% 0px",   // begin exit-fade 20 % early
-      threshold: thresholds
+      rootMargin: "0px 0px -40% 0px",                       // ⬅ fade-out sooner
+      threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 
-    /* Observe all current .reveal nodes */
     document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
       observerRef.current!.observe(el)
     );
 
-    /* disconnect on unmount */
     return () => observerRef.current?.disconnect();
   }, []);
 
-  /* ---------- helper for each scroll section ---------- */
+  /* ---------- helper component ---------- */
   const Section = ({
     title,
     children
@@ -78,17 +67,17 @@ const ScrollContent = () => {
     </section>
   );
 
-  /* -------------------------  page body ------------------------- */
+  /* ---------------- page body ----------------- */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
       <div className="h-64" />
 
       <Section title="Soul Inside the Car — Not the Cloud">
         Open the door and your assistant is already awake. All language
-        processing happens on the automotive-grade GPU that rides beside
-        the main ECU—nothing leaves the cabin. The patent-pending
-        architecture gives you answers in under a second, works even with
-        zero bars, and erases cloud fees and privacy worries.
+        processing happens on the automotive-grade GPU that rides beside the
+        main ECU—nothing leaves the cabin. The patent-pending architecture
+        gives you answers in under a second, works even with zero bars, and
+        erases cloud fees and privacy worries.
       </Section>
 
       <Section title="No Screens? No Problem">
@@ -97,27 +86,25 @@ const ScrollContent = () => {
         <br />
         <br />
         With Soul Interface you speak naturally to run navigation, music,
-        climate and much more; no menu mazes, no glare, no “safety
-        lockouts.” Your dash stays clean, your focus stays forward.
+        climate and much more; no menu mazes, no glare, no “safety lockouts.”
+        Your dash stays clean, your focus stays forward.
       </Section>
 
       <Section title="Forge the Soul of Your Ride">
-        Ask for a brand-new persona—any accent, attitude, or back-story—
-        and Soul Interface forges it on-device in about 30 seconds. Once
-        saved, your library of characters loads instantaneously whenever
-        you call for them. You're not picking from a short list; you're
-        creating anything you can imagine. Popeye the Sailor Dog? Sure!
-        Winston Churchill trapped in the body of kindergartner? Hey, you
-        do you! Swapping on the fly is easy thanks to LoRA overlays smaller
-        than a podcast.
+        Ask for a brand-new persona—any accent, attitude, or back-story—and
+        Soul Interface forges it on-device in about 30 seconds. Once saved,
+        your library of characters loads instantaneously whenever you call for
+        them. You're not picking from a short list; you're creating anything
+        you can imagine. Popeye the Sailor Dog? Sure! Winston Churchill trapped
+        in the body of kindergartner? Hey, you do you! Swapping on the fly is
+        easy thanks to LoRA overlays smaller than a podcast.
       </Section>
 
       <Section title="An Intelligent Interface">
-        A 16 GB offline knowledge vault rides everywhere you go. Soul
-        Interface can quote history, decode warning lights in plain
-        language, and suggest fixes before you open the hood. Need fresh
-        traffic or weather? Drop in a one-way update from your phone—data
-        flows in, never back out.
+        A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
+        can quote history, decode warning lights in plain language, and suggest
+        fixes before you open the hood. Need fresh traffic or weather? Drop in
+        a one-way update from your phone—data flows in, never back out.
       </Section>
 
       <Section title="Rediscover the Joy of the Open Road">
@@ -125,10 +112,10 @@ const ScrollContent = () => {
         Soul Interface harmonizes in real time, or sing any part of a duet.
         <br />
         <br />
-        Launch a choose-your-own-adventure for the whole family that plays
-        out with multiple character voices, sound-effects, and even
-        grammatically sound Elvish. Road trips become rolling entertainment,
-        no internet required.
+        Launch a choose-your-own-adventure for the whole family that plays out
+        with multiple character voices, sound-effects, and even grammatically
+        sound Elvish. Road trips become rolling entertainment, no internet
+        required.
       </Section>
 
       <Section
@@ -140,31 +127,29 @@ const ScrollContent = () => {
           </span>
         }
       >
-        Conversations among passengers flow freely: Soul Interface
-        translates speech across sixteen languages almost instantly, all
-        offline.
+        Conversations among passengers flow freely: Soul Interface translates
+        speech across sixteen languages almost instantly, all offline.
         <br />
         <br />
-        Prefer to learn? Switch to Tutor Mode and practice phrases while
-        the assistant corrects pronunciation on the fly—perfect prep for
-        that long-awaited trip to Italy.
+        Prefer to learn? Switch to Tutor Mode and practice phrases while the
+        assistant corrects pronunciation on the fly—perfect prep for that
+        long-awaited trip to Italy.
       </Section>
 
       <Section title="Robotaxi, Meet Your Portable AI Cabbie">
-        Your personal chauffeur lives on your phone. Step into a
-        Soul-equipped robotaxi and your custom crafted persona—with your
-        seat settings, conversation preferences, and small-talk
-        history—loads in a blink. Step out, and it purges itself from the
-        vehicle within seconds. Fleet operators deliver bespoke rides;
-        passengers keep total privacy.
+        Your personal chauffeur lives on your phone. Step into a Soul-equipped
+        robotaxi and your custom crafted persona—with your seat settings,
+        conversation preferences, and small-talk history—loads in a blink.
+        Step out, and it purges itself from the vehicle within seconds. Fleet
+        operators deliver bespoke rides; passengers keep total privacy.
       </Section>
 
       <Section title="Keep Your Car's Soul Safe">
-        You can keep a secure backup hidden away—like a horcrux minus the
-        dark magic—in case anything happens to your car, or you get a new
-        one. Updates install on a spare software partition first, so
-        there's always a safe version to fall back on. Preserve your
-        treasured personas for life.
+        You can keep a secure backup hidden away—like a horcrux minus the dark
+        magic—in case anything happens to your car, or you get a new one.
+        Updates install on a spare software partition first, so there's always
+        a safe version to fall back on. Preserve your treasured personas for
+        life.
       </Section>
     </div>
   );
