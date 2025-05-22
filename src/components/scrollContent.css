@@ -1,4 +1,5 @@
 
+
 /* Base styles for reveal animations */
 .reveal {
   opacity: 0;
@@ -47,12 +48,14 @@
 
 /* Glow effect for links */
 .text-glow:hover {
-  text-shadow: 0 0 8px rgba(51, 195, 240, 0.6);
+  text-shadow: 0 0 8px rgba(80, 210, 240, 0.7);
   transition: text-shadow 0.3s ease;
 }
 
 /* Add custom font styles to body */
 body {
-  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: 0.01em;
+  font-family: 'Outfit', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.015em;
+  color: #d0faff;
 }
+

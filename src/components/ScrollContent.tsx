@@ -1,10 +1,11 @@
+
 import { useEffect, useRef } from "react";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
   ScrollContent
   • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
-  • Fade-in on entry; fade-out begins much earlier so it’s visible
+  • Fade-in on entry; fade-out begins much earlier so it's visible
   • intersectionRatio drives opacity; scroll-up bug is gone
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
@@ -62,10 +63,10 @@ const ScrollContent = () => {
     <section className="mb-96">
       <div className="reveal overflow-hidden">
         <div className="p-6 md:p-8">
-          <h2 className="text-2xl md:text-3xl font-outfit font-semibold mb-4 text-cyan-white tracking-wide reveal-element">
+          <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-4 text-cyan-white tracking-wide reveal-element">
             {title}
           </h2>
-          <p className="text-lg md:text-xl text-cyan-white/90 leading-relaxed reveal-element">
+          <p className="text-lg md:text-xl text-cyan-white/90 leading-relaxed reveal-element font-outfit">
             {children}
           </p>
         </div>

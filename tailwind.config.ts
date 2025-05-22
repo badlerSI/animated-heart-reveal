@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
 				outfit: ['Outfit', 'sans-serif'],
+				playfair: ['Playfair Display', 'serif'], // More stylish serif font
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -28,7 +29,7 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				'cyan-white': '#e0faff', // Increased cyan tint in the off-white
+				'cyan-white': '#d0faff', // Increased cyan tint in the off-white (more cyan than before)
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
