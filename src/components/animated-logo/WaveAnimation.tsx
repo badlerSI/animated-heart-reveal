@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -8,7 +7,11 @@ interface WaveAnimationProps {
   onPlaySound: () => void;
 }
 
-/* 40 wave-slice PNG URLs ------------------------------------------------ */
+/*  final full-width static wave PNG  */
+const STATIC_WAVE_SRC =
+  "/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png";
+
+/* 40 frame slices ------------------------------------------------------- */
 const SLICE_SRC: string[] = [
   "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png",
   "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png",
@@ -59,23 +62,19 @@ const WaveAnimation = ({
 }: WaveAnimationProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false);
+  const [staticShown, setStaticShown] = useState(false);
 
-  /* helper ---------------------------------------------------------------- */
-  const fitToParent = (totalW: number, totalH: number) => {
-    const wrapper = wrapperRef.current!;
-    const parentBox = wrapper.parentElement!.getBoundingClientRect();
-    const scale = Math.min(
-      parentBox.width / totalW,
-      parentBox.height / totalH
-    );
-    wrapper.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  /* fit wrapper to parent (.aspect-video) ------------------------------- */
+  const fitToParent = (w: number, h: number) => {
+    const parent = wrapperRef.current!.parentElement!.getBoundingClientRect();
+    const scale = Math.min(parent.width / w, parent.height / h);
+    wrapperRef.current!.style.transform =
+      `translate(-50%, -50%) scale(${scale})`;
   };
 
-  /* build once when visible ---------------------------------------------- */
+  /* build animation once ------------------------------------------------ */
   useEffect(() => {
-    if (!isVisible || ready) return;
-    setReady(true);
+    if (!isVisible || staticShown) return;
 
     const container = containerRef.current!;
     container.innerHTML = "";
@@ -93,35 +92,42 @@ const WaveAnimation = ({
           const sliceW = img.naturalWidth;
           const sliceH = img.naturalHeight;
           const totalW = sliceW * SLICE_SRC.length;
-          const totalH = sliceH;
-
           container.style.setProperty("--slice-w", `${sliceW}px`);
           container.style.setProperty("--slice-h", `${sliceH}px`);
           container.style.width = `${totalW}px`;
-          container.style.height = `${totalH}px`;
-
-          fitToParent(totalW, totalH);
+          container.style.height = `${sliceH}px`;
+          fitToParent(totalW, sliceH);
         };
+      }
+      if (i === SLICE_SRC.length - 1) {
+        img.addEventListener("animationend", () => setStaticShown(true));
       }
     });
 
     if (!prefersReducedMotion) onPlaySound();
 
-    /* re-fit on resize ---------------------------------------------------- */
     const onResize = () => {
-      const totalW = parseFloat(container.style.width);
-      const totalH = parseFloat(container.style.height);
-      fitToParent(totalW, totalH);
+      const w = parseFloat(container.style.width);
+      const h = parseFloat(container.style.height);
+      fitToParent(w, h);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [isVisible, ready, prefersReducedMotion, onPlaySound]);
+  }, [isVisible, staticShown, prefersReducedMotion, onPlaySound]);
 
   if (!isVisible) return null;
 
   return (
     <div id="wave-wrapper" ref={wrapperRef}>
-      <div id="wave-container" ref={containerRef} className="wave-container" />
+      {staticShown ? (
+        <img
+          src={STATIC_WAVE_SRC}
+          alt="static wave"
+          className="static-wave"
+        />
+      ) : (
+        <div id="wave-container" ref={containerRef} className="wave-container" />
+      )}
     </div>
   );
 };

@@ -1,24 +1,31 @@
-
-/* ---------- wrapper: centered & scaled by JS ----------------- */
+/* wrapper: JS centers & scales -------------------------------- */
 #wave-wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);   /* JS appends scale() */
-  transform-origin: center center;    /* << fixes vertical shift */
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
   pointer-events: none;
 }
 
-/* ---------- container: exact bitmap size --------------------- */
+/* static fallback PNG ----------------------------------------- */
+.static-wave {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: none;
+  image-rendering: crisp-edges;
+}
+
+/* container + slices (during animation) ----------------------- */
 .wave-container {
   --fps: 30;
-  --slice-w: 38px;     /* overwritten by JS */
-  --slice-h: 300px;    /* overwritten by JS */
+  --slice-w: 38px;
+  --slice-h: 300px;
   display: flex;
   overflow: hidden;
 }
 
-/* ---------- each slice --------------------------------------- */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
