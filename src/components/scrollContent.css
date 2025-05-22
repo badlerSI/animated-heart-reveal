@@ -2,8 +2,9 @@
 /* Base styles for reveal animations */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+  will-change: opacity, transform;
 }
 
 .reveal-visible {
@@ -14,29 +15,29 @@
 /* Adding fade-out animation when scrolling past */
 .reveal-hidden {
   opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.4s ease, transform 0.6s ease;
+  transform: translateY(-30px);
+  transition: opacity 0.6s ease, transform 0.8s ease;
 }
 
 /* Sequential reveal for elements within cards */
 .reveal-element {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
 }
 
 .reveal-visible .reveal-element:nth-child(1) {
-  animation: reveal-up 0.6s ease-out 0.2s forwards;
+  animation: reveal-up 0.8s ease-out 0.3s forwards;
 }
 
 .reveal-visible .reveal-element:nth-child(2) {
-  animation: reveal-up 0.6s ease-out 0.4s forwards;
+  animation: reveal-up 0.8s ease-out 0.6s forwards;
 }
 
 /* Animation for revealing elements */
 @keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;

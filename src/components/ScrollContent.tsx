@@ -10,7 +10,7 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "0px 0px -50% 0px", // Trigger when element is 50% in viewport
+      rootMargin: "0px 0px -30% 0px", // Trigger when element is 30% above bottom of viewport
       threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // Multiple thresholds for smoother transitions
     };
     
@@ -38,6 +38,10 @@ const ScrollContent = () => {
             // Ensure it's completely hidden when above viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
+            (entry.target as HTMLElement).style.opacity = "0";
+          } else if (boundingRect.top > windowHeight) {
+            // Element is below the viewport - reset for fade-in
+            entry.target.classList.remove("reveal-visible");
             (entry.target as HTMLElement).style.opacity = "0";
           }
         }
