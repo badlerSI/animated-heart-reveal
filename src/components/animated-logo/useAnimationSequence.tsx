@@ -20,7 +20,7 @@ export const useAnimationSequence = (
         { element: "interface", delay: 1000 },
         { element: "soul", delay: 1500 },
         { element: "wave", delay: 2000 },
-        { element: "heart", delay: 3500 } // Extended delay to allow wave animation to complete
+        { element: "heart", delay: 2000 } // Modified to appear at the same time as the wave (Wave_21)
       ];
       
       // Show elements in sequence

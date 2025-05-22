@@ -19,7 +19,7 @@
 /* Individual frames - reverting to original width */
 .wave-container img.wave-frame {
   position: absolute;
-  width: 2.5%; /* Reverted to original width */
+  width: 2.5%; /* Width set to 2.5% */
   height: auto;
   object-fit: contain;
   opacity: 0;
@@ -29,4 +29,16 @@
 
 .wave-container img.wave-frame.active {
   opacity: 1;
+  animation: wave-glow 0.2s ease-in-out forwards;
+}
+
+@keyframes wave-glow {
+  0% {
+    filter: drop-shadow(0 0 3px #33C3F0);
+    opacity: 1;
+  }
+  100% {
+    filter: drop-shadow(0 0 0px #33C3F0);
+    opacity: 1;
+  }
 }
