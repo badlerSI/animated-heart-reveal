@@ -7,43 +7,46 @@ import "./scrollContent.css";
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  useEffect(() => {
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        const el = entry.target as HTMLElement;
-        const r = entry.intersectionRatio;                  // 0 → 1
+useEffect(() => {
+  const handleIntersect: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target as HTMLElement;
+      const ratio = entry.intersectionRatio;          // 0 → 1
 
-        /* Start fade when ≤30 % visible, finish by r ≈ 0 */
-        const opacity = Math.max(0, Math.min(1, (r - 0.30) / 0.70));
-        const translate = 24 * (1 - opacity);               // px slide
-        const scale = 0.9 + 0.15 * opacity;                 // 0.90 → 1.05
+      /*  Fade-IN (same as before) --------------------------- */
+      if (ratio > 0) {
+        el.classList.add("reveal-visible");
+        el.classList.remove("reveal-hidden");
+      } else {
+        el.classList.remove("reveal-visible");
+        el.classList.add("reveal-hidden");
+      }
 
-        if (r > 0) {
-          el.classList.add("reveal-visible");
-          el.classList.remove("reveal-hidden");
-        } else {
-          el.classList.remove("reveal-visible");
-          el.classList.add("reveal-hidden");
-        }
-
-        el.style.setProperty("--revealOpacity", opacity.toString());
-        el.style.setProperty("--revealTranslate", translate.toString());
-        el.style.setProperty("--revealScale", scale.toString());
-      });
-    };
-
-    observerRef.current = new IntersectionObserver(handleIntersect, {
-      root: null,
-      rootMargin: "0px 0px -40% 0px",                       // ⬅ fade-out sooner
-      threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
+      /*  NEW: start fading OUT when only ~60 % is visible,
+               finish by the time ~20 % remains.              */
+      const opacity = Math.max(0, Math.min(1, (ratio - 0.20) / 0.40));
+      const translate = 60 * (1 - opacity);            // match 60 px CSS
+      el.style.opacity = opacity.toString();
+      el.style.transform = `translateY(${translate}px)`;
     });
+  };
 
-    document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
-      observerRef.current!.observe(el)
-    );
+  /* rootMargin bottom = -100 % ⇢ observer “shrinks” so exit
+     fade begins much sooner (while the card is still well
+     inside the viewport). */
+  const observer = new IntersectionObserver(handleIntersect, {
+    root: null,
+    rootMargin: "0px 0px -100% 0px",
+    threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
+  });
 
-    return () => observerRef.current?.disconnect();
-  }, []);
+  document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
+    observer.observe(el)
+  );
+  observerRef.current = observer;
+
+  return () => observer.disconnect();
+}, []);
 
   /* ---------- helper component ---------- */
   const Section = ({
