@@ -56,7 +56,7 @@
 
 /* Add custom font styles to body */
 body {
-  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 0.01em;
 }
 
@@ -69,4 +69,11 @@ body {
 .section-left {
   margin-right: auto;
   margin-left: 0;
+}
+
+/* Full height segments to ensure they take up more vertical space */
+.full-height-segment {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
