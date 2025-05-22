@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -11,6 +10,8 @@ interface WaveAnimationProps {
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const [activeFrames, setActiveFrames] = useState<number[]>([]);
   const animationRef = useRef<number | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
   
   // Complete set of 40 frames for the wave animation
   const waveFrames = [
@@ -106,10 +107,54 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     { left: "97.5%", top: "10.1%" }    // Frame 40
   ];
 
+  // Preload all images before starting the animation
   useEffect(() => {
-    // Only start animation when component becomes visible
-    if (isVisible) {
-      console.log("Starting wave animation - horizontal sequence with persistent frames");
+    if (isVisible && !imagesLoaded) {
+      console.log("Starting image preload for all wave frames");
+      
+      const totalImages = waveFrames.length;
+      let loadedCount = 0;
+      
+      // Create a promise for each image load
+      const preloadPromises = waveFrames.map((src, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          
+          img.onload = () => {
+            loadedCount++;
+            setLoadProgress(Math.floor((loadedCount / totalImages) * 100));
+            console.log(`Preloaded image ${index + 1}/${totalImages} (${src})`);
+            resolve(src);
+          };
+          
+          img.onerror = (err) => {
+            console.error(`Failed to preload image ${index + 1}/${totalImages} (${src})`, err);
+            reject(err);
+          };
+          
+          img.src = src;
+        });
+      });
+      
+      // When all images are loaded, set imagesLoaded to true
+      Promise.all(preloadPromises)
+        .then(() => {
+          console.log("All wave frames successfully preloaded");
+          setImagesLoaded(true);
+        })
+        .catch((err) => {
+          console.error("Error preloading images:", err);
+          // Still set imagesLoaded to true to allow animation to proceed
+          setImagesLoaded(true);
+        });
+    }
+  }, [isVisible, waveFrames, imagesLoaded]);
+
+  // Start the animation once images are preloaded
+  useEffect(() => {
+    // Only start animation when component is visible and images are preloaded
+    if (isVisible && imagesLoaded) {
+      console.log("All images loaded, starting wave animation");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
@@ -156,7 +201,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         }
       };
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveFrames.length]);
+  }, [isVisible, imagesLoaded, prefersReducedMotion, onPlaySound, waveFrames.length]);
 
   // Don't render anything if not visible
   if (!isVisible) {
@@ -166,28 +211,36 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   return (
     <div className="absolute inset-0 z-50">
       <div className="wave-container">
-        <div className="wave-slice-container">
-          {waveFrames.map((frame, index) => {
-            // Check if this is one of the frames with issues (12-17)
-            const isSpecialFrame = index >= 11 && index <= 16; // Frames 12-17
-            
-            return (
-              <img
-                key={`wave-frame-${index}`}
-                src={frame}
-                alt={`Wave Frame ${index + 1}`}
-                className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''} ${isSpecialFrame ? 'special-frame' : ''}`}
-                style={{
-                  left: framePositions[index].left,
-                  top: framePositions[index].top,
-                  zIndex: index
-                }}
-                onLoad={() => isSpecialFrame && console.log(`Frame ${index + 1} loaded successfully`)}
-                onError={() => isSpecialFrame && console.log(`Frame ${index + 1} failed to load`)}
-              />
-            );
-          })}
-        </div>
+        {!imagesLoaded && (
+          <div className="preloader">
+            <div className="preloader-text">Loading wave animation: {loadProgress}%</div>
+            <div className="preloader-bar-container">
+              <div className="preloader-bar" style={{ width: `${loadProgress}%` }} />
+            </div>
+          </div>
+        )}
+        {imagesLoaded && (
+          <div className="wave-slice-container">
+            {waveFrames.map((frame, index) => {
+              // Check if this is one of the frames with issues (12-17)
+              const isSpecialFrame = index >= 11 && index <= 16; // Frames 12-17
+              
+              return (
+                <img
+                  key={`wave-frame-${index}`}
+                  src={frame}
+                  alt={`Wave Frame ${index + 1}`}
+                  className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''} ${isSpecialFrame ? 'special-frame' : ''}`}
+                  style={{
+                    left: framePositions[index].left,
+                    top: framePositions[index].top,
+                    zIndex: index
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
