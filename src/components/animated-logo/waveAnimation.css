@@ -19,7 +19,11 @@
   left: calc(var(--i) * var(--slice-w));
   animation-delay: calc(var(--i) / var(--fps) * 1s);
   height: var(--slice-h);
-  width: auto;
+  width: var(--slice-w); /* Ensure each slice has exact width */
+  object-fit: cover; /* Maintain aspect ratio while covering the area */
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
 @keyframes reveal {
