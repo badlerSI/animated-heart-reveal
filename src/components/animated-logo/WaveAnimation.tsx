@@ -59,51 +59,51 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   // Manual position adjustments for each frame to create a smooth wave
-  // Adjusting horizontal spacing to eliminate gaps and vertical position
+  // Keeping original horizontal spacing but updated vertical position to 8.5%
   const framePositions = [
-    // First 20 frames - adjusted to eliminate visual seams
+    // First 20 frames
     { left: "0%", top: "8.5%" },      // Frame 1
-    { left: "2.45%", top: "8.5%" },   // Frame 2
-    { left: "4.9%", top: "8.5%" },    // Frame 3
-    { left: "7.35%", top: "8.5%" },   // Frame 4
-    { left: "9.8%", top: "8.5%" },    // Frame 5
-    { left: "12.25%", top: "8.5%" },  // Frame 6
-    { left: "14.7%", top: "8.5%" },   // Frame 7
-    { left: "17.15%", top: "8.5%" },  // Frame 8
-    { left: "19.6%", top: "8.5%" },   // Frame 9
-    { left: "22.05%", top: "8.5%" },  // Frame 10
-    { left: "24.5%", top: "8.5%" },   // Frame 11
-    { left: "26.95%", top: "8.5%" },  // Frame 12
-    { left: "29.4%", top: "8.5%" },   // Frame 13
-    { left: "31.85%", top: "8.5%" },  // Frame 14
-    { left: "34.3%", top: "8.5%" },   // Frame 15
-    { left: "36.75%", top: "8.5%" },  // Frame 16
-    { left: "39.2%", top: "8.5%" },   // Frame 17
-    { left: "41.65%", top: "8.5%" },  // Frame 18
-    { left: "44.1%", top: "8.5%" },   // Frame 19
-    { left: "46.55%", top: "8.5%" },  // Frame 20
+    { left: "2.5%", top: "8.5%" },    // Frame 2
+    { left: "5%", top: "8.5%" },      // Frame 3
+    { left: "7.5%", top: "8.5%" },    // Frame 4
+    { left: "10%", top: "8.5%" },     // Frame 5
+    { left: "12.5%", top: "8.5%" },   // Frame 6
+    { left: "15%", top: "8.5%" },     // Frame 7
+    { left: "17.5%", top: "8.5%" },   // Frame 8
+    { left: "20%", top: "8.5%" },     // Frame 9
+    { left: "22.5%", top: "8.5%" },   // Frame 10
+    { left: "25%", top: "8.5%" },     // Frame 11
+    { left: "27.5%", top: "8.5%" },   // Frame 12
+    { left: "30%", top: "8.5%" },     // Frame 13
+    { left: "32.5%", top: "8.5%" },   // Frame 14
+    { left: "35%", top: "8.5%" },     // Frame 15
+    { left: "37.5%", top: "8.5%" },   // Frame 16
+    { left: "40%", top: "8.5%" },     // Frame 17
+    { left: "42.5%", top: "8.5%" },   // Frame 18
+    { left: "45%", top: "8.5%" },     // Frame 19
+    { left: "47.5%", top: "8.5%" },   // Frame 20
     
-    // Second 20 frames - adjusted to eliminate visual seams
-    { left: "49%", top: "8.5%" },     // Frame 21
-    { left: "51.45%", top: "8.5%" },  // Frame 22
-    { left: "53.9%", top: "8.5%" },   // Frame 23
-    { left: "56.35%", top: "8.5%" },  // Frame 24
-    { left: "58.8%", top: "8.5%" },   // Frame 25
-    { left: "61.25%", top: "8.5%" },  // Frame 26
-    { left: "63.7%", top: "8.5%" },   // Frame 27
-    { left: "66.15%", top: "8.5%" },  // Frame 28
-    { left: "68.6%", top: "8.5%" },   // Frame 29
-    { left: "71.05%", top: "8.5%" },  // Frame 30
-    { left: "73.5%", top: "8.5%" },   // Frame 31
-    { left: "75.95%", top: "8.5%" },  // Frame 32
-    { left: "78.4%", top: "8.5%" },   // Frame 33
-    { left: "80.85%", top: "8.5%" },  // Frame 34
-    { left: "83.3%", top: "8.5%" },   // Frame 35
-    { left: "85.75%", top: "8.5%" },  // Frame 36
-    { left: "88.2%", top: "8.5%" },   // Frame 37
-    { left: "90.65%", top: "8.5%" },  // Frame 38
-    { left: "93.1%", top: "8.5%" },   // Frame 39
-    { left: "95.55%", top: "8.5%" }   // Frame 40
+    // Second 20 frames
+    { left: "50%", top: "8.5%" },     // Frame 21
+    { left: "52.5%", top: "8.5%" },   // Frame 22
+    { left: "55%", top: "8.5%" },     // Frame 23
+    { left: "57.5%", top: "8.5%" },   // Frame 24
+    { left: "60%", top: "8.5%" },     // Frame 25
+    { left: "62.5%", top: "8.5%" },   // Frame 26
+    { left: "65%", top: "8.5%" },     // Frame 27
+    { left: "67.5%", top: "8.5%" },   // Frame 28
+    { left: "70%", top: "8.5%" },     // Frame 29
+    { left: "72.5%", top: "8.5%" },   // Frame 30
+    { left: "75%", top: "8.5%" },     // Frame 31
+    { left: "77.5%", top: "8.5%" },   // Frame 32
+    { left: "80%", top: "8.5%" },     // Frame 33
+    { left: "82.5%", top: "8.5%" },   // Frame 34
+    { left: "85%", top: "8.5%" },     // Frame 35
+    { left: "87.5%", top: "8.5%" },   // Frame 36
+    { left: "90%", top: "8.5%" },     // Frame 37
+    { left: "92.5%", top: "8.5%" },   // Frame 38
+    { left: "95%", top: "8.5%" },     // Frame 39
+    { left: "97.5%", top: "8.5%" }    // Frame 40
   ];
 
   useEffect(() => {

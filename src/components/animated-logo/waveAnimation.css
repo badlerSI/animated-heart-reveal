@@ -16,10 +16,10 @@
   height: 100%;
 }
 
-/* Individual frames - with adjusted width to eliminate horizontal gaps */
+/* Individual frames - reverting to original width */
 .wave-container img.wave-frame {
   position: absolute;
-  width: 2.55%; /* Fine-tuned width to eliminate horizontal seams */
+  width: 2.5%; /* Reverted to original width */
   height: auto;
   object-fit: contain;
   opacity: 0;
