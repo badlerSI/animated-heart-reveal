@@ -3,20 +3,28 @@
 .reveal {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
   will-change: opacity, transform;
 }
 
 .reveal-visible {
-  opacity: 1;
+  opacity: 1 !important; /* !important ensures it overrides inline styles when coming into view */
   transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* Adding fade-out animation when scrolling past */
 .reveal-hidden {
-  opacity: 0;
   transform: translateY(-30px);
-  transition: opacity 0.6s ease, transform 0.8s ease;
+  opacity: 0 !important; /* Force hide when completely scrolled past */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* New class for elements that are actively fading */
+.reveal-fading {
+  transform: translateY(-30px);
+  transition: opacity 0.3s linear, transform 0.5s ease;
+  /* opacity controlled dynamically by JavaScript */
 }
 
 /* Sequential reveal for elements within cards */
@@ -38,18 +46,6 @@
   from {
     opacity: 0;
     transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animations for scroll-up behavior */
-@keyframes fade-back-in {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
   }
   to {
     opacity: 1;

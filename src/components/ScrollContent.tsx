@@ -1,32 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
 
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
-  
-  // Track scroll direction
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY) {
-        setScrollDirection('down');
-      } else {
-        setScrollDirection('up');
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
   
   useEffect(() => {
     // Set up the Intersection Observer for scroll animations
@@ -43,33 +20,46 @@ const ScrollContent = () => {
         const windowHeight = window.innerHeight;
         
         if (entry.isIntersecting) {
-          // Element is entering the viewport - always show it regardless of scroll direction
+          // Element is entering the viewport
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
-          // Reset inline opacity to let CSS handle the fade in
-          (entry.target as HTMLElement).style.removeProperty('opacity');
+          // Reset opacity when element is in view
+          (entry.target as HTMLElement).style.opacity = "1";
+          console.log("Element in view - visible");
         } else {
-          // Element is completely out of view
-          if (boundingRect.top <= 0) {
-            // Element has scrolled above the viewport
+          // Check if element is above the viewport (scrolled past)
+          if (boundingRect.bottom < 0) {
+            // Element has completely scrolled past the viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
             
-            // Only apply opacity fade-out effect when scrolling down
-            if (scrollDirection === 'down') {
-              // Calculate opacity based on how far element has scrolled out
-              const distanceScrolledOut = -boundingRect.top;
-              const fadeOutDistance = windowHeight * 0.3; // Fade out over 30% of window height
-              const opacity = Math.max(0, 1 - (distanceScrolledOut / fadeOutDistance));
-              
-              (entry.target as HTMLElement).style.opacity = opacity.toString();
-            }
+            // Force opacity to 0 when fully scrolled past
+            (entry.target as HTMLElement).style.opacity = "0";
+            console.log("Element completely scrolled past - hiding", boundingRect.bottom);
+          } else if (boundingRect.top < 0 && boundingRect.bottom > 0) {
+            // Element is partially visible at top of screen - apply fade effect
+            entry.target.classList.remove("reveal-visible");
+            entry.target.classList.add("reveal-fading");
+            
+            // Calculate fade based on how much of the element is still visible
+            // As the element scrolls up and out of view, it fades out
+            const elementHeight = boundingRect.height;
+            const visibleHeight = boundingRect.bottom; // How much is still visible
+            const visibilityRatio = visibleHeight / elementHeight;
+            
+            // Apply a more dramatic curve to the fade
+            const opacity = Math.pow(visibilityRatio, 1.5); // Exponential fade for more dramatic effect
+            
+            console.log(`Fading with ratio: ${visibilityRatio.toFixed(2)}, opacity: ${opacity.toFixed(2)}`);
+            (entry.target as HTMLElement).style.opacity = opacity.toString();
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.remove("reveal-hidden");
+            entry.target.classList.remove("reveal-fading");
             (entry.target as HTMLElement).style.opacity = "0";
+            console.log("Element below viewport - hiding for entrance");
           }
         }
       });
@@ -85,7 +75,7 @@ const ScrollContent = () => {
         observerRef.current.disconnect();
       }
     };
-  }, [scrollDirection]); // Re-setup observer when scroll direction changes
+  }, []);
   
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
