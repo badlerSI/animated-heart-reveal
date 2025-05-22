@@ -1,31 +1,30 @@
 
-/* wrapper is centered; JS adds scale() so it exactly fits the
-   parent .relative aspect-video box that holds the static PNGs */
+/* ---------- wrapper: centered & scaled by JS ----------------- */
 #wave-wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  transform-origin: top center;
+  transform: translate(-50%, -50%);   /* JS appends scale() */
+  transform-origin: center center;    /* << fixes vertical shift */
   pointer-events: none;
 }
 
-/* container: exact bitmap size --------------------------------- */
+/* ---------- container: exact bitmap size --------------------- */
 .wave-container {
   --fps: 30;
-  --slice-w: 38px;      /* overwritten by JS */
-  --slice-h: 300px;     /* overwritten by JS */
+  --slice-w: 38px;     /* overwritten by JS */
+  --slice-h: 300px;    /* overwritten by JS */
   display: flex;
   overflow: hidden;
 }
 
-/* each slice ---------------------------------------------------- */
+/* ---------- each slice --------------------------------------- */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
   height: var(--slice-h);
   object-fit: none;
-  image-rendering: crisp-edges;   /* no blur */
+  image-rendering: crisp-edges;
   opacity: 0;
   animation:
     pop       0s   steps(1,end) forwards,
