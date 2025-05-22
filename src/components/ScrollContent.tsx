@@ -74,7 +74,7 @@ const ScrollContent = () => {
       
       <section className="mb-96">
         <TextCard title="Forge the Soul of Your Ride">
-          Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in about 30 seconds. Once saved, your library of characters loads instantaneously whenever you call for them. You're not picking from a short list; you're creating anything you can imagine. Poppy the Sailor Dog? Sure! Winston Churchil trapped in the body of kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast.
+          Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in about 30 seconds. Once saved, your library of characters loads instantaneously whenever you call for them. You're not picking from a short list; you're creating anything you can imagine. Popeye the Sailor Dog? Sure! Winston Churchil trapped in the body of kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast.
         </TextCard>
       </section>
       
@@ -108,7 +108,7 @@ const ScrollContent = () => {
       
       <section className="mb-96">
         <TextCard title="Keep Your Car's Soul Safe">
-          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there's always a safe version to fall back on. Your digital co-pilot is guarded as securely as the steel around you.
+          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there's always a safe version to fall back on. Keep your treasured persona for life.
         </TextCard>
       </section>
     </div>
