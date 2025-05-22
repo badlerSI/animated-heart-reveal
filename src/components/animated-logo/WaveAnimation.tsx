@@ -83,10 +83,12 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         setCurrentFrame(frameIndex);
         frameIndex++;
 
-        // Stop animation when we've shown all frames
+        // Continue animation until we've shown all frames
+        // But don't reset currentFrame, so the last frame stays visible
         if (frameIndex < waveSlices.length) {
           animationRef.current = window.setTimeout(animateFrames, frameDuration);
         }
+        // No "else" case that would hide frames or reset currentFrame
       };
 
       // Start the animation
@@ -115,8 +117,8 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               key={`wave-slice-${index}`}
               src={slice}
               alt={`Wave Slice ${index + 1}`}
-              className={`wave-slice ${index === currentFrame ? 'active' : ''}`}
-              style={{ order: index }} /* Ensure proper order in flex container */
+              className={`wave-slice ${index <= currentFrame ? 'active' : ''}`}
+              style={{ order: index }}
             />
           ))}
         </div>
