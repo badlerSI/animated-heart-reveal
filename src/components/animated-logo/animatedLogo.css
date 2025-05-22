@@ -1,6 +1,6 @@
 
 .glow-effect {
-  animation: glow 2s ease-in-out forwards;
+  animation: glow 2s ease-in-out forwards; /* removed the repeat by specifying forwards */
 }
 
 @keyframes glow {
