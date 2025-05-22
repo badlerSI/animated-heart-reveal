@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -10,7 +9,7 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "0px",
+      rootMargin: "-20% 0px", // Trigger when top is 20% from viewport top
       threshold: 0.1 // Trigger when 10% of the element is visible
     };
     
@@ -78,14 +77,11 @@ const ScrollContent = () => {
       </section>
       
       <section className="mb-44">
-        <QuoteCard>
-          "To have another language is to possess a second soul" -Charlemagne
-          <div className="mt-4 text-base">
-            Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
-            <br /><br />
-            Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
-          </div>
-        </QuoteCard>
+        <TextCard title="&quot;To have another language is to possess a second soul&quot; -Charlemagne">
+          Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
+          <br /><br />
+          Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
+        </TextCard>
       </section>
       
       <section className="mb-44">
@@ -121,7 +117,7 @@ const TextCard = ({ title, children, className = "" }) => {
   );
 };
 
-// Card component for quotes
+// Card component for quotes - no longer needed as we're using TextCard for all sections
 const QuoteCard = ({ children }) => {
   return (
     <div className="reveal">
