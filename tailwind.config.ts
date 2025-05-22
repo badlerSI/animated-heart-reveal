@@ -28,7 +28,7 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				'cyan-white': '#ecfdff', // Our slightly cyan-tinged off-white
+				'cyan-white': '#e0faff', // Increased cyan tint in the off-white
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'

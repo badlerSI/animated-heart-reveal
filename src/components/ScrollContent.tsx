@@ -9,7 +9,7 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "-20% 0px", // Trigger when top is 20% from viewport top
+      rootMargin: "-50% 0px", // Trigger when element is 50% away from viewport center
       threshold: 0.1 // Trigger when 10% of the element is visible
     };
     
