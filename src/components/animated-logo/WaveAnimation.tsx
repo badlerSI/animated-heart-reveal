@@ -7,11 +7,11 @@ interface WaveAnimationProps {
   onPlaySound: () => void;
 }
 
-/* full-wave PNG shown at the end */
+/* Static PNG shown after animation */
 const STATIC_WAVE_SRC =
   "/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png";
 
-/* 40 frame slices ------------------------------------------------------- */
+/* Slice images (40 total) */
 const SLICE_SRC: string[] = [
   "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png",
   "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png",
@@ -64,33 +64,33 @@ const WaveAnimation = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [staticShown, setStaticShown] = useState(false);
 
-  /* helper: scale wrapper so it fits its parent (.aspect-video) --------- */
-  const fitToParent = (w: number, h: number) => {
+  /* scale wrapper to fit parent */
+  const fit = (w: number, h: number) => {
     const parent = wrapperRef.current!.parentElement!.getBoundingClientRect();
-    const scale = Math.min(parent.width / w, parent.height / h);
-    wrapperRef.current!.style.transform =
-      `translate(-50%, -50%) scale(${scale})`;
-    wrapperRef.current!.style.width  = `${w}px`;
-    wrapperRef.current!.style.height = `${h}px`;
+    const s = Math.min(parent.width / w, parent.height / h);
+    const wEl = wrapperRef.current!;
+    wEl.style.transform = `translate(-50%, -50%) scale(${s})`;
+    wEl.style.width = `${w}px`;
+    wEl.style.height = `${h}px`;
   };
 
-  /* build slices once --------------------------------------------------- */
+  /* build slices once */
   useEffect(() => {
     if (!isVisible || staticShown) return;
 
     const container = containerRef.current!;
     container.innerHTML = "";
 
-    SLICE_SRC.forEach((src, idx) => {
+    SLICE_SRC.forEach((src, i) => {
       const img = document.createElement("img");
       img.src = src;
-      img.alt = `wave slice ${idx + 1}`;
+      img.alt = `wave slice ${i + 1}`;
       img.className = "wave-slice";
-      img.style.setProperty("--i", idx.toString());
+      img.style.setProperty("--i", i.toString());
       container.appendChild(img);
 
-      /* measure first slice */
-      if (idx === 0) {
+      /* measure first slice for total size */
+      if (i === 0) {
         img.onload = () => {
           const sliceW = img.naturalWidth;
           const sliceH = img.naturalHeight;
@@ -99,12 +99,12 @@ const WaveAnimation = ({
           container.style.setProperty("--slice-h", `${sliceH}px`);
           container.style.width = `${totalW}px`;
           container.style.height = `${sliceH}px`;
-          fitToParent(totalW, sliceH);
+          fit(totalW, sliceH);
         };
       }
 
-      /* after last slice finishes swap */
-      if (idx === SLICE_SRC.length - 1) {
+      /* trigger static PNG a bit early (slice 37, index 36) */
+      if (i === 36) {
         img.addEventListener("animationend", () => setStaticShown(true));
       }
     });
@@ -112,16 +112,13 @@ const WaveAnimation = ({
     if (!prefersReducedMotion) onPlaySound();
   }, [isVisible, staticShown, prefersReducedMotion, onPlaySound]);
 
-  /* when PNG replaces slices, fit again using its natural size ---------- */
+  /* once static PNG in DOM, fit again */
   useEffect(() => {
     if (!staticShown) return;
     const img = new Image();
     img.src = STATIC_WAVE_SRC;
-    img.onload = () => {
-      fitToParent(img.naturalWidth, img.naturalHeight);
-    };
-    const onResize = () =>
-      fitToParent(img.naturalWidth, img.naturalHeight);
+    img.onload = () => fit(img.naturalWidth, img.naturalHeight);
+    const onResize = () => fit(img.naturalWidth, img.naturalHeight);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [staticShown]);
@@ -131,11 +128,9 @@ const WaveAnimation = ({
   return (
     <div id="wave-wrapper" ref={wrapperRef}>
       {staticShown ? (
-        <img src={STATIC_WAVE_SRC} alt="static wave" className="static-wave" />
+        <img className="static-wave fade-in" src={STATIC_WAVE_SRC} alt="wave" />
       ) : (
-        <div id="wave-container"
-             ref={containerRef}
-             className="wave-container" />
+        <div id="wave-container" ref={containerRef} className="wave-container" />
       )}
     </div>
   );
