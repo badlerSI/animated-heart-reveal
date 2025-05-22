@@ -1,35 +1,28 @@
 
-/* ---------- wrapper for global scale on small screens ---------- */
+/* ───────── wrapper that holds the whole wave ───────── */
 #wave-wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);      /* center on desktop */
 }
 
-@media (max-width: 768px) {
-  #wave-wrapper {
-    transform: translate(-50%, -50%) scale(0.58); /* tweak factor as needed */
-    transform-origin: top center;
-  }
-}
-
-/* ---------- wave container (exact bit-map width / height) ------ */
+/* ───────── wave container: exact bitmap size ───────── */
 .wave-container {
   --fps: 30;
-  --slice-w: 38px;           /* overwritten by JS */
-  --slice-h: 300px;          /* overwritten by JS */
-  display: flex;             /* packs slices flush, no sub-pixel gaps */
+  --slice-w: 38px;    /* overwritten by JS on first load */
+  --slice-h: 300px;   /* overwritten by JS on first load */
+  display: flex;      /* packs slices flush */
   overflow: hidden;
 }
 
-/* ---------- every slice --------------------------------------- */
+/* every slice ------------------------------------------------ */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
   height: var(--slice-h);
-  object-fit: none;                 /* NEVER scale bitmap           */
-  image-rendering: crisp-edges;     /* prevent blur                 */
+  object-fit: none;                 /* never scale */
+  image-rendering: crisp-edges;     /* keep edges sharp */
   opacity: 0;
   animation:
     pop       0s   steps(1,end) forwards,
@@ -38,10 +31,22 @@
   animation-fill-mode: forwards;
 }
 
-@keyframes pop   { to { opacity: 1; } }
+@keyframes pop {
+  to { opacity: 1; }
+}
 
 @keyframes wave-glow {
   0%   { filter: drop-shadow(0 0 10px #33F0F0); }
   50%  { filter: drop-shadow(0 0 15px #33F0F0); }
-  100% { filter: drop-shadow(0 0 0px  transparent); }
+  100% { filter: drop-shadow(0 0 0px transparent); }
+}
+
+/* ───────────── mobile breakpoint ─────────────
+   Shrink entire assembled wave so it fits a phone
+   screen without scaling individual slices.      */
+@media (max-width: 768px) {
+  #wave-wrapper {
+    transform: translate(-50%, -50%) scale(0.55); /* tweak factor as needed */
+    transform-origin: top center;
+  }
 }
