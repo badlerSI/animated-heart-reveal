@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -25,30 +24,28 @@ const ScrollContent = () => {
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
-          // Calculate fade based on position for elements scrolling up out of view
-          if (boundingRect.top < windowHeight * 0.5) {
+          // If scrolling back up from below, ensure opacity is reset
+          if (boundingRect.top > 0) {
+            (entry.target as HTMLElement).style.removeProperty("opacity");
+          } 
+          // Only calculate opacity for elements being scrolled out of view (going up)
+          else if (boundingRect.top < windowHeight * 0.5) {
             const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
-            // Only apply inline opacity if we're fading out (scrolling past)
             if (opacity < 1) {
               (entry.target as HTMLElement).style.opacity = opacity.toString();
-            } else {
-              (entry.target as HTMLElement).style.removeProperty("opacity");
             }
-          } else {
-            // Coming into view from below - always fully visible
-            (entry.target as HTMLElement).style.removeProperty("opacity");
           }
         } else {
           // Element is completely out of view
           if (boundingRect.top <= 0) {
-            // Ensure it's completely hidden when above viewport
+            // Element has scrolled past the top - mark as hidden
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
-            (entry.target as HTMLElement).style.opacity = "0";
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            // Remove inline opacity to let CSS handle it 
+            entry.target.classList.remove("reveal-hidden");
+            // Always clear inline opacity when element is below viewport
             (entry.target as HTMLElement).style.removeProperty("opacity");
           }
         }
