@@ -67,7 +67,7 @@ const ScrollContent = () => {
       
       <section className="mb-96">
         <TextCard title="Soul Inside the Car — Not the Cloud">
-          Step in and your co-pilot is already awake. All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.
+          Open the door and your assistant is already awake. All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.
         </TextCard>
       </section>
       
@@ -100,7 +100,9 @@ const ScrollContent = () => {
       </section>
       
       <section className="mb-96">
-        <TextCard title="&quot;To have another language is to possess a second soul&quot;    -Charlemagne">
+        <TextCard title="&quot;To have another language is to possess a second soul&quot; 
+          <br /><br />
+          -Charlemagne">
           Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
           <br /><br />
           Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
@@ -115,7 +117,7 @@ const ScrollContent = () => {
       
       <section className="mb-96">
         <TextCard title="Keep Your Car's Soul Safe">
-          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there's always a safe version to fall back on. Keep your treasured persona for life.
+          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
         </TextCard>
       </section>
     </div>
