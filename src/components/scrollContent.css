@@ -16,8 +16,15 @@
 /* Adding fade-out animation when scrolling past */
 .reveal-hidden {
   transform: translateY(-30px);
+  opacity: 0 !important; /* Force hide when completely scrolled past */
   transition: opacity 0.5s ease, transform 0.5s ease;
-  /* opacity controlled by inline styles for more precise control */
+}
+
+/* New class for elements that are actively fading */
+.reveal-fading {
+  transform: translateY(-30px);
+  transition: opacity 0.3s linear, transform 0.5s ease;
+  /* opacity controlled dynamically by JavaScript */
 }
 
 /* Sequential reveal for elements within cards */
