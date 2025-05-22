@@ -50,15 +50,15 @@ const ScrollContent = () => {
       
       <section className="full-height-segment mb-72">
         <TextCard title="No Screens? No Problem" className="section-right max-w-3xl">
-          Touchscreens can take a driver's eyes off the road for over twenty seconds, and can spoil otherwise gorgeous interiors besides.
+          Touchscreens can take a driver&apos;s eyes off the road for over twenty seconds, and can spoil otherwise gorgeous interiors besides.
           <br /><br />
-          With Soul Interface you speak naturally to run navigation, music, climate and much more; no menu mazes, no glare, no "safety lockouts." Your dash stays clean, your focus stays forward.
+          With Soul Interface you speak naturally to run navigation, music, climate and much more; no menu mazes, no glare, no &quot;safety lockouts.&quot; Your dash stays clean, your focus stays forward.
         </TextCard>
       </section>
       
       <section className="full-height-segment mb-72">
         <TextCard title="Forge the Soul of Your Ride" className="section-left max-w-3xl">
-          Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in about 30 seconds. Once saved, your library of characters loads instantaneously whenever you call for them. You're not picking from a short list; you're creating anything you can imagine. Poppy the Sailor Dog? Sure! Winston Churchil trapped in the body of kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast.
+          Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in about 30 seconds. Once saved, your library of characters loads instantaneously whenever you call for them. You&apos;re not picking from a short list; you&apos;re creating anything you can imagine. Poppy the Sailor Dog? Sure! Winston Churchil trapped in the body of kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast.
         </TextCard>
       </section>
       
@@ -77,7 +77,7 @@ const ScrollContent = () => {
       </section>
       
       <section className="full-height-segment mb-72">
-        <TextCard title=""To have another language is to possess a second soul"" className="section-right max-w-3xl">
+        <TextCard title="&quot;To have another language is to possess a second soul&quot;" className="section-right max-w-3xl">
           <div className="reveal-element text-right mt-2 text-base font-light">
             -Charlemagne
           </div>
@@ -97,7 +97,7 @@ const ScrollContent = () => {
       
       <section className="full-height-segment mb-72">
         <TextCard title="Keep Your Car's Soul Safe" className="section-right max-w-3xl">
-          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there's always a safe version to fall back on. Your digital co-pilot is guarded as securely as the steel around you.
+          You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, or you get a new one. Updates install on a spare software partition first, so there&apos;s always a safe version to fall back on. Your digital co-pilot is guarded as securely as the steel around you.
         </TextCard>
       </section>
     </div>
