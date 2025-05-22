@@ -8,7 +8,7 @@
 }
 
 .reveal-visible {
-  opacity: 1 !important; /* Ensure this overrides any inline styles */
+  opacity: 1 !important; /* Ensure this overrides any inline styles when element is visible */
   transform: translateY(0);
 }
 

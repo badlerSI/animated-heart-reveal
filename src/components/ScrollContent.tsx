@@ -25,10 +25,15 @@ const ScrollContent = () => {
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
-          // Calculate fade based on position
+          // Calculate fade based on position for elements scrolling up out of view
           if (boundingRect.top < windowHeight * 0.5) {
             const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
-            (entry.target as HTMLElement).style.opacity = opacity.toString();
+            // Only apply inline opacity if we're fading out (scrolling past)
+            if (opacity < 1) {
+              (entry.target as HTMLElement).style.opacity = opacity.toString();
+            } else {
+              (entry.target as HTMLElement).style.removeProperty("opacity");
+            }
           } else {
             // Coming into view from below - always fully visible
             (entry.target as HTMLElement).style.removeProperty("opacity");
