@@ -4,11 +4,15 @@
   --slice-w: 38px;     /* default width - will be updated by JS */
   --slice-h: 300px;    /* default height - will be updated by JS */
   display: flex;
-  position: relative;
-  width: fit-content;  /* Will adjust based on content */
-  height: var(--slice-h);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
 
 /* styling for every img */
@@ -16,8 +20,8 @@
   flex: 0 0 var(--slice-w);  /* don't grow or shrink */
   width: var(--slice-w);     /* exact width */
   height: var(--slice-h);    /* exact height */
-  object-fit: none;          /* prevent scaling/distortion */
-  object-position: 0 0;      /* ensure top-left alignment */
+  object-fit: cover;         /* fill the space while maintaining aspect ratio */
+  object-position: center;   /* center alignment */
   opacity: 0;
   animation: pop 0s steps(1, end) forwards;
   animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */

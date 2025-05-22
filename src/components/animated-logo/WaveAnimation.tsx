@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
@@ -56,7 +57,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   useEffect(() => {
     if (isVisible && containerRef.current) {
-      console.log("Starting wave animation with improved sizing");
+      console.log("Starting wave animation with fixed sizing");
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -69,6 +70,26 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
         containerRef.current?.appendChild(img);
+        
+        // Use the first image to set the container dimensions
+        if (index === 0) {
+          img.onload = () => {
+            const container = containerRef.current;
+            if (container) {
+              // Calculate proportional slice width based on container size
+              const containerWidth = container.clientWidth;
+              const containerHeight = container.clientHeight;
+              const sliceCount = waveSlices.length;
+              
+              // Each slice should be wide enough so that all slices together fill the width
+              // We need to account for the aspect ratio of the original images
+              const sliceWidth = Math.floor(containerWidth / sliceCount);
+              
+              container.style.setProperty('--slice-w', `${sliceWidth}px`);
+              container.style.setProperty('--slice-h', `${containerHeight}px`);
+            }
+          };
+        }
       });
       
       // Play sound if animations are enabled
@@ -77,20 +98,18 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         onPlaySound();
       }
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
 
   if (!isVisible) {
     return null;
   }
 
   return (
-    <div 
-      className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full h-full flex items-center justify-center"
-    >
+    <div className="absolute inset-0 z-50 flex items-center justify-center">
       <div 
         id="wave-container"
         ref={containerRef} 
-        className="wave-container w-full h-full"
+        className="wave-container"
       ></div>
     </div>
   );

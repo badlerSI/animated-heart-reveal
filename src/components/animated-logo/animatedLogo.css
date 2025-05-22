@@ -1,6 +1,6 @@
 
 .glow-effect {
-  animation: glow 1.5s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out forwards;
 }
 
 @keyframes glow {
@@ -11,6 +11,6 @@
     filter: drop-shadow(0 0 15px #33C3F0);
   }
   100% {
-    filter: drop-shadow(0 0 5px #33C3F0);
+    filter: drop-shadow(0 0 8px #33C3F0);
   }
 }
