@@ -62,7 +62,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   useEffect(() => {
     // Only start animation when component becomes visible
     if (isVisible) {
-      console.log("Starting wave animation - horizontal spread");
+      console.log("Starting wave animation - horizontal sequence");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
@@ -117,6 +117,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
                 src={frame}
                 alt={`Wave Frame ${index + 1}`}
                 className={`wave-frame ${index === currentFrame ? 'active' : ''}`}
+                style={{ order: index }} // Ensure proper sequence order
               />
             ))}
           </div>
