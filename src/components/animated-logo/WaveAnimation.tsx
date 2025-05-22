@@ -74,7 +74,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.style.setProperty('--i', index.toString());
         containerRef.current?.appendChild(img);
         
-        // Set dimensions based on first image
+        // Set dimensions based on the first image and device size
         if (index === 0) {
           img.onload = () => {
             const container = containerRef.current;
@@ -83,10 +83,20 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               const containerHeight = container.clientHeight;
               const sliceCount = waveSlices.length;
               
-              const sliceWidth = Math.floor(containerWidth / sliceCount);
+              // Responsive slice width based on container size
+              let sliceWidth = Math.floor(containerWidth / sliceCount);
               
+              // Ensure minimum size on small screens
+              sliceWidth = Math.max(sliceWidth, 10);
+              
+              // Set CSS custom property for slice width
               container.style.setProperty('--slice-w', `${sliceWidth}px`);
-              container.style.setProperty('--slice-h', `${containerHeight}px`);
+              
+              // Adjust height for different screen sizes
+              const heightRatio = window.innerWidth <= 768 ? 0.8 : 1.0;
+              container.style.setProperty('--slice-h', `${containerHeight * heightRatio}px`);
+              
+              console.log(`Mobile optimization: Container size: ${containerWidth}x${containerHeight}, Slice width: ${sliceWidth}px`);
             }
           };
         }

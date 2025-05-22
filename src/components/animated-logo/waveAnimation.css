@@ -32,6 +32,17 @@
   border: none;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .wave-container {
+    --slice-w: 28px;  /* Smaller slice width on mobile */
+  }
+  
+  .wave-container img.wave-slice {
+    max-height: 80vh;  /* Limit height on mobile */
+  }
+}
+
 @keyframes pop {
   to { opacity: 1; }
 }
