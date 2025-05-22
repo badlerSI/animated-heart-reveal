@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
 interface WaveAnimationProps {
@@ -9,6 +10,7 @@ interface WaveAnimationProps {
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [animationStarted, setAnimationStarted] = useState(false);
   
   // Complete set of 40 frames for the wave animation
   const waveSlices = [
@@ -58,8 +60,10 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   useEffect(() => {
-    if (isVisible && containerRef.current && waveSlices.length > 0) {
-      console.log("Starting wave animation with all 40 frames");
+    if (isVisible && containerRef.current && waveSlices.length > 0 && !animationStarted) {
+      // Set animation started flag to prevent restarting
+      setAnimationStarted(true);
+      console.log("Starting wave animation with all 40 frames - one time only");
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -82,20 +86,25 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               const containerHeight = container.clientHeight;
               const sliceCount = waveSlices.length;
               
-              // Responsive slice width based on container size
+              // Dynamic slice width calculation based on screen size
+              const isMobile = window.innerWidth <= 768;
+              
+              // Responsive slice width based on container size & device
               let sliceWidth = Math.floor(containerWidth / sliceCount);
               
-              // Ensure minimum size on small screens
-              sliceWidth = Math.max(sliceWidth, 10);
+              // Adjust for mobile - smaller slices, larger on desktop
+              sliceWidth = isMobile ? 
+                Math.max(sliceWidth, 12) : // Mobile minimum
+                Math.max(sliceWidth, 18); // Desktop minimum
               
               // Set CSS custom property for slice width
               container.style.setProperty('--slice-w', `${sliceWidth}px`);
               
               // Adjust height for different screen sizes
-              const heightRatio = window.innerWidth <= 768 ? 0.8 : 1.0;
+              const heightRatio = isMobile ? 0.7 : 1.0;
               container.style.setProperty('--slice-h', `${containerHeight * heightRatio}px`);
               
-              console.log(`Mobile optimization: Container size: ${containerWidth}x${containerHeight}, Slice width: ${sliceWidth}px`);
+              console.log(`Container optimization: ${isMobile ? 'Mobile' : 'Desktop'} - Container size: ${containerWidth}x${containerHeight}, Slice width: ${sliceWidth}px`);
             }
           };
         }
@@ -107,7 +116,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         onPlaySound();
       }
     }
-  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices, animationStarted]);
 
   if (!isVisible) {
     return null;
