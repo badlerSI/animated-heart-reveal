@@ -25,7 +25,6 @@
   opacity: 0;
   transition: opacity 30ms linear;
   transform: translateX(-50%); /* Center each frame on its position */
-  will-change: opacity, filter; /* Performance optimization */
 }
 
 .wave-container img.wave-frame.active {
@@ -36,7 +35,6 @@
 /* Special attention to frames 12-17 */
 .wave-container img.wave-frame.special-frame {
   outline: none; /* No visible outline, just for debugging purposes */
-  z-index: 100; /* Ensure these frames are on top */
 }
 
 @keyframes wave-glow {
