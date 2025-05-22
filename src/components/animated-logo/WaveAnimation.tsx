@@ -57,7 +57,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   useEffect(() => {
     if (isVisible && containerRef.current) {
-      console.log("Starting wave animation with new approach");
+      console.log("Starting wave animation with scaled approach");
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
@@ -79,6 +79,10 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               // Adjust variables based on natural image dimensions
               container.style.setProperty('--slice-w', `${img.naturalWidth}px`);
               container.style.setProperty('--slice-h', `${img.naturalHeight}px`);
+              
+              // Can adjust scale factor dynamically based on parent container if needed
+              const scaleFactor = 0.25; // Adjustable scale factor - make smaller
+              container.style.setProperty('--scale-factor', scaleFactor.toString());
             }
           };
         }

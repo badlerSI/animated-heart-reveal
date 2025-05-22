@@ -1,22 +1,26 @@
 
 .wave-container {
-  --fps: 30;           /* target frame rate */
-  --slice-w: 38px;     /* default width - will be updated by JS */
-  --slice-h: 300px;    /* default height - will be updated by JS */
+  --fps: 30;               /* target frame rate */
+  --slice-w: 38px;         /* default width - will be updated by JS */
+  --slice-h: 300px;        /* default height - will be updated by JS */
+  --scale-factor: 0.25;    /* scale factor to reduce size */
   display: flex;
   position: relative;
-  width: fit-content;  /* Will adjust based on content */
-  height: var(--slice-h);
+  width: fit-content;      /* Will adjust based on content */
+  height: calc(var(--slice-h) * var(--scale-factor));
   overflow: hidden;
   margin: 0 auto;
 }
 
 /* styling for every img */
 .wave-container img.wave-slice {
-  flex: 0 0 var(--slice-w);  /* don't grow or shrink */
-  width: var(--slice-w);     /* exact width */
-  height: var(--slice-h);    /* exact height */
-  object-fit: none;          /* prevent scaling/distortion */
+  flex: 0 0 calc(var(--slice-w) * var(--scale-factor));  /* don't grow or shrink, but scale */
+  width: calc(var(--slice-w) * var(--scale-factor));     /* scaled width */
+  height: calc(var(--slice-h) * var(--scale-factor));    /* scaled height */
+  object-fit: none;        /* prevent scaling/distortion */
+  object-position: 0 0;    /* ensure top-left alignment */
+  transform: scale(var(--scale-factor)); /* scale the image itself */
+  transform-origin: top left; /* scale from top left */
   opacity: 0;
   animation: pop 0s steps(1, end) forwards;
   animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
