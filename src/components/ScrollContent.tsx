@@ -77,7 +77,7 @@ const ScrollContent = () => {
       </section>
       
       <section className="mb-44">
-        <TextCard title="&quot;To have another language is to possess a second soul&quot; -Charlemagne">
+        <TextCard title="&quot;To have another language is to possess a second soul&quot;    -Charlemagne">
           Conversations among passengers flow freely: Soul Interface translates speech across sixteen languages almost instantly, all offline.
           <br /><br />
           Prefer to learn? Switch to Tutor Mode and practice phrases while the assistant corrects pronunciation on the fly—perfect prep for that long-awaited trip to Italy.
