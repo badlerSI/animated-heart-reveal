@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -29,7 +30,8 @@ const ScrollContent = () => {
             const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
             (entry.target as HTMLElement).style.opacity = opacity.toString();
           } else {
-            (entry.target as HTMLElement).style.opacity = "1";
+            // Element is coming into view from below - ensure full visibility
+            (entry.target as HTMLElement).style.opacity = "";
           }
         } else {
           // Element is completely out of view
@@ -41,7 +43,8 @@ const ScrollContent = () => {
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            (entry.target as HTMLElement).style.opacity = "0";
+            // Remove inline opacity to let CSS handle it
+            (entry.target as HTMLElement).style.removeProperty("opacity");
           }
         }
       });
