@@ -9,20 +9,35 @@ const ScrollContent = () => {
     // Set up the Intersection Observer for scroll animations
     const options = {
       root: null, // viewport
-      rootMargin: "-50% 0px", // Trigger when element is 50% away from viewport center
-      threshold: 0.1 // Trigger when 10% of the element is visible
+      rootMargin: "0px 0px 0px 0px", // Use default margins
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // Multiple thresholds for smoother transitions
     };
     
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        // Calculate how far the element has scrolled past the viewport
+        const boundingRect = entry.boundingClientRect;
+        const windowHeight = window.innerHeight;
+        
         if (entry.isIntersecting) {
+          // Element is entering the viewport
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
+          
+          // Calculate fade based on position
+          if (boundingRect.top < windowHeight * 0.5) {
+            const opacity = Math.max(0, (boundingRect.bottom / windowHeight) - 0.1);
+            (entry.target as HTMLElement).style.opacity = opacity.toString();
+          } else {
+            (entry.target as HTMLElement).style.opacity = "1";
+          }
         } else {
-          // Add fade-out when scrolling past
-          if (entry.target.classList.contains("reveal-visible")) {
+          // Element is completely out of view
+          if (boundingRect.top <= 0) {
+            // Ensure it's completely hidden when above viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
+            (entry.target as HTMLElement).style.opacity = "0";
           }
         }
       });
