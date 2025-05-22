@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
 interface WaveAnimationProps {
@@ -8,13 +9,10 @@ interface WaveAnimationProps {
 }
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
-  const [activeFrames, setActiveFrames] = useState<number[]>([]);
-  const animationRef = useRef<number | null>(null);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [loadProgress, setLoadProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   // Complete set of 40 frames for the wave animation
-  const waveFrames = [
+  const waveSlices = [
     // First 20 frames
     "/lovable-uploads/762a95ff-f48e-4efd-9ce0-47a43f218f29.png", // Wave_01
     "/lovable-uploads/3dcd7f9b-3078-4677-b981-9f832697fb70.png", // Wave_02
@@ -60,188 +58,59 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     "/lovable-uploads/7f0b2c87-ab43-4627-ac48-d23bda5a7280.png"   // Wave_40
   ];
 
-  // Adjusted vertical positioning to create a smoother wave pattern
-  const framePositions = [
-    // First 20 frames - smoothed curve
-    { left: "0%", top: "10.0%" },      // Frame 1
-    { left: "2.5%", top: "10.1%" },    // Frame 2
-    { left: "5%", top: "10.2%" },      // Frame 3
-    { left: "7.5%", top: "10.3%" },    // Frame 4
-    { left: "10%", top: "10.4%" },     // Frame 5
-    { left: "12.5%", top: "10.5%" },   // Frame 6
-    { left: "15%", top: "10.4%" },     // Frame 7
-    { left: "17.5%", top: "10.3%" },   // Frame 8
-    { left: "20%", top: "10.2%" },     // Frame 9
-    { left: "22.5%", top: "10.1%" },   // Frame 10
-    { left: "25%", top: "10.0%" },     // Frame 11
-    { left: "27.5%", top: "9.9%" },    // Frame 12
-    { left: "30%", top: "9.8%" },      // Frame 13
-    { left: "32.5%", top: "9.9%" },    // Frame 14
-    { left: "35%", top: "10.0%" },     // Frame 15
-    { left: "37.5%", top: "10.1%" },   // Frame 16
-    { left: "40%", top: "10.2%" },     // Frame 17
-    { left: "42.5%", top: "10.3%" },   // Frame 18
-    { left: "45%", top: "10.4%" },     // Frame 19
-    { left: "47.5%", top: "10.5%" },   // Frame 20
-    
-    // Second 20 frames - smoothed curve
-    { left: "50%", top: "10.4%" },     // Frame 21
-    { left: "52.5%", top: "10.3%" },   // Frame 22
-    { left: "55%", top: "10.2%" },     // Frame 23
-    { left: "57.5%", top: "10.1%" },   // Frame 24
-    { left: "60%", top: "10.0%" },     // Frame 25
-    { left: "62.5%", top: "9.9%" },    // Frame 26
-    { left: "65%", top: "9.8%" },      // Frame 27
-    { left: "67.5%", top: "9.9%" },    // Frame 28
-    { left: "70%", top: "10.0%" },     // Frame 29
-    { left: "72.5%", top: "10.1%" },   // Frame 30
-    { left: "75%", top: "10.2%" },     // Frame 31
-    { left: "77.5%", top: "10.3%" },   // Frame 32
-    { left: "80%", top: "10.4%" },     // Frame 33
-    { left: "82.5%", top: "10.5%" },   // Frame 34
-    { left: "85%", top: "10.4%" },     // Frame 35
-    { left: "87.5%", top: "10.3%" },   // Frame 36
-    { left: "90%", top: "10.2%" },     // Frame 37
-    { left: "92.5%", top: "10.1%" },   // Frame 38
-    { left: "95%", top: "10.0%" },     // Frame 39
-    { left: "97.5%", top: "10.1%" }    // Frame 40
-  ];
-
-  // Preload all images before starting the animation
   useEffect(() => {
-    if (isVisible && !imagesLoaded) {
-      console.log("Starting image preload for all wave frames");
+    if (isVisible && containerRef.current && waveSlices.length > 0) {
+      console.log("Starting wave animation with all 40 frames");
       
-      const totalImages = waveFrames.length;
-      let loadedCount = 0;
+      // Clear any existing content
+      containerRef.current.innerHTML = '';
       
-      // Create a promise for each image load
-      const preloadPromises = waveFrames.map((src, index) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          
+      // Create and append all wave slice images
+      waveSlices.forEach((slice, index) => {
+        const img = document.createElement('img');
+        img.src = slice;
+        img.alt = `Wave Slice ${index + 1}`;
+        img.className = 'wave-slice';
+        img.style.setProperty('--i', index.toString());
+        containerRef.current?.appendChild(img);
+        
+        // Set dimensions based on first image
+        if (index === 0) {
           img.onload = () => {
-            loadedCount++;
-            setLoadProgress(Math.floor((loadedCount / totalImages) * 100));
-            console.log(`Preloaded image ${index + 1}/${totalImages} (${src})`);
-            resolve(src);
+            const container = containerRef.current;
+            if (container) {
+              const containerWidth = container.clientWidth;
+              const containerHeight = container.clientHeight;
+              const sliceCount = waveSlices.length;
+              
+              const sliceWidth = Math.floor(containerWidth / sliceCount);
+              
+              container.style.setProperty('--slice-w', `${sliceWidth}px`);
+              container.style.setProperty('--slice-h', `${containerHeight}px`);
+            }
           };
-          
-          img.onerror = (err) => {
-            console.error(`Failed to preload image ${index + 1}/${totalImages} (${src})`, err);
-            reject(err);
-          };
-          
-          img.src = src;
-        });
+        }
       });
-      
-      // When all images are loaded, set imagesLoaded to true
-      Promise.all(preloadPromises)
-        .then(() => {
-          console.log("All wave frames successfully preloaded");
-          setImagesLoaded(true);
-        })
-        .catch((err) => {
-          console.error("Error preloading images:", err);
-          // Still set imagesLoaded to true to allow animation to proceed
-          setImagesLoaded(true);
-        });
-    }
-  }, [isVisible, waveFrames, imagesLoaded]);
-
-  // Start the animation once images are preloaded
-  useEffect(() => {
-    // Only start animation when component is visible and images are preloaded
-    if (isVisible && imagesLoaded) {
-      console.log("All images loaded, starting wave animation");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
-        try {
-          onPlaySound();
-        } catch (error) {
-          console.log("Audio play error:", error);
-        }
+        console.log("Playing wave sound effect");
+        onPlaySound();
       }
-
-      // Set up animation timing
-      const framesPerSecond = 30;
-      const frameDuration = 1000 / framesPerSecond;
-      let frameIndex = 0;
-
-      // Reset active frames
-      setActiveFrames([]);
-
-      // Function to step through frames
-      const animateFrames = () => {
-        // Add the current frame to active frames and log it for debugging
-        setActiveFrames(prev => {
-          console.log(`Activating frame: ${frameIndex + 1}`);
-          return [...prev, frameIndex];
-        });
-        
-        frameIndex++;
-
-        // Continue animation until we've shown all frames
-        if (frameIndex < waveFrames.length) {
-          animationRef.current = window.setTimeout(animateFrames, frameDuration);
-        } else {
-          console.log("Wave animation complete, total frames activated:", frameIndex);
-        }
-      };
-
-      // Start the animation
-      animateFrames();
-
-      // Cleanup function to clear the timeout if the component unmounts
-      return () => {
-        if (animationRef.current !== null) {
-          clearTimeout(animationRef.current);
-        }
-      };
     }
-  }, [isVisible, imagesLoaded, prefersReducedMotion, onPlaySound, waveFrames.length]);
+  }, [isVisible, prefersReducedMotion, onPlaySound, waveSlices]);
 
-  // Don't render anything if not visible
   if (!isVisible) {
     return null;
   }
 
   return (
-    <div className="absolute inset-0 z-50">
-      <div className="wave-container">
-        {!imagesLoaded && (
-          <div className="preloader">
-            <div className="preloader-text">Loading wave animation: {loadProgress}%</div>
-            <div className="preloader-bar-container">
-              <div className="preloader-bar" style={{ width: `${loadProgress}%` }} />
-            </div>
-          </div>
-        )}
-        {imagesLoaded && (
-          <div className="wave-slice-container">
-            {waveFrames.map((frame, index) => {
-              // Check if this is one of the frames with issues (12-17)
-              const isSpecialFrame = index >= 11 && index <= 16; // Frames 12-17
-              
-              return (
-                <img
-                  key={`wave-frame-${index}`}
-                  src={frame}
-                  alt={`Wave Frame ${index + 1}`}
-                  className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''} ${isSpecialFrame ? 'special-frame' : ''}`}
-                  style={{
-                    left: framePositions[index].left,
-                    top: framePositions[index].top,
-                    zIndex: index
-                  }}
-                />
-              );
-            })}
-          </div>
-        )}
-      </div>
+    <div className="absolute inset-0 z-50 flex items-center justify-center">
+      <div 
+        id="wave-container"
+        ref={containerRef} 
+        className="wave-container"
+      ></div>
     </div>
   );
 };

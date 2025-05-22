@@ -1,82 +1,37 @@
 
 .wave-container {
+  --fps: 30;           /* target frame rate */
+  --slice-w: 38px;     /* default width - will be updated by JS */
+  --slice-h: 300px;    /* default height - will be updated by JS */
+  display: flex;
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  display: flex;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
-.wave-slice-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Individual frames - width set to 2.5% */
-.wave-container img.wave-frame {
-  position: absolute;
-  width: 2.5%; /* Width set to 2.5% */
-  height: auto;
-  object-fit: contain;
+/* styling for every img */
+.wave-container img.wave-slice {
+  flex: 0 0 var(--slice-w);  /* don't grow or shrink */
+  width: var(--slice-w);     /* exact width */
+  height: var(--slice-h);    /* exact height */
+  object-fit: cover;         /* fill the space while maintaining aspect ratio */
+  object-position: center;   /* center alignment */
   opacity: 0;
-  transition: opacity 30ms linear;
-  transform: translateX(-50%); /* Center each frame on its position */
-  will-change: opacity; /* Performance hint for browsers */
+  animation: pop 0s steps(1, end) forwards;
+  animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
+  animation-fill-mode: forwards;  /* Stay in the end state */
+  animation-iteration-count: 1;   /* Explicitly run once only */
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
-.wave-container img.wave-frame.active {
-  opacity: 1;
-  animation: wave-glow 0.2s ease-in-out forwards;
-}
-
-/* Special attention to frames 12-17 */
-.wave-container img.wave-frame.special-frame {
-  outline: none; /* No visible outline, just for debugging purposes */
-}
-
-/* Preloader styles */
-.preloader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 80%;
-  max-width: 300px;
-}
-
-.preloader-text {
-  color: #33C3F0;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.preloader-bar-container {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.preloader-bar {
-  height: 100%;
-  background: #33C3F0;
-  border-radius: 3px;
-  transition: width 0.3s ease;
-}
-
-@keyframes wave-glow {
-  0% {
-    filter: drop-shadow(0 0 3px #33C3F0);
-    opacity: 1;
-  }
-  100% {
-    filter: drop-shadow(0 0 0px #33C3F0);
-    opacity: 1;
-  }
+@keyframes pop {
+  to { opacity: 1; }
 }
