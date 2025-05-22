@@ -7,7 +7,7 @@ interface WaveAnimationProps {
   onPlaySound: () => void;
 }
 
-/*  final full-width static wave PNG  */
+/* final full-width PNG */
 const STATIC_WAVE_SRC =
   "/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png";
 
@@ -64,7 +64,7 @@ const WaveAnimation = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [staticShown, setStaticShown] = useState(false);
 
-  /* fit wrapper to parent (.aspect-video) ------------------------------- */
+  /* resize helper ------------------------------------------------------- */
   const fitToParent = (w: number, h: number) => {
     const parent = wrapperRef.current!.parentElement!.getBoundingClientRect();
     const scale = Math.min(parent.width / w, parent.height / h);
@@ -72,7 +72,7 @@ const WaveAnimation = ({
       `translate(-50%, -50%) scale(${scale})`;
   };
 
-  /* build animation once ------------------------------------------------ */
+  /* build slices once --------------------------------------------------- */
   useEffect(() => {
     if (!isVisible || staticShown) return;
 
@@ -87,6 +87,7 @@ const WaveAnimation = ({
       img.style.setProperty("--i", i.toString());
       container.appendChild(img);
 
+      /* measure first slice */
       if (i === 0) {
         img.onload = () => {
           const sliceW = img.naturalWidth;
@@ -99,6 +100,8 @@ const WaveAnimation = ({
           fitToParent(totalW, sliceH);
         };
       }
+
+      /* when last slice finishes swap to static PNG */
       if (i === SLICE_SRC.length - 1) {
         img.addEventListener("animationend", () => setStaticShown(true));
       }
@@ -115,16 +118,23 @@ const WaveAnimation = ({
     return () => window.removeEventListener("resize", onResize);
   }, [isVisible, staticShown, prefersReducedMotion, onPlaySound]);
 
+  /* when static PNG is shown, fit once more using its natural size */
+  useEffect(() => {
+    if (!staticShown) return;
+    const img = new Image();
+    img.src = STATIC_WAVE_SRC;
+    img.onload = () => fitToParent(img.naturalWidth, img.naturalHeight);
+    const onResize = () => fitToParent(img.naturalWidth, img.naturalHeight);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [staticShown]);
+
   if (!isVisible) return null;
 
   return (
     <div id="wave-wrapper" ref={wrapperRef}>
       {staticShown ? (
-        <img
-          src={STATIC_WAVE_SRC}
-          alt="static wave"
-          className="static-wave"
-        />
+        <img src={STATIC_WAVE_SRC} alt="static wave" className="static-wave" />
       ) : (
         <div id="wave-container" ref={containerRef} className="wave-container" />
       )}
