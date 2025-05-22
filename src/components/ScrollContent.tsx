@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { Card } from "./ui/card";
 import "./scrollContent.css";
@@ -24,18 +25,22 @@ const ScrollContent = () => {
           entry.target.classList.add("reveal-visible");
           entry.target.classList.remove("reveal-hidden");
           
-          // Reset opacity to 1 when scrolling back to a previously viewed element
-          (entry.target as HTMLElement).style.opacity = "1";
+          // Reset opacity when element is in view
+          (entry.target as HTMLElement).style.opacity = "";
         } else {
-          // Element is completely out of view
+          // Check if element is above the viewport (scrolled past)
           if (boundingRect.top <= 0) {
             // Element has scrolled above the viewport
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
+            
+            // Calculate fade based on how far it's scrolled past
+            const distancePast = Math.abs(boundingRect.bottom) / windowHeight;
+            const opacity = Math.max(0, 1 - distancePast * 2);
+            (entry.target as HTMLElement).style.opacity = opacity.toString();
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
-            // Don't add reveal-hidden class when below viewport, just prepare for fade-in
             entry.target.classList.remove("reveal-hidden");
             (entry.target as HTMLElement).style.opacity = "0";
           }
