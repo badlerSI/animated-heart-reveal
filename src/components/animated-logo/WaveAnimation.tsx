@@ -9,7 +9,7 @@ interface WaveAnimationProps {
 }
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
-  const [currentFrame, setCurrentFrame] = useState(0);
+  const [activeFrames, setActiveFrames] = useState<number[]>([]);
   const animationRef = useRef<number | null>(null);
   
   // Complete set of 40 frames for the wave animation
@@ -62,7 +62,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   useEffect(() => {
     // Only start animation when component becomes visible
     if (isVisible) {
-      console.log("Starting wave animation - horizontal sequence");
+      console.log("Starting wave animation - horizontal sequence with persistent frames");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
@@ -78,9 +78,14 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
       const frameDuration = 1000 / framesPerSecond;
       let frameIndex = 0;
 
+      // Reset active frames
+      setActiveFrames([]);
+
       // Function to step through frames
       const animateFrames = () => {
-        setCurrentFrame(frameIndex);
+        // Add the current frame to active frames
+        setActiveFrames(prev => [...prev, frameIndex]);
+        
         frameIndex++;
 
         // Continue animation until we've shown all frames
@@ -116,7 +121,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
                 key={`wave-frame-${index}`}
                 src={frame}
                 alt={`Wave Frame ${index + 1}`}
-                className={`wave-frame ${index === currentFrame ? 'active' : ''}`}
+                className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''}`}
                 style={{ order: index }} // Ensure proper sequence order
               />
             ))}
