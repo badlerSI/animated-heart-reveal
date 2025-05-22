@@ -29,15 +29,20 @@ const ScrollContent = () => {
           (entry.target as HTMLElement).style.opacity = "";
         } else {
           // Check if element is above the viewport (scrolled past)
-          if (boundingRect.top <= 0) {
-            // Element has scrolled above the viewport
+          if (boundingRect.top <= windowHeight * 0.4) { // Fade out when reaches 40% from top
+            // Element has scrolled above the target point
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
             
-            // Calculate fade based on how far it's scrolled past
-            const distancePast = Math.abs(boundingRect.bottom) / windowHeight;
-            const opacity = Math.max(0, 1 - distancePast * 2);
-            (entry.target as HTMLElement).style.opacity = opacity.toString();
+            // Calculate fade based on how far it's scrolled past the 40% mark
+            const distanceFromTop = boundingRect.top;
+            const fadeStartPoint = windowHeight * 0.4;
+            const fadeDistance = fadeStartPoint / 2; // Complete fade over half the fade start point
+            
+            const opacity = Math.max(0, (fadeStartPoint - distanceFromTop) / fadeDistance);
+            const fadeValue = Math.min(1, Math.max(0, 1 - opacity));
+            
+            (entry.target as HTMLElement).style.opacity = fadeValue.toString();
           } else if (boundingRect.top > windowHeight) {
             // Element is below the viewport - reset for fade-in
             entry.target.classList.remove("reveal-visible");
