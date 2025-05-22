@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -129,14 +130,19 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
       // Function to step through frames
       const animateFrames = () => {
-        // Add the current frame to active frames
-        setActiveFrames(prev => [...prev, frameIndex]);
+        // Add the current frame to active frames and log it for debugging
+        setActiveFrames(prev => {
+          console.log(`Activating frame: ${frameIndex + 1}`); // Log frame activation
+          return [...prev, frameIndex];
+        });
         
         frameIndex++;
 
         // Continue animation until we've shown all frames
         if (frameIndex < waveFrames.length) {
           animationRef.current = window.setTimeout(animateFrames, frameDuration);
+        } else {
+          console.log("Wave animation complete, total frames activated:", frameIndex);
         }
       };
 
@@ -161,19 +167,26 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     <div className="absolute inset-0 z-50">
       <div className="wave-container">
         <div className="wave-slice-container">
-          {waveFrames.map((frame, index) => (
-            <img
-              key={`wave-frame-${index}`}
-              src={frame}
-              alt={`Wave Frame ${index + 1}`}
-              className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''}`}
-              style={{
-                left: framePositions[index].left,
-                top: framePositions[index].top,
-                zIndex: index
-              }}
-            />
-          ))}
+          {waveFrames.map((frame, index) => {
+            // Check if this is one of the frames with issues (12-17)
+            const isSpecialFrame = index >= 11 && index <= 16; // Frames 12-17
+            
+            return (
+              <img
+                key={`wave-frame-${index}`}
+                src={frame}
+                alt={`Wave Frame ${index + 1}`}
+                className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''} ${isSpecialFrame ? 'special-frame' : ''}`}
+                style={{
+                  left: framePositions[index].left,
+                  top: framePositions[index].top,
+                  zIndex: index
+                }}
+                onLoad={() => isSpecialFrame && console.log(`Frame ${index + 1} loaded successfully`)}
+                onError={() => isSpecialFrame && console.log(`Frame ${index + 1} failed to load`)}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

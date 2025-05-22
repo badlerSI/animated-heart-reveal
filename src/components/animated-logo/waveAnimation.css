@@ -16,7 +16,7 @@
   height: 100%;
 }
 
-/* Individual frames - reverting to original width */
+/* Individual frames - width set to 2.5% */
 .wave-container img.wave-frame {
   position: absolute;
   width: 2.5%; /* Width set to 2.5% */
@@ -30,6 +30,11 @@
 .wave-container img.wave-frame.active {
   opacity: 1;
   animation: wave-glow 0.2s ease-in-out forwards;
+}
+
+/* Special attention to frames 12-17 */
+.wave-container img.wave-frame.special-frame {
+  outline: none; /* No visible outline, just for debugging purposes */
 }
 
 @keyframes wave-glow {
