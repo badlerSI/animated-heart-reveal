@@ -1,9 +1,13 @@
-/*  Fade / slide animation driven by CSS custom properties
-    --revealOpacity    (0 → 1)
-    --revealTranslate  (24 → 0)
---------------------------------------------------------- */
+/*  Unified reveal animation
+    • opacity 0 → 1
+    • translateY 24 px → 0
+    • scale 0.90 → 1.05   (gives the “pop”)
+------------------------------------------------------------ */
 .reveal {
   opacity: var(--revealOpacity, 0);
-  transform: translateY(var(--revealTranslate, 24)px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform: translateY(var(--revealTranslate, 24)px)
+             scale(var(--revealScale, 0.9));
+  transition: opacity 0.45s ease-out,
+              transform 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+              /* easeOutBack-ish for a gentle overshoot */
 }

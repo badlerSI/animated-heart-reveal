@@ -1,37 +1,40 @@
 import { useEffect, useRef } from "react";
 import "./scrollContent.css";
 
-/* ───────────────────────────────────────────────────────────────
-   ScrollContent  —  cards fade & slide in when visible and fade
-   out sooner (≈25 % before leaving). Uses IntersectionObserver
-   with fine-grained thresholds; opacity & translate are mapped
-   via CSS custom properties for silky animation in both scroll
-   directions.
-──────────────────────────────────────────────────────────────── */
+/*──────────────────────────────────────────────────────────────
+  ScrollContent
+  • Fade + slide + subtle “pop” scale on entry
+  • Fade/slide/scale back out ~25 % before the card leaves view
+──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
+    /* IO callback: write opacity, translate and scale to CSS vars */
+    const onIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         const el = entry.target as HTMLElement;
-        const ratio = entry.intersectionRatio;              // 0 → 1
+        const r = entry.intersectionRatio;               // 0 → 1
 
-        /* start fade-out when ratio < 1, reach 0 at ratio ≈ 0.10 */
-        const opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.90));
-        const translate = 24 * (1 - opacity);               // slide distance
+        /* Bias so fade-out starts sooner and finishes by r ≈ .10 */
+        const opacity = Math.max(0, Math.min(1, (r - 0.10) / 0.90));
+        const translate = 24 * (1 - opacity);            // px slide
+        const scale = 0.9 + 0.15 * opacity;              // 0.90 → 1.05
 
         el.style.setProperty("--revealOpacity", opacity.toString());
         el.style.setProperty("--revealTranslate", translate.toString());
+        el.style.setProperty("--revealScale", scale.toString());
       });
     };
 
-    observerRef.current = new IntersectionObserver(handleIntersect, {
+    /* Observer fires at 5 % increments for smoothness */
+    observerRef.current = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "0px 0px -25% 0px",                       // fade sooner
-      threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
+      rootMargin: "0px 0px -25% 0px",                    // earlier exit fade
+      threshold: Array.from({ length: 21 }, (_, i) => i / 20)
     });
 
+    /* Observe every .reveal block now in the DOM */
     document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
       observerRef.current!.observe(el)
     );
@@ -39,7 +42,7 @@ const ScrollContent = () => {
     return () => observerRef.current?.disconnect();
   }, []);
 
-  /* ----------  helper component for each section ---------- */
+  /* ---------- helper for each scroll section ---------- */
   const Section = ({
     title,
     children
@@ -61,10 +64,9 @@ const ScrollContent = () => {
     </section>
   );
 
-  /* ---------------------  page body ----------------------- */
+  /* -------------------------  page  ------------------------- */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
-      {/* spacer so first card doesn’t appear immediately */}
       <div className="h-64" />
 
       <Section title="Soul Inside the Car — Not the Cloud">
@@ -87,17 +89,17 @@ const ScrollContent = () => {
 
       <Section title="Forge the Soul of Your Ride">
         Ask for a brand-new persona—any accent, attitude, or back-story—and
-        Soul Interface forges it on-device in about 30&nbsp;seconds. Once
-        saved, your library of characters loads instantaneously whenever
-        you call for them. You're not picking from a short list; you're
-        creating anything you can imagine. Popeye the Sailor Dog? Sure!
-        Winston Churchill trapped in the body of kindergartner? Hey, you
-        do you! Swapping on the fly is easy thanks to LoRA overlays smaller
-        than a podcast.
+        Soul Interface forges it on-device in about 30 seconds. Once saved,
+        your library of characters loads instantaneously whenever you call
+        for them. You're not picking from a short list; you're creating
+        anything you can imagine. Popeye the Sailor Dog? Sure! Winston
+        Churchill trapped in the body of kindergartner? Hey, you do you!
+        Swapping on the fly is easy thanks to LoRA overlays smaller than a
+        podcast.
       </Section>
 
       <Section title="An Intelligent Interface">
-        A 16&nbsp;GB offline knowledge vault rides everywhere you go. Soul
+        A 16 GB offline knowledge vault rides everywhere you go. Soul
         Interface can quote history, decode warning lights in plain
         language, and suggest fixes before you open the hood. Need fresh
         traffic or weather? Drop in a one-way update from your phone—data
@@ -136,19 +138,19 @@ const ScrollContent = () => {
 
       <Section title="Robotaxi, Meet Your Portable AI Cabbie">
         Your personal chauffeur lives on your phone. Step into a
-        Soul-equipped robotaxi and your custom crafted persona—with your
-        seat settings, conversation preferences, and small-talk
-        history—loads in a blink. Step out, and it purges itself from the
-        vehicle within seconds. Fleet operators deliver bespoke rides;
-        passengers keep total privacy.
+        Soul-equipped robotaxi and your custom crafted persona—with your seat
+        settings, conversation preferences, and small-talk history—loads in a
+        blink. Step out, and it purges itself from the vehicle within
+        seconds. Fleet operators deliver bespoke rides; passengers keep total
+        privacy.
       </Section>
 
       <Section title="Keep Your Car's Soul Safe">
         You can keep a secure backup hidden away—like a horcrux minus the
         dark magic—in case anything happens to your car, or you get a new
-        one. Updates install on a spare software partition first, so
-        there's always a safe version to fall back on. Preserve your
-        treasured personas for life.
+        one. Updates install on a spare software partition first, so there's
+        always a safe version to fall back on. Preserve your treasured
+        personas for life.
       </Section>
     </div>
   );
