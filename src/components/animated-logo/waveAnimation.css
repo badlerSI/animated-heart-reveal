@@ -14,31 +14,30 @@
 .wave-slice-container {
   position: relative;
   width: 100%;
-  max-width: 1200px; /* Increased maximum width */
   height: 100%;
-  max-height: 300px; /* Control maximum height */
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-/* For the progressive reveal effect */
-.wave-container .wave-frames {
+/* For the frame display */
+.wave-frames {
   position: relative;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Single image approach instead of slices */
+/* Individual frames */
 .wave-container img.wave-frame {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Maintain aspect ratio without cropping */
+  object-fit: contain; /* Keep aspect ratio without distortion */
   opacity: 0;
   transition: opacity 30ms linear;
 }
