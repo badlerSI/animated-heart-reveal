@@ -62,7 +62,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   useEffect(() => {
     // Only start animation when component becomes visible
     if (isVisible) {
-      console.log("Starting wave animation");
+      console.log("Starting wave animation - horizontal spread");
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {

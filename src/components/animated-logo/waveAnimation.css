@@ -32,12 +32,13 @@
   justify-content: center;
 }
 
-/* Individual frames */
+/* Individual frames - adjusted to spread horizontally */
 .wave-container img.wave-frame {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Keep aspect ratio without distortion */
+  object-fit: cover; /* Changed to cover to fill the entire container */
+  object-position: center; /* Center the image */
   opacity: 0;
   transition: opacity 30ms linear;
 }
