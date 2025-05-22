@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -115,6 +116,7 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               src={slice}
               alt={`Wave Slice ${index + 1}`}
               className={`wave-slice ${index === currentFrame ? 'active' : ''}`}
+              style={{ order: index }} /* Ensure proper order in flex container */
             />
           ))}
         </div>
