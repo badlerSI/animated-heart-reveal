@@ -1,14 +1,10 @@
-/* ----------------------------------------------------
-   Fade / slide animation for .reveal blocks
----------------------------------------------------- */
+/* ─────────────  reveal animation  ───────────── */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);      /* subtle slide up */
-  transition: opacity 0.6s ease-out,
-              transform 0.6s ease-out;
-}
+  /* CSS custom properties set by JS */
+  --revealOpacity: 0;
+  --revealTranslate: 24;
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: var(--revealOpacity);
+  transform: translateY(var(--revealTranslate)px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
