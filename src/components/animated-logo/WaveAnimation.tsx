@@ -72,29 +72,25 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.alt = `Wave Slice ${index + 1}`;
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
-        
-        // Apply consistent positioning to reduce jagged appearance
-        img.style.position = 'absolute';
-        img.style.left = '0';
-        img.style.top = '0';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        
         containerRef.current?.appendChild(img);
-      });
-      
-      // Set container dimensions once
-      if (containerRef.current) {
-        const container = containerRef.current;
-        container.style.position = 'relative';
-        container.style.overflow = 'hidden';
         
-        // Ensure container has proper dimensions
-        if (container.clientWidth === 0) {
-          container.style.width = '100%';
-          container.style.height = '100%';
+        // Set dimensions based on first image
+        if (index === 0) {
+          img.onload = () => {
+            const container = containerRef.current;
+            if (container) {
+              const containerWidth = container.clientWidth;
+              const containerHeight = container.clientHeight;
+              const sliceCount = waveSlices.length;
+              
+              const sliceWidth = Math.floor(containerWidth / sliceCount);
+              
+              container.style.setProperty('--slice-w', `${sliceWidth}px`);
+              container.style.setProperty('--slice-h', `${containerHeight}px`);
+            }
+          };
         }
-      }
+      });
       
       // Play sound if animations are enabled
       if (!prefersReducedMotion) {
