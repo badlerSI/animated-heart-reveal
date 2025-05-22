@@ -80,11 +80,7 @@ const ScrollContent = () => {
       <div className="h-64" />
 
       <Section title="Soul Inside the Car — Not the Cloud">
-        Open the door and your assistant is already awake. All language
-        processing happens on the automotive-grade GPU that rides beside the
-        main ECU—nothing leaves the cabin. The patent-pending architecture
-        gives you answers in under a second, works even with zero bars, and
-        erases cloud fees and privacy worries.
+        All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
       </Section>
 
       <Section title="No Screens? No Problem">
@@ -98,13 +94,7 @@ const ScrollContent = () => {
       </Section>
 
       <Section title="Forge the Soul of Your Ride">
-        Ask for a brand-new persona—any accent, attitude, or back-story—and
-        Soul Interface forges it on-device in about 30 seconds. Once saved,
-        your library of characters loads instantaneously whenever you call for
-        them. You're not picking from a short list; you're creating anything
-        you can imagine. Popeye the Sailor Dog? Sure! Winston Churchill trapped
-        in the body of kindergartner? Hey, you do you! Swapping on the fly is
-        easy thanks to LoRA overlays smaller than a podcast.
+        Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface forges it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load instantly.
       </Section>
 
       <Section title="An Intelligent Interface">
@@ -116,7 +106,7 @@ const ScrollContent = () => {
 
       <Section title="Rediscover the Joy of the Open Road">
         Fire up Karaoke Mode with your own saved tracks—vocals drop out and
-        Soul Interface harmonizes in real time, or sing any part of a duet.
+        Soul Interface harmonizes in real time, or sings any part of a duet.
         <br />
         <br />
         Launch a choose-your-own-adventure for the whole family that plays out
@@ -152,11 +142,7 @@ const ScrollContent = () => {
       </Section>
 
       <Section title="Keep Your Car's Soul Safe">
-        You can keep a secure backup hidden away—like a horcrux minus the dark
-        magic—in case anything happens to your car, or you get a new one.
-        Updates install on a spare software partition first, so there's always
-        a safe version to fall back on. Preserve your treasured personas for
-        life.
+        You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there’s always a safe version to fall back on. Preserve your treasured personas for life.
       </Section>
     </div>
   );
