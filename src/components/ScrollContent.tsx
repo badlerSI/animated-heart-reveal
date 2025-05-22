@@ -72,7 +72,7 @@ const ScrollContent = () => {
       
       <section className="mb-96">
         <TextCard title="No Screens? No Problem">
-          Touchscreens can take a driver's eyes off the road for over twenty seconds, and can spoil otherwise gorgeous interiors besides.
+          Touchscreens can take a driver's eyes off the road for over twenty seconds, and can spoil an otherwise gorgeous interior besides.
           <br /><br />
           With Soul Interface you speak naturally to run navigation, music, climate and much more; no menu mazes, no glare, no "safety lockouts." Your dash stays clean, your focus stays forward.
         </TextCard>
