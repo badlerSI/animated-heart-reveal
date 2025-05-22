@@ -32,6 +32,10 @@
   animation: reveal-up 0.6s ease-out 0.4s forwards;
 }
 
+.reveal-visible .reveal-element:nth-child(3) {
+  animation: reveal-up 0.6s ease-out 0.6s forwards;
+}
+
 /* Animation for revealing elements */
 @keyframes reveal-up {
   from {
@@ -52,6 +56,24 @@
 
 /* Add custom font styles to body */
 body {
-  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Playfair Display', serif;
   letter-spacing: 0.01em;
+}
+
+/* Staggered section positioning */
+.section-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.section-left {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* Full height segments to ensure they take up more vertical space */
+.full-height-segment {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
