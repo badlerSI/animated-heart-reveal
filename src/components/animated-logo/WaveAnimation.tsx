@@ -1,6 +1,6 @@
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import "./waveAnimation.css";
 
 interface WaveAnimationProps {
   isVisible: boolean;
@@ -9,8 +9,8 @@ interface WaveAnimationProps {
 }
 
 const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAnimationProps) => {
-  const [currentWaveSlice, setCurrentWaveSlice] = useState(-1);
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  
   // Wave slices - paths to all 40 uploaded wave slice images
   const waveSlices = [
     "/lovable-uploads/0706c3d0-ffba-4897-8921-d48c49ed347d.png",
@@ -33,7 +33,6 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     "/lovable-uploads/982d0243-480d-4d98-916a-10f04f281028.png",
     "/lovable-uploads/4619c67f-6cda-4871-8814-65279fba0a0e.png",
     "/lovable-uploads/10ae94f5-8da8-4d84-bc98-a0c6bf4e5c80.png",
-    // Adding the next 20 slices (21-40)
     "/lovable-uploads/ee8feb5c-8c1d-4632-859a-6564afe6a702.png",
     "/lovable-uploads/c086a73b-66ce-4264-bd40-ecd097b23bd5.png",
     "/lovable-uploads/38fd9be8-fa67-4026-ab4f-220eca8ccbcd.png",
@@ -56,56 +55,45 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
     "/lovable-uploads/a03e77d4-21a0-4f1c-9d36-7a6fcef004cd.png",
   ];
 
-  // Wave animation controller
   useEffect(() => {
-    if (isVisible && currentWaveSlice === -1) {
-      console.log("Starting wave animation");
-      // Start the wave slice animation at 30fps (approximately 33.33ms per frame)
-      const frameInterval = 33.33; // milliseconds
-      let sliceIndex = 0;
+    if (isVisible && containerRef.current) {
+      console.log("Starting wave animation with CSS approach");
       
-      // Play sound when wave animation starts
+      // Clear any existing content
+      containerRef.current.innerHTML = '';
+      
+      // Create and append all wave slice images with proper CSS variables
+      waveSlices.forEach((slice, index) => {
+        const img = document.createElement('img');
+        img.src = slice;
+        img.alt = `Wave Slice ${index + 1}`;
+        img.className = 'wave-slice';
+        img.style.setProperty('--i', index.toString());
+        containerRef.current?.appendChild(img);
+      });
+      
+      // Play sound if animations are enabled
       if (!prefersReducedMotion) {
+        console.log("Playing wave sound effect");
         onPlaySound();
       }
-      
-      // Animate through each slice
-      const interval = setInterval(() => {
-        if (sliceIndex < waveSlices.length) {
-          setCurrentWaveSlice(sliceIndex);
-          console.log(`Showing wave slice: ${sliceIndex}`);
-          sliceIndex++;
-        } else {
-          // Animation complete, clear interval
-          console.log("Wave animation complete");
-          clearInterval(interval);
-        }
-      }, frameInterval);
-      
-      return () => clearInterval(interval);
     }
-  }, [isVisible, currentWaveSlice, prefersReducedMotion, waveSlices.length, onPlaySound]);
+  }, [isVisible, prefersReducedMotion, onPlaySound]);
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
-    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-[300px] z-50 flex overflow-hidden">
-      {isVisible && currentWaveSlice >= 0 && (
-        <div className="relative w-auto h-[300px] flex" style={{ width: "100%" }}>
-          {waveSlices.map((slice, index) => (
-            <img
-              key={index}
-              src={slice}
-              alt={`Wave Slice ${index + 1}`}
-              className="h-[300px] w-auto"
-              style={{ 
-                opacity: index <= currentWaveSlice ? 1 : 0,
-                position: "absolute",
-                left: 0,
-                top: 0
-              }}
-            />
-          ))}
-        </div>
-      )}
+    <div 
+      className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+      style={{ width: '100%', height: '100%' }}
+    >
+      <div 
+        id="wave-container"
+        ref={containerRef} 
+        className="wave-container"
+      ></div>
     </div>
   );
 };

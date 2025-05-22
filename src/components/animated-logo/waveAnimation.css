@@ -1,0 +1,27 @@
+
+.wave-container {
+  --slice-w: 38px;          /* width of ONE slice */
+  --slice-h: 300px;         /* height of slices */
+  --fps: 30;                /* target frame rate */
+  position: relative;
+  width: calc(var(--slice-w) * 40);  /* 40 columns */
+  height: var(--slice-h);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* baseline for every img */
+.wave-container img.wave-slice {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  animation: reveal 0s steps(1, end) forwards;
+  left: calc(var(--i) * var(--slice-w));
+  animation-delay: calc(var(--i) / var(--fps) * 1s);
+  height: var(--slice-h);
+  width: auto;
+}
+
+@keyframes reveal {
+  to { opacity: 1; }
+}

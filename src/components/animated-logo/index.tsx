@@ -4,6 +4,7 @@ import { useAnimationSequence } from './useAnimationSequence';
 import { useAudio } from './useAudio';
 import AnimatedElement from './AnimatedElement';
 import WaveAnimation from './WaveAnimation';
+import './animatedLogo.css';
 
 const AnimatedLogo = () => {
   const prefersReducedMotion = useReducedMotion();
