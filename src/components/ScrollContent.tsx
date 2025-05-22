@@ -29,14 +29,14 @@ const ScrollContent = () => {
           (entry.target as HTMLElement).style.opacity = "";
         } else {
           // Check if element is above the viewport (scrolled past)
-          if (boundingRect.top <= windowHeight * 0.4) { // Fade out when reaches 40% from top
+          if (boundingRect.top <= windowHeight * 0.6) { // Changed from 0.4 to 0.6 - fade out when reaches 60% from top
             // Element has scrolled above the target point
             entry.target.classList.remove("reveal-visible");
             entry.target.classList.add("reveal-hidden");
             
-            // Calculate fade based on how far it's scrolled past the 40% mark
+            // Calculate fade based on how far it's scrolled past the 60% mark
             const distanceFromTop = boundingRect.top;
-            const fadeStartPoint = windowHeight * 0.4;
+            const fadeStartPoint = windowHeight * 0.6; // Changed from 0.4 to 0.6
             const fadeDistance = fadeStartPoint / 2; // Complete fade over half the fade start point
             
             const opacity = Math.max(0, (fadeStartPoint - distanceFromTop) / fadeDistance);
