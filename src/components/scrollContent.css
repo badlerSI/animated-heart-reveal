@@ -45,6 +45,18 @@
   }
 }
 
+/* Animations for scroll-up behavior */
+@keyframes fade-back-in {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Glow effect for links */
 .text-glow:hover {
   text-shadow: 0 0 8px rgba(51, 195, 240, 0.6);
