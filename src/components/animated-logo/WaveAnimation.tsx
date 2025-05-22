@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import "./waveAnimation.css";
 
@@ -60,29 +59,52 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
   ];
 
   // Manual position adjustments for each frame to create a smooth wave
-  const framePositions = waveFrames.map((_, index) => {
-    // Calculate position along the horizontal axis (0 to 1)
-    const position = index / (waveFrames.length - 1);
+  // You can adjust each frame's position here individually
+  const framePositions = [
+    // First 20 frames - manually positioned
+    { left: "0%", top: "50%" },      // Frame 1
+    { left: "2.5%", top: "49%" },    // Frame 2
+    { left: "5%", top: "48%" },      // Frame 3
+    { left: "7.5%", top: "46%" },    // Frame 4
+    { left: "10%", top: "44%" },     // Frame 5
+    { left: "12.5%", top: "42%" },   // Frame 6
+    { left: "15%", top: "40%" },     // Frame 7
+    { left: "17.5%", top: "38%" },   // Frame 8
+    { left: "20%", top: "37%" },     // Frame 9
+    { left: "22.5%", top: "36%" },   // Frame 10
+    { left: "25%", top: "37%" },     // Frame 11
+    { left: "27.5%", top: "38%" },   // Frame 12
+    { left: "30%", top: "40%" },     // Frame 13
+    { left: "32.5%", top: "42%" },   // Frame 14
+    { left: "35%", top: "44%" },     // Frame 15
+    { left: "37.5%", top: "46%" },   // Frame 16
+    { left: "40%", top: "48%" },     // Frame 17
+    { left: "42.5%", top: "49%" },   // Frame 18
+    { left: "45%", top: "50%" },     // Frame 19
+    { left: "47.5%", top: "51%" },   // Frame 20
     
-    // Calculate horizontal position (left to right)
-    const leftPos = `${position * 100}%`;
-    
-    // Create a smoother vertical wave using a sine function
-    // Amplitude: how high/low the wave goes (adjust as needed)
-    const amplitude = 8;
-    // Frequency: how many complete waves across the width
-    const frequency = 1;
-    // Phase shift: moves the starting point of the wave
-    const phaseShift = 0;
-    
-    const verticalOffset = Math.sin((position * Math.PI * 2 * frequency) + phaseShift) * amplitude;
-    const topPos = `calc(50% - ${verticalOffset}%)`;
-    
-    return {
-      left: leftPos,
-      top: topPos,
-    };
-  });
+    // Second 20 frames - manually positioned
+    { left: "50%", top: "52%" },     // Frame 21
+    { left: "52.5%", top: "54%" },   // Frame 22
+    { left: "55%", top: "56%" },     // Frame 23
+    { left: "57.5%", top: "58%" },   // Frame 24
+    { left: "60%", top: "60%" },     // Frame 25
+    { left: "62.5%", top: "62%" },   // Frame 26
+    { left: "65%", top: "63%" },     // Frame 27
+    { left: "67.5%", top: "64%" },   // Frame 28
+    { left: "70%", top: "63%" },     // Frame 29
+    { left: "72.5%", top: "62%" },   // Frame 30
+    { left: "75%", top: "60%" },     // Frame 31
+    { left: "77.5%", top: "58%" },   // Frame 32
+    { left: "80%", top: "56%" },     // Frame 33
+    { left: "82.5%", top: "54%" },   // Frame 34
+    { left: "85%", top: "52%" },     // Frame 35
+    { left: "87.5%", top: "51%" },   // Frame 36
+    { left: "90%", top: "50%" },     // Frame 37
+    { left: "92.5%", top: "49%" },   // Frame 38
+    { left: "95%", top: "48%" },     // Frame 39
+    { left: "97.5%", top: "47%" }    // Frame 40
+  ];
 
   useEffect(() => {
     // Only start animation when component becomes visible
