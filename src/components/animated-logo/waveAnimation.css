@@ -1,31 +1,30 @@
 
 .wave-container {
-  --slice-w: 38px;          /* width of ONE slice */
-  --slice-h: 300px;         /* height of slices */
-  --fps: 30;                /* target frame rate */
+  --fps: 30;           /* target frame rate */
+  --slice-w: 38px;     /* default width - will be updated by JS */
+  --slice-h: 300px;    /* default height - will be updated by JS */
+  display: flex;
   position: relative;
-  width: calc(var(--slice-w) * 40);  /* 40 columns */
+  width: fit-content;  /* Will adjust based on content */
   height: var(--slice-h);
   overflow: hidden;
   margin: 0 auto;
 }
 
-/* baseline for every img */
+/* styling for every img */
 .wave-container img.wave-slice {
-  position: absolute;
-  top: 0;
+  flex: 0 0 var(--slice-w);  /* don't grow or shrink */
+  width: var(--slice-w);     /* exact width */
+  height: var(--slice-h);    /* exact height */
+  object-fit: none;          /* prevent scaling/distortion */
   opacity: 0;
-  animation: reveal 0s steps(1, end) forwards;
-  left: calc(var(--i) * var(--slice-w));
-  animation-delay: calc(var(--i) / var(--fps) * 1s);
-  height: var(--slice-h);
-  width: var(--slice-w); /* Ensure each slice has exact width */
-  object-fit: cover; /* Maintain aspect ratio while covering the area */
+  animation: pop 0s steps(1, end) forwards;
+  animation-delay: calc(var(--i) / var(--fps) * 1s);  /* stagger at 30fps */
   padding: 0;
   margin: 0;
   border: none;
 }
 
-@keyframes reveal {
+@keyframes pop {
   to { opacity: 1; }
 }

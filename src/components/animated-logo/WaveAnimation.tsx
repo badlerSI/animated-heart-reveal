@@ -57,12 +57,12 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   useEffect(() => {
     if (isVisible && containerRef.current) {
-      console.log("Starting wave animation with CSS approach");
+      console.log("Starting wave animation with new approach");
       
       // Clear any existing content
       containerRef.current.innerHTML = '';
       
-      // Create and append all wave slice images with proper CSS variables
+      // Create and append all wave slice images
       waveSlices.forEach((slice, index) => {
         const img = document.createElement('img');
         img.src = slice;
@@ -70,6 +70,18 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
         img.className = 'wave-slice';
         img.style.setProperty('--i', index.toString());
         containerRef.current?.appendChild(img);
+        
+        // Use the first image to set the container dimensions
+        if (index === 0) {
+          img.onload = () => {
+            const container = containerRef.current;
+            if (container) {
+              // Adjust variables based on natural image dimensions
+              container.style.setProperty('--slice-w', `${img.naturalWidth}px`);
+              container.style.setProperty('--slice-h', `${img.naturalHeight}px`);
+            }
+          };
+        }
       });
       
       // Play sound if animations are enabled
