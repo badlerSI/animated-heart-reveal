@@ -61,15 +61,21 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
 
   // Manual position adjustments for each frame to create a smooth wave
   const framePositions = waveFrames.map((_, index) => {
-    // Calculate positions to form a smooth arc across the container
-    // Using a sine wave pattern to create a natural flow
-    const position = index / (waveFrames.length - 1); // 0 to 1
+    // Calculate position along the horizontal axis (0 to 1)
+    const position = index / (waveFrames.length - 1);
     
     // Calculate horizontal position (left to right)
     const leftPos = `${position * 100}%`;
     
-    // Calculate vertical position with a slight wave using sine
-    const verticalOffset = Math.sin(position * Math.PI) * 5;
+    // Create a smoother vertical wave using a sine function
+    // Amplitude: how high/low the wave goes (adjust as needed)
+    const amplitude = 8;
+    // Frequency: how many complete waves across the width
+    const frequency = 1;
+    // Phase shift: moves the starting point of the wave
+    const phaseShift = 0;
+    
+    const verticalOffset = Math.sin((position * Math.PI * 2 * frequency) + phaseShift) * amplitude;
     const topPos = `calc(50% - ${verticalOffset}%)`;
     
     return {
@@ -141,7 +147,6 @@ const WaveAnimation = ({ isVisible, prefersReducedMotion, onPlaySound }: WaveAni
               alt={`Wave Frame ${index + 1}`}
               className={`wave-frame ${activeFrames.includes(index) ? 'active' : ''}`}
               style={{
-                position: 'absolute',
                 left: framePositions[index].left,
                 top: framePositions[index].top,
                 zIndex: index
