@@ -1,10 +1,9 @@
-/* ─────────────  reveal animation  ───────────── */
+/*  Fade / slide animation driven by CSS custom properties
+    --revealOpacity    (0 → 1)
+    --revealTranslate  (24 → 0)
+--------------------------------------------------------- */
 .reveal {
-  /* CSS custom properties set by JS */
-  --revealOpacity: 0;
-  --revealTranslate: 24;
-
-  opacity: var(--revealOpacity);
-  transform: translateY(var(--revealTranslate)px);
+  opacity: var(--revealOpacity, 0);
+  transform: translateY(var(--revealTranslate, 24)px);
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
