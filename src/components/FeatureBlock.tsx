@@ -1,39 +1,58 @@
-/*──────────────────────────────────────────────────────────────
-  FeatureBlock.tsx
-  • Clean card: hero illustration + heading + copy.
-  • NO hidden prose classes; colour inherits from index.css.
-──────────────────────────────────────────────────────────────*/
-import React, { PropsWithChildren, CSSProperties } from "react";
 
-interface Props extends PropsWithChildren {
-  id: string;
-  heading: React.ReactNode;
-  imgSrc: string;
-  imgAlt: string;
-  imgStyle?: CSSProperties;   /* optional test halo */
+import React, { ReactNode } from 'react';
+
+interface FeatureBlockProps {
+  id?: string;           // anchor id for navbar links
+  heading: string | ReactNode;
+  imgSrc?: string;
+  imgAlt?: string;
+  children: ReactNode;  // body copy
 }
 
-const FeatureBlock = ({
-  id,
-  heading,
-  imgSrc,
-  imgAlt,
-  imgStyle = {},
-  children,
-}: Props) => (
-  <section
-    id={id}
-    className="mb-32 flex flex-col md:flex-row items-start gap-8"
-  >
-    <div className="w-full md:w-1/2">
-      <img src={imgSrc} alt={imgAlt} className="w-full neon" style={imgStyle} />
-    </div>
+const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockProps) => {
+  // Define which images should be larger
+  const largerImages = [
+    '/lovable-uploads/dash.png',
+    '/lovable-uploads/soulforge.png', 
+    '/lovable-uploads/RoadTrip.png',
+    '/lovable-uploads/SoulSpeak.png',
+    '/lovable-uploads/RoboTaxi.png'
+  ];
+  
+  const shouldBeLarger = imgSrc && largerImages.includes(imgSrc);
+  
+  return (
+    <section
+      id={id}
+      className="reveal overflow-hidden mb-96"
+    >
+      <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16
+                     flex flex-col md:flex-row items-start md:items-center gap-5">
+        {/* LEFT COLUMN — heading + image */}
+        <div className="flex flex-col items-center md:items-start md:w-1/2 space-y-2">
+          <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
+            {heading}
+          </h2>
 
-    <div className="w-full md:w-1/2 space-y-4 text-lg leading-relaxed">
-      <h2 className="text-2xl font-semibold">{heading}</h2>
-      {children}
-    </div>
-  </section>
-);
+          {imgSrc && (
+            <img
+              src={imgSrc}
+              alt={imgAlt || "Section illustration"}
+              className={`w-full object-contain opacity-80 ${
+                shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
+              }`}
+              loading="lazy"
+            />
+          )}
+        </div>
+
+        {/* RIGHT COLUMN — body copy */}
+        <div className="md:w-1/2 text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default FeatureBlock;
