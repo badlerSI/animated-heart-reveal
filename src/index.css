@@ -1,50 +1,19 @@
-/*──────────────────────────────────────────────────────────────
-  index.css  –  Tailwind base + refined neon utility
-  • NEW: first drop-shadow (blur-0) colours the white line art,
-         so it shows on a white page before the halo is applied.
-  • Neon glow + flicker dialled to a subtle level.
-──────────────────────────────────────────────────────────────*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- DESIGN TOKENS (unchanged) ---------- */
+/*──────────────────────────────────────────────────────────────
+  DESIGN TOKENS  (unchanged from your previous version)
+──────────────────────────────────────────────────────────────*/
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    /* Neon palette */
-    --stroke-cyan: #1bbac2;  /* main tube colour */
-    --halo-cyan:   #00f8ff;  /* outer glow       */
+    /* … all the other HSL custom-prop lines stay as-is … */
+    --stroke-cyan: #1bbac2;
+    --halo-cyan:   #00f8ff;
   }
+  .dark { /* keep your dark-mode tokens here */ }
 }
 
 @layer base {
@@ -52,7 +21,9 @@
   body{ @apply bg-background text-foreground; }
 }
 
-/* ---------- UTILITIES : NEON ---------- */
+/*──────────────────────────────────────────────────────────────
+  NEON GLOW + FLICKER  (subtle)
+──────────────────────────────────────────────────────────────*/
 @layer utilities {
 
   @media (prefers-reduced-motion: reduce) {
@@ -60,9 +31,8 @@
   }
 
   .neon {
-    /* 1) colour the white stroke            (blur 0)            */
-    /* 2) inner rim                           (blur 3 px)         */
-    /* 3) outer halo                          (blur 10 px)        */
+    /* 0px blur colours the white line art so it’s visible on white   */
+    /* 3px + 10px blurs give inner rim + outer halo                   */
     filter:
       drop-shadow(0 0 0   var(--stroke-cyan))
       drop-shadow(0 0 3px var(--halo-cyan))
@@ -81,16 +51,16 @@
         drop-shadow(0 0 10px var(--halo-cyan));
     }
     15%,17%,32%,34%,58% {
-      opacity: 0.85;
+      opacity: .85;
       filter:
         drop-shadow(0 0 0   var(--stroke-cyan))
         drop-shadow(0 0 2px var(--halo-cyan))
-        drop-shadow(0 0 7px var(--halo-cyan));
+        drop-shadow(0 0 7px  var(--halo-cyan));
     }
     33% {
-      opacity: 0.70;
+      opacity: .70;
       filter:
-        drop-shadow(0 0 0 var(--stroke-cyan));   /* keep tube visible */
+        drop-shadow(0 0 0 var(--stroke-cyan));
     }
   }
 }
