@@ -7,7 +7,7 @@ const WaveLibraryImage = () => {
       <img 
         src="/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png" 
         alt="Glowing blue wave symbol" 
-        className="max-w-full max-h-full" 
+        className="max-w-full max-h-full neon-glow" 
       />
     </div>
   );

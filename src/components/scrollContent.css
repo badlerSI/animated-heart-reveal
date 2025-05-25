@@ -1,5 +1,4 @@
 
-
 /* Base styles for reveal animations */
 .reveal {
   opacity: 0;
@@ -52,10 +51,30 @@
   transition: text-shadow 0.3s ease;
 }
 
+/* Flickering neon glow for images */
+.neon-glow {
+  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  }
+  25% {
+    filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(51, 243, 240, 0.4));
+  }
+  75% {
+    filter: drop-shadow(0 0 10px rgba(51, 243, 240, 0.7));
+  }
+}
+
 /* Add custom font styles to body */
 body {
   font-family: 'Outfit', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0.015em;
   color: #d0faff;
 }
-
