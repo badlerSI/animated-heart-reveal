@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,4 +99,33 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Neon glow effect for images */
+.neon-glow {
+  filter: drop-shadow(0 0 8px #33F0F0);
+  animation: flickerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes flickerGlow {
+  0% {
+    filter: drop-shadow(0 0 5px #33F0F0);
+  }
+  25% {
+    filter: drop-shadow(0 0 12px #33F0F0);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px #33F0F0);
+  }
+  75% {
+    filter: drop-shadow(0 0 15px #33F0F0);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px #33F0F0);
+  }
+}
+
+/* Ensure static wave with neon glow fades in properly */
+.static-wave.neon-glow.fade-in {
+  animation: fadeIn 0.18s ease-out forwards, flickerGlow 3s ease-in-out infinite alternate;
 }
