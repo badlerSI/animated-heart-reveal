@@ -134,7 +134,7 @@ const WaveAnimation = ({
         ref={staticRef}
         src={STATIC_WAVE_SRC}
         alt="wave"
-        className="static-wave"
+        className="static-wave neon-glow"
       />
 
       {/* Slice container underneath */}
