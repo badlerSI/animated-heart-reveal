@@ -14,8 +14,8 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
     id={id}
     className="reveal overflow-hidden mb-96"
   >
-    <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12 py-16
-                   flex flex-col md:flex-row items-start md:items-center gap-10">
+    <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16
+                   flex flex-col md:flex-row items-start md:items-center gap-5">
       {/* LEFT COLUMN — heading + image */}
       <div className="flex flex-col items-center md:items-start md:w-1/2 space-y-2">
         <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
