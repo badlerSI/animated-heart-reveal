@@ -85,8 +85,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="forge-soul-of-ride"
         heading="Forge the Soul of Your Ride"
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
+        imgAlt="Soul forging illustration"
       >
         Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
       </FeatureBlock>
@@ -94,8 +94,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="intelligent-interface"
         heading="An Intelligent Interface"
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
+        imgAlt="Brain illustration"
       >
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
         can answer trivia, quote Mark Twain, decode warning lights in plain language, and
@@ -106,8 +106,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="rediscover-joy"
         heading="Rediscover the Joy of the Open Road"
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png"
+        imgAlt="Road trip illustration"
       >
         Fire up Karaoke Mode with your own saved tracks—vocals drop out and
         Soul Interface harmonizes in real time, or sings any part of a duet.
@@ -122,8 +122,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="charlemagne-quote"
         heading={<span className="italic">"To have another language is to possess a second soul" — Charlemagne</span>}
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png"
+        imgAlt="Soul speak illustration"
       >
         Conversations among passengers from around the globe flow freely: Soul Interface translates
         speech across sixteen languages almost instantly, all offline.
@@ -137,8 +137,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="robotaxi-cabbie"
         heading="Robotaxi, Meet Your Portable AI Cabbie"
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png"
+        imgAlt="Robotaxi illustration"
       >
         Your personal chauffeur lives on your phone. Step into a Soul-equipped
         robotaxi and your custom-crafted persona—with your seat settings,
@@ -150,8 +150,8 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="keep-soul-safe"
         heading="Keep Your Car's Soul Safe"
-        imgSrc=""
-        imgAlt=""
+        imgSrc="/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png"
+        imgAlt="Heart lock security illustration"
       >
         You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
       </FeatureBlock>
