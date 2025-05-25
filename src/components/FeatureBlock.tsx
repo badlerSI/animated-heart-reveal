@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 
 interface FeatureBlockProps {
   id?: string;           // anchor id for navbar links
-  heading: string;
+  heading: string | ReactNode;
   imgSrc?: string;
   imgAlt?: string;
   children: ReactNode;  // body copy

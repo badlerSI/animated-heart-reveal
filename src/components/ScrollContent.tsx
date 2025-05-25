@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
 import "./scrollContent.css";
@@ -120,7 +121,7 @@ const ScrollContent = () => {
 
       <FeatureBlock 
         id="charlemagne-quote"
-        heading="To have another language is to possess a second soul — Charlemagne"
+        heading={<span className="italic">"To have another language is to possess a second soul" — Charlemagne</span>}
         imgSrc=""
         imgAlt=""
       >
