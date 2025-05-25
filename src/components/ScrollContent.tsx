@@ -36,8 +36,8 @@ const ScrollContent = () => {
       });
     };
 
-    /* rootMargin bottom –150 %  ➜ element considered “exiting”
-       while it’s still well inside viewport, giving fade-out time */
+    /* rootMargin bottom –150 %  ➜ element considered "exiting"
+       while it's still well inside viewport, giving fade-out time */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
       rootMargin: "0px 0px -150% 0px",
@@ -73,7 +73,7 @@ const ScrollContent = () => {
               <img 
                 src={imageSrc}
                 alt="Section illustration"
-                className="max-w-32 max-h-32 object-contain opacity-80"
+                className="max-w-64 max-h-64 object-contain opacity-80"
               />
             </div>
           )}
@@ -103,7 +103,7 @@ const ScrollContent = () => {
         <br />
         <br />
         With Soul Interface you speak naturally to run navigation, music,
-        climate and much more; no menu mazes, no glare, no “safety lockouts.”
+        climate and much more; no menu mazes, no glare, no "safety lockouts."
         Your dash stays clean, your focus stays forward.
       </Section>
 
@@ -156,7 +156,7 @@ const ScrollContent = () => {
       </Section>
 
       <Section title="Keep Your Car's Soul Safe">
-        You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there’s always a safe version to fall back on. Preserve your treasured personas for life.
+        You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
       </Section>
     </div>
   );
