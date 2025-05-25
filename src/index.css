@@ -2,65 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/*──────────────────────────────────────────────────────────────
-  DESIGN TOKENS  (unchanged from your previous version)
-──────────────────────────────────────────────────────────────*/
+/* ——— absolutely plain design tokens ——— */
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    /* … all the other HSL custom-prop lines stay as-is … */
-    --stroke-cyan: #1bbac2;
-    --halo-cyan:   #00f8ff;
+    --foreground: 0 0% 0%;          /* BLACK for sanity check */
   }
-  .dark { /* keep your dark-mode tokens here */ }
 }
 
 @layer base {
-  *   { @apply border-border; }
-  body{ @apply bg-background text-foreground; }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-/*──────────────────────────────────────────────────────────────
-  NEON GLOW + FLICKER  (subtle)
-──────────────────────────────────────────────────────────────*/
+/* ——— DEBUG HELPERS: show ALL borders & images ——— */
 @layer utilities {
-
-  @media (prefers-reduced-motion: reduce) {
-    .neon { animation: none; }
+  h1, h2, h3, h4, h5, h6, p, li, span {
+    color: black !important;
   }
-
-  .neon {
-    /* 0px blur colours the white line art so it’s visible on white   */
-    /* 3px + 10px blurs give inner rim + outer halo                   */
-    filter:
-      drop-shadow(0 0 0   var(--stroke-cyan))
-      drop-shadow(0 0 3px var(--halo-cyan))
-      drop-shadow(0 0 10px var(--halo-cyan));
-
-    animation: neon-flicker 3s infinite ease-in-out;
-    will-change: opacity, filter;
-  }
-
-  @keyframes neon-flicker {
-    0%,14%,16%,18%,60%,100% {
-      opacity: 1;
-      filter:
-        drop-shadow(0 0 0   var(--stroke-cyan))
-        drop-shadow(0 0 3px var(--halo-cyan))
-        drop-shadow(0 0 10px var(--halo-cyan));
-    }
-    15%,17%,32%,34%,58% {
-      opacity: .85;
-      filter:
-        drop-shadow(0 0 0   var(--stroke-cyan))
-        drop-shadow(0 0 2px var(--halo-cyan))
-        drop-shadow(0 0 7px  var(--halo-cyan));
-    }
-    33% {
-      opacity: .70;
-      filter:
-        drop-shadow(0 0 0 var(--stroke-cyan));
-    }
+  img {
+    outline: 2px solid red;   /* visible frame */
   }
 }
