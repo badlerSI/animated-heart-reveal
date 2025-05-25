@@ -55,10 +55,12 @@ const ScrollContent = () => {
   /* ---------- helper component ---------- */
   const Section = ({
     title,
-    children
+    children,
+    imageSrc
   }: {
     title: React.ReactNode;
     children: React.ReactNode;
+    imageSrc?: string;
   }) => (
     <section className="mb-96">
       <div className="reveal overflow-hidden">
@@ -66,6 +68,15 @@ const ScrollContent = () => {
           <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-4 text-cyan-white tracking-wide reveal-element">
             {title}
           </h2>
+          {imageSrc && (
+            <div className="flex justify-center mb-6 reveal-element">
+              <img 
+                src={imageSrc}
+                alt="Section illustration"
+                className="max-w-32 max-h-32 object-contain opacity-80"
+              />
+            </div>
+          )}
           <p className="text-lg md:text-xl text-cyan-white/90 leading-relaxed reveal-element font-outfit">
             {children}
           </p>
@@ -79,7 +90,10 @@ const ScrollContent = () => {
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
       <div className="h-64" />
 
-      <Section title="Soul Inside the Car — Not the Cloud">
+      <Section 
+        title="Soul Inside the Car — Not the Cloud"
+        imageSrc="/lovable-uploads/ef12abac-5da4-4e46-a727-d9f5c1d42d66.png"
+      >
         All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
       </Section>
 
