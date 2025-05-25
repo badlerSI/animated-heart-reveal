@@ -1,73 +1,46 @@
 /*──────────────────────────────────────────────────────────────
   ScrollContent.tsx
-  • Scroll reveal + neon class injector
-  • First image carries hot-pink test halo; remove later
+  • Renders the full marketing sequence (seven FeatureBlocks).
+  • Adds the global `neon` class + random delay to every <img>/<svg>.
+  • The FIRST hero gets an over-the-top pink/red halo so you can
+    prove the filter path works.  Delete `imgStyleTest` once happy.
 ──────────────────────────────────────────────────────────────*/
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import FeatureBlock from "./FeatureBlock";
 import "./scrollContent.css";
 
 const ScrollContent = () => {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
+  /* ─────────  neon-class and random delay  ───────── */
   useEffect(() => {
-    /* --- reveal-in-on-scroll --- */
-    const onIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        const el = entry.target as HTMLElement;
-        const r = entry.intersectionRatio;
-        if (r > 0) {
-          el.classList.add("reveal-visible");
-          el.classList.remove("reveal-hidden");
-        } else {
-          el.classList.remove("reveal-visible");
-          el.classList.add("reveal-hidden");
-        }
-        const op = Math.max(0, Math.min(1, (r - 0.2) / 0.6));
-        el.style.opacity = op.toString();
-        el.style.transform = `translateY(${60 * (1 - op)}px)`;
-      });
-    };
-
-    const obs = new IntersectionObserver(onIntersect, {
-      root: null,
-      rootMargin: "0px 0px -150% 0px",
-      threshold: Array.from({ length: 21 }, (_, i) => i / 20)
-    });
-
-    document.querySelectorAll<HTMLElement>(".reveal").forEach((el) =>
-      obs.observe(el)
-    );
-    observerRef.current = obs;
-
-    /* --- add .neon + random delay to every img/svg inside .reveal --- */
     document
-      .querySelectorAll<HTMLImageElement | SVGElement>(".reveal img, .reveal svg")
+      .querySelectorAll<HTMLImageElement | SVGElement>("img.neon, svg.neon, .reveal img, .reveal svg")
       .forEach((g) => {
+        /* ensure class present (build may purge literal strings) */
         g.classList.add("neon");
+
+        /* slight stagger so icons don't flicker in sync */
         g.style.animationDelay = `-${Math.random() * 3}s`;
       });
-
-    return () => obs.disconnect();
   }, []);
 
-  /* Hot-pink halo for FIRST card only (visual test) */
+  /* TEMP: hot-pink halo for the very first hero only */
   const imgStyleTest = {
-    filter: "drop-shadow(0 0 12px hotpink) drop-shadow(0 0 32px red)"
+    filter: "drop-shadow(0 0 12px hotpink) drop-shadow(0 0 32px red)",
   };
 
-  /* ---------------- page body ---------------- */
+  /* ─────────  page body  ───────── */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
       <div className="h-64" />
 
+      {/* 1 ─ Soul inside the car */}
       <FeatureBlock
         id="soul-inside-car"
         heading="Soul Inside the Car — Not the Cloud"
         imgSrc="/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png"
         imgAlt="Soul Interface illustration"
         className="reveal"
-        imgStyle={imgStyleTest}        /* ← delete this after confirming glow */
+        imgStyle={imgStyleTest}           /* ← delete after confirming glow */
       >
         All language processing happens on the automotive-grade GPU that rides
         beside the main ECU—nothing leaves the cabin. The patent-pending
@@ -75,6 +48,7 @@ const ScrollContent = () => {
         bars, and erases cloud fees and privacy worries.
       </FeatureBlock>
 
+      {/* 2 ─ No screens, no problem */}
       <FeatureBlock
         id="no-screens-no-problem"
         heading="No Screens? No Problem"
@@ -87,10 +61,11 @@ const ScrollContent = () => {
         <br />
         <br />
         With Soul Interface you speak naturally to run navigation, music,
-        climate and much more; no menu mazes, no glare, no "safety lockouts."
+        climate and much more—no menu mazes, no glare, no “safety lockouts.”
         Your dash stays clean, your focus stays forward.
       </FeatureBlock>
 
+      {/* 3 ─ Forge a soul */}
       <FeatureBlock
         id="forge-soul-of-ride"
         heading="Forge the Soul of Your Ride"
@@ -106,6 +81,7 @@ const ScrollContent = () => {
         podcast. Your personas load in a snap.
       </FeatureBlock>
 
+      {/* 4 ─ Intelligent interface */}
       <FeatureBlock
         id="intelligent-interface"
         heading="An Intelligent Interface"
@@ -120,6 +96,7 @@ const ScrollContent = () => {
         phone—data flows in, never back out.
       </FeatureBlock>
 
+      {/* 5 ─ Rediscover joy */}
       <FeatureBlock
         id="rediscover-joy"
         heading="Rediscover the Joy of the Open Road"
@@ -131,18 +108,18 @@ const ScrollContent = () => {
         Interface harmonizes in real time, or sings any part of a duet.
         <br />
         <br />
-        Launch a choose-your-own-adventure for the whole family that plays out
-        with multiple character voices, sound-effects, and even grammatically
-        sound Elvish. Road trips become rolling entertainment, no internet
-        required.
+        Launch a choose-your-own-adventure that plays out with multiple
+        character voices, sound effects, and even grammatically sound Elvish.
+        Road trips become rolling entertainment, no internet required.
       </FeatureBlock>
 
+      {/* 6 ─ Quote */}
       <FeatureBlock
         id="charlemagne-quote"
         heading={
           <span className="italic">
-            "To have another language is to possess a second soul"
-            <br /> —Charlemagne
+            “To have another language is to possess a second soul”
+            <br />— Charlemagne
           </span>
         }
         imgSrc="/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png"
@@ -159,6 +136,7 @@ const ScrollContent = () => {
         long-awaited trip to Italy.
       </FeatureBlock>
 
+      {/* 7 ─ Robotaxi */}
       <FeatureBlock
         id="robotaxi-cabbie"
         heading="Robotaxi, Meet Your Portable AI Cabbie"
@@ -168,23 +146,23 @@ const ScrollContent = () => {
       >
         Your personal chauffeur lives on your phone. Step into a Soul-equipped
         robotaxi and your custom-crafted persona—with your seat settings,
-        conversation preferences, and small-talk history—loads in a blink. Step
-        out, and it purges itself from the vehicle within seconds. Fleet
-        operators deliver bespoke rides; passengers keep total privacy.
+        conversation preferences, and small-talk history—loads in a blink.
+        Step out, and it purges itself from the vehicle within seconds.
+        Fleet operators deliver bespoke rides; passengers keep total privacy.
       </FeatureBlock>
 
+      {/* 8 ─ Keep the soul safe */}
       <FeatureBlock
         id="keep-soul-safe"
-        heading="Keep Your Car's Soul Safe"
+        heading="Keep Your Car’s Soul Safe"
         imgSrc="/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png"
         imgAlt="Heart lock security illustration"
         className="reveal"
       >
-        You can keep a secure backup hidden away—like a horcrux minus the dark
-        magic—in case anything happens to your car, and securely transfer it
-        when you get a new ride. Updates install on a spare software partition
-        first, so there's always a safe version to fall back on. Preserve your
-        treasured personas for life.
+        Keep a secure backup hidden away—like a horcrux minus the dark magic—in
+        case anything happens to your car, and transfer it safely when you get a
+        new ride. Updates install on a spare partition first, so there’s always
+        a safe version to fall back on.
       </FeatureBlock>
     </div>
   );

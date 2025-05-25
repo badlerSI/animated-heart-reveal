@@ -1,7 +1,13 @@
 /*──────────────────────────────────────────────────────────────
   FeatureBlock.tsx
-  • Presentational card: image + text
-  • Forwards className to outer wrapper, imgStyle to <img>
+  • Generic card that shows a heading, body text, and a hero image.
+  • Props:
+      – id          (anchor / key)
+      – heading     (string or JSX)
+      – imgSrc      (URL)
+      – imgAlt      (alt text)
+      – className   (extra classes for wrapper, e.g. "reveal")
+      – imgStyle    (inline styles for <img>, e.g. test halo)
 ──────────────────────────────────────────────────────────────*/
 import React, { PropsWithChildren, CSSProperties } from "react";
 
@@ -21,12 +27,13 @@ const FeatureBlock = ({
   imgAlt,
   className = "",
   imgStyle = {},
-  children
+  children,
 }: Props) => (
   <section
     id={id}
     className={`mb-32 flex flex-col md:flex-row items-center gap-8 ${className}`}
   >
+    {/* hero illustration */}
     <img
       src={imgSrc}
       alt={imgAlt}
@@ -34,6 +41,7 @@ const FeatureBlock = ({
       style={imgStyle}
     />
 
+    {/* copy block */}
     <div className="w-full md:w-1/2 prose prose-lg text-foreground">
       <h2>{heading}</h2>
       {children}
