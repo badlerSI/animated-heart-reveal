@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from "react";
+import FeatureBlock from "./FeatureBlock";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
@@ -52,52 +53,20 @@ const ScrollContent = () => {
     return () => observer.disconnect();
   }, []);
 
-  /* ---------- helper component ---------- */
-  const Section = ({
-    title,
-    children,
-    imageSrc
-  }: {
-    title: React.ReactNode;
-    children: React.ReactNode;
-    imageSrc?: string;
-  }) => (
-    <section className="mb-96">
-      <div className="reveal overflow-hidden">
-        <div className="p-6 md:p-8">
-          <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-4 text-cyan-white tracking-wide">
-            {title}
-          </h2>
-          {imageSrc && (
-            <div className="flex justify-center mb-6">
-              <img 
-                src={imageSrc}
-                alt="Section illustration"
-                className="max-w-64 max-h-64 object-contain opacity-80"
-              />
-            </div>
-          )}
-          <div className="text-lg md:text-xl text-cyan-white/90 leading-relaxed font-outfit">
-            {children}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-
   /* ------------------------  page body ------------------------ */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
       <div className="h-64" />
 
-      <Section 
-        title="Soul Inside the Car — Not the Cloud"
-        imageSrc="/lovable-uploads/ef12abac-5da4-4e46-a727-d9f5c1d42d66.png"
+      <FeatureBlock 
+        heading="Soul Inside the Car — Not the Cloud"
+        imgSrc="/lovable-uploads/ef12abac-5da4-4e46-a727-d9f5c1d42d66.png"
+        imgAlt="Soul Interface illustration"
       >
         All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
-      </Section>
+      </FeatureBlock>
 
-      <Section title="No Screens? No Problem">
+      <FeatureBlock heading="No Screens? No Problem">
         Touchscreens can take a driver's eyes off the road for over twenty
         seconds, and can spoil an otherwise gorgeous interior besides.
         <br />
@@ -105,20 +74,20 @@ const ScrollContent = () => {
         With Soul Interface you speak naturally to run navigation, music,
         climate and much more; no menu mazes, no glare, no "safety lockouts."
         Your dash stays clean, your focus stays forward.
-      </Section>
+      </FeatureBlock>
 
-      <Section title="Forge the Soul of Your Ride">
+      <FeatureBlock heading="Forge the Soul of Your Ride">
         Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
-      </Section>
+      </FeatureBlock>
 
-      <Section title="An Intelligent Interface">
+      <FeatureBlock heading="An Intelligent Interface">
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
         can answer trivia, quote Mark Twain, decode warning lights in plain language, and
         suggest fixes before you even decide if you need to pull over. Need fresh traffic or weather?
         Drop in a one-way update from your phone—data flows in, never back out.
-      </Section>
+      </FeatureBlock>
 
-      <Section title="Rediscover the Joy of the Open Road">
+      <FeatureBlock heading="Rediscover the Joy of the Open Road">
         Fire up Karaoke Mode with your own saved tracks—vocals drop out and
         Soul Interface harmonizes in real time, or sings any part of a duet.
         <br />
@@ -127,10 +96,10 @@ const ScrollContent = () => {
         with multiple character voices, sound-effects, and even grammatically
         sound Elvish. Road trips become rolling entertainment, no internet
         required.
-      </Section>
+      </FeatureBlock>
 
-      <Section
-        title={
+      <FeatureBlock
+        heading={
           <span className="font-bold italic">
             "To have another language is to possess a second soul"
             <br />
@@ -145,19 +114,19 @@ const ScrollContent = () => {
         Prefer to learn? Switch to Tutor Mode and practice phrases while the
         assistant corrects pronunciation on the fly—perfect prep for that
         long-awaited trip to Italy.
-      </Section>
+      </FeatureBlock>
 
-      <Section title="Robotaxi, Meet Your Portable AI Cabbie">
+      <FeatureBlock heading="Robotaxi, Meet Your Portable AI Cabbie">
         Your personal chauffeur lives on your phone. Step into a Soul-equipped
         robotaxi and your custom-crafted persona—with your seat settings,
         conversation preferences, and small-talk history—loads in a blink.
         Step out, and it purges itself from the vehicle within seconds. Fleet
         operators deliver bespoke rides; passengers keep total privacy.
-      </Section>
+      </FeatureBlock>
 
-      <Section title="Keep Your Car's Soul Safe">
+      <FeatureBlock heading="Keep Your Car's Soul Safe">
         You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
-      </Section>
+      </FeatureBlock>
     </div>
   );
 };
