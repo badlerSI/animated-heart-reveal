@@ -70,7 +70,7 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="no-screens-no-problem"
         heading="No Screens? No Problem"
-        imgSrc="/lovable-uploads/f7de707f-a7b2-412c-91fb-b79169fa2a82.png"
+        imgSrc="/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png"
         imgAlt="Car dashboard with microphone illustration"
       >
         Touchscreens can take a driver's eyes off the road for over twenty
