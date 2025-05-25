@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
 import "./scrollContent.css";
@@ -59,6 +58,7 @@ const ScrollContent = () => {
       <div className="h-64" />
 
       <FeatureBlock 
+        id="soul-inside-car"
         heading="Soul Inside the Car — Not the Cloud"
         imgSrc="/lovable-uploads/ef12abac-5da4-4e46-a727-d9f5c1d42d66.png"
         imgAlt="Soul Interface illustration"
@@ -66,7 +66,12 @@ const ScrollContent = () => {
         All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
       </FeatureBlock>
 
-      <FeatureBlock heading="No Screens? No Problem">
+      <FeatureBlock 
+        id="no-screens-no-problem"
+        heading="No Screens? No Problem"
+        imgSrc=""
+        imgAlt=""
+      >
         Touchscreens can take a driver's eyes off the road for over twenty
         seconds, and can spoil an otherwise gorgeous interior besides.
         <br />
@@ -76,18 +81,33 @@ const ScrollContent = () => {
         Your dash stays clean, your focus stays forward.
       </FeatureBlock>
 
-      <FeatureBlock heading="Forge the Soul of Your Ride">
+      <FeatureBlock 
+        id="forge-soul-of-ride"
+        heading="Forge the Soul of Your Ride"
+        imgSrc=""
+        imgAlt=""
+      >
         Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
       </FeatureBlock>
 
-      <FeatureBlock heading="An Intelligent Interface">
+      <FeatureBlock 
+        id="intelligent-interface"
+        heading="An Intelligent Interface"
+        imgSrc=""
+        imgAlt=""
+      >
         A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
         can answer trivia, quote Mark Twain, decode warning lights in plain language, and
         suggest fixes before you even decide if you need to pull over. Need fresh traffic or weather?
         Drop in a one-way update from your phone—data flows in, never back out.
       </FeatureBlock>
 
-      <FeatureBlock heading="Rediscover the Joy of the Open Road">
+      <FeatureBlock 
+        id="rediscover-joy"
+        heading="Rediscover the Joy of the Open Road"
+        imgSrc=""
+        imgAlt=""
+      >
         Fire up Karaoke Mode with your own saved tracks—vocals drop out and
         Soul Interface harmonizes in real time, or sings any part of a duet.
         <br />
@@ -98,14 +118,11 @@ const ScrollContent = () => {
         required.
       </FeatureBlock>
 
-      <FeatureBlock
-        heading={
-          <span className="font-bold italic">
-            "To have another language is to possess a second soul"
-            <br />
-            <br />-Charlemagne
-          </span>
-        }
+      <FeatureBlock 
+        id="charlemagne-quote"
+        heading="To have another language is to possess a second soul — Charlemagne"
+        imgSrc=""
+        imgAlt=""
       >
         Conversations among passengers from around the globe flow freely: Soul Interface translates
         speech across sixteen languages almost instantly, all offline.
@@ -116,7 +133,12 @@ const ScrollContent = () => {
         long-awaited trip to Italy.
       </FeatureBlock>
 
-      <FeatureBlock heading="Robotaxi, Meet Your Portable AI Cabbie">
+      <FeatureBlock 
+        id="robotaxi-cabbie"
+        heading="Robotaxi, Meet Your Portable AI Cabbie"
+        imgSrc=""
+        imgAlt=""
+      >
         Your personal chauffeur lives on your phone. Step into a Soul-equipped
         robotaxi and your custom-crafted persona—with your seat settings,
         conversation preferences, and small-talk history—loads in a blink.
@@ -124,7 +146,12 @@ const ScrollContent = () => {
         operators deliver bespoke rides; passengers keep total privacy.
       </FeatureBlock>
 
-      <FeatureBlock heading="Keep Your Car's Soul Safe">
+      <FeatureBlock 
+        id="keep-soul-safe"
+        heading="Keep Your Car's Soul Safe"
+        imgSrc=""
+        imgAlt=""
+      >
         You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
       </FeatureBlock>
     </div>

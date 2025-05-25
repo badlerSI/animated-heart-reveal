@@ -18,7 +18,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
                    flex flex-col md:flex-row items-start md:items-center gap-10">
       {/* LEFT COLUMN — heading + image */}
       <div className="flex flex-col items-center md:items-start md:w-1/2 space-y-6">
-        <h2 className="text-2xl md:text-3xl font-playfair font-semibold text-cyan-white tracking-wide">
+        <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
           {heading}
         </h2>
 
@@ -26,7 +26,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
           <img
             src={imgSrc}
             alt={imgAlt || "Section illustration"}
-            className="w-full max-w-64 object-contain opacity-80"
+            className="w-full max-w-64 max-h-64 object-contain opacity-80"
             loading="lazy"
           />
         )}
