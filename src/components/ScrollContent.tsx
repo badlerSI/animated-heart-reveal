@@ -73,7 +73,7 @@ const ScrollContent = () => {
               <img 
                 src={imageSrc}
                 alt="Section illustration"
-                className="max-w-128 max-h-128 object-contain opacity-80"
+                className="max-w-64 max-h-64 object-contain opacity-80"
               />
             </div>
           )}
