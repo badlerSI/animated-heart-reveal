@@ -61,7 +61,7 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="soul-inside-car"
         heading="Soul Inside the Car — Not the Cloud"
-        imgSrc="/lovable-uploads/ef12abac-5da4-4e46-a727-d9f5c1d42d66.png"
+        imgSrc="/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png"
         imgAlt="Soul Interface illustration"
       >
         All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
