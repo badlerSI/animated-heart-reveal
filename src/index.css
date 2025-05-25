@@ -2,26 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ——— absolutely plain design tokens ——— */
+/*──────────────────────────────────────────────────────────────
+  BASE COLOURS – guaranteed readable
+──────────────────────────────────────────────────────────────*/
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;          /* BLACK for sanity check */
+    --background: 0 0% 100%;   /* pure white page */
+    --foreground: 0 0% 10%;    /* almost-black text */
+
+    /* Neon palette */
+    --stroke-cyan: #1bbac2;    /* tube colour  */
+    --halo-cyan:   #00f8ff;    /* halo colour  */
+  }
+
+  .dark {
+    --background: 222 44% 5%;   /* dark grey   */
+    --foreground: 0 0% 98%;     /* near white  */
   }
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 }
 
-/* ——— DEBUG HELPERS: show ALL borders & images ——— */
+/*──────────────────────────────────────────────────────────────
+  SINGLE “.neon” UTILITY
+  • 0-px blur colours the white stroke so it’s visible.
+  • 3-px + 10-px blurs create the inner rim + halo.
+  • Subtle flicker never drops below 70 % opacity.
+──────────────────────────────────────────────────────────────*/
 @layer utilities {
-  h1, h2, h3, h4, h5, h6, p, li, span {
-    color: black !important;
+  @media (prefers-reduced-motion: reduce) {
+    .neon { animation: none; }
   }
-  img {
-    outline: 2px solid red;   /* visible frame */
+
+  .neon {
+    filter:
+      drop-shadow(0 0 0   var(--stroke-cyan))
+      drop-shadow(0 0 3px var(--halo-cyan))
+      drop-shadow(0 0 10px var(--halo-cyan));
+    animation: neon-flicker 3s infinite ease-in-out;
+    will-change: opacity, filter;
+  }
+
+  @keyframes neon-flicker {
+    0%,14%,16%,18%,60%,100% {
+      opacity: 1;
+      filter:
+        drop-shadow(0 0 0   var(--stroke-cyan))
+        drop-shadow(0 0 3px var(--halo-cyan))
+        drop-shadow(0 0 10px var(--halo-cyan));
+    }
+    15%,17%,32%,34%,58% {
+      opacity: .85;
+      filter:
+        drop-shadow(0 0 0   var(--stroke-cyan))
+        drop-shadow(0 0 2px var(--halo-cyan))
+        drop-shadow(0 0 7px  var(--halo-cyan));
+    }
+    33% {
+      opacity: .70;
+      filter:
+        drop-shadow(0 0 0 var(--stroke-cyan));   /* tube still visible */
+    }
   }
 }
