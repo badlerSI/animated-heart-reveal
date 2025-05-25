@@ -121,7 +121,7 @@ const ScrollContent = () => {
 
       <FeatureBlock 
         id="charlemagne-quote"
-        heading={<span className="italic">"To have another language is to possess a second soul" — Charlemagne</span>}
+        heading={<span className="italic">"To have another language is to possess a second soul" —Charlemagne</span>}
         imgSrc="/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png"
         imgAlt="Soul speak illustration"
       >
