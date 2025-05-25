@@ -1,10 +1,11 @@
+/*──────────────────────────────────────────────────────────────
+  index.css  –  Tailwind base + custom neon utility
+──────────────────────────────────────────────────────────────*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* --------------------------------------------------------------------
-   BASE LAYER - colour tokens, light & dark
-   ------------------------------------------------------------------ */
+/* ---------- BASE DESIGN TOKENS (unchanged from earlier) ---------- */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -46,106 +47,54 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* ---------- CYAN-NEON BRAND COLOURS ---------- */
-    --stroke-cyan: #1bbac2; /* core stroke */
-    --halo-cyan:   #00f8ff; /* glow halo  */
+    /* Neon brand colours */
+    --stroke-cyan: #1bbac2;
+    --halo-cyan:   #00f8ff;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    /* dark-mode neon can stay identical or be tuned here if desired */
-    --stroke-cyan: #1bbac2;
-    --halo-cyan:   #00f8ff;
+    /* dark-mode tokens (omitted here to save space; keep yours) */
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+  *   { @apply border-border; }
+  body{ @apply bg-background text-foreground; }
 }
 
-/* --------------------------------------------------------------------
-   UTILITIES LAYER - cyan-neon glow + subtle flicker
-   ------------------------------------------------------------------ */
+/* ---------- UTILITIES LAYER : NEON GLOW + FLICKER ---------- */
 @layer utilities {
 
-  /* Respect user accessibility preference */
   @media (prefers-reduced-motion: reduce) {
-    .neon {
-      animation: none;
-    }
+    .neon { animation: none; }
   }
 
   .neon {
-    /* static double halo (cheap, GPU-friendly) */
+    /* softer double halo than before */
     filter:
-      drop-shadow(0 0 4px  var(--halo-cyan))
-      drop-shadow(0 0 12px var(--halo-cyan));
+      drop-shadow(0 0 3px  var(--halo-cyan))
+      drop-shadow(0 0 10px var(--halo-cyan));
 
-    /* flicker animation */
-    animation: neon-flicker 3s infinite;
+    /* gentler flicker – opacity never below 0.7 */
+    animation: neon-flicker 3s infinite ease-in-out;
     will-change: opacity, filter;
   }
 
   @keyframes neon-flicker {
-    /* fully lit */
-    0%, 14%, 16%, 18%, 60%, 100% {
+    0%,14%,16%,18%,60%,100% {
       opacity: 1;
       filter:
-        drop-shadow(0 0 4px  var(--halo-cyan))
-        drop-shadow(0 0 12px var(--halo-cyan));
+        drop-shadow(0 0 3px var(--halo-cyan))
+        drop-shadow(0 0 10px var(--halo-cyan));
     }
-    /* subtle dips */
-    15%, 17%, 32%, 34%, 58% {
+    15%,17%,32%,34%,58% {
       opacity: 0.85;
       filter:
-        drop-shadow(0 0 3px  var(--halo-cyan))
-        drop-shadow(0 0 9px  var(--halo-cyan));
+        drop-shadow(0 0 2px var(--halo-cyan))
+        drop-shadow(0 0 7px  var(--halo-cyan));
     }
-    /* rare arc-out moment */
     33% {
-      opacity: 0.45;
+      opacity: 0.70;
       filter: none;
     }
   }

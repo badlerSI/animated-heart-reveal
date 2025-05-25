@@ -1,8 +1,7 @@
 /*──────────────────────────────────────────────────────────────
-  FeatureBlock.tsx  –  PRESENTATIONAL CARD
-  • Receives: id, heading, children, imgSrc, imgAlt
-  • NEW: forwards  className    → outer wrapper
-          &        imgStyle     → <img> style      (for test glow)
+  FeatureBlock.tsx
+  • Presentational card: image + text
+  • Forwards className to outer wrapper, imgStyle to <img>
 ──────────────────────────────────────────────────────────────*/
 import React, { PropsWithChildren, CSSProperties } from "react";
 
@@ -11,8 +10,8 @@ interface Props extends PropsWithChildren {
   heading: React.ReactNode;
   imgSrc: string;
   imgAlt: string;
-  className?: string;           // pass-through for ScrollContent reveal
-  imgStyle?: CSSProperties;     // lets us inject test filter
+  className?: string;
+  imgStyle?: CSSProperties;
 }
 
 const FeatureBlock = ({
@@ -32,7 +31,7 @@ const FeatureBlock = ({
       src={imgSrc}
       alt={imgAlt}
       className="w-full md:w-1/2 neon"
-      style={imgStyle}          /* <── here */
+      style={imgStyle}
     />
 
     <div className="w-full md:w-1/2 prose prose-lg text-foreground">
