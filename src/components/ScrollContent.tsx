@@ -65,11 +65,11 @@ const ScrollContent = () => {
     <section className="mb-96">
       <div className="reveal overflow-hidden">
         <div className="p-6 md:p-8">
-          <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-4 text-cyan-white tracking-wide reveal-element">
+          <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-4 text-cyan-white tracking-wide">
             {title}
           </h2>
           {imageSrc && (
-            <div className="flex justify-center mb-6 reveal-element">
+            <div className="flex justify-center mb-6">
               <img 
                 src={imageSrc}
                 alt="Section illustration"
@@ -77,7 +77,7 @@ const ScrollContent = () => {
               />
             </div>
           )}
-          <div className="text-lg md:text-xl text-cyan-white/90 leading-relaxed reveal-element font-outfit">
+          <div className="text-lg md:text-xl text-cyan-white/90 leading-relaxed font-outfit">
             {children}
           </div>
         </div>
