@@ -9,111 +9,157 @@ const HeartNavigation = () => {
     <div className="w-full max-w-full px-4 py-8">
       <div className="relative w-full max-w-4xl mx-auto">
         <div className="relative w-full h-auto">
-          {/* Base heart image */}
+          {/* Base heart image with individual section overlays */}
           <img 
             src="/src/heart-cta.svg" 
             alt="Heart Navigation" 
-            className="w-full h-auto"
+            className="w-full h-auto heart-glow-base"
           />
           
-          {/* Individual PNG images positioned over the heart */}
-          <div className="absolute inset-0">
-            {/* Tech section - top left */}
-            <img 
-              src="/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png"
-              alt="Tech"
-              className={`absolute top-[15%] left-[20%] w-[25%] h-auto transition-all duration-300 ${
-                hoveredSection === 'tech' ? 'drop-shadow-[0_0_15px_rgba(51,243,240,0.8)]' : 'drop-shadow-[0_0_5px_rgba(51,243,240,0.3)]'
-              }`}
-            />
-            
-            {/* Partner section - top right */}
-            <img 
-              src="/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png"
-              alt="Partner"
-              className={`absolute top-[15%] right-[20%] w-[25%] h-auto transition-all duration-300 ${
-                hoveredSection === 'partner' ? 'drop-shadow-[0_0_15px_rgba(51,243,240,0.8)]' : 'drop-shadow-[0_0_5px_rgba(51,243,240,0.3)]'
-              }`}
-            />
-            
-            {/* News section - bottom left */}
-            <img 
-              src="/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
-              alt="News"
-              className={`absolute bottom-[25%] left-[15%] w-[25%] h-auto transition-all duration-300 ${
-                hoveredSection === 'news' ? 'drop-shadow-[0_0_15px_rgba(51,243,240,0.8)]' : 'drop-shadow-[0_0_5px_rgba(51,243,240,0.3)]'
-              }`}
-            />
-            
-            {/* Vision section - bottom right */}
-            <img 
-              src="/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png"
-              alt="Vision"
-              className={`absolute bottom-[25%] right-[15%] w-[25%] h-auto transition-all duration-300 ${
-                hoveredSection === 'vision' ? 'drop-shadow-[0_0_15px_rgba(51,243,240,0.8)]' : 'drop-shadow-[0_0_5px_rgba(51,243,240,0.3)]'
-              }`}
-            />
-          </div>
+          {/* Individual section images that light up on hover */}
+          <img 
+            src="/src/heart-cta.svg" 
+            alt="Tech section" 
+            className={`absolute inset-0 w-full h-auto transition-opacity duration-300 ${
+              hoveredSection === 'tech' ? 'opacity-100 heart-section-glow' : 'opacity-0'
+            }`}
+            style={{ 
+              clipPath: "url(#tech-clip)",
+              filter: hoveredSection === 'tech' ? 'drop-shadow(0 0 8px rgba(51, 243, 240, 1))' : 'none'
+            }}
+          />
           
-          {/* Invisible clickable areas that outline each PNG */}
+          <img 
+            src="/src/heart-cta.svg" 
+            alt="Vision section" 
+            className={`absolute inset-0 w-full h-auto transition-opacity duration-300 ${
+              hoveredSection === 'vision' ? 'opacity-100 heart-section-glow' : 'opacity-0'
+            }`}
+            style={{ 
+              clipPath: "url(#vision-clip)",
+              filter: hoveredSection === 'vision' ? 'drop-shadow(0 0 8px rgba(51, 243, 240, 1))' : 'none'
+            }}
+          />
+          
+          <img 
+            src="/src/heart-cta.svg" 
+            alt="Partner section" 
+            className={`absolute inset-0 w-full h-auto transition-opacity duration-300 ${
+              hoveredSection === 'partner' ? 'opacity-100 heart-section-glow' : 'opacity-0'
+            }`}
+            style={{ 
+              clipPath: "url(#partner-clip)",
+              filter: hoveredSection === 'partner' ? 'drop-shadow(0 0 8px rgba(51, 243, 240, 1))' : 'none'
+            }}
+          />
+          
+          <img 
+            src="/src/heart-cta.svg" 
+            alt="News section" 
+            className={`absolute inset-0 w-full h-auto transition-opacity duration-300 ${
+              hoveredSection === 'news' ? 'opacity-100 heart-section-glow' : 'opacity-0'
+            }`}
+            style={{ 
+              clipPath: "url(#news-clip)",
+              filter: hoveredSection === 'news' ? 'drop-shadow(0 0 8px rgba(51, 243, 240, 1))' : 'none'
+            }}
+          />
+          
+          {/* Invisible clickable areas */}
           <svg 
             viewBox="0 0 400 400" 
             className="absolute inset-0 w-full h-full"
+            style={{ pointerEvents: 'none' }}
           >
-            {/* Tech Section outline - top left around PNG */}
+            {/* Define clip paths for each section */}
+            <defs>
+              <clipPath id="tech-clip">
+                <g id="stroke-tech">
+                  <path d="M 100 120 C 80 100, 60 100, 50 120 C 40 140, 50 160, 70 170 L 120 200 L 150 170 C 170 160, 180 140, 170 120 C 160 100, 140 100, 120 120 C 110 130, 105 125, 100 120 Z" />
+                </g>
+              </clipPath>
+              
+              <clipPath id="vision-clip">
+                <g id="stroke-vision">
+                  <path d="M 280 200 L 250 170 L 200 220 L 220 280 L 260 260 C 280 250, 290 230, 280 200 Z" />
+                </g>
+              </clipPath>
+              
+              <clipPath id="partner-clip">
+                <g id="stroke-partner">
+                  <path d="M 300 120 C 320 100, 340 100, 350 120 C 360 140, 350 160, 330 170 L 280 200 L 250 170 C 230 160, 220 140, 230 120 C 240 100, 260 100, 280 120 C 290 130, 295 125, 300 120 Z" />
+                </g>
+              </clipPath>
+              
+              <clipPath id="news-clip">
+                <g id="stroke-news">
+                  <path d="M 120 200 L 150 170 L 200 220 L 180 280 L 140 260 C 120 250, 110 230, 120 200 Z" />
+                </g>
+              </clipPath>
+            </defs>
+            
+            {/* Tech Section */}
             <Link to="/tech">
-              <path
-                d="M 60 50 L 140 50 L 140 130 L 60 130 Z"
-                fill="transparent"
-                stroke="transparent"
-                strokeWidth="2"
-                className="cursor-pointer"
-                onMouseEnter={() => setHoveredSection('tech')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Tech Section"
-              />
+              <g className="cursor-pointer" style={{ pointerEvents: 'all' }}>
+                <path
+                  id="stroke-tech-edge"
+                  d="M 100 120 C 80 100, 60 100, 50 120 C 40 140, 50 160, 70 170 L 120 200 L 150 170 C 170 160, 180 140, 170 120 C 160 100, 140 100, 120 120 C 110 130, 105 125, 100 120 Z"
+                  fill="transparent"
+                  stroke="transparent"
+                  strokeWidth="2"
+                  onMouseEnter={() => setHoveredSection('tech')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Tech"
+                />
+              </g>
             </Link>
             
-            {/* Partner Section outline - top right around PNG */}
-            <Link to="/partner">
-              <path
-                d="M 260 50 L 340 50 L 340 130 L 260 130 Z"
-                fill="transparent"
-                stroke="transparent"
-                strokeWidth="2"
-                className="cursor-pointer"
-                onMouseEnter={() => setHoveredSection('partner')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Partner Section"
-              />
-            </Link>
-            
-            {/* News Section outline - bottom left around PNG */}
-            <Link to="/news">
-              <path
-                d="M 45 270 L 125 270 L 125 350 L 45 350 Z"
-                fill="transparent"
-                stroke="transparent"
-                strokeWidth="2"
-                className="cursor-pointer"
-                onMouseEnter={() => setHoveredSection('news')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="News Section"
-              />
-            </Link>
-            
-            {/* Vision Section outline - bottom right around PNG */}
+            {/* Vision Section */}
             <Link to="/vision">
-              <path
-                d="M 275 270 L 355 270 L 355 350 L 275 350 Z"
-                fill="transparent"
-                stroke="transparent"
-                strokeWidth="2"
-                className="cursor-pointer"
-                onMouseEnter={() => setHoveredSection('vision')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Vision Section"
-              />
+              <g className="cursor-pointer" style={{ pointerEvents: 'all' }}>
+                <path
+                  id="stroke-vision-edge"
+                  d="M 280 200 L 250 170 L 200 220 L 220 280 L 260 260 C 280 250, 290 230, 280 200 Z"
+                  fill="transparent"
+                  stroke="transparent"
+                  strokeWidth="2"
+                  onMouseEnter={() => setHoveredSection('vision')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Vision"
+                />
+              </g>
+            </Link>
+            
+            {/* Partner Section */}
+            <Link to="/partner">
+              <g className="cursor-pointer" style={{ pointerEvents: 'all' }}>
+                <path
+                  id="stroke-partner-edge"
+                  d="M 300 120 C 320 100, 340 100, 350 120 C 360 140, 350 160, 330 170 L 280 200 L 250 170 C 230 160, 220 140, 230 120 C 240 100, 260 100, 280 120 C 290 130, 295 125, 300 120 Z"
+                  fill="transparent"
+                  stroke="transparent"
+                  strokeWidth="2"
+                  onMouseEnter={() => setHoveredSection('partner')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Partner"
+                />
+              </g>
+            </Link>
+            
+            {/* News Section */}
+            <Link to="/news">
+              <g className="cursor-pointer" style={{ pointerEvents: 'all' }}>
+                <path
+                  id="stroke-news-edge"
+                  d="M 120 200 L 150 170 L 200 220 L 180 280 L 140 260 C 120 250, 110 230, 120 200 Z"
+                  fill="transparent"
+                  stroke="transparent"
+                  strokeWidth="2"
+                  onMouseEnter={() => setHoveredSection('news')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="News"
+                />
+              </g>
             </Link>
           </svg>
         </div>

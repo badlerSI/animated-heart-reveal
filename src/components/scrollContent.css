@@ -1,3 +1,6 @@
+
+/* ... keep existing code (all current styles) */
+
 /* Base styles for reveal animations */
 .reveal {
   opacity: 0;
@@ -71,13 +74,16 @@
   }
 }
 
-/* Heart navigation glow effects */
+/* Heart navigation base and section-specific glow effects */
 .heart-glow-base {
-  filter: drop-shadow(0 0 2px rgba(51, 243, 240, 0.8));
+  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 0.9));
   transition: filter 0.3s ease;
 }
 
-/* Remove heart navigation glow effects - no longer needed */
+.heart-section-glow {
+  filter: drop-shadow(0 0 6px rgba(51, 243, 240, 1)) drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+  transition: filter 0.3s ease;
+}
 
 /* Add custom font styles to body */
 body {
