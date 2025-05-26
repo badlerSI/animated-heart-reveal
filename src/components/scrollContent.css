@@ -85,6 +85,17 @@
   transition: filter 0.3s ease;
 }
 
+/* New heart navigation glow effects */
+.heart-glow-initial {
+  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 0.9));
+  transition: filter 0.3s ease;
+}
+
+.heart-glow-hover {
+  filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8)) drop-shadow(0 0 24px rgba(51, 243, 240, 0.4));
+  transition: filter 0.3s ease;
+}
+
 /* Add custom font styles to body */
 body {
   font-family: 'Outfit', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
