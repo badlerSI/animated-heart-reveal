@@ -1,10 +1,9 @@
-
 /* -------------------------------------------------------------------
    HeartNavigation.tsx  –  inline SVG w/ per-stroke hover-glow
    ------------------------------------------------------------------- */
 
 import { Link } from "react-router-dom";
-import { ReactComponent as HeartSVG } from "../heart-cta.svg?react";
+import HeartSVG from "../heart-cta.svg?react";
 import { useEffect } from "react";
 import "@/components/scrollContent.css"; // ensures .heart-glow-* classes exist
 
