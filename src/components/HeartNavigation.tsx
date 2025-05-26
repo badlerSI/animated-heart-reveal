@@ -1,16 +1,15 @@
-
 /* -------------------------------------------------------------------
    HeartNavigation.tsx  –  inline SVG menu with per-stroke hover / tap
    ------------------------------------------------------------------- */
 
 import { Link } from "react-router-dom";
+import { ReactComponent as HeartSVG } from "@/assets/heart-cta.svg?react"; // ← works once svgr is active
 import { useEffect } from "react";
-import "@/components/scrollContent.css";                                   // glow classes: .heart-glow-initial / -hover
-import heartSvg from "@/assets/heart-cta.svg";
+import "@/components/scrollContent.css";                                   // glow classes
 
 const HeartNavigation = () => {
   /* ---------------------------------------------------------------
-     One-time setup: add hover / focus / tap listeners to SVG groups
+     Add hover / focus / tap listeners once after mount
   ---------------------------------------------------------------- */
   useEffect(() => {
     const root = document.getElementById("heart-cta");
@@ -19,33 +18,33 @@ const HeartNavigation = () => {
     const groups = root.querySelectorAll<SVGGElement>("g[id^='stroke-']");
 
     groups.forEach((g) => {
-      const slug = g.id.replace("stroke-", "");          // tech, vision, partner, news
+      const slug = g.id.replace("stroke-", ""); // tech, vision, partner, news
       const path = g.querySelector("path");
 
+      if (!path) return;
+
       /* keyboard accessibility */
-      if (path) {
-        path.setAttribute("tabIndex", "0");
-        path.setAttribute("role", "link");
-        path.setAttribute("aria-label", slug);
+      path.setAttribute("tabIndex", "0");
+      path.setAttribute("role", "link");
+      path.setAttribute("aria-label", slug);
 
-        /* hover / focus glow */
-        const enter = () => g.classList.add("heart-glow-hover");
-        const leave = () => g.classList.remove("heart-glow-hover");
+      /* hover / focus glow */
+      const enter = () => g.classList.add("heart-glow-hover");
+      const leave = () => g.classList.remove("heart-glow-hover");
 
-        path.addEventListener("mouseenter", enter);
-        path.addEventListener("focus", enter);
-        path.addEventListener("mouseleave", leave);
-        path.addEventListener("blur", leave);
+      path.addEventListener("mouseenter", enter);
+      path.addEventListener("focus", enter);
+      path.addEventListener("mouseleave", leave);
+      path.addEventListener("blur", leave);
 
-        /* click / tap: keep glow on mobile, then navigate */
-        path.addEventListener("click", () => {
-          g.classList.add("heart-glow-hover");
-          window.location.href = `/${slug}`;             // adjust routes if needed
-        });
-      }
+      /* click / tap navigate + keep glow on mobile */
+      path.addEventListener("click", () => {
+        g.classList.add("heart-glow-hover");
+        window.location.href = `/${slug}`; // adjust routes if needed
+      });
     });
 
-    /* cleanup listeners on unmount */
+    /* cleanup on unmount */
     return () =>
       groups.forEach((g) => {
         const clone = g.cloneNode(true);
@@ -59,13 +58,7 @@ const HeartNavigation = () => {
   return (
     <div className="w-full px-4 py-12 flex justify-center">
       <div className="relative w-64 md:w-96">
-        {/* SVG as img element for Vite compatibility */}
-        <img 
-          id="heart-cta" 
-          src={heartSvg} 
-          alt="Heart Navigation" 
-          className="w-full h-auto heart-glow-initial"
-        />
+        <HeartSVG id="heart-cta" className="w-full h-auto heart-glow-initial" />
 
         {/* Fallback nav for SEO / no-JS users */}
         <nav className="sr-only">
