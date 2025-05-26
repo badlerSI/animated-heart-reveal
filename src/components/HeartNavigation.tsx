@@ -23,56 +23,56 @@ const HeartNavigation = () => {
             className="absolute inset-0 w-full h-full"
             style={{ pointerEvents: 'none' }}
           >
-            {/* Tech Section - Top Left heart lobe */}
+            {/* Tech Section - stroke-tech-edge */}
             <Link to="/tech">
-              <path
-                d="M 120 80 C 80 40, 20 40, 20 100 C 20 140, 80 180, 120 220 L 160 180 C 160 140, 140 100, 120 80 Z"
-                fill="transparent"
-                className="cursor-pointer transition-all duration-300"
-                style={{ pointerEvents: 'all' }}
-                onMouseEnter={() => setHoveredSection('tech')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Tech"
-              />
+              <g id="stroke-tech-edge" className="cursor-pointer transition-all duration-300" style={{ pointerEvents: 'all' }}>
+                <path
+                  d="M 100 120 C 80 100, 60 100, 50 120 C 40 140, 50 160, 70 170 L 120 200 L 150 170 C 170 160, 180 140, 170 120 C 160 100, 140 100, 120 120 C 110 130, 105 125, 100 120 Z"
+                  fill="transparent"
+                  onMouseEnter={() => setHoveredSection('tech')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Tech"
+                />
+              </g>
             </Link>
             
-            {/* Partner Section - Top Right heart lobe */}
+            {/* Partner Section - stroke-partner-edge */}
             <Link to="/partner">
-              <path
-                d="M 280 80 C 320 40, 380 40, 380 100 C 380 140, 320 180, 280 220 L 240 180 C 240 140, 260 100, 280 80 Z"
-                fill="transparent"
-                className="cursor-pointer transition-all duration-300"
-                style={{ pointerEvents: 'all' }}
-                onMouseEnter={() => setHoveredSection('partner')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Partner"
-              />
+              <g id="stroke-partner-edge" className="cursor-pointer transition-all duration-300" style={{ pointerEvents: 'all' }}>
+                <path
+                  d="M 300 120 C 320 100, 340 100, 350 120 C 360 140, 350 160, 330 170 L 280 200 L 250 170 C 230 160, 220 140, 230 120 C 240 100, 260 100, 280 120 C 290 130, 295 125, 300 120 Z"
+                  fill="transparent"
+                  onMouseEnter={() => setHoveredSection('partner')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Partner"
+                />
+              </g>
             </Link>
             
-            {/* News Section - Bottom Left heart point */}
+            {/* News Section - stroke-news-edge */}
             <Link to="/news">
-              <path
-                d="M 120 220 L 160 180 L 200 240 L 170 280 C 150 260, 130 240, 120 220 Z"
-                fill="transparent"
-                className="cursor-pointer transition-all duration-300"
-                style={{ pointerEvents: 'all' }}
-                onMouseEnter={() => setHoveredSection('news')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="News"
-              />
+              <g id="stroke-news-edge" className="cursor-pointer transition-all duration-300" style={{ pointerEvents: 'all' }}>
+                <path
+                  d="M 120 200 L 150 170 L 200 220 L 180 280 L 140 260 C 120 250, 110 230, 120 200 Z"
+                  fill="transparent"
+                  onMouseEnter={() => setHoveredSection('news')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="News"
+                />
+              </g>
             </Link>
             
-            {/* Vision Section - Bottom Right heart point */}
+            {/* Vision Section - stroke-vision-edge */}
             <Link to="/vision">
-              <path
-                d="M 280 220 L 240 180 L 200 240 L 230 280 C 250 260, 270 240, 280 220 Z"
-                fill="transparent"
-                className="cursor-pointer transition-all duration-300"
-                style={{ pointerEvents: 'all' }}
-                onMouseEnter={() => setHoveredSection('vision')}
-                onMouseLeave={() => setHoveredSection(null)}
-                aria-label="Vision"
-              />
+              <g id="stroke-vision-edge" className="cursor-pointer transition-all duration-300" style={{ pointerEvents: 'all' }}>
+                <path
+                  d="M 280 200 L 250 170 L 200 220 L 220 280 L 260 260 C 280 250, 290 230, 280 200 Z"
+                  fill="transparent"
+                  onMouseEnter={() => setHoveredSection('vision')}
+                  onMouseLeave={() => setHoveredSection(null)}
+                  aria-label="Vision"
+                />
+              </g>
             </Link>
           </svg>
         </div>

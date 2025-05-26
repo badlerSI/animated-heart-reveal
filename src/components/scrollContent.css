@@ -87,12 +87,12 @@
 
 /* New heart navigation glow effects */
 .heart-glow-initial {
-  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 0.9));
+  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 1));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-hover {
-  filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8)) drop-shadow(0 0 24px rgba(51, 243, 240, 0.4));
+  filter: drop-shadow(0 0 2px rgba(51, 243, 240, 1)) drop-shadow(0 0 4px rgba(51, 243, 240, 0.8));
   transition: filter 0.3s ease;
 }
 
