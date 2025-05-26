@@ -4,9 +4,9 @@
    ------------------------------------------------------------------- */
 
 import { Link } from "react-router-dom";
-import { ReactComponent as HeartSVG } from "@/assets/heart-cta.svg?react"; // SVG compiled as React component
 import { useEffect } from "react";
 import "@/components/scrollContent.css";                                   // glow classes: .heart-glow-initial / -hover
+import heartSvg from "@/assets/heart-cta.svg";
 
 const HeartNavigation = () => {
   /* ---------------------------------------------------------------
@@ -59,8 +59,13 @@ const HeartNavigation = () => {
   return (
     <div className="w-full px-4 py-12 flex justify-center">
       <div className="relative w-64 md:w-96">
-        {/* Inline SVG component – keeps internal groups for JS to target */}
-        <HeartSVG id="heart-cta" className="w-full h-auto heart-glow-initial" />
+        {/* SVG as img element for Vite compatibility */}
+        <img 
+          id="heart-cta" 
+          src={heartSvg} 
+          alt="Heart Navigation" 
+          className="w-full h-auto heart-glow-initial"
+        />
 
         {/* Fallback nav for SEO / no-JS users */}
         <nav className="sr-only">
