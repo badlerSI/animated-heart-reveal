@@ -4,7 +4,6 @@
    ------------------------------------------------------------------- */
 
 import { Link } from "react-router-dom";
-import HeartSVG from "../heart-cta.svg?react";
 import { useEffect } from "react";
 import "@/components/scrollContent.css"; // ensures .heart-glow-* classes exist
 
@@ -57,7 +56,12 @@ const HeartNavigation = () => {
   return (
     <div className="w-full px-4 py-12 flex justify-center">
       <div className="relative w-64 md:w-96">
-        <HeartSVG id="heart-cta" className="w-full h-auto heart-glow-initial" />
+        <img 
+          id="heart-cta" 
+          src="/src/heart-cta.svg" 
+          alt="Heart Navigation" 
+          className="w-full h-auto heart-glow-initial"
+        />
 
         {/* Fallback nav for SEO / no-JS users */}
         <nav className="sr-only">
