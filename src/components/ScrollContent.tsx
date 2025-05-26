@@ -1,6 +1,6 @@
-
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
+import HeartNavigation from "./HeartNavigation";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
@@ -155,6 +155,11 @@ const ScrollContent = () => {
       >
         You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
       </FeatureBlock>
+
+      {/* Heart Navigation */}
+      <div className="mt-32">
+        <HeartNavigation />
+      </div>
     </div>
   );
 };

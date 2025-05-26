@@ -1,4 +1,6 @@
 
+/* ... keep existing code (all current styles) */
+
 /* Base styles for reveal animations */
 .reveal {
   opacity: 0;
@@ -70,6 +72,17 @@
   75% {
     filter: drop-shadow(0 0 10px rgba(51, 243, 240, 0.7));
   }
+}
+
+/* Heart navigation glow effects */
+.neon-glow-dim {
+  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.neon-glow-bright {
+  filter: drop-shadow(0 0 15px rgba(51, 243, 240, 0.8));
+  transition: filter 0.3s ease;
 }
 
 /* Add custom font styles to body */
