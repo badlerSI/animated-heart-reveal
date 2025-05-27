@@ -74,14 +74,25 @@
   }
 }
 
-/* Heart navigation base and section-specific glow effects */
-.heart-glow-base {
-  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 0.9));
+/* Heart navigation glow effects */
+.neon-glow-dim {
+  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.4));
   transition: filter 0.3s ease;
 }
 
-.heart-section-glow {
-  filter: drop-shadow(0 0 6px rgba(51, 243, 240, 1)) drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+.neon-glow-bright {
+  filter: drop-shadow(0 0 15px rgba(51, 243, 240, 0.8));
+  transition: filter 0.3s ease;
+}
+
+/* New heart navigation glow effects */
+.heart-glow-initial {
+  filter: drop-shadow(0 0 1px rgba(51, 243, 240, 1));
+  transition: filter 0.3s ease;
+}
+
+.heart-glow-hover {
+  filter: drop-shadow(0 0 2px rgba(51, 243, 240, 1)) drop-shadow(0 0 4px rgba(51, 243, 240, 0.8));
   transition: filter 0.3s ease;
 }
 
