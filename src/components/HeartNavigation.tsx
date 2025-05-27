@@ -81,9 +81,9 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Partner path - Central large stroke of 心 */}
+          {/* Partner path - Central large stroke of 心 (doubled size, moved down 25%) */}
           <path
-            d="M 140 120 L 180 120 L 200 140 L 190 180 L 180 220 L 160 240 L 140 220 L 130 180 L 120 140 Z"
+            d="M 120 200 L 200 200 L 220 220 L 210 260 L 200 300 L 160 320 L 120 300 L 110 260 L 100 220 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("partner")}
