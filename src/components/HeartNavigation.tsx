@@ -1,14 +1,14 @@
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "@/components/scrollContent.css"; // .nav-piece + .heart-glow-* rules live here
+import "@/components/scrollContent.css";
 
 const HeartNavigation = () => {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   return (
     <div className="w-full px-4 py-12 flex justify-center">
-      <div className="relative w-80 md:w-96 heart-glow-initial">
+      {/* wrapper now has fixed height to anchor the absolute children */}
+      <div className="relative w-80 h-80 md:w-96 md:h-96 heart-glow-initial">
         {/* News piece – top-left */}
         <Link
           to="/news"
