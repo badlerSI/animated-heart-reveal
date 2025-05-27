@@ -35,13 +35,12 @@ const HeartNavigation = () => {
 
   return (
     <div className="w-full px-4 py-12 flex justify-center">
-      <div ref={containerRef} className="relative w-80 md:w-96 heart-glow-initial">
-        {/* News piece - top left */}
+      <div ref={containerRef} className="relative w-80 h-80 heart-glow-initial">
+        {/* All pieces positioned to overlay and form complete heart */}
+        
+        {/* News piece */}
         <Link to="/news">
-          <div 
-            className="nav-piece absolute top-0 left-8 w-24 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
-            style={{ transform: 'rotate(-15deg)' }}
-          >
+          <div className="nav-piece absolute inset-0 w-full h-full cursor-pointer transition-all duration-300 hover:scale-105">
             <img 
               src="/lovable-uploads/7bc57b7b-ec7e-45cb-82e4-d098daa974b9.png" 
               alt="News"
@@ -50,12 +49,9 @@ const HeartNavigation = () => {
           </div>
         </Link>
 
-        {/* Partnerships piece - top right */}
+        {/* Partnerships piece */}
         <Link to="/partner">
-          <div 
-            className="nav-piece absolute top-4 right-4 w-32 h-28 cursor-pointer transition-all duration-300 hover:scale-105"
-            style={{ transform: 'rotate(10deg)' }}
-          >
+          <div className="nav-piece absolute inset-0 w-full h-full cursor-pointer transition-all duration-300 hover:scale-105">
             <img 
               src="/lovable-uploads/46d25664-67ff-4e5a-82fb-473b390f2cb1.png" 
               alt="Partnerships"
@@ -64,12 +60,9 @@ const HeartNavigation = () => {
           </div>
         </Link>
 
-        {/* Tech piece - bottom left */}
+        {/* Tech piece */}
         <Link to="/tech">
-          <div 
-            className="nav-piece absolute bottom-8 left-4 w-24 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
-            style={{ transform: 'rotate(25deg)' }}
-          >
+          <div className="nav-piece absolute inset-0 w-full h-full cursor-pointer transition-all duration-300 hover:scale-105">
             <img 
               src="/lovable-uploads/a31111c7-f4ed-47e8-8d33-0d4480f635d8.png" 
               alt="Tech"
@@ -78,12 +71,9 @@ const HeartNavigation = () => {
           </div>
         </Link>
 
-        {/* Vision piece - bottom right */}
+        {/* Vision piece */}
         <Link to="/vision">
-          <div 
-            className="nav-piece absolute bottom-4 right-8 w-28 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
-            style={{ transform: 'rotate(-20deg)' }}
-          >
+          <div className="nav-piece absolute inset-0 w-full h-full cursor-pointer transition-all duration-300 hover:scale-105">
             <img 
               src="/lovable-uploads/cf5e4b11-5777-42d1-bf53-b818cde95600.png" 
               alt="Vision"
