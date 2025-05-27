@@ -1,98 +1,97 @@
-/* ------------------------------------------------------------------
-   HeartNavigation.tsx  –  inline SVG strokes with per-stroke glow
-   ------------------------------------------------------------------ */
+
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import "@/components/scrollContent.css";           // .heart-glow-* rules
+import "@/components/scrollContent.css";
 
 const HeartNavigation = () => {
-  /* ---------- 1. Inline SVG markup -------------------------------- */
-  /*  (Paste your final heart-cta.svg here.  I’ve kept only the core
-      structure so the file isn’t 1000-lines long.)                  */
-  const svgMarkup = /* html */ `
-    <svg id="heart-cta" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
-      <g id="stroke-tech">
-        <image id="tech-img" href="/src/assets/tech.png" x="0" y="0" width="900" height="900"/>
-        <path id="stroke-tech-edge"
-              d="M 100 120 C 80 100, 60 100, ... Z"
-              fill="transparent"/>
-      </g>
-      <g id="stroke-vision">
-        <image id="vision-img" href="/src/assets/vision.png" x="0" y="0" width="900" height="900"/>
-        <path id="stroke-vision-edge"
-              d="M 300 120 C 320 100, 340 100, ... Z"
-              fill="transparent"/>
-      </g>
-      <g id="stroke-partner">
-        <image id="partner-img" href="/src/assets/partner.png" x="0" y="0" width="900" height="900"/>
-        <path id="stroke-partner-edge"
-              d="M 450 400 ... Z"
-              fill="transparent"/>
-      </g>
-      <g id="stroke-news">
-        <image id="news-img" href="/src/assets/news.png" x="0" y="0" width="900" height="900"/>
-        <path id="stroke-news-edge"
-              d="M 600 200 ... Z"
-              fill="transparent"/>
-      </g>
-    </svg>
-  `;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  /* ---------- 2. Ref gives us the actual <svg> element ------------ */
-  const svgRef = useRef<SVGSVGElement | null>(null);
-
-  /* ---------- 3. One-time listener wiring ------------------------- */
   useEffect(() => {
-    const root = svgRef.current;
-    if (!root) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    /* Every group (stroke-tech, stroke-vision …) */
-    root.querySelectorAll<SVGGElement>("g[id^='stroke-']").forEach((g) => {
-      const slug = g.id.replace("stroke-", "");          // tech, vision …
-      const edge = g.querySelector<SVGPathElement>("path");
+    // Add event listeners to each navigation piece
+    const navPieces = container.querySelectorAll<HTMLDivElement>(".nav-piece");
+    
+    navPieces.forEach((piece) => {
+      const handleMouseEnter = () => {
+        piece.classList.add("heart-glow-hover");
+      };
+      
+      const handleMouseLeave = () => {
+        piece.classList.remove("heart-glow-hover");
+      };
 
-      if (!edge) return;
+      piece.addEventListener("mouseenter", handleMouseEnter);
+      piece.addEventListener("mouseleave", handleMouseLeave);
 
-      /* keyboard / a11y */
-      edge.setAttribute("tabIndex", "0");
-      edge.setAttribute("role", "link");
-      edge.setAttribute("aria-label", slug);
-
-      /* hover / focus */
-      const enter = () => g.classList.add("heart-glow-hover");
-      const leave = () => g.classList.remove("heart-glow-hover");
-
-      edge.addEventListener("mouseenter", enter);
-      edge.addEventListener("focus", enter);
-      edge.addEventListener("mouseleave", leave);
-      edge.addEventListener("blur", leave);
-
-      /* click / tap navigates */
-      edge.addEventListener("click", () => (window.location.href = `/${slug}`));
+      // Cleanup
+      return () => {
+        piece.removeEventListener("mouseenter", handleMouseEnter);
+        piece.removeEventListener("mouseleave", handleMouseLeave);
+      };
     });
-
-    /* cleanup on unmount */
-    return () => {
-      root.querySelectorAll("path").forEach((p) => {
-        const clone = p.cloneNode(true);
-        p.parentNode?.replaceChild(clone, p);
-      });
-    };
   }, []);
 
-  /* ---------- 4. Render ------------------------------------------ */
   return (
     <div className="w-full px-4 py-12 flex justify-center">
-      <div
-        className="relative w-64 md:w-96 heart-glow-initial"
-        /* Dangerously inject raw SVG once */
-        dangerouslySetInnerHTML={{ __html: svgMarkup }}
-        /* ref receives the <svg> element after injection */
-        ref={(node) => {
-          /* node is the wrapping div; its firstChild is the svg */
-          svgRef.current = node?.firstElementChild as SVGSVGElement | null;
-        }}
-      />
+      <div ref={containerRef} className="relative w-80 md:w-96 heart-glow-initial">
+        {/* News piece - top left */}
+        <Link to="/news">
+          <div 
+            className="nav-piece absolute top-0 left-8 w-24 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
+            style={{ transform: 'rotate(-15deg)' }}
+          >
+            <img 
+              src="/lovable-uploads/7bc57b7b-ec7e-45cb-82e4-d098daa974b9.png" 
+              alt="News"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Link>
+
+        {/* Partnerships piece - top right */}
+        <Link to="/partner">
+          <div 
+            className="nav-piece absolute top-4 right-4 w-32 h-28 cursor-pointer transition-all duration-300 hover:scale-105"
+            style={{ transform: 'rotate(10deg)' }}
+          >
+            <img 
+              src="/lovable-uploads/46d25664-67ff-4e5a-82fb-473b390f2cb1.png" 
+              alt="Partnerships"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Link>
+
+        {/* Tech piece - bottom left */}
+        <Link to="/tech">
+          <div 
+            className="nav-piece absolute bottom-8 left-4 w-24 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
+            style={{ transform: 'rotate(25deg)' }}
+          >
+            <img 
+              src="/lovable-uploads/a31111c7-f4ed-47e8-8d33-0d4480f635d8.png" 
+              alt="Tech"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Link>
+
+        {/* Vision piece - bottom right */}
+        <Link to="/vision">
+          <div 
+            className="nav-piece absolute bottom-4 right-8 w-28 h-32 cursor-pointer transition-all duration-300 hover:scale-105"
+            style={{ transform: 'rotate(-20deg)' }}
+          >
+            <img 
+              src="/lovable-uploads/cf5e4b11-5777-42d1-bf53-b818cde95600.png" 
+              alt="Vision"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Link>
+      </div>
 
       {/* Hidden fallback nav for SEO / no-JS */}
       <nav className="sr-only">

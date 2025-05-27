@@ -1,3 +1,4 @@
+
 /* ... keep existing code (all current styles) */
 
 /* Base styles for reveal animations */
@@ -86,26 +87,24 @@
 
 /* New heart navigation glow effects */
 .heart-glow-initial {
-  filter: drop-shadow(0 0 1px rgba(0, 255, 255, 1));
+  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.6));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-hover {
-  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 1)) drop-shadow(0 0 4px rgba(0, 255, 255, 0.8));
+  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 1)) drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
   transition: filter 0.3s ease;
 }
 
-/* ----------  PER-STROKE DIM + HOVER GLOW ---------------------------- */
-/*   Each stroke group is <g id="stroke-…"> and contains one PNG        */
-/*   <image id="tech-img"> etc.  When the group is hovered, only that   */
-/*   PNG brightens.                                                     */
-#heart-cta g[id^="stroke-"] image {
-  filter: brightness(35%) drop-shadow(0 0 2px rgba(51,243,240,.15));
-  transition: filter 0.25s ease;
+/* Individual navigation piece glow effects */
+.nav-piece {
+  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.4));
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-#heart-cta g[id^="stroke-"]:hover image {
-  filter: brightness(100%) drop-shadow(0 0 6px rgba(51,243,240,.85));
+.nav-piece:hover,
+.nav-piece.heart-glow-hover {
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 1)) drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
 }
 
 /* Add custom font styles to body */
