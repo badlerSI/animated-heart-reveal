@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "@/components/scrollContent.css";
@@ -7,16 +8,17 @@ const HeartNavigation = () => {
 
   return (
     <div className="w-full px-4 py-12 flex justify-center">
-      {/* fixed-size container that holds all four slices */}
+      {/* Container with fixed dimensions to hold all overlapping pieces */}
       <div className="relative w-80 h-80 md:w-96 md:h-96">
         
-        {/* News piece – top left */}
+        {/* All pieces positioned absolutely to overlay and form complete heart */}
+        
+        {/* News piece */}
         <Link
           to="/news"
-          className={`nav-piece absolute top-0 left-0 w-24 h-32 transition-all duration-300 ${
+          className={`absolute inset-0 w-full h-full transition-all duration-300 ${
             hoveredSection === "news" ? "heart-glow-hover" : ""
           }`}
-          style={{ transform: "rotate(-15deg)" }}
           onMouseEnter={() => setHoveredSection("news")}
           onMouseLeave={() => setHoveredSection(null)}
         >
@@ -27,13 +29,12 @@ const HeartNavigation = () => {
           />
         </Link>
 
-        {/* Partnerships piece – top right */}
+        {/* Partnerships piece */}
         <Link
           to="/partner"
-          className={`nav-piece absolute top-0 right-0 w-24 h-32 transition-all duration-300 ${
+          className={`absolute inset-0 w-full h-full transition-all duration-300 ${
             hoveredSection === "partner" ? "heart-glow-hover" : ""
           }`}
-          style={{ transform: "rotate(10deg)" }}
           onMouseEnter={() => setHoveredSection("partner")}
           onMouseLeave={() => setHoveredSection(null)}
         >
@@ -44,13 +45,12 @@ const HeartNavigation = () => {
           />
         </Link>
 
-        {/* Tech piece – bottom left */}
+        {/* Tech piece */}
         <Link
           to="/tech"
-          className={`nav-piece absolute bottom-0 left-0 w-24 h-32 transition-all duration-300 ${
+          className={`absolute inset-0 w-full h-full transition-all duration-300 ${
             hoveredSection === "tech" ? "heart-glow-hover" : ""
           }`}
-          style={{ transform: "rotate(25deg)" }}
           onMouseEnter={() => setHoveredSection("tech")}
           onMouseLeave={() => setHoveredSection(null)}
         >
@@ -61,13 +61,12 @@ const HeartNavigation = () => {
           />
         </Link>
 
-        {/* Vision piece – bottom right */}
+        {/* Vision piece */}
         <Link
           to="/vision"
-          className={`nav-piece absolute bottom-0 right-0 w-24 h-32 transition-all duration-300 ${
+          className={`absolute inset-0 w-full h-full transition-all duration-300 ${
             hoveredSection === "vision" ? "heart-glow-hover" : ""
           }`}
-          style={{ transform: "rotate(-20deg)" }}
           onMouseEnter={() => setHoveredSection("vision")}
           onMouseLeave={() => setHoveredSection(null)}
         >
@@ -79,7 +78,7 @@ const HeartNavigation = () => {
         </Link>
       </div>
 
-      {/* fallback nav for no-JS / SEO */}
+      {/* Hidden fallback for no-JS / SEO */}
       <nav className="sr-only">
         <Link to="/tech">Tech</Link>
         <Link to="/vision">Vision</Link>
