@@ -140,7 +140,7 @@ const ScrollContent = () => {
         imgSrc="/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png"
         imgAlt="Robotaxi illustration"
       >
-        Your personal chauffeur lives on your phone. Step into a Soul Interface-equipped
+        Your personal chauffeur lives on your phone. Step into a Soul-equipped
         robotaxi and your custom-crafted persona—with your seat settings,
         conversation preferences, and small-talk history—loads in a blink.
         Step out, and it purges itself from the vehicle within seconds. Fleet
