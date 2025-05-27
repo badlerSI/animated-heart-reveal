@@ -48,9 +48,9 @@ export default function HeartNavigation() {
           className="absolute inset-0 w-full h-full"
           style={{ pointerEvents: "none" }}
         >
-          {/* News path - Left stroke of 心 */}
+          {/* News path - Left stroke of 心 (50% larger, moved down 10%) */}
           <path
-            d="M 60 80 L 80 100 L 100 140 L 90 180 L 70 200 L 50 180 L 40 140 L 50 100 Z"
+            d="M 35 112 L 65 142 L 95 202 L 80 262 L 50 292 L 20 262 L 5 202 L 20 142 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("news")}
@@ -59,9 +59,9 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Tech path - Top stroke of 心 */}
+          {/* Tech path - Top stroke of 心 (50% larger, moved up 5%) */}
           <path
-            d="M 120 60 L 200 60 L 220 80 L 200 100 L 120 100 L 100 80 Z"
+            d="M 90 44 L 230 44 L 260 74 L 230 104 L 90 104 L 60 74 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("tech")}
@@ -70,9 +70,9 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Vision path - Right stroke of 心 */}
+          {/* Vision path - Right stroke of 心 (50% larger, moved right 10%) */}
           <path
-            d="M 260 80 L 280 100 L 270 140 L 280 180 L 260 200 L 240 180 L 230 140 L 240 100 Z"
+            d="M 285 112 L 315 142 L 300 202 L 315 262 L 285 292 L 255 262 L 240 202 L 255 142 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("vision")}
@@ -81,9 +81,9 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Partner path - Central large stroke of 心 (doubled size, moved down 25%) */}
+          {/* Partner path - Central large stroke of 心 (50% larger, moved up 10%) */}
           <path
-            d="M 120 200 L 200 200 L 220 220 L 210 260 L 200 300 L 160 320 L 120 300 L 110 260 L 100 220 Z"
+            d="M 90 168 L 230 168 L 260 198 L 245 258 L 230 318 L 160 348 L 90 318 L 75 258 L 60 198 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("partner")}
