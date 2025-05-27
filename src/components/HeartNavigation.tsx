@@ -42,37 +42,15 @@ export default function HeartNavigation() {
           }`}
         />
 
-        {/* SVG overlay with more accurate heart-shaped paths */}
+        {/* SVG overlay with Chinese heart character stroke paths */}
         <svg
           viewBox="0 0 320 320"
           className="absolute inset-0 w-full h-full"
           style={{ pointerEvents: "none" }}
         >
-          {/* Tech path - Left lobe of heart */}
+          {/* News path - Left stroke of 心 */}
           <path
-            d="M 80 120 C 60 90, 30 90, 20 120 C 10 150, 30 170, 60 180 L 120 200 L 160 160 C 180 140, 170 110, 150 100 C 130 90, 110 100, 100 120 C 90 130, 85 125, 80 120 Z"
-            fill="transparent"
-            pointerEvents="all"
-            onMouseEnter={() => setHovered("tech")}
-            onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/tech")}
-            style={{ cursor: "pointer" }}
-          />
-
-          {/* Partner path - Right lobe of heart */}
-          <path
-            d="M 240 120 C 250 90, 280 90, 300 120 C 310 150, 290 170, 260 180 L 200 200 L 160 160 C 140 140, 150 110, 170 100 C 190 90, 210 100, 220 120 C 230 130, 235 125, 240 120 Z"
-            fill="transparent"
-            pointerEvents="all"
-            onMouseEnter={() => setHovered("partner")}
-            onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/partner")}
-            style={{ cursor: "pointer" }}
-          />
-
-          {/* News path - Bottom left of heart */}
-          <path
-            d="M 120 200 L 60 180 C 40 190, 30 210, 40 230 C 50 250, 70 260, 90 250 L 160 280 L 160 160 Z"
+            d="M 60 80 L 80 100 L 100 140 L 90 180 L 70 200 L 50 180 L 40 140 L 50 100 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("news")}
@@ -81,14 +59,36 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Vision path - Bottom right of heart */}
+          {/* Tech path - Top stroke of 心 */}
           <path
-            d="M 200 200 L 260 180 C 280 190, 290 210, 280 230 C 270 250, 250 260, 230 250 L 160 280 L 160 160 Z"
+            d="M 120 60 L 200 60 L 220 80 L 200 100 L 120 100 L 100 80 Z"
+            fill="transparent"
+            pointerEvents="all"
+            onMouseEnter={() => setHovered("tech")}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => nav("/tech")}
+            style={{ cursor: "pointer" }}
+          />
+
+          {/* Vision path - Right stroke of 心 */}
+          <path
+            d="M 260 80 L 280 100 L 270 140 L 280 180 L 260 200 L 240 180 L 230 140 L 240 100 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("vision")}
             onMouseLeave={() => setHovered(null)}
             onClick={() => nav("/vision")}
+            style={{ cursor: "pointer" }}
+          />
+
+          {/* Partner path - Central large stroke of 心 */}
+          <path
+            d="M 140 120 L 180 120 L 200 140 L 190 180 L 180 220 L 160 240 L 140 220 L 130 180 L 120 140 Z"
+            fill="transparent"
+            pointerEvents="all"
+            onMouseEnter={() => setHovered("partner")}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => nav("/partner")}
             style={{ cursor: "pointer" }}
           />
         </svg>
