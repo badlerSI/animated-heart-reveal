@@ -1,79 +1,108 @@
+/* ------------------------------------------------------------------
+   HeartNavigation.tsx  –  inline SVG strokes with per-stroke glow
+   ------------------------------------------------------------------ */
+import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import "@/components/scrollContent.css";           // .heart-glow-* rules
 
-/* -------------------------------------------------------------------
-   HeartNavigation.tsx  –  per-stroke hover / tap glow navigation
-   ------------------------------------------------------------------- */
+const HeartNavigation = () => {
+  /* ---------- 1. Inline SVG markup -------------------------------- */
+  /*  (Paste your final heart-cta.svg here.  I’ve kept only the core
+      structure so the file isn’t 1000-lines long.)                  */
+  const svgMarkup = /* html */ `
+    <svg id="heart-cta" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+      <g id="stroke-tech">
+        <image id="tech-img" href="/src/assets/tech.png" x="0" y="0" width="900" height="900"/>
+        <path id="stroke-tech-edge"
+              d="M 100 120 C 80 100, 60 100, ... Z"
+              fill="transparent"/>
+      </g>
+      <g id="stroke-vision">
+        <image id="vision-img" href="/src/assets/vision.png" x="0" y="0" width="900" height="900"/>
+        <path id="stroke-vision-edge"
+              d="M 300 120 C 320 100, 340 100, ... Z"
+              fill="transparent"/>
+      </g>
+      <g id="stroke-partner">
+        <image id="partner-img" href="/src/assets/partner.png" x="0" y="0" width="900" height="900"/>
+        <path id="stroke-partner-edge"
+              d="M 450 400 ... Z"
+              fill="transparent"/>
+      </g>
+      <g id="stroke-news">
+        <image id="news-img" href="/src/assets/news.png" x="0" y="0" width="900" height="900"/>
+        <path id="stroke-news-edge"
+              d="M 600 200 ... Z"
+              fill="transparent"/>
+      </g>
+    </svg>
+  `;
 
-import { useEffect, useState } from "react";
-import "@/components/scrollContent.css";     // we'll append new rules there
+  /* ---------- 2. Ref gives us the actual <svg> element ------------ */
+  const svgRef = useRef<SVGSVGElement | null>(null);
 
-export default function HeartNavigation() {
-  const [svgMarkup, setSvgMarkup] = useState<string>("");
-
-  /* 1 ▸ fetch the raw SVG once --------------------------------------- */
+  /* ---------- 3. One-time listener wiring ------------------------- */
   useEffect(() => {
-    fetch("/heart-cta.svg")                 // ← file lives in /public
-      .then((r) => r.text())
-      .then(setSvgMarkup)
-      .catch((err) => console.error("Could not load /heart-cta.svg", err));
-  }, []);
+    const root = svgRef.current;
+    if (!root) return;
 
-  /* 2 ▸ after the SVG is in the DOM wire up listeners ---------------- */
-  useEffect(() => {
-    if (!svgMarkup) return;                 // nothing yet
+    /* Every group (stroke-tech, stroke-vision …) */
+    root.querySelectorAll<SVGGElement>("g[id^='stroke-']").forEach((g) => {
+      const slug = g.id.replace("stroke-", "");          // tech, vision …
+      const edge = g.querySelector<SVGPathElement>("path");
 
-    const rootSvg = document.getElementById("heart-cta") as SVGSVGElement | null;
-    if (!rootSvg) return;
+      if (!edge) return;
 
-    const groups = Array.from(
-      rootSvg.querySelectorAll<SVGGElement>("g[id^='stroke-']")
-    );
+      /* keyboard / a11y */
+      edge.setAttribute("tabIndex", "0");
+      edge.setAttribute("role", "link");
+      edge.setAttribute("aria-label", slug);
 
-    groups.forEach((g) => {
-      const slug = g.id.replace("stroke-", "");   // tech | vision | partner | news
-      g.setAttribute("tabIndex", "0");
-      g.setAttribute("role", "link");
-      g.setAttribute("aria-label", slug);
-      g.style.cursor = "pointer";
+      /* hover / focus */
+      const enter = () => g.classList.add("heart-glow-hover");
+      const leave = () => g.classList.remove("heart-glow-hover");
 
-      /* glow on hover / keyboard focus */
-      const enter = () => g.classList.add("stroke-glow");
-      const leave = () => g.classList.remove("stroke-glow");
+      edge.addEventListener("mouseenter", enter);
+      edge.addEventListener("focus", enter);
+      edge.addEventListener("mouseleave", leave);
+      edge.addEventListener("blur", leave);
 
-      g.addEventListener("mouseenter", enter);
-      g.addEventListener("focus", enter);
-      g.addEventListener("mouseleave", leave);
-      g.addEventListener("blur", leave);
-
-      /* click / tap */
-      g.addEventListener("click", () => {
-        g.classList.add("stroke-glow");         // keep bright on mobile tap
-        window.location.href = `/${slug}`;      // adjust routes if different
-      });
+      /* click / tap navigates */
+      edge.addEventListener("click", () => (window.location.href = `/${slug}`));
     });
 
     /* cleanup on unmount */
-    return () =>
-      groups.forEach((g) => {
-        const clone = g.cloneNode(true);
-        g.parentNode?.replaceChild(clone, g);
+    return () => {
+      root.querySelectorAll("path").forEach((p) => {
+        const clone = p.cloneNode(true);
+        p.parentNode?.replaceChild(clone, p);
       });
-  }, [svgMarkup]);
+    };
+  }, []);
 
-  /* 3 ▸ render -------------------------------------------------------- */
+  /* ---------- 4. Render ------------------------------------------ */
   return (
     <div className="w-full px-4 py-12 flex justify-center">
-      {/* inject SVG markup here */}
       <div
-        className="relative w-64 md:w-96"
+        className="relative w-64 md:w-96 heart-glow-initial"
+        /* Dangerously inject raw SVG once */
         dangerouslySetInnerHTML={{ __html: svgMarkup }}
+        /* ref receives the <svg> element after injection */
+        ref={(node) => {
+          /* node is the wrapping div; its firstChild is the svg */
+          svgRef.current = node?.firstElementChild as SVGSVGElement | null;
+        }}
       />
-      {/* no-JS fallback nav (screen readers / SEO) */}
+
+      {/* Hidden fallback nav for SEO / no-JS */}
       <nav className="sr-only">
-        <a href="/tech">Tech</a>
-        <a href="/vision">Vision</a>
-        <a href="/partner">Partner</a>
-        <a href="/news">News</a>
+        <Link to="/tech">Tech</Link>
+        <Link to="/vision">Vision</Link>
+        <Link to="/partner">Partner</Link>
+        <Link to="/news">News</Link>
       </nav>
     </div>
   );
-}
+};
+
+export default HeartNavigation;
