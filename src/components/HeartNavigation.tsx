@@ -12,25 +12,25 @@ const HeartNavigation = () => {
   const svgMarkup = /* html */ `
     <svg id="heart-cta" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
       <g id="stroke-tech">
-        <image id="tech-img" href="/tech.png" x="0" y="0" width="900" height="900"/>
+        <image id="tech-img" href="/src/assets/tech.png" x="0" y="0" width="900" height="900"/>
         <path id="stroke-tech-edge"
               d="M 100 120 C 80 100, 60 100, ... Z"
               fill="transparent"/>
       </g>
       <g id="stroke-vision">
-        <image id="vision-img" href="/vision.png" x="0" y="0" width="900" height="900"/>
+        <image id="vision-img" href="/src/assets/vision.png" x="0" y="0" width="900" height="900"/>
         <path id="stroke-vision-edge"
               d="M 300 120 C 320 100, 340 100, ... Z"
               fill="transparent"/>
       </g>
       <g id="stroke-partner">
-        <image id="partner-img" href="/partner.png" x="0" y="0" width="900" height="900"/>
+        <image id="partner-img" href="/src/assets/partner.png" x="0" y="0" width="900" height="900"/>
         <path id="stroke-partner-edge"
               d="M 450 400 ... Z"
               fill="transparent"/>
       </g>
       <g id="stroke-news">
-        <image id="news-img" href="/news.png" x="0" y="0" width="900" height="900"/>
+        <image id="news-img" href="/src/assets/news.png" x="0" y="0" width="900" height="900"/>
         <path id="stroke-news-edge"
               d="M 600 200 ... Z"
               fill="transparent"/>
