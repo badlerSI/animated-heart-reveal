@@ -95,12 +95,16 @@
   transition: filter 0.3s ease;
 }
 
-/* ----------  ADDED: per-stroke dim + hover glow  -------------------- */
-#heart-cta g image {                                         /* all strokes */
+/* ----------  PER-STROKE DIM + HOVER GLOW ---------------------------- */
+/*   Each stroke group is <g id="stroke-…"> and contains one PNG        */
+/*   <image id="tech-img"> etc.  When the group is hovered, only that   */
+/*   PNG brightens.                                                     */
+#heart-cta g[id^="stroke-"] image {
   filter: brightness(35%) drop-shadow(0 0 2px rgba(51,243,240,.15));
   transition: filter 0.25s ease;
 }
-#heart-cta g:hover image {                                   /* hover only */
+
+#heart-cta g[id^="stroke-"]:hover image {
   filter: brightness(100%) drop-shadow(0 0 6px rgba(51,243,240,.85));
 }
 
