@@ -122,21 +122,6 @@ const ScrollContent = () => {
         Drop in a one-way update from your phone—data flows in, never back out.
       </FeatureBlock>
 
-      <FeatureBlock 
-        id="rediscover-joy"
-        heading="Rediscover the Joy of the Open Road"
-        imgSrc="/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png"
-        imgAlt="Road trip illustration"
-      >
-        Fire up Karaoke Mode with your own saved tracks—vocals drop out and
-        Soul Interface harmonizes in real time, or sings any part of a duet.
-        <br />
-        <br />
-        Launch a choose-your-own-adventure for the whole family that plays out
-        with multiple character voices, sound-effects, and even grammatically
-        sound Elvish. Road trips become rolling entertainment, no internet
-        required.
-      </FeatureBlock>
 
       <FeatureBlock 
         id="charlemagne-quote"
