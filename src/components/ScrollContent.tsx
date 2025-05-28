@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
 import HeartNavigation from "./HeartNavigation";
@@ -37,11 +38,11 @@ const ScrollContent = () => {
       });
     };
 
-    /* rootMargin bottom –150 %  ➜ element considered "exiting"
-       while it's still well inside viewport, giving fade-out time */
+    /* rootMargin bottom –50% ➜ element considered "exiting"
+       while still giving fade-out time but ensuring visibility */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "0px 0px -150% 0px",
+      rootMargin: "0px 0px -50% 0px",
       threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 
