@@ -70,9 +70,9 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Vision path - Right stroke of 心 (50% larger, moved right 10%) */}
+          {/* Vision path - Right stroke of 心 (50% larger, moved up 10%) */}
           <path
-            d="M 285 112 L 315 142 L 300 202 L 315 262 L 285 292 L 255 262 L 240 202 L 255 142 Z"
+            d="M 285 80 L 315 110 L 300 170 L 315 230 L 285 260 L 255 230 L 240 170 L 255 110 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("vision")}
