@@ -12,13 +12,18 @@ import "./scrollContent.css";
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const elementStates = useRef<Map<Element, { wasVisible: boolean }>>(new Map());
 
   useEffect(() => {
     const onIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         const el = entry.target as HTMLElement;
         const ratio = entry.intersectionRatio;          // 0 → 1
-
+        
+        // Track element state to determine if fading in or out
+        const currentState = elementStates.current.get(entry.target) || { wasVisible: false };
+        const isBecomingVisible = ratio > currentState.wasVisible ? true : false;
+        
         /* toggle classes for slide pop-up */
         if (ratio > 0) {
           el.classList.add("reveal-visible");
@@ -28,14 +33,23 @@ const ScrollContent = () => {
           el.classList.add("reveal-hidden");
         }
 
-        /* opacity & slide distance
-           – fully opaque while ≥80 % visible
-           – starts fading in at 10% visible (earlier than before)           */
-        const opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.70));
+        /* separate opacity calculations for fade-in vs fade-out */
+        let opacity;
+        if (isBecomingVisible || ratio >= 0.70) {
+          // Fade-in: starts at 5% visibility, completes at 70%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.65));
+        } else {
+          // Fade-out: starts at 70% visibility, completes at 10%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.60));
+        }
+        
         const translate = 60 * (1 - opacity);           // match CSS 60 px
         el.style.opacity = opacity.toString();
         el.style.transform = `translateY(${translate}px)`;
         el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; // Faster transitions
+        
+        // Update element state
+        elementStates.current.set(entry.target, { wasVisible: Math.max(ratio, currentState.wasVisible) });
       });
     };
 
@@ -52,7 +66,10 @@ const ScrollContent = () => {
     );
 
     observerRef.current = observer;
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      elementStates.current.clear();
+    };
   }, []);
 
   /* ------------------------  page body ------------------------ */
