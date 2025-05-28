@@ -37,7 +37,7 @@
   animation: fadeOut 0.18s ease-out forwards;
 }
 
-/* individual slices - restored bright flash effect */
+/* individual slices - 50% brighter flash effect */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
@@ -56,7 +56,7 @@
 @keyframes fadeIn    { to { opacity: 1; } }
 @keyframes fadeOut   { to { opacity: 0; } }
 @keyframes wave-glow {
-  0%   { filter: drop-shadow(0 0 15px #33F0F0); } /* restored bright flash */
-  50%  { filter: drop-shadow(0 0 20px #33F0F0); } /* peak brightness */
-  100% { filter: drop-shadow(0 0 0px transparent); }
+  0%   { filter: drop-shadow(0 0 22px #4DFFFF); } /* 50% brighter flash */
+  50%  { filter: drop-shadow(0 0 30px #4DFFFF); } /* 50% brighter peak */
+  100% { filter: drop-shadow(0 0 4px rgba(77, 255, 255, 0.6)); } /* brighter residual glow */
 }
