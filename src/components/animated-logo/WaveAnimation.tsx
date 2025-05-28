@@ -103,11 +103,11 @@ const WaveAnimation = ({
         };
       }
 
-      /* start static fade-in at frame 35 */
+      /* start static fade-in at frame 35 with 0.5s duration */
       if (i === 34) {
         img.addEventListener("animationstart", () => {
           setTimeout(() => {
-            staticWave.classList.add("fade-in-smooth");
+            staticWave.classList.add("fade-in-smooth-long");
           }, (35 / 30) * 1000); // Frame 35 timing
         });
       }
