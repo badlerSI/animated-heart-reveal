@@ -12,7 +12,7 @@ import "./scrollContent.css";
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const elementStates = useRef<Map<Element, { wasVisible: boolean }>>(new Map());
+  const elementStates = useRef<Map<Element, { lastVisibleRatio: number }>>(new Map());
 
   useEffect(() => {
     const onIntersect: IntersectionObserverCallback = (entries) => {
@@ -21,8 +21,8 @@ const ScrollContent = () => {
         const ratio = entry.intersectionRatio;          // 0 → 1
         
         // Track element state to determine if fading in or out
-        const currentState = elementStates.current.get(entry.target) || { wasVisible: false };
-        const isBecomingVisible = ratio > currentState.wasVisible ? true : false;
+        const currentState = elementStates.current.get(entry.target) || { lastVisibleRatio: 0 };
+        const isBecomingVisible = ratio > currentState.lastVisibleRatio;
         
         /* toggle classes for slide pop-up */
         if (ratio > 0) {
@@ -49,7 +49,7 @@ const ScrollContent = () => {
         el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; // Faster transitions
         
         // Update element state
-        elementStates.current.set(entry.target, { wasVisible: Math.max(ratio, currentState.wasVisible) });
+        elementStates.current.set(entry.target, { lastVisibleRatio: ratio });
       });
     };
 
