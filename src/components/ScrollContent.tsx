@@ -1,5 +1,4 @@
 
-
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
 import HeartNavigation from "./HeartNavigation";
@@ -36,6 +35,7 @@ const ScrollContent = () => {
         const translate = 60 * (1 - opacity);           // match CSS 60 px
         el.style.opacity = opacity.toString();
         el.style.transform = `translateY(${translate}px)`;
+        el.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; // Faster transitions
       });
     };
 
