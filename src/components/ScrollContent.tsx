@@ -7,7 +7,7 @@ import "./scrollContent.css";
 /*──────────────────────────────────────────────────────────────
   ScrollContent
   • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
-  • Earlier fade-in and fade-out for better visibility timing
+  • Earlier fade-in and independent faster fade-out timing
   • intersectionRatio drives opacity; scroll-up bug is gone
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
@@ -28,21 +28,33 @@ const ScrollContent = () => {
           el.classList.add("reveal-hidden");
         }
 
-        /* opacity & slide distance
-           – fully opaque while ≥25 % visible
-           – starts fading in at 5% visible (earlier but reasonable)           */
-        const opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.20));
+        /* opacity & slide distance with independent fade-in and fade-out
+           – fade-in: starts at 5% visible, fully opaque at 25%
+           – fade-out: starts fading at 80% visible, fully transparent at 60%  */
+        let opacity: number;
+        
+        if (ratio >= 0.8) {
+          // Fade-out range: 80% to 60% visible (faster fade-out)
+          opacity = Math.max(0, Math.min(1, (ratio - 0.6) / 0.2));
+        } else if (ratio >= 0.05) {
+          // Normal visibility range: 25% to 80% visible
+          opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.20));
+        } else {
+          // Below 5% visible
+          opacity = 0;
+        }
+
         const translate = 60 * (1 - opacity);           // match CSS 60 px
         el.style.opacity = opacity.toString();
         el.style.transform = `translateY(${translate}px)`;
       });
     };
 
-    /* rootMargin bottom –50% ➜ element considered "exiting" earlier
-       for earlier fade-out while ensuring visibility */
+    /* rootMargin bottom –20% ➜ start fade-out detection earlier
+       for better fade-out while ensuring visibility */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "0px 0px -50% 0px",
+      rootMargin: "0px 0px -20% 0px",
       threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 
