@@ -1,6 +1,6 @@
 
 .glow-effect {
-  animation: glow 2s ease-in-out forwards; /* removed the repeat by specifying forwards */
+  animation: glow 2s ease-in-out forwards, heartPulse 3s ease-in-out infinite;
 }
 
 @keyframes glow {
@@ -12,5 +12,14 @@
   }
   100% {
     filter: drop-shadow(0 0 8px #33C3F0);
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px #33C3F0);
+  }
+  50% {
+    filter: drop-shadow(0 0 12px #33C3F0);
   }
 }

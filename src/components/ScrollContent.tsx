@@ -30,8 +30,8 @@ const ScrollContent = () => {
 
         /* opacity & slide distance
            – fully opaque while ≥80 % visible
-           – fully transparent once ≤20 % visible           */
-        const opacity = Math.max(0, Math.min(1, (ratio - 0.20) / 0.60));
+           – starts fading in at 10% visible (earlier than before)           */
+        const opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.70));
         const translate = 60 * (1 - opacity);           // match CSS 60 px
         el.style.opacity = opacity.toString();
         el.style.transform = `translateY(${translate}px)`;

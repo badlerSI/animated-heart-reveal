@@ -1,3 +1,4 @@
+
 /* wrapper sits above Soul (z-index 50 set in TSX) */
 #wave-wrapper {
   position: absolute;
@@ -55,7 +56,7 @@
 @keyframes fadeIn    { to { opacity: 1; } }
 @keyframes fadeOut   { to { opacity: 0; } }
 @keyframes wave-glow {
-  0%   { filter: drop-shadow(0 0 10px #33F0F0); }
-  50%  { filter: drop-shadow(0 0 15px #33F0F0); }
+  0%   { filter: drop-shadow(0 0 5px rgba(51, 240, 240, 0.5)); }
+  50%  { filter: drop-shadow(0 0 7.5px rgba(51, 240, 240, 0.5)); }
   100% { filter: drop-shadow(0 0 0px transparent); }
 }
