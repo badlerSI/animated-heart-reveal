@@ -37,13 +37,13 @@
   z-index: 10;   /* above the slices */
 }
 
-/* 4. When wrapper receives this class, do the two opposite fades */
+/* 4. When wrapper receives this class, do the fade transitions */
 #wave-wrapper.fade-out-smooth .wave-container {
-  animation: fadeOutSmooth 0.4s ease-in-out forwards;
+  animation: fadeOutSmooth 0.6s ease-in-out forwards;
 }
 
 #wave-wrapper.fade-out-smooth .static-wave {
-  animation: fadeInSmoothLong 0.6s ease-in-out forwards;
+  animation: fadeInSmoothLong 0.8s ease-in-out forwards;
 }
 
 /* 5. Individual slice styling */
@@ -75,7 +75,7 @@
 
 @keyframes fadeOutSmooth {
   0%   { opacity: 1;   }
-  70%  { opacity: 0.8; }
+  70%  { opacity: 0.3; }
   100% { opacity: 0;   }
 }
 
