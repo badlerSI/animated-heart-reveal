@@ -1,5 +1,9 @@
 
-/* wrapper sits above Soul (z-index 50 set in TSX) */
+/* -------------------------------------------------------------------
+   waveAnimation.css
+   ------------------------------------------------------------------- */
+
+/* 1. Wrapper sits above Soul (z-index set in TSX) */
 #wave-wrapper {
   position: absolute;
   left: 50%;
@@ -9,36 +13,7 @@
   pointer-events: none;
 }
 
-/* static PNG (top layer) - higher z-index to be in front */
-.static-wave {
-  position: absolute;
-  left: 0;
-  top: 0;
-  image-rendering: crisp-edges;
-  object-fit: none;
-  opacity: 0;            /* fade-in later */
-  z-index: 10;           /* ensure it's in front of slices */
-}
-
-.fade-in {
-  animation: fadeIn 0.18s ease-out forwards;
-}
-
-.fade-in-smooth {
-  animation: fadeInSmooth 0.167s ease-out forwards; /* 5 frames at 30fps = 0.167s */
-}
-
-.fade-in-smooth-long {
-  animation: fadeInSmoothLong 0.6s ease-in-out forwards; /* slightly shorter for better timing */
-}
-
-.static-wave.fade-in-smooth-long {
-  animation: fadeInSmoothLong 0.6s ease-in-out forwards !important; /* !important to override any inherited animations */
-  opacity: 0 !important; /* start completely transparent */
-  top: 8px; /* move down 8 pixels to align better (adjusted from 10px) */
-}
-
-/* slice container (lower layer) - lower z-index */
+/* 2. Slice container (lower layer) */
 .wave-container {
   --fps: 30;
   --slice-w: 38px;
@@ -46,24 +21,32 @@
   display: flex;
   overflow: hidden;
   opacity: 1;
-  z-index: 1;            /* behind static wave */
+  z-index: 1;
 }
 
-.fade-out {
-  animation: fadeOut 0.18s ease-out forwards;
+/* 3. Static PNG (top layer), hidden until fade-in */
+.static-wave {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: crisp-edges;
+  object-fit: none;
+  opacity: 0;    /* start invisible */
+  z-index: 10;   /* above the slices */
 }
 
-.fade-out-smooth {
-  animation: fadeOutSmooth 0.4s ease-in-out forwards; /* shorter fade-out to prevent black gap */
+/* 4. When wrapper receives this class, do the two opposite fades */
+#wave-wrapper.fade-out-smooth .wave-container {
+  animation: fadeOutSmooth 0.4s ease-in-out forwards;
 }
 
-/* Make sure static wave doesn't inherit fade-out from container */
-.fade-out-smooth .static-wave {
-  animation: none !important; /* prevent inheriting fade-out */
-  opacity: 1 !important; /* ensure it stays visible */
+#wave-wrapper.fade-out-smooth .static-wave {
+  animation: fadeInSmoothLong 0.6s ease-in-out forwards;
 }
 
-/* individual slices - 50% brighter flash effect */
+/* 5. Individual slice styling */
 .wave-container img.wave-slice {
   flex: 0 0 var(--slice-w);
   width: var(--slice-w);
@@ -72,31 +55,32 @@
   image-rendering: crisp-edges;
   opacity: 0;
   animation:
-    pop       0s   steps(1,end) forwards,
+    pop       0s steps(1,end) forwards,
     wave-glow 0.8s ease-out forwards;
   animation-delay: calc(var(--i) / var(--fps) * 1s);
 }
 
-/* keyframes */
-@keyframes pop       { to { opacity: 1; } }
-@keyframes fadeIn    { to { opacity: 1; } }
-@keyframes fadeOut   { to { opacity: 0; } }
-@keyframes fadeInSmooth { 
-  0% { opacity: 0; }
-  100% { opacity: 1; } 
+/* 6. Keyframes */
+@keyframes pop {
+  to {
+    opacity: 1;
+  }
 }
-@keyframes fadeInSmoothLong { 
-  0% { opacity: 0; }
-  30% { opacity: 0.8; } /* reach high opacity faster */
-  100% { opacity: 1; } 
+
+@keyframes fadeInSmoothLong {
+  0%   { opacity: 0;   }
+  30%  { opacity: 0.8; }
+  100% { opacity: 1;   }
 }
-@keyframes fadeOutSmooth { 
-  0% { opacity: 1; }
-  70% { opacity: 0.8; } /* stay more visible longer */
-  100% { opacity: 0; } 
+
+@keyframes fadeOutSmooth {
+  0%   { opacity: 1;   }
+  70%  { opacity: 0.8; }
+  100% { opacity: 0;   }
 }
+
 @keyframes wave-glow {
-  0%   { filter: drop-shadow(0 0 22px #4DFFFF); } /* 50% brighter flash */
-  50%  { filter: drop-shadow(0 0 30px #4DFFFF); } /* 50% brighter peak */
-  100% { filter: drop-shadow(0 0 4px rgba(77, 255, 255, 0.6)); } /* brighter residual glow */
+  0%   { filter: drop-shadow(0 0 22px #4DFFFF); }
+  50%  { filter: drop-shadow(0 0 30px #4DFFFF); }
+  100% { filter: drop-shadow(0 0 4px rgba(77,255,255,0.6)); }
 }
