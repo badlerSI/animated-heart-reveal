@@ -1,3 +1,4 @@
+
 /* wrapper sits above Soul (z-index 50 set in TSX) */
 #wave-wrapper {
   position: absolute;
@@ -28,13 +29,13 @@
 }
 
 .fade-in-smooth-long {
-  animation: fadeInSmoothLong 0.5s ease-out forwards; /* 0.5 second smooth transition */
+  animation: fadeInSmoothLong 0.8s ease-in-out forwards; /* longer, smoother transition */
 }
 
 .static-wave.fade-in-smooth-long {
-  animation: fadeInSmoothLong 0.5s ease-out forwards;
-  opacity: 1 !important; /* ensure it stays visible after animation */
-  top: 10px; /* move down 10 pixels to align better */
+  animation: fadeInSmoothLong 0.8s ease-in-out forwards;
+  opacity: 0 !important; /* start completely transparent */
+  top: 8px; /* move down 8 pixels to align better (adjusted from 10px) */
 }
 
 /* slice container (lower layer) - lower z-index */
@@ -53,7 +54,7 @@
 }
 
 .fade-out-smooth {
-  animation: fadeOutSmooth 0.167s ease-out forwards; /* 5 frames at 30fps = 0.167s */
+  animation: fadeOutSmooth 0.8s ease-in-out forwards; /* match the fade-in duration */
 }
 
 /* individual slices - 50% brighter flash effect */
@@ -80,10 +81,12 @@
 }
 @keyframes fadeInSmoothLong { 
   0% { opacity: 0; }
+  50% { opacity: 0.5; }
   100% { opacity: 1; } 
 }
 @keyframes fadeOutSmooth { 
   0% { opacity: 1; }
+  50% { opacity: 0.5; }
   100% { opacity: 0; } 
 }
 @keyframes wave-glow {

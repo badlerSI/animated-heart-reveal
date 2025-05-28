@@ -103,21 +103,21 @@ const WaveAnimation = ({
         };
       }
 
-      /* start static fade-in at frame 35 with 0.5s duration */
-      if (i === 34) {
+      /* start static fade-in at frame 30 for smoother transition */
+      if (i === 29) {
         img.addEventListener("animationstart", () => {
           setTimeout(() => {
             staticWave.classList.add("fade-in-smooth-long");
-          }, (35 / 30) * 1000); // Frame 35 timing
+          }, (30 / 30) * 1000); // Frame 30 timing - earlier start
         });
       }
 
-      /* start slice fade-out at frame 35, complete by frame 40 */
-      if (i === 34) {
+      /* start slice fade-out at frame 32, overlapping with static fade-in */
+      if (i === 31) {
         img.addEventListener("animationstart", () => {
           setTimeout(() => {
             container.classList.add("fade-out-smooth");
-          }, (35 / 30) * 1000); // Frame 35 timing
+          }, (32 / 30) * 1000); // Frame 32 timing
         });
       }
     });
