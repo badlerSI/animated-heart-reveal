@@ -6,7 +6,7 @@ import "./scrollContent.css";
 /*──────────────────────────────────────────────────────────────
   ScrollContent
   • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
-  • Simple fade-in when entering, fade-out when leaving viewport
+  • Fade-out between 70-90% visibility, fade-in at lower ratios
   • intersectionRatio drives opacity; clean and simple
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
@@ -27,16 +27,20 @@ const ScrollContent = () => {
           el.classList.add("reveal-hidden");
         }
 
-        /* Simple opacity based on intersection ratio
-           - fade-in: starts at 10% visible, fully opaque at 30%
-           - fade-out: starts fading when less than 30% visible */
+        /* Fade-out between 70-90% visibility, normal fade-in below 70% */
         let opacity: number;
         
-        if (ratio >= 0.3) {
-          // Fully visible when 30% or more is showing
+        if (ratio >= 0.9) {
+          // Fully faded out when 90% or more is showing
+          opacity = 0;
+        } else if (ratio >= 0.7) {
+          // Fade-out zone between 70% and 90%
+          opacity = 1 - ((ratio - 0.7) / 0.2);
+        } else if (ratio >= 0.3) {
+          // Fully visible when 30% to 70% is showing
           opacity = 1;
         } else if (ratio > 0.1) {
-          // Fade-in/out zone between 10% and 30%
+          // Fade-in zone between 10% and 30%
           opacity = (ratio - 0.1) / 0.2;
         } else {
           // Nearly invisible when less than 10% showing
