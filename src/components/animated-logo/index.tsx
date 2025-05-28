@@ -93,14 +93,6 @@ const AnimatedLogo = () => {
         zIndex={20}
       />
       
-      {/* Line Kanji (z-index 30) */}
-      <AnimatedElement 
-        isVisible={isElementVisible("line")}
-        imageSrc="/lovable-uploads/0b053000-25d7-4396-8891-d05e2caf2fa0.png"
-        alt="Line Symbol"
-        zIndex={30}
-      />
-      
       {/* Interface.png (z-index 40) */}
       <AnimatedElement 
         isVisible={isElementVisible("interface")}
@@ -114,6 +106,14 @@ const AnimatedLogo = () => {
         isVisible={isElementVisible("wave")}
         prefersReducedMotion={prefersReducedMotion}
         onPlaySound={playSoftWhoosh}
+      />
+
+      {/* Line Kanji (z-index 55) - NOW IN FRONT OF WAVE */}
+      <AnimatedElement 
+        isVisible={isElementVisible("line")}
+        imageSrc="/lovable-uploads/0b053000-25d7-4396-8891-d05e2caf2fa0.png"
+        alt="Line Symbol"
+        zIndex={55}
       />
 
       {/* Heart Kanji (z-index 60) - With cyan glow effect, appears last */}
