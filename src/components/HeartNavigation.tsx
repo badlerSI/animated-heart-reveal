@@ -5,7 +5,15 @@ import "@/components/scrollContent.css";
 
 export default function HeartNavigation() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [clicked, setClicked] = useState<string | null>(null);
   const nav = useNavigate();
+
+  const handleNavigation = (section: string, path: string) => {
+    setClicked(section);
+    setTimeout(() => {
+      nav(path);
+    }, 500); // Brief delay to show the effect
+  };
 
   return (
     <div className="w-full px-4 py-12 flex justify-center">
@@ -17,6 +25,7 @@ export default function HeartNavigation() {
           src="/lovable-uploads/7bc57b7b-ec7e-45cb-82e4-d098daa974b9.png"
           alt="News"
           className={`absolute inset-0 w-full h-full object-contain ${
+            clicked === "news" ? "heart-glow-clicked" :
             hovered === "news" ? "heart-glow-hover" : "heart-glow-initial"
           }`}
         />
@@ -24,6 +33,7 @@ export default function HeartNavigation() {
           src="/lovable-uploads/46d25664-67ff-4e5a-82fb-473b390f2cb1.png"
           alt="Partner"
           className={`absolute inset-0 w-full h-full object-contain ${
+            clicked === "partner" ? "heart-glow-clicked" :
             hovered === "partner" ? "heart-glow-hover" : "heart-glow-initial"
           }`}
         />
@@ -31,6 +41,7 @@ export default function HeartNavigation() {
           src="/lovable-uploads/a31111c7-f4ed-47e8-8d33-0d4480f635d8.png"
           alt="Tech"
           className={`absolute inset-0 w-full h-full object-contain ${
+            clicked === "tech" ? "heart-glow-clicked" :
             hovered === "tech" ? "heart-glow-hover" : "heart-glow-initial"
           }`}
         />
@@ -38,6 +49,7 @@ export default function HeartNavigation() {
           src="/lovable-uploads/cf5e4b11-5777-42d1-bf53-b818cde95600.png"
           alt="Vision"
           className={`absolute inset-0 w-full h-full object-contain ${
+            clicked === "vision" ? "heart-glow-clicked" :
             hovered === "vision" ? "heart-glow-hover" : "heart-glow-initial"
           }`}
         />
@@ -55,7 +67,7 @@ export default function HeartNavigation() {
             pointerEvents="all"
             onMouseEnter={() => setHovered("news")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/news")}
+            onClick={() => handleNavigation("news", "/news")}
             style={{ cursor: "pointer" }}
           />
 
@@ -66,7 +78,7 @@ export default function HeartNavigation() {
             pointerEvents="all"
             onMouseEnter={() => setHovered("tech")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/tech")}
+            onClick={() => handleNavigation("tech", "/tech")}
             style={{ cursor: "pointer" }}
           />
 
@@ -77,7 +89,7 @@ export default function HeartNavigation() {
             pointerEvents="all"
             onMouseEnter={() => setHovered("vision")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/vision")}
+            onClick={() => handleNavigation("vision", "/vision")}
             style={{ cursor: "pointer" }}
           />
 
@@ -88,7 +100,7 @@ export default function HeartNavigation() {
             pointerEvents="all"
             onMouseEnter={() => setHovered("partner")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => nav("/partner")}
+            onClick={() => handleNavigation("partner", "/partner")}
             style={{ cursor: "pointer" }}
           />
         </svg>
