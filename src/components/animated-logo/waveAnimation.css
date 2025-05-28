@@ -28,6 +28,11 @@
   animation: fadeInSmooth 0.167s ease-out forwards; /* 5 frames at 30fps = 0.167s */
 }
 
+.static-wave.fade-in-smooth {
+  animation: fadeInSmooth 0.167s ease-out forwards;
+  opacity: 1 !important; /* ensure it stays visible after animation */
+}
+
 /* slice container (lower layer) - lower z-index */
 .wave-container {
   --fps: 30;
