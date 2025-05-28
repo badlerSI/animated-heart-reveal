@@ -7,7 +7,7 @@ import "./scrollContent.css";
 /*──────────────────────────────────────────────────────────────
   ScrollContent
   • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
-  • MUCH earlier fade-in and fade-out for optimal visibility timing
+  • Earlier fade-in and fade-out for better visibility timing
   • intersectionRatio drives opacity; scroll-up bug is gone
 ──────────────────────────────────────────────────────────────*/
 const ScrollContent = () => {
@@ -29,20 +29,20 @@ const ScrollContent = () => {
         }
 
         /* opacity & slide distance
-           – fully opaque while ≥15 % visible
-           – starts fading in at 0.5% visible (MUCH earlier)           */
-        const opacity = Math.max(0, Math.min(1, (ratio - 0.005) / 0.145));
+           – fully opaque while ≥25 % visible
+           – starts fading in at 5% visible (earlier but reasonable)           */
+        const opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.20));
         const translate = 60 * (1 - opacity);           // match CSS 60 px
         el.style.opacity = opacity.toString();
         el.style.transform = `translateY(${translate}px)`;
       });
     };
 
-    /* rootMargin bottom –85% ➜ element considered "exiting" MUCH earlier
-       for much earlier fade-out while ensuring visibility */
+    /* rootMargin bottom –50% ➜ element considered "exiting" earlier
+       for earlier fade-out while ensuring visibility */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "0px 0px -85% 0px",
+      rootMargin: "0px 0px -50% 0px",
       threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 
