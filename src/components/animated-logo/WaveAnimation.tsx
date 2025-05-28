@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import "./waveAnimation.css";
 
@@ -78,6 +79,7 @@ const WaveAnimation = ({
     if (!isVisible) return;
 
     const container = containerRef.current!;
+    const staticWave = staticRef.current!;
     container.innerHTML = "";
 
     SLICE_SRC.forEach((src, i) => {
@@ -101,11 +103,21 @@ const WaveAnimation = ({
         };
       }
 
-      /* when slice 37 ends, cross-fade layers */
-      if (i === 36) {
-        img.addEventListener("animationend", () => {
-          staticRef.current!.classList.add("fade-in");
-          container.classList.add("fade-out");        // fade slices away
+      /* start static fade-in at frame 35 */
+      if (i === 34) {
+        img.addEventListener("animationstart", () => {
+          setTimeout(() => {
+            staticWave.classList.add("fade-in-smooth");
+          }, (35 / 30) * 1000); // Frame 35 timing
+        });
+      }
+
+      /* start slice fade-out at frame 35, complete by frame 40 */
+      if (i === 34) {
+        img.addEventListener("animationstart", () => {
+          setTimeout(() => {
+            container.classList.add("fade-out-smooth");
+          }, (35 / 30) * 1000); // Frame 35 timing
         });
       }
     });
