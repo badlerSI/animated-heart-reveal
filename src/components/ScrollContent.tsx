@@ -35,11 +35,10 @@ const ScrollContent = () => {
         /* separate opacity calculations for fade-in vs fade-out */
         let opacity;
         if (isBecomingVisible || ratio >= 0.70) {
-          // Fade-in: starts at -10% visibility (using negative rootMargin effect), completes at 70%
-          // We simulate -10% by starting opacity calculation earlier
-          opacity = Math.max(0, Math.min(1, (ratio + 0.10) / 0.80));
+          // Fade-in: starts at 1% visibility, completes at 70%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.01) / 0.69));
         } else {
-          // Fade-out: starts at 70% visibility, completes at 10% (unchanged)
+          // Fade-out: starts at 70% visibility, completes at 10%
           opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.60));
         }
         
@@ -57,7 +56,7 @@ const ScrollContent = () => {
        while still giving fade-out time but ensuring visibility */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "10% 0px -50% 0px",  // Added 10% top margin to simulate -10% start
+      rootMargin: "0px 0px -50% 0px",
       threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 

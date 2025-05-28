@@ -1,4 +1,3 @@
-
 import React, { ReactNode } from 'react';
 
 interface FeatureBlockProps {
@@ -38,7 +37,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
   return (
     <section
       id={id}
-      className="reveal overflow-hidden mb-96"
+      className="reveal overflow-hidden mb-64"
     >
       <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16
                      flex flex-col md:flex-row items-start md:items-center gap-5">
