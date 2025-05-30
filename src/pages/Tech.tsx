@@ -35,7 +35,7 @@ const Tech = () => {
           >
             tech@soulinterface.ai
           </a>{" "}
-          and we would be more than happy to send you a briefing.
+          and we would be more than happy to send you a detailed technology briefing.
         </p>
       </div>
     </div>
