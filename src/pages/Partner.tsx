@@ -14,7 +14,7 @@ const Partner = () => {
       {/* AiSha partnership text */}
       <div className="max-w-4xl text-center mb-16">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          We have teamed up with AiSha LLC to integrate soul interface into the greatest 240Zs ever conceived. Steel with a real soul, premiering Q3 2025.
+          We have teamed up with AiSha LLC to integrate Soul Interface into the greatest 240Zs ever conceived. Steel with a real soul, premiering Q3 2025.
         </p>
       </div>
 
