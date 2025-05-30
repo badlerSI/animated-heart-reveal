@@ -21,7 +21,7 @@ const Partner = () => {
       {/* Partnership opportunities text with glowing email link */}
       <div className="max-w-4xl text-center border-t border-cyan-white/20 pt-16">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          We are currently exploring hardware and software partnerships. As well as automotive OEMs, resto mods and autonomous ride hailing vehicle collaborations. If you think your company could interface well with ours, shoot us an email:{" "}
+          We are currently exploring hardware and software partnerships, as well as automotive OEM, resto mod and autonomous ride hailing vehicle collaborations. If you think your company could interface well with ours, shoot us an email:{" "}
           <a
             href="mailto:partners@soulinterface.ai"
             className="text-cyan-white hover:text-cyan-300 transition-all duration-300"

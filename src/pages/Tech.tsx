@@ -5,7 +5,7 @@ const Tech = () => {
       {/* Full-size technology diagram with neon glow */}
       <div className="w-full max-w-4xl mb-16">
         <img
-          src="/lovable-uploads/54485ca6-5ac5-4c73-b7bd-eace775bc1ee.png"
+          src="/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png"
           alt="Technology diagram showing what makes our clockwork soul tick"
           className="w-full h-auto object-contain neon-glow"
         />
