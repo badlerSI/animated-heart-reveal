@@ -14,7 +14,7 @@ const Tech = () => {
       {/* Investment text with glowing email link */}
       <div className="max-w-4xl text-center">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          The specifics are still under wraps, but if you are interested in investing in Soul Interface, please email{" "}
+          The specifics are still under wraps, but if you think you might be interested in investing in Soul Interface, please email{" "}
           <a
             href="mailto:tech@soulinterface.ai"
             className="text-cyan-white hover:text-cyan-300 transition-all duration-300"
@@ -35,7 +35,7 @@ const Tech = () => {
           >
             tech@soulinterface.ai
           </a>{" "}
-          and we would be happy to send you a briefing.
+          and we would be more than happy to send you a briefing.
         </p>
       </div>
     </div>
