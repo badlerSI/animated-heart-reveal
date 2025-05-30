@@ -23,12 +23,14 @@ const Tech = () => {
               filter: "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))"
             }}
             onMouseEnter={(e) => {
-              e.target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
-              e.target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
+              target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
             }}
             onMouseLeave={(e) => {
-              e.target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
-              e.target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
+              target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
             }}
           >
             tech@soulinterface.ai
