@@ -5,21 +5,21 @@
 
 @keyframes glow {
   0% {
-    filter: drop-shadow(0 0 0px #80E5FF);
+    filter: drop-shadow(0 0 0px #33C3F0);
   }
   50% {
-    filter: drop-shadow(0 0 20px #80E5FF);
+    filter: drop-shadow(0 0 15px #33C3F0);
   }
   100% {
-    filter: drop-shadow(0 0 12px #80E5FF);
+    filter: drop-shadow(0 0 8px #33C3F0);
   }
 }
 
 @keyframes heartPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 12px #80E5FF);
+    filter: drop-shadow(0 0 8px #33C3F0);
   }
   50% {
-    filter: drop-shadow(0 0 18px #80E5FF);
+    filter: drop-shadow(0 0 12px #33C3F0);
   }
 }
