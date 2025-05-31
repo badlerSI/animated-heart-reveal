@@ -47,72 +47,72 @@
   }
 }
 
-/* Glow effect for links */
+/* Glow effect for links - made whiter and brighter */
 .text-glow:hover {
-  text-shadow: 0 0 8px rgba(80, 210, 240, 0.7);
+  text-shadow: 0 0 12px rgba(180, 255, 255, 0.9);
   transition: text-shadow 0.3s ease;
 }
 
-/* Flickering neon glow for images */
+/* Flickering neon glow for images - made whiter and brighter */
 .neon-glow {
-  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  filter: drop-shadow(0 0 10px rgba(180, 255, 255, 0.8));
   animation: neon-flicker 3s ease-in-out infinite;
 }
 
 @keyframes neon-flicker {
   0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+    filter: drop-shadow(0 0 10px rgba(180, 255, 255, 0.8));
   }
   25% {
-    filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+    filter: drop-shadow(0 0 16px rgba(180, 255, 255, 1.0));
   }
   50% {
-    filter: drop-shadow(0 0 6px rgba(51, 243, 240, 0.4));
+    filter: drop-shadow(0 0 8px rgba(180, 255, 255, 0.6));
   }
   75% {
-    filter: drop-shadow(0 0 10px rgba(51, 243, 240, 0.7));
+    filter: drop-shadow(0 0 14px rgba(180, 255, 255, 0.9));
   }
 }
 
-/* Heart navigation glow effects */
+/* Heart navigation glow effects - made whiter and brighter */
 .neon-glow-dim {
-  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.4));
+  filter: drop-shadow(0 0 10px rgba(180, 255, 255, 0.6));
   transition: filter 0.3s ease;
 }
 
 .neon-glow-bright {
-  filter: drop-shadow(0 0 15px rgba(51, 243, 240, 0.8));
+  filter: drop-shadow(0 0 20px rgba(180, 255, 255, 1.0));
   transition: filter 0.3s ease;
 }
 
-/* New heart navigation glow effects */
+/* New heart navigation glow effects - made whiter and brighter */
 .heart-glow-initial {
-  filter: drop-shadow(0 0 1px rgba(0, 255, 255, 0.9));
+  filter: drop-shadow(0 0 2px rgba(180, 255, 255, 1.0));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-hover {
-  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+  filter: drop-shadow(0 0 6px rgba(180, 255, 255, 1))
+          drop-shadow(0 0 12px rgba(180, 255, 255, 0.9));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-clicked {
-  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 9px rgba(0, 255, 255, 0.9));
+  filter: drop-shadow(0 0 8px rgba(180, 255, 255, 1))
+          drop-shadow(0 0 14px rgba(180, 255, 255, 1.0));
   transition: filter 0.1s ease;
 }
 
-/* Individual navigation piece glow effects */
+/* Individual navigation piece glow effects - made whiter and brighter */
 .nav-piece {
-  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.4));
+  filter: drop-shadow(0 0 4px rgba(180, 255, 255, 0.6));
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .nav-piece:hover,
 .nav-piece.heart-glow-hover {
-  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
+  filter: drop-shadow(0 0 10px rgba(180, 255, 255, 1))
+          drop-shadow(0 0 18px rgba(180, 255, 255, 0.8));
 }
 
 /* Add custom font styles to body */

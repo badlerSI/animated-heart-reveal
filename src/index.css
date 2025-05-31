@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,27 +101,27 @@
   }
 }
 
-/* Neon glow effect for images - made more transparent */
+/* Neon glow effect for images - made whiter and brighter */
 .neon-glow {
-  filter: drop-shadow(0 0 4px rgba(51, 240, 240, 0.5));
+  filter: drop-shadow(0 0 6px rgba(200, 255, 255, 0.8));
   animation: flickerGlow 3s ease-in-out infinite alternate;
 }
 
 @keyframes flickerGlow {
   0% {
-    filter: drop-shadow(0 0 2.5px rgba(51, 240, 240, 0.5));
+    filter: drop-shadow(0 0 4px rgba(200, 255, 255, 0.8));
   }
   25% {
-    filter: drop-shadow(0 0 6px rgba(51, 240, 240, 0.5));
+    filter: drop-shadow(0 0 10px rgba(200, 255, 255, 0.8));
   }
   50% {
-    filter: drop-shadow(0 0 4px rgba(51, 240, 240, 0.5));
+    filter: drop-shadow(0 0 6px rgba(200, 255, 255, 0.8));
   }
   75% {
-    filter: drop-shadow(0 0 7.5px rgba(51, 240, 240, 0.5));
+    filter: drop-shadow(0 0 12px rgba(200, 255, 255, 0.8));
   }
   100% {
-    filter: drop-shadow(0 0 5px rgba(51, 240, 240, 0.5));
+    filter: drop-shadow(0 0 8px rgba(200, 255, 255, 0.8));
   }
 }
 

@@ -24,14 +24,15 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
     '/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png', // wave.png
     '/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png', // nocloud.png
     '/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png', // dash.png
-    '/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png', // soulforge.png
+    '/lovable-uploads/303a024c-86e6-4074-8c17-167698cbc1cf.png', // NEW soul forge image
     '/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png', // brain.png
     '/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png', // RoadTrip.png
     '/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png', // SoulSpeak.png
     '/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png', // RoboTaxi.png
     '/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png', // LockHeart.png
     '/lovable-uploads/54485ca6-5ac5-4c73-b7bd-eace775bc1ee.png', // tech page diagram
-    '/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png'  // partner page car
+    '/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png',  // partner page car
+    '/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png'   // news page image
   ];
   
   const shouldBeLarger = imgSrc && largerImages.includes(imgSrc);
