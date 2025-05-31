@@ -54,7 +54,7 @@ const News = () => {
       {/* Newsletter signup text */}
       <div className="max-w-4xl text-center mb-8">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          Sign up for the Soul Dispatch and be the first to know about product updates, public demonstrations and events at our workshop! Just let us know your email here:
+          Sign up for our newsletter, the Soul Dispatch and be the first to know about product updates, car show appearances, events at our workshop and swag giveaways!
         </p>
       </div>
 
@@ -73,7 +73,21 @@ const News = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-4 py-3 text-base bg-cyan-600 hover:bg-cyan-700 text-white border-none rounded cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-3 text-base bg-cyan-600 hover:bg-cyan-700 text-white border-none rounded cursor-pointer transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              boxShadow: "0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)",
+              filter: "drop-shadow(0 0 8px rgba(0, 255, 255, 0.6))"
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.boxShadow = "0 0 15px rgba(0, 255, 255, 0.7), 0 0 25px rgba(0, 255, 255, 0.5), 0 0 35px rgba(0, 255, 255, 0.3)";
+              target.style.filter = "drop-shadow(0 0 12px rgba(0, 255, 255, 0.8))";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.boxShadow = "0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1)";
+              target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.6))";
+            }}
           >
             {isSubmitting ? 'Subscribing...' : 'Subscribe'}
           </button>
