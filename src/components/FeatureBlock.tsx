@@ -19,18 +19,17 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
     '/lovable-uploads/RoboTaxi.png'
   ];
   
-  // Define which images should have neon glow - ensuring ALL scroll content images are included
+  // Define which images should have neon glow
   const glowImages = [
-    '/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png', // Soul Inside the Car - nocloud.png
-    '/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png', // No Screens No Problem - dash.png
-    '/lovable-uploads/07c3333c-8075-4e0a-9643-9457ee77cc7b.png', // Forge the Soul - new soulforge.png
-    '/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png', // Intelligent Interface - brain.png
-    '/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png', // Charlemagne quote - SoulSpeak.png
-    '/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png', // Robotaxi - RoboTaxi.png
-    '/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png', // Keep Soul Safe - LockHeart.png
-    // Additional images that should also have glow
     '/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png', // wave.png
+    '/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png', // nocloud.png
+    '/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png', // dash.png
+    '/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png', // soulforge.png
+    '/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png', // brain.png
     '/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png', // RoadTrip.png
+    '/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png', // SoulSpeak.png
+    '/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png', // RoboTaxi.png
+    '/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png', // LockHeart.png
     '/lovable-uploads/54485ca6-5ac5-4c73-b7bd-eace775bc1ee.png', // tech page diagram
     '/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png'  // partner page car
   ];
