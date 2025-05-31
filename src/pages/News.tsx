@@ -45,7 +45,7 @@ const News = () => {
       {/* News image with neon glow */}
       <div className="w-full max-w-4xl mb-16">
         <img
-          src="/news.png"
+          src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
           alt="Soul Dispatch newsletter illustration"
           className="w-full h-auto object-contain neon-glow"
         />
