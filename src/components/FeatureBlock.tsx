@@ -45,7 +45,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
       <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16">
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
           {/* LEFT COLUMN — heading + image */}
-          <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 space-y-4">
+          <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 space-y-4 lg:flex-shrink-0">
             <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide text-center lg:text-left">
               {heading}
             </h2>
@@ -63,7 +63,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
           </div>
 
           {/* RIGHT COLUMN — body copy */}
-          <div className="w-full lg:w-1/2 text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+          <div className="w-full lg:w-1/2 lg:flex-shrink-0 text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
             {children}
           </div>
         </div>
