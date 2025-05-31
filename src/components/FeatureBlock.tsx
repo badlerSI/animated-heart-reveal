@@ -43,10 +43,33 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
       className="reveal overflow-hidden mb-96"
     >
       <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
+        {/* Mobile layout - single column */}
+        <div className="lg:hidden flex flex-col items-center space-y-4">
+          <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide text-center">
+            {heading}
+          </h2>
+          
+          {imgSrc && (
+            <img
+              src={imgSrc}
+              alt={imgAlt || "Section illustration"}
+              className={`w-full object-contain opacity-80 ${
+                shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
+              } ${shouldHaveGlow ? 'neon-glow' : ''}`}
+              loading="lazy"
+            />
+          )}
+          
+          <div className="w-full text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+            {children}
+          </div>
+        </div>
+
+        {/* Desktop layout - two columns using CSS Grid */}
+        <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* LEFT COLUMN — heading + image */}
-          <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 space-y-4 lg:flex-shrink-0">
-            <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide text-center lg:text-left">
+          <div className="flex flex-col items-start space-y-4">
+            <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
               {heading}
             </h2>
 
@@ -63,7 +86,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
           </div>
 
           {/* RIGHT COLUMN — body copy */}
-          <div className="w-full lg:w-1/2 lg:flex-shrink-0 text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+          <div className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
             {children}
           </div>
         </div>
