@@ -45,7 +45,7 @@ const News = () => {
       {/* News image with neon glow */}
       <div className="w-full max-w-4xl mb-16">
         <img
-          src="/lovable-uploads/054f952a-9a89-4bc4-ac0e-a3c93459eb93.png"
+          src="/news.png"
           alt="Soul Dispatch newsletter illustration"
           className="w-full h-auto object-contain neon-glow"
         />
@@ -54,7 +54,7 @@ const News = () => {
       {/* Newsletter signup text */}
       <div className="max-w-4xl text-center mb-8">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          Sign up for our newsletter, the Soul Dispatch and be the first to know about product updates, car show appearances, events at our workshop and swag giveaways!
+          Sign up for our newsletter, the Soul Dispatch, and be the first to know about product updates, car show appearances, events at our workshop and swag giveaways!
         </p>
       </div>
 
