@@ -5,7 +5,7 @@ const Tech = () => {
       {/* Full-size technology diagram with neon glow */}
       <div className="w-full max-w-4xl mb-16">
         <img
-          src="/lovable-uploads/54485ca6-5ac5-4c73-b7bd-eace775bc1ee.png"
+          src="/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png"
           alt="Technology diagram showing what makes our clockwork soul tick"
           className="w-full h-auto object-contain neon-glow"
         />
@@ -14,7 +14,7 @@ const Tech = () => {
       {/* Investment text with glowing email link */}
       <div className="max-w-4xl text-center">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          The specifics are still under wraps, but if you are interested in investing in Soul Interface, please email{" "}
+          The specifics are still under wraps, but if you think you might be interested in investing in Soul Interface, please email{" "}
           <a
             href="mailto:tech@soulinterface.ai"
             className="text-cyan-white hover:text-cyan-300 transition-all duration-300"
@@ -23,17 +23,19 @@ const Tech = () => {
               filter: "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))"
             }}
             onMouseEnter={(e) => {
-              e.target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
-              e.target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
+              target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
             }}
             onMouseLeave={(e) => {
-              e.target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
-              e.target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
+              target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
             }}
           >
             tech@soulinterface.ai
           </a>{" "}
-          and we would be happy to send you a briefing.
+          and we would be more than happy to send you a detailed technology briefing.
         </p>
       </div>
     </div>
