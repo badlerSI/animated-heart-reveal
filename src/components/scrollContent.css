@@ -1,15 +1,12 @@
 
-/*──────────────────────────────────────────────────────────────
-  ScrollContent
-  • Pop-up (translateY 60 px → 0) + slight scale via CSS classes
-  • Fade-in on entry; fade-out begins much earlier so it's visible
-  • intersectionRatio drives opacity; scroll-up bug is gone
-──────────────────────────────────────────────────────────────*/
+/* … keep existing code (all current styles) … */
 
+/* Base styles for reveal animations */
 .reveal {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  will-change: opacity, transform;
 }
 
 .reveal-visible {
@@ -17,17 +14,110 @@
   transform: translateY(0);
 }
 
+/* Adding fade-out animation when scrolling past */
 .reveal-hidden {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(-30px);
+  transition: opacity 0.6s ease, transform 0.8s ease;
 }
 
-/* Ensure no conflicting layout styles */
-.reveal * {
-  box-sizing: border-box;
+/* Sequential reveal for elements within cards */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-/* Remove any potential flex or grid overrides */
-.reveal .max-w-6xl {
-  display: block !important;
+.reveal-visible .reveal-element:nth-child(1) {
+  animation: reveal-up 0.8s ease-out 0.4s forwards;
+}
+
+.reveal-visible .reveal-element:nth-child(2) {
+  animation: reveal-up 0.8s ease-out 0.7s forwards;
+}
+
+/* Animation for revealing elements */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow effect for links */
+.text-glow:hover {
+  text-shadow: 0 0 8px rgba(80, 210, 240, 0.7);
+  transition: text-shadow 0.3s ease;
+}
+
+/* Flickering neon glow for images */
+.neon-glow {
+  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  animation: neon-flicker 3s ease-in-out infinite;
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  }
+  25% {
+    filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(51, 243, 240, 0.4));
+  }
+  75% {
+    filter: drop-shadow(0 0 10px rgba(51, 243, 240, 0.7));
+  }
+}
+
+/* Heart navigation glow effects */
+.neon-glow-dim {
+  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.neon-glow-bright {
+  filter: drop-shadow(0 0 15px rgba(51, 243, 240, 0.8));
+  transition: filter 0.3s ease;
+}
+
+/* New heart navigation glow effects */
+.heart-glow-initial {
+  filter: drop-shadow(0 0 1px rgba(0, 255, 255, 0.9));
+  transition: filter 0.3s ease;
+}
+
+.heart-glow-hover {
+  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 1))
+          drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+  transition: filter 0.3s ease;
+}
+
+.heart-glow-clicked {
+  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 1))
+          drop-shadow(0 0 9px rgba(0, 255, 255, 0.9));
+  transition: filter 0.1s ease;
+}
+
+/* Individual navigation piece glow effects */
+.nav-piece {
+  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.4));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.nav-piece:hover,
+.nav-piece.heart-glow-hover {
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 1))
+          drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
+}
+
+/* Add custom font styles to body */
+body {
+  font-family: 'Outfit', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.015em;
+  color: #d0faff;
 }
