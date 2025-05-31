@@ -80,7 +80,6 @@ const WaveAnimation = ({
 
     const container = containerRef.current!;
     const staticWave = staticRef.current!;
-    const wrapper = wrapperRef.current!;
     container.innerHTML = "";
 
     SLICE_SRC.forEach((src, i) => {
@@ -103,14 +102,25 @@ const WaveAnimation = ({
           fit(totalW, sliceH);
         };
       }
-    });
 
-    // Start the crossfade at frame 30
-    const crossfadeDelay = (30 / 30) * 1000; // 1 second delay
-    setTimeout(() => {
-      console.log('Starting crossfade transition');
-      wrapper.classList.add('fade-out-smooth');
-    }, crossfadeDelay);
+      /* start static fade-in at frame 35 */
+      if (i === 34) {
+        img.addEventListener("animationstart", () => {
+          setTimeout(() => {
+            staticWave.classList.add("fade-in-smooth");
+          }, (35 / 30) * 1000); // Frame 35 timing
+        });
+      }
+
+      /* start slice fade-out at frame 35, complete by frame 40 */
+      if (i === 34) {
+        img.addEventListener("animationstart", () => {
+          setTimeout(() => {
+            container.classList.add("fade-out-smooth");
+          }, (35 / 30) * 1000); // Frame 35 timing
+        });
+      }
+    });
 
     if (!prefersReducedMotion) onPlaySound();
   }, [isVisible, prefersReducedMotion, onPlaySound]);
@@ -137,7 +147,6 @@ const WaveAnimation = ({
         src={STATIC_WAVE_SRC}
         alt="wave"
         className="static-wave neon-glow"
-        style={{ transform: 'translateY(-2px)' }}
       />
 
       {/* Slice container underneath */}
