@@ -43,62 +43,58 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
       className="reveal overflow-hidden mb-96"
     >
       <div className="max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-16">
-        {/* Mobile and tablet: single column */}
-        <div className="block lg:hidden">
-          <div className="flex flex-col items-center space-y-6">
-            <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide text-center">
-              {heading}
-            </h2>
-            
-            {imgSrc && (
-              <div className="flex justify-center">
-                <img
-                  src={imgSrc}
-                  alt={imgAlt || "Section illustration"}
-                  className={`object-contain opacity-80 ${
-                    shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
-                  } ${shouldHaveGlow ? 'neon-glow' : ''}`}
-                  loading="lazy"
-                />
-              </div>
-            )}
-            
-            <div className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-              {children}
+        {/* Mobile: single column - show on all screens EXCEPT large and up */}
+        <div className="flex flex-col items-center space-y-6 lg:hidden">
+          <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide text-center">
+            {heading}
+          </h2>
+          
+          {imgSrc && (
+            <div className="flex justify-center">
+              <img
+                src={imgSrc}
+                alt={imgAlt || "Section illustration"}
+                className={`object-contain opacity-80 ${
+                  shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
+                } ${shouldHaveGlow ? 'neon-glow' : ''}`}
+                loading="lazy"
+              />
             </div>
+          )}
+          
+          <div className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+            {children}
           </div>
         </div>
 
-        {/* Desktop: explicit two columns with flexbox */}
-        <div className="hidden lg:block">
-          <div className="flex items-start gap-16">
-            {/* LEFT COLUMN — exactly 50% width */}
-            <div className="w-1/2 flex-shrink-0">
-              <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
-                  {heading}
-                </h2>
+        {/* Desktop: two columns - show ONLY on large screens and up */}
+        <div className="hidden lg:flex lg:gap-16 lg:items-start">
+          {/* LEFT COLUMN - heading and image */}
+          <div className="lg:w-1/2 lg:flex-shrink-0">
+            <div className="space-y-6">
+              <h2 className="text-2xl md:text-3xl font-sans font-semibold text-cyan-white tracking-wide">
+                {heading}
+              </h2>
 
-                {imgSrc && (
-                  <div className="flex justify-start">
-                    <img
-                      src={imgSrc}
-                      alt={imgAlt || "Section illustration"}
-                      className={`object-contain opacity-80 ${
-                        shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
-                      } ${shouldHaveGlow ? 'neon-glow' : ''}`}
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </div>
+              {imgSrc && (
+                <div className="flex justify-start">
+                  <img
+                    src={imgSrc}
+                    alt={imgAlt || "Section illustration"}
+                    className={`object-contain opacity-80 ${
+                      shouldBeLarger ? 'max-w-96 max-h-96' : 'max-w-64 max-h-64'
+                    } ${shouldHaveGlow ? 'neon-glow' : ''}`}
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </div>
+          </div>
 
-            {/* RIGHT COLUMN — exactly 50% width */}
-            <div className="w-1/2 flex-shrink-0">
-              <div className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-                {children}
-              </div>
+          {/* RIGHT COLUMN - body text */}
+          <div className="lg:w-1/2 lg:flex-shrink-0">
+            <div className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
+              {children}
             </div>
           </div>
         </div>
