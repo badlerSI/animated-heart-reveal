@@ -24,7 +24,7 @@ const FeatureBlock = ({ id, heading, imgSrc, imgAlt, children }: FeatureBlockPro
     '/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png', // wave.png
     '/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png', // nocloud.png
     '/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png', // dash.png
-    '/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png', // soulforge.png
+    '/lovable-uploads/07c3333c-8075-4e0a-9643-9457ee77cc7b.png', // new soulforge.png
     '/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png', // brain.png
     '/lovable-uploads/c96b8fff-dfa3-4bcf-a8a4-03a81b0410be.png', // RoadTrip.png
     '/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png', // SoulSpeak.png

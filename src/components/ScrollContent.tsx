@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import FeatureBlock from "./FeatureBlock";
 import HeartNavigation from "./HeartNavigation";
@@ -104,7 +103,7 @@ const ScrollContent = () => {
       <FeatureBlock 
         id="forge-soul-of-ride"
         heading="Forge the Soul of Your Ride"
-        imgSrc="/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
+        imgSrc="/lovable-uploads/07c3333c-8075-4e0a-9643-9457ee77cc7b.png"
         imgAlt="Soul forging illustration"
       >
         Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
