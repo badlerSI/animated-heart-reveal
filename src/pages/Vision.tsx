@@ -34,7 +34,7 @@ const Vision = () => {
         {/* Mobile Layout: Text over image */}
         <div className="md:hidden relative min-h-screen flex items-center">
           {/* Background Image */}
-          <div className="absolute inset-0 flex items-center justify-center z-0">
+          <div className="absolute inset-0 flex items-center justify-center">
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
