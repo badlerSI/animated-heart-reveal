@@ -4,7 +4,7 @@ const Vision = () => {
     <div className="min-h-screen bg-[#0d0d12] flex items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-8">
         {/* Desktop Layout: Side by side */}
-        <div className="hidden md:flex md:items-center md:gap-12 h-screen">
+        <div className="hidden md:flex md:items-center md:gap-8 h-screen">
           {/* Left column - Text (60%) */}
           <div className="md:w-3/5 space-y-6">
             <div className="text-lg lg:text-xl xl:text-2xl leading-relaxed text-cyan-white/90 font-outfit">
@@ -21,11 +21,11 @@ const Vision = () => {
           </div>
 
           {/* Right column - Image (40%) */}
-          <div className="md:w-2/5 flex justify-center">
+          <div className="md:w-2/5 flex justify-center items-center">
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain max-w-full max-h-[80vh] neon-glow opacity-80"
+              className="object-contain w-full h-full max-h-[90vh] neon-glow opacity-80"
               loading="lazy"
             />
           </div>
@@ -34,18 +34,18 @@ const Vision = () => {
         {/* Mobile Layout: Text over image */}
         <div className="md:hidden relative min-h-screen flex items-center">
           {/* Background Image */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center z-0">
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain max-w-full max-h-full neon-glow opacity-30"
+              className="object-contain w-full h-full neon-glow opacity-40"
               loading="lazy"
             />
           </div>
 
           {/* Text Overlay */}
           <div className="relative z-10 w-full px-6 py-12">
-            <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4 bg-[#0d0d12]/80 backdrop-blur-sm rounded-lg p-6">
+            <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4 bg-[#0d0d12]/85 backdrop-blur-sm rounded-lg p-6">
               <p>
                 We believe the most powerful computers ever put in a car shouldn't just look outward—they should look within. While the industry races toward autonomous driving, we're pioneering something equally transformative: automotive AI that truly understands you.
               </p>
