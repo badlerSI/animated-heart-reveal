@@ -31,21 +31,11 @@ const Vision = () => {
           </div>
         </div>
 
-        {/* Mobile Layout: Text over image */}
-        <div className="md:hidden relative min-h-screen flex items-center">
-          {/* Background Image */}
-          <div className="absolute inset-0 flex items-center justify-center z-0">
-            <img
-              src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
-              alt="Vision illustration"
-              className="object-contain w-full h-full neon-glow opacity-40"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Text Overlay */}
-          <div className="relative z-10 w-full px-6 py-12">
-            <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4 bg-[#0d0d12]/85 backdrop-blur-sm rounded-lg p-6">
+        {/* Mobile Layout: Same as desktop but stacked vertically */}
+        <div className="md:hidden flex flex-col items-center gap-8 min-h-screen justify-center px-6">
+          {/* Text */}
+          <div className="w-full">
+            <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4">
               <p>
                 We believe the most powerful computers ever put in a car shouldn't just look outward—they should look within. While the industry races toward autonomous driving, we're pioneering something equally transformative: automotive AI that truly understands you.
               </p>
@@ -56,6 +46,16 @@ const Vision = () => {
                 We're assembling existing technologies in revolutionary ways to make cars more human, not less. While others build for a future where everyone increasingly ignores the road, we're building for drivers who love the journey. Soul Interface doesn't replace driving engagement—it turbocharges it, all while keeping your eyes on the road, with both hands on the wheel, and your left foot on the clutch.
               </p>
             </div>
+          </div>
+
+          {/* Image */}
+          <div className="w-full flex justify-center">
+            <img
+              src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
+              alt="Vision illustration"
+              className="object-contain w-full max-w-md h-auto neon-glow opacity-80"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
