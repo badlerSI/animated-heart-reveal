@@ -25,7 +25,11 @@ const Vision = () => {
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain w-full h-full max-h-[90vh] neon-glow opacity-80"
+              className="object-contain w-full h-full max-h-[90vh] opacity-80"
+              style={{
+                filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
+                animation: "flickerGlow 3s ease-in-out infinite alternate"
+              }}
               loading="lazy"
             />
           </div>
@@ -53,7 +57,11 @@ const Vision = () => {
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain w-full max-w-md h-auto neon-glow opacity-80"
+              className="object-contain w-full max-w-md h-auto opacity-80"
+              style={{
+                filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
+                animation: "flickerGlow 3s ease-in-out infinite alternate"
+              }}
               loading="lazy"
             />
           </div>
