@@ -15,7 +15,7 @@ const News = () => {
       const formData = new FormData();
       formData.append('email', email);
 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxcE2X9hu0w_Yv8_EMgvpERJqdwE5c-MLl04AYXbaOshlpafeUVMI6mPJURiGtf61NTmQ/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxmojoMHsiXxDa_ov5tWQq-vzPz9CX7kKZjWevddvdclh_c0dEEdKlB198jgGGAFDLqng/exec', {
         method: 'POST',
         mode: 'cors',
         headers: {
