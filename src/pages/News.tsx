@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 const WEB_APP_URL =
-  'https://script.google.com/macros/s/AKfycbyTFq8NbQRoZJSxWFlYvW7u7rK6Ph6c5mGUPZkmAvH4rtTaJYl_SJ4cnRx7nR48DKmSkQ/exec';
+  'https://script.google.com/macros/s/AKfycbwbLV5QPP53aAMTcZxqRqeau69V1-R5Z4cDG6V0lkVXqoVn_pfwjGqlC6pvxzG7rnm6ig/exec';
 
 const News: React.FC = () => {
   const [email, setEmail]           = useState<string>('');
