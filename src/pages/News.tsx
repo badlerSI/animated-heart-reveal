@@ -1,70 +1,65 @@
-// src/pages/news.tsx
+// src/pages/news.tsx   (replace entire file)
 
 import React, { useState } from 'react';
 
 const WEB_APP_URL =
-  'https://script.google.com/a/macros/soulinterface.ai/s/AKfycbwhuNk-t7Jl_uUBMxfIiNojTgAmAmE0R0nN6VmwQKqM9vGS7bXJaY-WkvSXKElSWYXiXA/exec';
+  'https://script.google.com/macros/s/AKfycbzHJddpJQ6oEf5Mj3aWMitvyoA5wtOzlKxKfy-PtonKcMeOPtiOQEje3ybGrA8HpaVCjg/exec';
 
-const News: React.FC = () => {
-  const [email, setEmail]           = useState<string>('');
-  const [message, setMessage]       = useState<string>('');
-  const [isSubmitting, setSubmitting] = useState<boolean>(false);
+export default function News() {
+  const [email, setEmail]       = useState('');
+  const [message, setMessage]   = useState('');
+  const [isSubmitting, setSub]  = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
+    setSub(true);
     setMessage('Submitting…');
 
     try {
-      // Build params as application/x-www-form-urlencoded (simple POST)  [oai_citation:6‡stackoverflow.com](https://stackoverflow.com/questions/53433938/how-do-i-allow-a-cors-requests-in-my-google-script?utm_source=chatgpt.com)
-      const params = new URLSearchParams({ email });
-
+      const params   = new URLSearchParams({ email });
       const response = await fetch(WEB_APP_URL, {
-        method:   'POST',        // Simple POST avoids CORS preflight  [oai_citation:7‡medium.com](https://medium.com/%40cybersphere/fetch-api-the-ultimate-guide-to-cors-and-no-cors-cbcef88d371e?utm_source=chatgpt.com)
-        mode:     'cors',        // CORS mode is fine for simple requests  [oai_citation:8‡developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch?utm_source=chatgpt.com)
-        redirect: 'follow',      // Follow Google’s 302 redirect internally  [oai_citation:9‡groups.google.com](https://groups.google.com/g/google-apps-script-community/c/WALz_3rw7u4?utm_source=chatgpt.com)
-        body:     params         // fetch auto-sets Content-Type correctly  [oai_citation:10‡stackoverflow.com](https://stackoverflow.com/questions/43262121/trying-to-use-fetch-and-pass-in-mode-no-cors?utm_source=chatgpt.com)
+        method:   'POST',
+        mode:     'cors',
+        redirect: 'follow',
+        body:     params           // no custom headers → simple CORS
       });
 
-      // Always expect JSON from your doPost  [oai_citation:11‡googlecloudcommunity.com](https://www.googlecloudcommunity.com/gc/AppSheet-Q-A/Google-Apps-Script-Form-to-Sheets-Cors-issue/m-p/885941?utm_source=chatgpt.com)
       const data = await response.json();
-
       if (data.status === 'success') {
         setMessage('🎉 Thanks for subscribing!');
         setEmail('');
       } else {
-        console.error('Subscription error:', data);
         setMessage('⚠️ Something went wrong. Try again.');
       }
     } catch (err) {
-      console.error('Network error:', err);
+      console.error(err);
       setMessage('⚠️ Network error. Please try later.');
     } finally {
-      setSubmitting(false);
+      setSub(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
-      {/* Preserve your hero image with neon glow */}
+      {/* Hero image */}
       <div className="w-full max-w-4xl mb-16">
         <img
           src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
-          alt="Soul Dispatch newsletter illustration"
+          alt="Soul Dispatch illustration"
           className="w-full h-auto object-contain neon-glow"
         />
       </div>
 
-      {/* Preserve your intro copy */}
+      {/* Intro copy */}
       <div className="max-w-4xl text-center mb-8">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
           Sign up for our newsletter, the Soul Dispatch, and be the first to know
-          about product updates, car show appearances, events at our workshop,
-          and swag giveaways!
+          about product updates, car-show appearances, workshop events, and swag
+          giveaways!
         </p>
       </div>
 
-      {/* Preserve your form styling */}
+      {/* Form */}
       <div className="max-w-md w-full">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
@@ -74,14 +69,14 @@ const News: React.FC = () => {
             placeholder="you@example.com"
             required
             disabled={isSubmitting}
-            className="px-4 py-3 text-base border border-cyan-white/30 rounded bg-[#0d0d12] text-cyan-white placeholder-cyan-white/50 focus:outline-none focus:border-cyan-white/60 focus:ring-1 focus:ring-cyan-white/30"
+            className="px-4 py-3 text-base border border-cyan-white/30 rounded bg-[#0d0d12] text-cyan-white placeholder-cyan-white/50 focus:outline-none focus:ring-1 focus:ring-cyan-white/30"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-4 py-3 text-base bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-3 text-base bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-all disabled:opacity-50"
           >
-            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+            {isSubmitting ? 'Subscribing…' : 'Subscribe'}
           </button>
         </form>
 
@@ -97,6 +92,4 @@ const News: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default News;
+}
