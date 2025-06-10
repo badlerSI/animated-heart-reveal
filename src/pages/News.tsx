@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const WEB_APP_URL =
   "https://script.google.com/macros/s/AKfycbx_YHdex8SAepSgvrBr6undMUd-RBIlHAxoLQhBvMFeaRocwEtJMoWPXRZ2lQCY8Al0rQ/exec";
@@ -8,7 +8,8 @@ export default function News() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  const imageLoaded = useImagePreloader("/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +46,6 @@ export default function News() {
           className={`w-full object-contain neon-glow transition-opacity duration-500 ${
             imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
           }`}
-          onLoad={() => setImageLoaded(true)}
         />
       </div>
 

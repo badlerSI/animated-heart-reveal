@@ -1,13 +1,22 @@
 
+import { useImagePreloader } from "../hooks/useImagePreloader";
+
 const Tech = () => {
+  const imageLoaded = useImagePreloader("/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png");
+
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
       {/* Full-size technology diagram with neon glow */}
-      <div className="w-full max-w-4xl mb-16">
+      <div className="w-full max-w-4xl mb-16 relative">
+        {!imageLoaded && (
+          <div className="w-full h-64 bg-[#0d0d12] animate-pulse rounded"></div>
+        )}
         <img
           src="/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png"
           alt="Technology diagram showing what makes our clockwork soul tick"
-          className="w-full h-auto object-contain neon-glow"
+          className={`w-full h-auto object-contain neon-glow transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
+          }`}
         />
       </div>
 

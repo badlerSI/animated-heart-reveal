@@ -1,5 +1,9 @@
 
+import { useImagePreloader } from "../hooks/useImagePreloader";
+
 const Vision = () => {
+  const imageLoaded = useImagePreloader("/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png");
+
   return (
     <div className="min-h-screen bg-[#0d0d12] flex items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-8">
@@ -21,11 +25,16 @@ const Vision = () => {
           </div>
 
           {/* Right column - Image (40%) */}
-          <div className="md:w-2/5 flex justify-center items-center">
+          <div className="md:w-2/5 flex justify-center items-center relative">
+            {!imageLoaded && (
+              <div className="w-full h-96 bg-[#0d0d12] animate-pulse rounded"></div>
+            )}
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain w-full h-full max-h-[90vh] opacity-80"
+              className={`object-contain w-full h-full max-h-[90vh] opacity-80 transition-opacity duration-500 ${
+                imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
+              }`}
               style={{
                 filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
                 animation: "flickerGlow 3s ease-in-out infinite alternate"
@@ -53,11 +62,16 @@ const Vision = () => {
           </div>
 
           {/* Image */}
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center relative">
+            {!imageLoaded && (
+              <div className="w-full max-w-md h-64 bg-[#0d0d12] animate-pulse rounded"></div>
+            )}
             <img
               src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
               alt="Vision illustration"
-              className="object-contain w-full max-w-md h-auto opacity-80"
+              className={`object-contain w-full max-w-md h-auto opacity-80 transition-opacity duration-500 ${
+                imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
+              }`}
               style={{
                 filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
                 animation: "flickerGlow 3s ease-in-out infinite alternate"

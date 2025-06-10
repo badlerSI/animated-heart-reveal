@@ -1,13 +1,22 @@
 
+import { useImagePreloader } from "../hooks/useImagePreloader";
+
 const Partner = () => {
+  const imageLoaded = useImagePreloader("/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png");
+
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
       {/* Car image with neon glow */}
-      <div className="w-full max-w-4xl mb-16">
+      <div className="w-full max-w-4xl mb-16 relative">
+        {!imageLoaded && (
+          <div className="w-full h-64 bg-[#0d0d12] animate-pulse rounded"></div>
+        )}
         <img
           src="/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png"
           alt="AiSha LLC partnership - Neon car illustration"
-          className="w-full h-auto object-contain neon-glow"
+          className={`w-full h-auto object-contain neon-glow transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
+          }`}
         />
       </div>
 
