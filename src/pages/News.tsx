@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const WEB_APP_URL =
-  'https://script.google.com/macros/s/AKfycbyQFevmhNmalGQT3ydWwj6c3DR63FlpbOZcx9vGS5x69y-tAue5fA8WhTJgLuHSBO7xqg/exec';
+  'https://script.google.com/macros/s/AKfycbxxUwYG8aLE3PwknK1w_7DX-a04NjiDWaTuuStR0oSndwAU0HuQ0cU8wKVkJ003FqWFqQ/exec';
 
 export default function News() {
   const [email, setEmail]   = useState('');
