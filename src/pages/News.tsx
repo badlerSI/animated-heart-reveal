@@ -1,4 +1,3 @@
-// src/pages/news.tsx   (replace entire file)
 
 import React, { useState } from 'react';
 
@@ -41,12 +40,16 @@ export default function News() {
 
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
-      {/* Hero image */}
+      {/* Hero image with pulsing neon glow */}
       <div className="w-full max-w-4xl mb-16">
         <img
           src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
           alt="Soul Dispatch illustration"
-          className="w-full h-auto object-contain neon-glow"
+          className="w-full h-auto object-contain"
+          style={{
+            filter: "drop-shadow(0 0 8px rgba(0, 255, 255, 0.6))",
+            animation: "flickerGlow 3s ease-in-out infinite alternate"
+          }}
         />
       </div>
 
@@ -75,6 +78,18 @@ export default function News() {
             type="submit"
             disabled={isSubmitting}
             className="px-4 py-3 text-base bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-all disabled:opacity-50"
+            style={{
+              boxShadow: "0 0 10px rgba(0, 255, 255, 0.4)",
+              animation: "pulse 2s infinite"
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.boxShadow = "0 0 20px rgba(0, 255, 255, 0.8)";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.boxShadow = "0 0 10px rgba(0, 255, 255, 0.4)";
+            }}
           >
             {isSubmitting ? 'Subscribing…' : 'Subscribe'}
           </button>
