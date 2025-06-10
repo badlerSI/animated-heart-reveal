@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 const WEB_APP_URL =
@@ -7,6 +8,7 @@ export default function News() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,11 +35,17 @@ export default function News() {
 
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center px-4 py-16">
-      <div className="w-full max-w-4xl mb-16">
+      <div className="w-full max-w-4xl mb-16 relative">
+        {!imageLoaded && (
+          <div className="w-full h-32 bg-[#0d0d12] animate-pulse rounded"></div>
+        )}
         <img
           src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
           alt="Soul Dispatch"
-          className="w-full object-contain neon-glow"
+          className={`w-full object-contain neon-glow transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
+          }`}
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
 
@@ -60,7 +68,7 @@ export default function News() {
           />
           <button
             disabled={busy}
-            className="px-4 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded disabled:opacity-50"
+            className="px-4 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded disabled:opacity-50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
           >
             {busy ? "Subscribing…" : "Subscribe"}
           </button>
