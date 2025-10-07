@@ -1,8 +1,57 @@
-
+import { useEffect } from "react";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const Tech = () => {
   const imageLoaded = useImagePreloader("/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png");
+
+  useEffect(() => {
+    // Set page title
+    document.title = "Soul Interface Technology";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Discover the patent-pending technology behind Soul Interface's natural, offline AI.");
+    }
+
+    // Set canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = 'https://soulinterface.ai/tech';
+
+    // Set Open Graph meta tags
+    const ogTags = {
+      'og:type': 'article',
+      'og:url': 'https://soulinterface.ai/tech',
+      'og:title': 'Soul Interface Technology',
+      'og:description': "Discover the patent-pending technology behind Soul Interface's natural, offline AI.",
+      'og:image': '/og-tech.jpg',
+      'og:image:width': '1200',
+      'og:image:height': '630'
+    };
+
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Cleanup function to reset to home page meta
+    return () => {
+      document.title = "Soul Interface — Cloud-Free AI Assistant for Cars";
+      if (metaDescription) {
+        metaDescription.setAttribute("content", "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant");
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
