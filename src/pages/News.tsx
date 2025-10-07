@@ -36,9 +36,11 @@ export default function News() {
       'og:url': 'https://soulinterface.ai/news',
       'og:title': 'News — Soul Interface',
       'og:description': "Stay up to date with the latest news from Soul Interface.",
+      'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png',
       'og:image:width': '1200',
-      'og:image:height': '630'
+      'og:image:height': '630',
+      'og:image:alt': 'Soul Interface news header image'
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -46,6 +48,24 @@ export default function News() {
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set Twitter Card meta tags
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': 'News — Soul Interface',
+      'twitter:description': "Stay up to date with the latest news from Soul Interface.",
+      'twitter:image': '/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png'
+    };
+
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
         document.head.appendChild(meta);
       }
       meta.content = content;
