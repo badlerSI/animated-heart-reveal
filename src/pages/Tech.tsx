@@ -29,7 +29,7 @@ const Tech = () => {
       'og:url': 'https://soulinterface.ai/tech',
       'og:title': 'Soul Interface Technology',
       'og:description': "Discover the patent-pending technology behind Soul Interface's natural, offline AI.",
-      'og:image': '/og-tech.jpg',
+      'og:image': '/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png',
       'og:image:width': '1200',
       'og:image:height': '630'
     };

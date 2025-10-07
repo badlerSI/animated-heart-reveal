@@ -36,7 +36,7 @@ export default function News() {
       'og:url': 'https://soulinterface.ai/news',
       'og:title': 'News — Soul Interface',
       'og:description': "Stay up to date with the latest news from Soul Interface.",
-      'og:image': '/og-news.jpg',
+      'og:image': '/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png',
       'og:image:width': '1200',
       'og:image:height': '630'
     };
