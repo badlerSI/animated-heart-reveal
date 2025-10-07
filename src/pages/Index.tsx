@@ -27,10 +27,12 @@ const Index = () => {
       'og:type': 'website',
       'og:url': 'https://soulinterface.ai/',
       'og:title': 'Soul Interface — Cloud-Free AI Assistant for Cars',
-      'og:description': "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant",
+      'og:description': "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant.",
+      'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/4f6fbcc1-56c4-4684-b67c-dbf671788af0.png',
       'og:image:width': '1200',
-      'og:image:height': '630'
+      'og:image:height': '630',
+      'og:image:alt': 'Soul Interface AI Assistant in vehicle environment'
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -38,6 +40,24 @@ const Index = () => {
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set Twitter Card meta tags
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': 'Soul Interface — Cloud-Free AI Assistant for Cars',
+      'twitter:description': "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant.",
+      'twitter:image': '/lovable-uploads/4f6fbcc1-56c4-4684-b67c-dbf671788af0.png'
+    };
+
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
         document.head.appendChild(meta);
       }
       meta.content = content;
