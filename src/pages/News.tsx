@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const WEB_APP_URL =
@@ -10,6 +10,55 @@ export default function News() {
   const [busy, setBusy] = useState(false);
   
   const imageLoaded = useImagePreloader("/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png");
+
+  useEffect(() => {
+    // Set page title
+    document.title = "News — Soul Interface";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Stay up to date with the latest news from Soul Interface.");
+    }
+
+    // Set canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = 'https://soulinterface.ai/news';
+
+    // Set Open Graph meta tags
+    const ogTags = {
+      'og:type': 'article',
+      'og:url': 'https://soulinterface.ai/news',
+      'og:title': 'News — Soul Interface',
+      'og:description': "Stay up to date with the latest news from Soul Interface.",
+      'og:image': '/og-news.jpg',
+      'og:image:width': '1200',
+      'og:image:height': '630'
+    };
+
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Cleanup function to reset to home page meta
+    return () => {
+      document.title = "Soul Interface — Cloud-Free AI Assistant for Cars";
+      if (metaDescription) {
+        metaDescription.setAttribute("content", "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant");
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
