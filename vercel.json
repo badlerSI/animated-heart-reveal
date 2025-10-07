@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "https://www.soulinterface.ai/(.*)",
+      "destination": "https://soulinterface.ai/$1",
+      "permanent": true
+    }
+  ]
+}
