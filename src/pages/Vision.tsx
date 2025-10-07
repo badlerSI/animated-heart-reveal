@@ -29,9 +29,11 @@ const Vision = () => {
       'og:url': 'https://soulinterface.ai/vision',
       'og:title': 'Our Vision — Soul Interface',
       'og:description': "See how we imagine a future of total automotive freedom.",
+      'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png',
       'og:image:width': '1200',
-      'og:image:height': '630'
+      'og:image:height': '630',
+      'og:image:alt': 'Concept vehicle showing automotive freedom'
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -39,6 +41,24 @@ const Vision = () => {
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set Twitter Card meta tags
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': 'Our Vision — Soul Interface',
+      'twitter:description': "See how we imagine a future of total automotive freedom.",
+      'twitter:image': '/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png'
+    };
+
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
         document.head.appendChild(meta);
       }
       meta.content = content;
