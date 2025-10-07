@@ -1,8 +1,57 @@
-
+import { useEffect } from "react";
 import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const Partner = () => {
   const imageLoaded = useImagePreloader("/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png");
+
+  useEffect(() => {
+    // Set page title
+    document.title = "Partner with Soul Interface";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Partner with us to shape the next generation of customizable in-vehicle AI personas.");
+    }
+
+    // Set canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = 'https://soulinterface.ai/partner';
+
+    // Set Open Graph meta tags
+    const ogTags = {
+      'og:type': 'article',
+      'og:url': 'https://soulinterface.ai/partner',
+      'og:title': 'Partner with Soul Interface',
+      'og:description': "Partner with us to shape the next generation of customizable in-vehicle AI personas.",
+      'og:image': '/og-partner.jpg',
+      'og:image:width': '1200',
+      'og:image:height': '630'
+    };
+
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Cleanup function to reset to home page meta
+    return () => {
+      document.title = "Soul Interface — Cloud-Free AI Assistant for Cars";
+      if (metaDescription) {
+        metaDescription.setAttribute("content", "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant");
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-start px-4 py-16">
