@@ -72,7 +72,30 @@ const Partner = () => {
       {/* AiSha partnership text */}
       <div className="max-w-4xl text-center mb-16">
         <p className="text-lg md:text-xl leading-relaxed text-cyan-white/90 font-outfit">
-          We have teamed up with AiSha LLC to integrate Soul Interface into the greatest 240Zs ever conceived. Steel with a real soul, premiering Q3 2025.
+          We have teamed up with{" "}
+          <a
+            href="https://aishallc.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-white hover:text-cyan-300 transition-all duration-300"
+            style={{
+              textShadow: "0 0 8px rgba(0, 255, 255, 0.6)",
+              filter: "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))"
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
+              target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
+              target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
+            }}
+          >
+            AiSha LLC
+          </a>{" "}
+          to integrate Soul Interface into the greatest 240Zs ever conceived. Steel with a real soul, premiering Q3 2025.
         </p>
       </div>
 
