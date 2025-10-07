@@ -29,9 +29,11 @@ const Partner = () => {
       'og:url': 'https://soulinterface.ai/partner',
       'og:title': 'Partner with Soul Interface',
       'og:description': "Partner with us to shape the next generation of customizable in-vehicle AI personas.",
+      'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png',
       'og:image:width': '1200',
-      'og:image:height': '630'
+      'og:image:height': '630',
+      'og:image:alt': 'Partnership handshake symbolizing AI collaboration'
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -39,6 +41,24 @@ const Partner = () => {
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set Twitter Card meta tags
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': 'Partner with Soul Interface',
+      'twitter:description': "Partner with us to shape the next generation of customizable in-vehicle AI personas.",
+      'twitter:image': '/lovable-uploads/28631674-4b61-4d51-8fea-ef232cea859d.png'
+    };
+
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
         document.head.appendChild(meta);
       }
       meta.content = content;
