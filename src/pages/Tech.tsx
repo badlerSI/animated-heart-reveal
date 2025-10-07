@@ -29,9 +29,11 @@ const Tech = () => {
       'og:url': 'https://soulinterface.ai/tech',
       'og:title': 'Soul Interface Technology',
       'og:description': "Discover the patent-pending technology behind Soul Interface's natural, offline AI.",
+      'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png',
       'og:image:width': '1200',
-      'og:image:height': '630'
+      'og:image:height': '630',
+      'og:image:alt': 'Soul Interface technology diagram'
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -39,6 +41,24 @@ const Tech = () => {
       if (!meta) {
         meta = document.createElement('meta');
         meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    });
+
+    // Set Twitter Card meta tags
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': 'Soul Interface Technology',
+      'twitter:description': "Discover the patent-pending technology behind Soul Interface's natural, offline AI.",
+      'twitter:image': '/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png'
+    };
+
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
         document.head.appendChild(meta);
       }
       meta.content = content;
