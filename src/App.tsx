@@ -10,6 +10,7 @@ import Tech from "./pages/Tech";
 import Partner from "./pages/Partner";
 import News from "./pages/News";
 import Vision from "./pages/Vision";
+import Sema from "./pages/Sema";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/partner" element={<Partner />} />
           <Route path="/news" element={<News />} />
           <Route path="/vision" element={<Vision />} />
+          <Route path="/sema" element={<Sema />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
