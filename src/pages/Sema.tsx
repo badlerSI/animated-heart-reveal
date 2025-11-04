@@ -59,6 +59,25 @@ const Sema = () => {
             </p>
           </div>
         </section>
+
+        {/* Navigation Buttons */}
+        <section className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-20">
+          <Link to="/builders">
+            <Button size="lg" className="w-48">
+              For Builders
+            </Button>
+          </Link>
+          <Link to="/investors">
+            <Button size="lg" className="w-48">
+              For Investors
+            </Button>
+          </Link>
+          <Link to="/news">
+            <Button size="lg" className="w-48">
+              For Fans
+            </Button>
+          </Link>
+        </section>
       </div>
     </div>
   );
