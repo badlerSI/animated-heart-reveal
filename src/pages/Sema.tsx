@@ -61,7 +61,7 @@ const Sema = () => {
           <section>
             <h2 className="text-3xl font-bold mb-4">One System to Do it All</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Soul Interface's patent-pending architecture is designed especially for applications where for reasons of taste, simplicity, or safety, screens are not required. It replaces every infotainment system in a modern car's interior with one interface that never takes your eyes off the road.
+              Soul Interface's patent-pending architecture is designed especially for applications where for reasons of taste, simplicity, or safety, screens are not desired. It replaces every infotainment system in a modern car's interior with one interface that never takes your eyes off the road.
             </p>
           </section>
 
