@@ -25,9 +25,8 @@ const Sema = () => {
         </Link>
 
         <h1 className="text-4xl md:text-6xl font-bold mb-16 text-center flex items-center justify-center gap-4">
-          <span>Soul</span>
           <img src={heartLogo} alt="Heart" className="w-12 h-12 md:w-16 md:h-16" />
-          <span>Interface</span>
+          <span>Soul Interface</span>
         </h1>
 
         {/* Builders Section */}
