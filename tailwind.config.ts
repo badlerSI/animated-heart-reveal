@@ -19,9 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				sans: ['Helvetica', 'Arial', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
 				outfit: ['Outfit', 'sans-serif'],
-				playfair: ['Playfair Display', 'serif'], // More stylish serif font
+				playfair: ['Playfair Display', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
