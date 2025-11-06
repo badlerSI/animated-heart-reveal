@@ -113,7 +113,7 @@ const Sema = () => {
               For Builders
             </Button>
           </Link>
-          <Link to="/partner">
+          <Link to="/tech">
             <Button size="lg" className="w-48">
               For Investors
             </Button>
