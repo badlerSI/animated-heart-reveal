@@ -69,7 +69,7 @@ const Sema = () => {
           <section>
             <h2 className="text-3xl font-bold mb-4">True Luxury</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Give your customers' vehicles the ability to do things that no car on the road today, and not even any smartphone can do. Accurately look up almost any location or fact without needing the internet. A clientele that expects bespoke touches at every turn should not have to settle for choosing among a handful of personas for their ride. We let them forge a digital soul, imbuing their car with whatever age, gender, accent, temperament, species assistance their heart desires, and we make it easy to forge a new one.
+              Give your customers' vehicles the ability to do things that no car on the road today, and not even any smartphone can do. A clientele that expects bespoke touches at every turn should not have to settle for choosing among a handful of personas for their ride. We let them forge a digital soul, imbuing their car with whatever age, gender, accent, temperament, species assistance their heart desires, and we make it easy to forge a new one.
             </p>
           </section>
 
