@@ -115,10 +115,16 @@ const Investors = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-2 md:p-4 lg:p-10">
       <style>{`
+        body, html {
+          background-color: #000;
+        }
+
         .slide-container-wrapper {
           display: flex;
           justify-content: center;
           align-items: flex-start;
+          background-color: #000;
+          position: relative;
         }
 
         .slide-container {
@@ -137,6 +143,52 @@ const Investors = () => {
           .slide-container {
             max-width: 100%;
             max-height: calc(100vh - 200px);
+          }
+        }
+
+        @media (max-width: 768px) and (orientation: landscape) {
+          .mobile-nav-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+          
+          .mobile-prev-btn {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.6) !important;
+            backdrop-filter: blur(4px);
+          }
+          
+          .mobile-next-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.6) !important;
+            backdrop-filter: blur(4px);
+          }
+          
+          .mobile-slide-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+          }
+          
+          .desktop-nav {
+            display: none;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .mobile-nav-wrapper {
+            display: none;
           }
         }
         
@@ -194,7 +246,8 @@ const Investors = () => {
       </div>
 
       {/* Slide Container */}
-      <div className="slide-container-wrapper">
+      <div className="slide-container-wrapper bg-black">
+        <div className="mobile-nav-wrapper">
         <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
@@ -520,10 +573,50 @@ const Investors = () => {
           </div>
         )}
       </div>
+      
+      {/* Mobile Navigation (sides) */}
+      <Button
+        onClick={prevSlide}
+        disabled={currentSlide === 0}
+        variant="outline"
+        size="icon"
+        className="mobile-prev-btn"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </Button>
+      
+      <Button
+        onClick={nextSlide}
+        disabled={currentSlide === totalSlides - 1}
+        variant="outline"
+        size="icon"
+        className="mobile-next-btn"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </Button>
+
+      {/* Slide indicators (mobile) */}
+      <div className="mobile-slide-dots flex gap-2">
+        {Array.from({ length: totalSlides }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              currentSlide === index 
+                ? 'bg-cyan-400 w-6' 
+                : 'bg-gray-600 hover:bg-gray-500'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+      </div>
       </div>
 
-      {/* Navigation Controls */}
-      <div className="w-full max-w-[1280px] flex justify-between items-center mt-2 md:mt-4 px-2">
+      {/* Desktop Navigation (bottom) */}
+      <div className="desktop-nav w-full max-w-[1280px] flex justify-between items-center mt-2 md:mt-4 px-2">
         <Button
           onClick={prevSlide}
           variant="ghost"
