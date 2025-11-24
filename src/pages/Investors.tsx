@@ -376,7 +376,7 @@ const Investors = () => {
                       <span>Build production‑ready chassis</span>
                     </li>
                     <li className="flex items-start gap-3 text-lg text-white/90">
-                      <i className="fa-solid fa-building-flask text-cyan-white cyan-glow flex-shrink-0 mt-1"></i>
+                      <i className="fa-solid fa-handshake text-cyan-white cyan-glow flex-shrink-0 mt-1"></i>
                       <span>Lab build‑out + key trade shows</span>
                     </li>
                   </ul>
