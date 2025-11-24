@@ -137,7 +137,7 @@ const Investors = () => {
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
                     <i className="fa-solid fa-language text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
-                    <span>Offline machine interpreter for people & machines</span>
+                    <span>The most capable non-human interpreter there is</span>
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
                     <i className="fa-solid fa-brain text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
