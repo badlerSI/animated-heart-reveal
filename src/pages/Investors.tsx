@@ -8,6 +8,7 @@ const Investors = () => {
   const [isLandscape, setIsLandscape] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scale, setScale] = useState(1);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
   const totalSlides = 5;
 
   useEffect(() => {
@@ -87,6 +88,51 @@ const Investors = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Touch swipe gestures for mobile
+  useEffect(() => {
+    if (!isMobile) return;
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].clientX;
+      const swipeDistance = touchStartX - touchEndX;
+      const minSwipeDistance = 50;
+      
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0 && currentSlide < totalSlides - 1) {
+          nextSlide();
+          setShowSwipeHint(false);
+        } else if (swipeDistance < 0 && currentSlide > 0) {
+          prevSlide();
+          setShowSwipeHint(false);
+        }
+      }
+    };
+    
+    const container = document.querySelector('.slide-container');
+    container?.addEventListener('touchstart', handleTouchStart);
+    container?.addEventListener('touchend', handleTouchEnd);
+    
+    return () => {
+      container?.removeEventListener('touchstart', handleTouchStart);
+      container?.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, currentSlide]);
+
+  // Hide swipe hint after timeout
+  useEffect(() => {
+    if (isMobile && showSwipeHint) {
+      const timer = setTimeout(() => setShowSwipeHint(false), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile, showSwipeHint]);
+
   // Show rotation prompt on mobile portrait
   if (isMobile && !isLandscape) {
     return (
@@ -147,32 +193,6 @@ const Investors = () => {
         }
 
         @media (max-width: 768px) and (orientation: landscape) {
-          .mobile-nav-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-          }
-          
-          .mobile-prev-btn {
-            position: absolute;
-            left: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            background-color: rgba(0, 0, 0, 0.6) !important;
-            backdrop-filter: blur(4px);
-          }
-          
-          .mobile-next-btn {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            background-color: rgba(0, 0, 0, 0.6) !important;
-            backdrop-filter: blur(4px);
-          }
-          
           .mobile-slide-dots {
             position: absolute;
             bottom: 20px;
@@ -184,12 +204,46 @@ const Investors = () => {
           .desktop-nav {
             display: none;
           }
+
+          .swipe-hint {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2CE0D0;
+            font-size: 0.875rem;
+            z-index: 25;
+            animation: fadeOut 4s forwards;
+            text-shadow: 0 0 10px rgba(44, 224, 208, 0.6);
+          }
+
+          @keyframes fadeOut {
+            0%, 70% { opacity: 1; }
+            100% { opacity: 0; }
+          }
         }
 
         @media (min-width: 769px) {
-          .mobile-nav-wrapper {
+          .mobile-slide-dots {
             display: none;
           }
+
+          .swipe-hint {
+            display: none;
+          }
+        }
+
+        .desktop-nav button {
+          transition: all 0.3s ease;
+        }
+
+        .desktop-nav button:hover {
+          color: #2CE0D0;
+          box-shadow: 0 0 20px rgba(44, 224, 208, 0.5);
+          border-color: #2CE0D0;
         }
         
         .slide-inner {
@@ -247,7 +301,6 @@ const Investors = () => {
 
       {/* Slide Container */}
       <div className="slide-container-wrapper bg-black">
-        <div className="mobile-nav-wrapper">
         <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
@@ -572,46 +625,30 @@ const Investors = () => {
             </div>
           </div>
         )}
-      </div>
-      
-      {/* Mobile Navigation (sides) */}
-      <Button
-        onClick={prevSlide}
-        disabled={currentSlide === 0}
-        variant="outline"
-        size="icon"
-        className="mobile-prev-btn"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </Button>
-      
-      <Button
-        onClick={nextSlide}
-        disabled={currentSlide === totalSlides - 1}
-        variant="outline"
-        size="icon"
-        className="mobile-next-btn"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </Button>
+        {/* Swipe hint for mobile */}
+        {isMobile && showSwipeHint && (
+          <div className="swipe-hint">
+            <ChevronLeft className="h-5 w-5 animate-pulse" />
+            <span>Swipe to navigate</span>
+            <ChevronRight className="h-5 w-5 animate-pulse" />
+          </div>
+        )}
 
-      {/* Slide indicators (mobile) */}
-      <div className="mobile-slide-dots flex gap-2">
-        {Array.from({ length: totalSlides }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              currentSlide === index 
-                ? 'bg-cyan-400 w-6' 
-                : 'bg-gray-600 hover:bg-gray-500'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+        {/* Slide indicators (mobile) */}
+        <div className="mobile-slide-dots flex gap-2">
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentSlide === index 
+                  ? 'bg-cyan-400 w-6' 
+                  : 'bg-gray-600 hover:bg-gray-500'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
       </div>
 
@@ -620,10 +657,10 @@ const Investors = () => {
         <Button
           onClick={prevSlide}
           variant="ghost"
-          className="text-white hover:text-[#2CE0D0] text-xs md:text-base px-2 md:px-4"
+          className="text-white hover:text-cyan-white hover:bg-white/10 flex items-center gap-2"
           disabled={currentSlide === 0}
         >
-          <ChevronLeft className="mr-1 md:mr-2 w-4 h-4 md:w-5 md:h-5" /> 
+          <div className="w-0 h-0 border-t-[6px] border-t-transparent border-r-[10px] border-r-current border-b-[6px] border-b-transparent" />
           <span className="hidden sm:inline">Previous</span>
           <span className="sm:hidden">Prev</span>
         </Button>
@@ -633,7 +670,7 @@ const Investors = () => {
               key={i}
               onClick={() => setCurrentSlide(i)}
               className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
-                i === currentSlide ? 'bg-[#2CE0D0] w-5 md:w-8' : 'bg-gray-600'
+                i === currentSlide ? 'bg-cyan-400 w-5 md:w-8' : 'bg-gray-600'
               }`}
             />
           ))}
@@ -641,12 +678,12 @@ const Investors = () => {
         <Button
           onClick={nextSlide}
           variant="ghost"
-          className="text-white hover:text-[#2CE0D0] text-xs md:text-base px-2 md:px-4"
+          className="text-white hover:text-cyan-white hover:bg-white/10 flex items-center gap-2"
           disabled={currentSlide === totalSlides - 1}
         >
           <span className="hidden sm:inline">Next</span>
           <span className="sm:hidden">Next</span>
-          <ChevronRight className="ml-1 md:ml-2 w-4 h-4 md:w-5 md:h-5" />
+          <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-current border-b-[6px] border-b-transparent" />
         </Button>
       </div>
     </div>
