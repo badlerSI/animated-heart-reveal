@@ -316,7 +316,7 @@ const Investors = () => {
                       </li>
                       <li className="flex items-start gap-3 text-white/90">
                         <i className="fa-solid fa-check text-cyan-white cyan-glow text-sm mt-1 flex-shrink-0"></i>
-                        <span className="text-cyan-white cyan-glow">"Soul‑equipped" trim: ~$30k extra</span>
+                        <span className="text-cyan-white cyan-glow">$50k value to end customer =<br />Big financial incentive to builder</span>
                       </li>
                       <li className="flex items-start gap-3 text-white/90">
                         <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
