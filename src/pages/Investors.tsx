@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Investors = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLandscape, setIsLandscape] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const totalSlides = 5;
 
   useEffect(() => {
@@ -16,6 +18,33 @@ const Investors = () => {
         "Soul Interface investor pitch deck: cloud-free AI technology for vehicles"
       );
     }
+
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Check orientation
+    const checkOrientation = () => {
+      if (window.innerWidth <= 768) {
+        setIsLandscape(window.innerWidth > window.innerHeight);
+      } else {
+        setIsLandscape(true);
+      }
+    };
+
+    checkMobile();
+    checkOrientation();
+
+    window.addEventListener('resize', checkMobile);
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
   }, []);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -30,8 +59,33 @@ const Investors = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Show rotation prompt on mobile portrait
+  if (isMobile && !isLandscape) {
+    return (
+      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center p-6 z-50">
+        <div className="text-center space-y-6">
+          <div className="text-6xl text-cyan-white cyan-glow animate-pulse">
+            <i className="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold text-white">Please Rotate Your Device</h2>
+            <p className="text-white/70">This pitch deck is best viewed in landscape orientation</p>
+          </div>
+          <div className="text-cyan-white cyan-glow text-4xl animate-bounce">
+            <i className="fa-solid fa-rotate"></i>
+          </div>
+        </div>
+        <style>{`
+          .cyan-glow {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-4 md:p-10">
+    <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-2 md:p-4 lg:p-10">
       <style>{`
         .slide-container {
           width: 100%;
@@ -42,6 +96,32 @@ const Investors = () => {
           overflow: hidden;
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
           border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        /* Mobile landscape optimizations */
+        @media (max-width: 768px) and (orientation: landscape) {
+          .slide-container {
+            max-height: calc(100vh - 60px);
+            width: auto;
+          }
+          
+          .slide-inner {
+            font-size: 0.75rem;
+          }
+          
+          .slide-inner h2 {
+            font-size: 1.25rem !important;
+          }
+          
+          .slide-inner h3 {
+            font-size: 1rem !important;
+          }
+          
+          .slide-inner li,
+          .slide-inner p,
+          .slide-inner span {
+            font-size: 0.75rem !important;
+          }
         }
         
         .slide-inner {
@@ -91,8 +171,8 @@ const Investors = () => {
       `}</style>
 
       {/* Navigation */}
-      <div className="w-full max-w-[1280px] flex justify-end items-center mb-4">
-        <div className="text-white text-sm">
+      <div className="w-full max-w-[1280px] flex justify-end items-center mb-2 md:mb-4 px-2">
+        <div className="text-white text-xs md:text-sm">
           Slide {currentSlide + 1} / {totalSlides}
         </div>
       </div>
@@ -425,22 +505,24 @@ const Investors = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="w-full max-w-[1280px] flex justify-between items-center mt-4">
+      <div className="w-full max-w-[1280px] flex justify-between items-center mt-2 md:mt-4 px-2">
         <Button
           onClick={prevSlide}
           variant="ghost"
-          className="text-white hover:text-[#2CE0D0]"
+          className="text-white hover:text-[#2CE0D0] text-xs md:text-base px-2 md:px-4"
           disabled={currentSlide === 0}
         >
-          <ChevronLeft className="mr-2" /> Previous
+          <ChevronLeft className="mr-1 md:mr-2 w-4 h-4 md:w-5 md:h-5" /> 
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Prev</span>
         </Button>
-        <div className="flex gap-2">
+        <div className="flex gap-1.5 md:gap-2">
           {Array.from({ length: totalSlides }).map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentSlide(i)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                i === currentSlide ? 'bg-[#2CE0D0] w-8' : 'bg-gray-600'
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
+                i === currentSlide ? 'bg-[#2CE0D0] w-5 md:w-8' : 'bg-gray-600'
               }`}
             />
           ))}
@@ -448,10 +530,12 @@ const Investors = () => {
         <Button
           onClick={nextSlide}
           variant="ghost"
-          className="text-white hover:text-[#2CE0D0]"
+          className="text-white hover:text-[#2CE0D0] text-xs md:text-base px-2 md:px-4"
           disabled={currentSlide === totalSlides - 1}
         >
-          Next <ChevronRight className="ml-2" />
+          <span className="hidden sm:inline">Next</span>
+          <span className="sm:hidden">Next</span>
+          <ChevronRight className="ml-1 md:ml-2 w-4 h-4 md:w-5 md:h-5" />
         </Button>
       </div>
     </div>
