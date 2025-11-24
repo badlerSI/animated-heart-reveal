@@ -8,8 +8,6 @@ const Investors = () => {
   const [isLandscape, setIsLandscape] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scale, setScale] = useState(1);
-  const [showSwipeHint, setShowSwipeHint] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
   const totalSlides = 5;
 
   useEffect(() => {
@@ -89,77 +87,6 @@ const Investors = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Touch swipe handling for mobile
-  useEffect(() => {
-    if (!isMobile) return;
-    
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      // Prevent page scroll during horizontal swipe
-      const touchCurrentX = e.touches[0].clientX;
-      const touchCurrentY = e.touches[0].clientY;
-      const deltaX = Math.abs(touchCurrentX - touchStartX);
-      const deltaY = Math.abs(touchCurrentY - touchStartY);
-      
-      if (deltaX > deltaY) {
-        e.preventDefault();
-      }
-    };
-    
-    const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX = e.changedTouches[0].clientX;
-      touchEndY = e.changedTouches[0].clientY;
-      
-      const swipeDistanceX = touchStartX - touchEndX;
-      const swipeDistanceY = touchStartY - touchEndY;
-      const minSwipeDistance = 50;
-      
-      // Only swipe if horizontal movement > vertical movement
-      if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY) && 
-          Math.abs(swipeDistanceX) > minSwipeDistance) {
-        
-        if (swipeDistanceX > 0) {
-          // Swipe left = next slide (with wrap)
-          setCurrentSlide(prev => (prev + 1) % totalSlides);
-        } else {
-          // Swipe right = previous slide (with wrap)
-          setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
-        }
-        
-        setShowSwipeHint(false);
-      }
-    };
-    
-    const container = containerRef.current;
-    if (!container) return;
-    
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: false });
-    container.addEventListener('touchend', handleTouchEnd, { passive: true });
-    
-    return () => {
-      container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
-      container.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [isMobile, totalSlides]);
-
-  // Hide swipe hint after timeout
-  useEffect(() => {
-    if (isMobile && showSwipeHint) {
-      const timer = setTimeout(() => setShowSwipeHint(false), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [isMobile, showSwipeHint]);
 
   // Show rotation prompt on mobile portrait
   if (isMobile && !isLandscape) {
@@ -233,38 +160,29 @@ const Investors = () => {
             display: none;
           }
 
-          .swipe-hint {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
+          .mobile-nav-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid #2CE0D0;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(44, 224, 208, 0.6);
             display: flex;
             align-items: center;
-            gap: 16px;
-            color: #2CE0D0;
-            font-size: 1rem;
-            font-weight: 600;
-            z-index: 25;
-            animation: fadeOut 5s forwards, pulse 2s ease-in-out infinite;
-            text-shadow: 0 0 15px rgba(44, 224, 208, 0.8);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 24px;
-            border-radius: 9999px;
-            border: 1px solid rgba(44, 224, 208, 0.3);
-          }
-          
-          @keyframes pulse {
-            0%, 100% { 
-              transform: translateX(-50%) scale(1); 
-            }
-            50% { 
-              transform: translateX(-50%) scale(1.05); 
-            }
+            justify-content: center;
+            transition: all 0.3s ease;
+            padding: 0;
           }
 
-          @keyframes fadeOut {
-            0%, 70% { opacity: 1; }
-            100% { opacity: 0; }
+          .mobile-nav-btn:hover:not(:disabled) {
+            box-shadow: 0 0 30px rgba(44, 224, 208, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+          }
+
+          .mobile-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
           }
         }
 
@@ -273,7 +191,7 @@ const Investors = () => {
             display: none;
           }
 
-          .swipe-hint {
+          .mobile-nav-btn {
             display: none;
           }
         }
@@ -343,7 +261,7 @@ const Investors = () => {
 
       {/* Slide Container */}
       <div className="slide-container-wrapper bg-black">
-        <div ref={containerRef} className="slide-container">
+        <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
           <div className="w-full h-full relative flex items-center justify-center bg-black">
@@ -667,13 +585,38 @@ const Investors = () => {
             </div>
           </div>
         )}
-        {/* Swipe hint for mobile */}
-        {isMobile && showSwipeHint && (
-          <div className="swipe-hint">
-            <ChevronLeft className="h-5 w-5 animate-pulse" />
-            <span>Swipe to navigate</span>
-            <ChevronRight className="h-5 w-5 animate-pulse" />
-          </div>
+        
+        {/* Mobile Navigation Buttons */}
+        {isMobile && (
+          <>
+            <Button
+              onClick={prevSlide}
+              className="mobile-nav-btn"
+              style={{
+                position: 'absolute',
+                left: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 20
+              }}
+            >
+              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-r-[16px] border-r-[#2CE0D0] border-b-[10px] border-b-transparent" />
+            </Button>
+            
+            <Button
+              onClick={nextSlide}
+              className="mobile-nav-btn"
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 20
+              }}
+            >
+              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-[#2CE0D0] border-b-[10px] border-b-transparent" />
+            </Button>
+          </>
         )}
 
         {/* Slide indicators (mobile) */}
