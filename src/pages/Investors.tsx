@@ -358,7 +358,8 @@ const Investors = () => {
 
             <div className="h-full flex flex-col relative z-10">
               <div className="px-12 pt-8 pb-6 border-b border-cyan-white/20">
-                <h2 className="text-3xl font-bold uppercase tracking-wider metal-text">$900k SAFE <span className="text-cyan-white cyan-glow mx-3">→</span> From Demo to Deployments</h2>
+                <h2 className="text-3xl font-bold uppercase tracking-wider metal-text">$900K SAFE</h2>
+                <h3 className="text-2xl font-bold uppercase tracking-wider text-cyan-white cyan-glow mt-1">From Demo to Deployments</h3>
               </div>
 
               <div className="flex-1 grid grid-cols-2">
