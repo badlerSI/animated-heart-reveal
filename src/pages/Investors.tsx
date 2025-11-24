@@ -388,25 +388,25 @@ const Investors = () => {
                   <div className="space-y-7 pl-8 relative">
                     <div className="relative">
                       <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow-strong"></div>
-                      <h4 className="metal-text font-bold text-base">Early Dec '25 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white cyan-glow uppercase">Save Lives</span></h4>
+                      <h4 className="metal-text font-bold text-base">Early Dec '25</h4>
                       <p className="text-white/60 text-sm mt-1">Sign first APC customer & Field offline demo</p>
                     </div>
 
                     <div className="relative">
                       <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
-                      <h4 className="metal-text font-bold text-base">Jan '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Change Lives</span></h4>
+                      <h4 className="metal-text font-bold text-base">Jan '26</h4>
                       <p className="text-white/60 text-sm mt-1">Launch ed‑tech pilots at 2 sites</p>
                     </div>
 
                     <div className="relative">
                       <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
-                      <h4 className="metal-text font-bold text-base">Spring '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white cyan-glow uppercase">Paid Orders</span></h4>
+                      <h4 className="metal-text font-bold text-base">Spring '26</h4>
                       <p className="text-white/60 text-sm mt-1">Convert pilots → paying Ed Edition. Legal deployments.</p>
                     </div>
 
                     <div className="relative">
                       <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
-                      <h4 className="metal-text font-bold text-base">SEMA '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Better Lives</span></h4>
+                      <h4 className="metal-text font-bold text-base">SEMA '26</h4>
                       <p className="text-white/60 text-sm mt-1">Premiere 12V classic talking car.</p>
                     </div>
                   </div>
