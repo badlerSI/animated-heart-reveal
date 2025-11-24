@@ -25,23 +25,13 @@ const Investors = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     
-    // Check orientation with delay for Android Chrome
+    // Check orientation
     const checkOrientation = () => {
-      setTimeout(() => {
-        const width = window.innerWidth || window.screen.width;
-        const height = window.innerHeight || window.screen.height;
-        
-        if (width <= 768) {
-          // Use screen.orientation API if available (better for Android)
-          if (window.screen.orientation) {
-            setIsLandscape(window.screen.orientation.type.includes('landscape'));
-          } else {
-            setIsLandscape(width > height);
-          }
-        } else {
-          setIsLandscape(true);
-        }
-      }, 100);
+      if (window.innerWidth <= 768) {
+        setIsLandscape(window.innerWidth > window.innerHeight);
+      } else {
+        setIsLandscape(true);
+      }
     };
 
     checkMobile();
@@ -61,30 +51,23 @@ const Investors = () => {
   // Calculate scale for mobile landscape
   useEffect(() => {
     const calculateScale = () => {
-      setTimeout(() => {
-        const width = window.innerWidth || window.screen.width;
-        const height = window.innerHeight || window.screen.height;
-        
-        if (width <= 768) {
-          const designWidth = 1280;
-          const designHeight = 720;
-          const availableWidth = width - 16; // reduced padding for mobile
-          const availableHeight = height - 60; // reduced nav space
-          const scaleX = availableWidth / designWidth;
-          const scaleY = availableHeight / designHeight;
-          const newScale = Math.min(scaleX, scaleY);
-          setScale(Math.max(newScale, 0.25)); // minimum scale 0.25
-        } else {
-          setScale(1);
-        }
-      }, 100);
+      if (window.innerWidth <= 768) {
+        const designWidth = 1280;
+        const designHeight = 720;
+        const availableWidth = window.innerWidth - 32; // padding
+        const availableHeight = window.innerHeight - 80; // nav space
+        const scaleX = availableWidth / designWidth;
+        const scaleY = availableHeight / designHeight;
+        const newScale = Math.min(scaleX, scaleY);
+        setScale(Math.max(newScale, 0.3)); // minimum scale 0.3
+      } else {
+        setScale(1);
+      }
     };
     
     calculateScale();
     window.addEventListener('resize', calculateScale);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(calculateScale, 200); // Extra delay after orientation change
-    });
+    window.addEventListener('orientationchange', calculateScale);
     
     return () => {
       window.removeEventListener('resize', calculateScale);
