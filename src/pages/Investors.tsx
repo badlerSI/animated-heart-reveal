@@ -294,7 +294,7 @@ const Investors = () => {
                       </div>
                       <div className="flex justify-between border-b border-white/10 pb-2">
                         <span className="text-white/60">Target</span>
-                        <span className="text-cyan-white cyan-glow font-mono font-bold">$5k+ profit</span>
+                        <span className="text-cyan-white cyan-glow font-mono font-bold">{'>'}$5k net profit/unit</span>
                       </div>
                       <div className="text-sm text-white/40 pt-2 italic">Education Edition: discounted</div>
                     </div>
