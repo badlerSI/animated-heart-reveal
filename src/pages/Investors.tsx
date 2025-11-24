@@ -31,7 +31,7 @@ const Investors = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] flex flex-col items-center justify-center p-4 md:p-10">
+    <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-4 md:p-10">
       <style>{`
         .slide-container {
           width: 100%;
@@ -41,13 +41,52 @@ const Investors = () => {
           position: relative;
           overflow: auto;
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
-          border: 1px solid rgba(255,255,255,0.1);
+          border: 1px solid rgba(0, 255, 255, 0.2);
         }
         
         .slide-inner {
           min-width: 100%;
           min-height: 100%;
           position: relative;
+        }
+
+        .cyan-glow {
+          filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+        }
+
+        .cyan-glow-strong {
+          filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8))
+                  drop-shadow(0 0 30px rgba(0, 255, 255, 0.4));
+        }
+
+        .metal-text {
+          background: linear-gradient(180deg, #ffffff 0%, #94a3b8 50%, #64748b 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .neon-flicker {
+          animation: neon-flicker 3s ease-in-out infinite;
+        }
+
+        @keyframes neon-flicker {
+          0%, 100% {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+          }
+          25% {
+            filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.8));
+          }
+          50% {
+            filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.4));
+          }
+          75% {
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
+          }
+        }
+
+        .radial-glow {
+          background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
         }
       `}</style>
 
@@ -62,11 +101,12 @@ const Investors = () => {
       <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
-          <div className="w-full h-full relative flex items-center justify-center bg-[#05070A]">
+          <div className="w-full h-full relative flex items-center justify-center bg-black">
+            <div className="absolute inset-0 radial-glow"></div>
             <img 
               src="/pitch-deck/opening-slide.png" 
               alt="Soul Interface Opening Slide" 
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain relative z-10"
             />
           </div>
         )}
@@ -74,43 +114,44 @@ const Investors = () => {
         {/* Slide 2: Soul Box */}
         {currentSlide === 1 && (
           <div className="slide-inner bg-black">
-            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
+            <div className="absolute inset-0 radial-glow"></div>
+            <div className="absolute bottom-[-50px] right-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
             <div className="grid grid-cols-2 h-full relative z-10 px-12 py-8 gap-8">
               <div className="flex flex-col justify-center pr-6">
-                <h2 className="font-sans font-bold text-3xl text-white tracking-wider uppercase mb-2">Soul Box</h2>
-                <h3 className="font-sans font-normal text-xl text-cyan-white mb-8 tracking-wide">Carry-On Offline Machine Interpreter</h3>
+                <h2 className="font-sans font-bold text-3xl metal-text tracking-wider uppercase mb-2">Soul Box</h2>
+                <h3 className="font-sans font-normal text-xl text-cyan-white cyan-glow mb-8 tracking-wide">Carry-On Offline Machine Interpreter</h3>
 
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-lg text-white/90">
-                    <i className="fa-solid fa-server text-cyan-white mt-1 flex-shrink-0"></i>
+                    <i className="fa-solid fa-server text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
                     <span>Carry‑on RTX 6000 mini‑datacenter</span>
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
-                    <i className="fa-solid fa-bolt text-cyan-white mt-1 flex-shrink-0"></i>
+                    <i className="fa-solid fa-bolt text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
                     <span>Cloud‑free, 120V plug‑anywhere power</span>
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
-                    <i className="fa-solid fa-microphone-lines text-cyan-white mt-1 flex-shrink-0"></i>
+                    <i className="fa-solid fa-microphone-lines text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
                     <span>Voice‑first, screen‑optional, app‑connected</span>
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
-                    <i className="fa-solid fa-language text-cyan-white mt-1 flex-shrink-0"></i>
+                    <i className="fa-solid fa-language text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
                     <span>Offline machine interpreter for people & machines</span>
                   </li>
                   <li className="flex items-start gap-3 text-lg text-white/90">
-                    <i className="fa-solid fa-brain text-cyan-white mt-1 flex-shrink-0"></i>
+                    <i className="fa-solid fa-brain text-cyan-white cyan-glow mt-1 flex-shrink-0"></i>
                     <span>Preloaded knowledge + patent‑pending "souls"</span>
                   </li>
                 </ul>
               </div>
 
               <div className="flex flex-col justify-center items-center relative">
-                <div className="absolute w-80 h-80 bg-cyan-white opacity-10 blur-3xl rounded-full"></div>
+                <div className="absolute w-80 h-80 bg-cyan-white opacity-10 blur-3xl rounded-full neon-flicker"></div>
                 
-                <div className="w-80 h-56 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-white/10 shadow-2xl relative flex items-center justify-center">
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-white/20"></div>
-                  <div className="text-6xl text-cyan-white">心</div>
+                <div className="w-80 h-56 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-cyan-white/20 shadow-2xl relative flex items-center justify-center">
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-cyan-white/30"></div>
+                  <div className="text-6xl text-cyan-white cyan-glow-strong" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
                   <div className="absolute bottom-3 left-0 right-0 flex gap-2 px-6">
                     <div className="h-1 bg-gray-800 flex-1 rounded"></div>
                     <div className="h-1 bg-gray-800 flex-1 rounded"></div>
@@ -120,7 +161,7 @@ const Investors = () => {
               </div>
 
               <div className="absolute bottom-6 right-8 text-white/50 text-xs tracking-wider uppercase">
-                <i className="fa-solid fa-shield-halved mr-2 text-cyan-white"></i>Cloud-free. Local-only. No data leaves the box.
+                <i className="fa-solid fa-shield-halved mr-2 text-cyan-white cyan-glow"></i>Cloud-free. Local-only. No data leaves the box.
               </div>
             </div>
           </div>
@@ -129,24 +170,25 @@ const Investors = () => {
         {/* Slide 3: Three Pillars */}
         {currentSlide === 2 && (
           <div className="slide-inner bg-black">
-            <div className="absolute inset-0 bg-gradient-to-b from-cyan-white/5 to-transparent opacity-30"></div>
+            <div className="absolute inset-0 radial-glow"></div>
+            <div className="absolute top-[-50px] left-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
             <div className="h-full flex flex-col px-12 py-8 relative z-10">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold uppercase tracking-wider text-white">
-                  Save Lives <span className="text-cyan-white mx-3">→</span> Change Lives <span className="text-cyan-white mx-3">→</span> Better Lives
+                <h2 className="text-2xl font-bold uppercase tracking-wider metal-text">
+                  Save Lives <span className="text-cyan-white cyan-glow mx-3">→</span> Change Lives <span className="text-cyan-white cyan-glow mx-3">→</span> Better Lives
                 </h2>
               </div>
 
               <div className="grid grid-cols-3 gap-6 flex-1">
                 {/* Pillar 1 */}
-                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                <div className="border border-cyan-white/20 bg-white/5 rounded-lg p-6 flex flex-col hover:border-cyan-white/40 transition-all duration-500">
                   <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white cyan-glow">
                       <i className="fa-solid fa-truck-medical text-sm"></i>
                     </div>
-                    <h3 className="text-lg font-semibold text-white tracking-wide">Save Lives</h3>
+                    <h3 className="text-lg font-semibold metal-text tracking-wide">Save Lives</h3>
                   </div>
                   <ul className="space-y-4 text-white/70 text-base flex-1">
                     <li className="flex items-start gap-2">
@@ -165,13 +207,13 @@ const Investors = () => {
                 </div>
 
                 {/* Pillar 2 */}
-                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                <div className="border border-cyan-white/20 bg-white/5 rounded-lg p-6 flex flex-col hover:border-cyan-white/40 transition-all duration-500">
                   <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white cyan-glow">
                       <i className="fa-solid fa-eye text-sm"></i>
                     </div>
-                    <h3 className="text-lg font-semibold text-white tracking-wide">Change Lives</h3>
+                    <h3 className="text-lg font-semibold metal-text tracking-wide">Change Lives</h3>
                   </div>
                   <ul className="space-y-4 text-white/70 text-base flex-1">
                     <li className="flex items-start gap-2">
@@ -190,13 +232,13 @@ const Investors = () => {
                 </div>
 
                 {/* Pillar 3 */}
-                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                <div className="border border-cyan-white/20 bg-white/5 rounded-lg p-6 flex flex-col hover:border-cyan-white/40 transition-all duration-500">
                   <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white cyan-glow">
                       <i className="fa-regular fa-compass text-sm"></i>
                     </div>
-                    <h3 className="text-lg font-semibold text-white tracking-wide">Better Lives</h3>
+                    <h3 className="text-lg font-semibold metal-text tracking-wide">Better Lives</h3>
                   </div>
                   <ul className="space-y-4 text-white/70 text-base flex-1">
                     <li className="flex items-start gap-2">
@@ -216,7 +258,7 @@ const Investors = () => {
               </div>
 
               <div className="text-center mt-6">
-                <p className="uppercase tracking-wider text-cyan-white text-sm font-semibold">Start where Soul can save lives first.</p>
+                <p className="uppercase tracking-wider text-cyan-white cyan-glow text-sm font-semibold">Start where Soul can save lives first.</p>
               </div>
             </div>
           </div>
@@ -225,20 +267,21 @@ const Investors = () => {
         {/* Slide 4: Economics */}
         {currentSlide === 3 && (
           <div className="slide-inner bg-black">
-            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
+            <div className="absolute inset-0 radial-glow"></div>
+            <div className="absolute bottom-[-50px] right-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
             <div className="h-full flex flex-col px-12 py-8 relative z-10">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold uppercase tracking-wider text-white mb-2">$20k Box, Strong Margins, OEM Upside</h2>
-                <div className="w-20 h-1 bg-cyan-white"></div>
+                <h2 className="text-3xl font-bold uppercase tracking-wider metal-text mb-2">$20k Box, Strong Margins, OEM Upside</h2>
+                <div className="w-20 h-1 bg-cyan-white cyan-glow"></div>
               </div>
 
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-10 px-4 gap-8">
                   <div className="flex-1 text-left">
-                    <div className="flex items-center gap-3 mb-5 text-cyan-white text-xl">
+                    <div className="flex items-center gap-3 mb-5 text-cyan-white cyan-glow text-xl">
                       <i className="fa-solid fa-cube"></i>
-                      <h3 className="font-bold uppercase tracking-wide text-white">Our Unit</h3>
+                      <h3 className="font-bold uppercase tracking-wide metal-text">Our Unit</h3>
                     </div>
                     <div className="space-y-3 text-lg">
                       <div className="flex justify-between border-b border-white/10 pb-2">
@@ -251,16 +294,16 @@ const Investors = () => {
                       </div>
                       <div className="flex justify-between border-b border-white/10 pb-2">
                         <span className="text-white/60">Target</span>
-                        <span className="text-cyan-white font-mono font-bold">$5k+ profit</span>
+                        <span className="text-cyan-white cyan-glow font-mono font-bold">$5k+ profit</span>
                       </div>
                       <div className="text-sm text-white/40 pt-2 italic">Education Edition: discounted</div>
                     </div>
                   </div>
 
                   <div className="flex-1 text-left">
-                    <div className="flex items-center gap-3 mb-5 text-cyan-white text-xl">
+                    <div className="flex items-center gap-3 mb-5 text-cyan-white cyan-glow text-xl">
                       <i className="fa-solid fa-industry"></i>
-                      <h3 className="font-bold uppercase tracking-wide text-white">Partner Econ</h3>
+                      <h3 className="font-bold uppercase tracking-wide metal-text">Partner Econ</h3>
                     </div>
                     <ul className="space-y-3 text-base">
                       <li className="flex items-start gap-3 text-white/90">
@@ -272,8 +315,8 @@ const Investors = () => {
                         <span>Soul as AI copilot + diagnostics</span>
                       </li>
                       <li className="flex items-start gap-3 text-white/90">
-                        <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
-                        <span className="text-cyan-white">"Soul‑equipped" trim: ~$30k extra</span>
+                        <i className="fa-solid fa-check text-cyan-white cyan-glow text-sm mt-1 flex-shrink-0"></i>
+                        <span className="text-cyan-white cyan-glow">"Soul‑equipped" trim: ~$30k extra</span>
                       </li>
                       <li className="flex items-start gap-3 text-white/90">
                         <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
@@ -284,16 +327,16 @@ const Investors = () => {
                 </div>
 
                 <div className="w-full max-w-3xl mx-auto mb-6">
-                  <div className="flex h-14 w-full relative rounded overflow-hidden border border-cyan-white/50">
+                  <div className="flex h-14 w-full relative rounded overflow-hidden border border-cyan-white/50 cyan-glow">
                     <div className="w-2/3 bg-gray-900 flex items-center justify-center border-r border-white/20 relative">
                       <span className="text-white/60 font-mono text-base font-bold z-10">Cost ~10k</span>
                     </div>
                     <div className="w-1/3 bg-gradient-to-r from-gray-300 to-white flex items-center justify-center relative">
                       <span className="text-black font-mono text-base font-bold">Soul Profit 5k+</span>
-                      <div className="absolute top-0 right-0 bottom-0 w-1 bg-cyan-white"></div>
+                      <div className="absolute top-0 right-0 bottom-0 w-1 bg-cyan-white cyan-glow-strong"></div>
                     </div>
                   </div>
-                  <div className="flex justify-between text-xs text-cyan-white mt-2 px-1 uppercase tracking-wide font-semibold">
+                  <div className="flex justify-between text-xs text-cyan-white cyan-glow mt-2 px-1 uppercase tracking-wide font-semibold">
                     <span>Hardware</span>
                     <span>Margin</span>
                   </div>
@@ -310,59 +353,60 @@ const Investors = () => {
         {/* Slide 5: Funding & Timeline */}
         {currentSlide === 4 && (
           <div className="slide-inner bg-black">
-            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
+            <div className="absolute inset-0 radial-glow"></div>
+            <div className="absolute top-[-50px] right-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
             <div className="h-full flex flex-col relative z-10">
-              <div className="px-12 pt-8 pb-6 border-b border-white/10">
-                <h2 className="text-3xl font-bold uppercase tracking-wider text-white">$900k SAFE <span className="text-cyan-white mx-3">→</span> From Demo to Deployments</h2>
+              <div className="px-12 pt-8 pb-6 border-b border-cyan-white/20">
+                <h2 className="text-3xl font-bold uppercase tracking-wider metal-text">$900k SAFE <span className="text-cyan-white cyan-glow mx-3">→</span> From Demo to Deployments</h2>
               </div>
 
               <div className="flex-1 grid grid-cols-2">
-                <div className="p-10 border-r border-white/10 flex flex-col justify-center">
-                  <h3 className="text-cyan-white font-bold uppercase tracking-wide mb-6 text-lg flex items-center gap-3">
+                <div className="p-10 border-r border-cyan-white/10 flex flex-col justify-center">
+                  <h3 className="text-cyan-white cyan-glow font-bold uppercase tracking-wide mb-6 text-lg flex items-center gap-3">
                     <i className="fa-solid fa-chart-pie"></i> Use of Funds
                   </h3>
                   <ul className="space-y-5">
                     <li className="flex items-start gap-3 text-lg text-white/90">
-                      <i className="fa-solid fa-user-plus text-cyan-white flex-shrink-0 mt-1"></i>
+                      <i className="fa-solid fa-user-plus text-cyan-white cyan-glow flex-shrink-0 mt-1"></i>
                       <span>Hire 2 core engineers</span>
                     </li>
                     <li className="flex items-start gap-3 text-lg text-white/90">
-                      <i className="fa-solid fa-screwdriver-wrench text-cyan-white flex-shrink-0 mt-1"></i>
+                      <i className="fa-solid fa-screwdriver-wrench text-cyan-white cyan-glow flex-shrink-0 mt-1"></i>
                       <span>Build production‑ready chassis</span>
                     </li>
                     <li className="flex items-start gap-3 text-lg text-white/90">
-                      <i className="fa-solid fa-building-flask text-cyan-white flex-shrink-0 mt-1"></i>
+                      <i className="fa-solid fa-building-flask text-cyan-white cyan-glow flex-shrink-0 mt-1"></i>
                       <span>Lab build‑out + key trade shows</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="p-10 relative">
-                  <div className="absolute left-10 top-10 bottom-10 w-px bg-cyan-white/30"></div>
+                  <div className="absolute left-10 top-10 bottom-10 w-px bg-cyan-white/30 cyan-glow"></div>
                   
                   <div className="space-y-7 pl-8 relative">
                     <div className="relative">
-                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
-                      <h4 className="text-white font-bold text-base">Early Dec '25 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white uppercase">Save Lives</span></h4>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow-strong"></div>
+                      <h4 className="metal-text font-bold text-base">Early Dec '25 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white cyan-glow uppercase">Save Lives</span></h4>
                       <p className="text-white/60 text-sm mt-1">Sign first APC customer & Field offline demo</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
-                      <h4 className="text-white font-bold text-base">Jan '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Change Lives</span></h4>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
+                      <h4 className="metal-text font-bold text-base">Jan '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Change Lives</span></h4>
                       <p className="text-white/60 text-sm mt-1">Launch ed‑tech pilots at 2 sites</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
-                      <h4 className="text-white font-bold text-base">Spring '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white uppercase">Paid Orders</span></h4>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
+                      <h4 className="metal-text font-bold text-base">Spring '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white cyan-glow uppercase">Paid Orders</span></h4>
                       <p className="text-white/60 text-sm mt-1">Convert pilots → paying Ed Edition. Legal deployments.</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
-                      <h4 className="text-white font-bold text-base">SEMA '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Better Lives</span></h4>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full cyan-glow"></div>
+                      <h4 className="metal-text font-bold text-base">SEMA '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Better Lives</span></h4>
                       <p className="text-white/60 text-sm mt-1">Premiere 12V classic talking car.</p>
                     </div>
                   </div>
@@ -370,7 +414,7 @@ const Investors = () => {
               </div>
 
               <div className="h-12 border-t border-cyan-white/30 bg-cyan-white/5 flex items-center justify-center">
-                <p className="text-cyan-white uppercase tracking-wide font-semibold text-sm">
+                <p className="text-cyan-white cyan-glow uppercase tracking-wide font-semibold text-sm">
                   Next: meet the carry‑on box. <span className="text-white/50 mx-3">|</span> Live demo: offline machine interpreter, no internet.
                 </p>
               </div>
