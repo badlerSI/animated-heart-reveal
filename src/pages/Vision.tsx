@@ -66,7 +66,7 @@ const Vision = () => {
 
     // Cleanup function to reset to home page meta
     return () => {
-      document.title = "Soul Interface — Cloud-Free AI Assistant for Cars";
+      document.title = "Soul Interface — Cloud-Free AI Assistant";
       if (metaDescription) {
         metaDescription.setAttribute("content", "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant");
       }
