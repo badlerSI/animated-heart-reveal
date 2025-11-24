@@ -39,7 +39,7 @@ const Investors = () => {
           aspect-ratio: 16/9;
           background-color: #000;
           position: relative;
-          overflow: auto;
+          overflow: hidden;
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
           border: 1px solid rgba(0, 255, 255, 0.2);
         }
@@ -117,7 +117,7 @@ const Investors = () => {
             <div className="absolute inset-0 radial-glow"></div>
             <div className="absolute bottom-[-50px] right-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
-            <div className="grid grid-cols-2 h-full relative z-10 px-12 py-8 gap-8">
+            <div className="grid grid-cols-2 h-full relative z-10 px-6 py-6 md:px-12 md:py-8 gap-8">
               <div className="flex flex-col justify-center pr-6">
                 <h2 className="font-sans font-bold text-3xl metal-text tracking-wider uppercase mb-2">Soul Box</h2>
                 <h3 className="font-sans font-normal text-xl text-cyan-white cyan-glow mb-8 tracking-wide">Carry-On Offline Machine Interpreter</h3>
@@ -173,7 +173,7 @@ const Investors = () => {
             <div className="absolute inset-0 radial-glow"></div>
             <div className="absolute top-[-50px] left-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
-            <div className="h-full flex flex-col px-12 py-8 relative z-10">
+            <div className="h-full flex flex-col px-6 py-6 md:px-12 md:py-8 relative z-10">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold uppercase tracking-wider metal-text">
                   Save Lives <span className="text-cyan-white cyan-glow mx-3">→</span> Change Lives <span className="text-cyan-white cyan-glow mx-3">→</span> Better Lives
@@ -270,7 +270,7 @@ const Investors = () => {
             <div className="absolute inset-0 radial-glow"></div>
             <div className="absolute bottom-[-50px] right-[-50px] text-[280px] opacity-[0.02] text-cyan-white" style={{ fontFamily: "'Noto Serif TC', serif" }}>心</div>
 
-            <div className="h-full flex flex-col px-12 py-8 relative z-10">
+            <div className="h-full flex flex-col px-6 py-6 md:px-12 md:py-8 relative z-10">
               <div className="mb-8">
                 <h2 className="text-3xl font-bold uppercase tracking-wider metal-text mb-2">$20k Box, Strong Margins, OEM Upside</h2>
                 <div className="w-20 h-1 bg-cyan-white cyan-glow"></div>
