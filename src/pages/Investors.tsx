@@ -119,8 +119,8 @@ const Investors = () => {
 
             <div className="grid grid-cols-2 h-full relative z-10 px-6 py-6 md:px-12 md:py-8 gap-8">
               <div className="flex flex-col justify-center pr-6">
-                <h2 className="font-sans font-bold text-3xl metal-text tracking-wider uppercase mb-2">Soul Box</h2>
-                <h3 className="font-sans font-normal text-xl text-cyan-white cyan-glow mb-8 tracking-wide">Carry-On Offline Machine Interpreter</h3>
+                <h2 className="font-sans font-bold text-3xl metal-text tracking-wider uppercase mb-2">Private AI</h2>
+                <h3 className="font-sans font-normal text-xl text-cyan-white cyan-glow mb-8 tracking-wide">Carry-On-Sized Offline Machine Interpreter</h3>
 
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-lg text-white/90">
@@ -415,7 +415,7 @@ const Investors = () => {
 
               <div className="h-12 border-t border-cyan-white/30 bg-cyan-white/5 flex items-center justify-center">
                 <p className="text-cyan-white cyan-glow uppercase tracking-wide font-semibold text-sm">
-                  Next: meet the carry‑on box. <span className="text-white/50 mx-3">|</span> Live demo: offline machine interpreter, no internet.
+                  Next: meet the carry‑on-sized box. <span className="text-white/50 mx-3">|</span> Live demo: carry-on-sized offline machine interpreter, no internet.
                 </p>
               </div>
             </div>
