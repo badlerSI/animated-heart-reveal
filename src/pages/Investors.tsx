@@ -35,113 +35,19 @@ const Investors = () => {
       <style>{`
         .slide-container {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1440px;
           aspect-ratio: 16/9;
-          background-color: #05070A;
+          background-color: #000;
           position: relative;
-          overflow: hidden;
+          overflow: auto;
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
-          border: 1px solid #1e293b;
+          border: 1px solid rgba(255,255,255,0.1);
         }
         
-        .swoosh-bg {
-          position: absolute;
-          width: 150%;
-          height: 100%;
-          top: -20%;
-          left: -20%;
-          background: radial-gradient(circle at 50% 50%, rgba(44, 224, 208, 0.03) 0%, transparent 60%);
-          z-index: 0;
-          pointer-events: none;
-        }
-        
-        .swoosh-line {
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #2CE0D0, transparent);
-          opacity: 0.2;
-          transform: rotate(-15deg);
-        }
-        
-        .watermark {
-          position: absolute;
-          bottom: -20px;
-          right: 20px;
-          font-family: 'Noto Serif TC', serif;
-          font-size: 200px;
-          color: #2CE0D0;
-          opacity: 0.03;
-          z-index: 0;
-          pointer-events: none;
-          user-select: none;
-        }
-        
-        .text-silver-gradient {
-          background: linear-gradient(to bottom, #ffffff 0%, #cbd5e1 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        
-        .soul-list li {
-          display: flex;
-          align-items: center;
-          margin-bottom: 24px;
-          font-size: 22px;
-          color: #E2E8F0;
-          font-weight: 300;
-          letter-spacing: 0.02em;
-        }
-        
-        .soul-list li i {
-          color: #2CE0D0;
-          width: 40px;
-          text-align: center;
-          margin-right: 16px;
-          font-size: 20px;
-          filter: drop-shadow(0 0 5px rgba(44,224,208,0.6));
-        }
-        
-        .soul-box-render {
-          width: 400px;
-          height: 280px;
-          background: linear-gradient(145deg, #0f131a, #05070A);
-          border-radius: 12px;
-          border: 1px solid #1e293b;
-          box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+        .slide-inner {
+          min-width: 100%;
+          min-height: 100%;
           position: relative;
-          transform: perspective(1000px) rotateY(-15deg) rotateX(10deg);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        
-        .soul-box-sigil {
-          font-family: 'Noto Serif TC', serif;
-          font-size: 80px;
-          color: #2CE0D0;
-          text-shadow: 0 0 20px #2CE0D0, 0 0 40px #2CE0D0;
-        }
-        
-        .soul-box-corner {
-          position: absolute;
-          width: 20px;
-          height: 20px;
-          border-top: 2px solid #334155;
-          border-left: 2px solid #334155;
-          top: 10px;
-          left: 10px;
-        }
-        
-        .timeline-node {
-          width: 12px;
-          height: 12px;
-          background-color: #05070A;
-          border: 2px solid #2CE0D0;
-          border-radius: 50%;
-          box-shadow: 0 0 10px #2CE0D0;
-          position: relative;
-          z-index: 10;
         }
       `}</style>
 
@@ -167,32 +73,45 @@ const Investors = () => {
 
         {/* Slide 2: Soul Box */}
         {currentSlide === 1 && (
-          <div className="w-full h-full relative">
-            <div className="swoosh-bg"></div>
-            <div className="swoosh-line" style={{ top: '30%', left: '-10%' }}></div>
-            <div className="watermark">心</div>
+          <div className="slide-inner bg-black">
+            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
 
-            <div className="grid grid-cols-2 h-full relative z-10 px-20 py-16">
-              <div className="flex flex-col justify-center pr-10">
-                <h2 className="font-sans font-bold text-4xl text-white tracking-widest uppercase mb-2">Soul Box</h2>
-                <h3 className="font-sans font-light text-2xl text-[#2CE0D0] mb-12 tracking-wider">Carry-On Offline Machine Interpreter</h3>
+            <div className="grid grid-cols-2 h-full relative z-10 px-12 py-8 gap-8">
+              <div className="flex flex-col justify-center pr-6">
+                <h2 className="font-sans font-bold text-3xl text-white tracking-wider uppercase mb-2">Soul Box</h2>
+                <h3 className="font-sans font-normal text-xl text-cyan-white mb-8 tracking-wide">Carry-On Offline Machine Interpreter</h3>
 
-                <ul className="soul-list">
-                  <li><i className="fa-solid fa-server"></i> Carry‑on RTX 6000 mini‑datacenter</li>
-                  <li><i className="fa-solid fa-bolt"></i> Cloud‑free, 120V plug‑anywhere power</li>
-                  <li><i className="fa-solid fa-microphone-lines"></i> Voice‑first, screen‑optional, app‑connected</li>
-                  <li><i className="fa-solid fa-language"></i> Offline machine interpreter for people & machines</li>
-                  <li><i className="fa-solid fa-brain"></i> Preloaded knowledge + patent‑pending "souls"</li>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3 text-lg text-white/90">
+                    <i className="fa-solid fa-server text-cyan-white mt-1 flex-shrink-0"></i>
+                    <span>Carry‑on RTX 6000 mini‑datacenter</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-lg text-white/90">
+                    <i className="fa-solid fa-bolt text-cyan-white mt-1 flex-shrink-0"></i>
+                    <span>Cloud‑free, 120V plug‑anywhere power</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-lg text-white/90">
+                    <i className="fa-solid fa-microphone-lines text-cyan-white mt-1 flex-shrink-0"></i>
+                    <span>Voice‑first, screen‑optional, app‑connected</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-lg text-white/90">
+                    <i className="fa-solid fa-language text-cyan-white mt-1 flex-shrink-0"></i>
+                    <span>Offline machine interpreter for people & machines</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-lg text-white/90">
+                    <i className="fa-solid fa-brain text-cyan-white mt-1 flex-shrink-0"></i>
+                    <span>Preloaded knowledge + patent‑pending "souls"</span>
+                  </li>
                 </ul>
               </div>
 
               <div className="flex flex-col justify-center items-center relative">
-                <div className="absolute w-[400px] h-[400px] bg-[#2CE0D0] opacity-5 blur-[100px] rounded-full"></div>
+                <div className="absolute w-80 h-80 bg-cyan-white opacity-10 blur-3xl rounded-full"></div>
                 
-                <div className="soul-box-render">
-                  <div className="soul-box-corner"></div>
-                  <div className="soul-box-sigil">心</div>
-                  <div className="absolute bottom-4 w-full px-8 flex gap-2">
+                <div className="w-80 h-56 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-white/10 shadow-2xl relative flex items-center justify-center">
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-white/20"></div>
+                  <div className="text-6xl text-cyan-white">心</div>
+                  <div className="absolute bottom-3 left-0 right-0 flex gap-2 px-6">
                     <div className="h-1 bg-gray-800 flex-1 rounded"></div>
                     <div className="h-1 bg-gray-800 flex-1 rounded"></div>
                     <div className="h-1 bg-gray-800 flex-1 rounded"></div>
@@ -200,8 +119,8 @@ const Investors = () => {
                 </div>
               </div>
 
-              <div className="absolute bottom-8 right-12 text-[#94A3B8] text-xs tracking-widest uppercase opacity-70">
-                <i className="fa-solid fa-shield-halved mr-2 text-[#2CE0D0]"></i>Cloud-free. Local-only. No data leaves the box.
+              <div className="absolute bottom-6 right-8 text-white/50 text-xs tracking-wider uppercase">
+                <i className="fa-solid fa-shield-halved mr-2 text-cyan-white"></i>Cloud-free. Local-only. No data leaves the box.
               </div>
             </div>
           </div>
@@ -209,69 +128,95 @@ const Investors = () => {
 
         {/* Slide 3: Three Pillars */}
         {currentSlide === 2 && (
-          <div className="w-full h-full relative">
-            <div className="swoosh-bg" style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(44, 224, 208, 0.05) 0%, transparent 70%)' }}></div>
-            <div className="watermark" style={{ left: '-20px', right: 'auto' }}>心</div>
+          <div className="slide-inner bg-black">
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-white/5 to-transparent opacity-30"></div>
 
-            <div className="h-full flex flex-col px-16 py-12 relative z-10">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold uppercase tracking-[0.2em] text-silver-gradient">
-                  Save Lives <span className="text-[#2CE0D0] mx-4">→</span> Change Lives <span className="text-[#2CE0D0] mx-4">→</span> Better Lives
+            <div className="h-full flex flex-col px-12 py-8 relative z-10">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold uppercase tracking-wider text-white">
+                  Save Lives <span className="text-cyan-white mx-3">→</span> Change Lives <span className="text-cyan-white mx-3">→</span> Better Lives
                 </h2>
               </div>
 
-              <div className="grid grid-cols-3 gap-8 h-full items-start">
+              <div className="grid grid-cols-3 gap-6 flex-1">
                 {/* Pillar 1 */}
-                <div className="border border-white/5 bg-white/5 rounded-xl p-8 h-[420px] relative overflow-hidden group hover:border-[#2CE0D0]/30 transition-all duration-500">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2CE0D0] to-transparent opacity-50"></div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-10 h-10 rounded-full border border-[#2CE0D0]/50 flex items-center justify-center text-[#2CE0D0]">
-                      <i className="fa-solid fa-truck-medical"></i>
+                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                      <i className="fa-solid fa-truck-medical text-sm"></i>
                     </div>
-                    <h3 className="text-xl font-semibold text-white tracking-wide">Save Lives</h3>
+                    <h3 className="text-lg font-semibold text-white tracking-wide">Save Lives</h3>
                   </div>
-                  <ul className="space-y-6 text-[#94A3B8] font-light text-lg">
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> APCs & humanitarian vehicles</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Offline field language interpreter</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Plain‑language vehicle health alerts</li>
+                  <ul className="space-y-4 text-white/70 text-base flex-1">
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>APCs & humanitarian vehicles</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Offline field language interpreter</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Plain‑language vehicle health alerts</span>
+                    </li>
                   </ul>
                 </div>
 
                 {/* Pillar 2 */}
-                <div className="border border-white/5 bg-white/5 rounded-xl p-8 h-[420px] relative overflow-hidden group hover:border-[#2CE0D0]/30 transition-all duration-500">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2CE0D0] to-transparent opacity-50"></div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-10 h-10 rounded-full border border-[#2CE0D0]/50 flex items-center justify-center text-[#2CE0D0]">
-                      <i className="fa-solid fa-eye"></i>
+                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                      <i className="fa-solid fa-eye text-sm"></i>
                     </div>
-                    <h3 className="text-xl font-semibold text-white tracking-wide">Change Lives</h3>
+                    <h3 className="text-lg font-semibold text-white tracking-wide">Change Lives</h3>
                   </div>
-                  <ul className="space-y-6 text-[#94A3B8] font-light text-lg">
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Accessibility & visually impaired</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Ed‑tech pilots – charter / homeschool</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Interpreter + teacher's aide in a box</li>
+                  <ul className="space-y-4 text-white/70 text-base flex-1">
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Accessibility & visually impaired</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Ed‑tech pilots – charter / homeschool</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Interpreter + teacher's aide in a box</span>
+                    </li>
                   </ul>
                 </div>
 
                 {/* Pillar 3 */}
-                <div className="border border-white/5 bg-white/5 rounded-xl p-8 h-[420px] relative overflow-hidden group hover:border-[#2CE0D0]/30 transition-all duration-500">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2CE0D0] to-transparent opacity-50"></div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-10 h-10 rounded-full border border-[#2CE0D0]/50 flex items-center justify-center text-[#2CE0D0]">
-                      <i className="fa-regular fa-compass"></i>
+                <div className="border border-white/10 bg-white/5 rounded-lg p-6 flex flex-col">
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-white to-transparent opacity-50"></div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-full border border-cyan-white/50 flex items-center justify-center text-cyan-white">
+                      <i className="fa-regular fa-compass text-sm"></i>
                     </div>
-                    <h3 className="text-xl font-semibold text-white tracking-wide">Better Lives</h3>
+                    <h3 className="text-lg font-semibold text-white tracking-wide">Better Lives</h3>
                   </div>
-                  <ul className="space-y-6 text-[#94A3B8] font-light text-lg">
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Motorhomes & yachts off‑grid</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> Classic talking car experiences</li>
-                    <li className="flex items-start gap-3"><span className="text-[#2CE0D0] mt-1.5 text-xs">●</span> "After‑internet" prepper knowledge</li>
+                  <ul className="space-y-4 text-white/70 text-base flex-1">
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Motorhomes & yachts off‑grid</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>Classic talking car experiences</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-cyan-white mt-1.5 text-xs flex-shrink-0">●</span>
+                      <span>"After‑internet" prepper knowledge</span>
+                    </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="absolute bottom-12 left-0 w-full text-center">
-                <p className="uppercase tracking-[0.2em] text-[#2CE0D0] text-sm font-semibold opacity-80">Start where Soul can save lives first.</p>
+              <div className="text-center mt-6">
+                <p className="uppercase tracking-wider text-cyan-white text-sm font-semibold">Start where Soul can save lives first.</p>
               </div>
             </div>
           </div>
@@ -279,72 +224,83 @@ const Investors = () => {
 
         {/* Slide 4: Economics */}
         {currentSlide === 3 && (
-          <div className="w-full h-full relative">
-            <div className="swoosh-bg"></div>
-            <div className="watermark">心</div>
+          <div className="slide-inner bg-black">
+            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
 
-            <div className="h-full flex flex-col px-20 py-16 relative z-10">
-              <div className="mb-16">
-                <h2 className="text-4xl font-bold uppercase tracking-widest text-silver-gradient mb-2">$20k Box, Strong Margins, OEM Upside</h2>
-                <div className="w-24 h-1 bg-[#2CE0D0]"></div>
+            <div className="h-full flex flex-col px-12 py-8 relative z-10">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold uppercase tracking-wider text-white mb-2">$20k Box, Strong Margins, OEM Upside</h2>
+                <div className="w-20 h-1 bg-cyan-white"></div>
               </div>
 
               <div className="flex-1 flex flex-col justify-center">
-                <div className="flex justify-between items-start mb-16 px-4">
-                  <div className="w-1/3 text-left">
-                    <div className="flex items-center gap-3 mb-6 text-[#2CE0D0] text-2xl">
+                <div className="flex justify-between items-start mb-10 px-4 gap-8">
+                  <div className="flex-1 text-left">
+                    <div className="flex items-center gap-3 mb-5 text-cyan-white text-xl">
                       <i className="fa-solid fa-cube"></i>
-                      <h3 className="font-bold uppercase tracking-wider text-white">Our Unit</h3>
+                      <h3 className="font-bold uppercase tracking-wide text-white">Our Unit</h3>
                     </div>
-                    <div className="space-y-4 text-xl">
-                      <div className="flex justify-between border-b border-gray-800 pb-2">
-                        <span className="text-gray-400">Price</span>
+                    <div className="space-y-3 text-lg">
+                      <div className="flex justify-between border-b border-white/10 pb-2">
+                        <span className="text-white/60">Price</span>
                         <span className="text-white font-mono">≈ $20k</span>
                       </div>
-                      <div className="flex justify-between border-b border-gray-800 pb-2">
-                        <span className="text-gray-400">Cost</span>
+                      <div className="flex justify-between border-b border-white/10 pb-2">
+                        <span className="text-white/60">Cost</span>
                         <span className="text-white font-mono">≈ $10k marginal</span>
                       </div>
-                      <div className="flex justify-between border-b border-gray-800 pb-2">
-                        <span className="text-gray-400">Target</span>
-                        <span className="text-[#2CE0D0] font-mono font-bold">$5k+ profit</span>
+                      <div className="flex justify-between border-b border-white/10 pb-2">
+                        <span className="text-white/60">Target</span>
+                        <span className="text-cyan-white font-mono font-bold">$5k+ profit</span>
                       </div>
-                      <div className="text-sm text-gray-500 pt-2 italic">Education Edition: discounted</div>
+                      <div className="text-sm text-white/40 pt-2 italic">Education Edition: discounted</div>
                     </div>
                   </div>
 
-                  <div className="w-1/3 text-left">
-                    <div className="flex items-center gap-3 mb-6 text-[#2CE0D0] text-2xl">
+                  <div className="flex-1 text-left">
+                    <div className="flex items-center gap-3 mb-5 text-cyan-white text-xl">
                       <i className="fa-solid fa-industry"></i>
-                      <h3 className="font-bold uppercase tracking-wider text-white">Partner Econ</h3>
+                      <h3 className="font-bold uppercase tracking-wide text-white">Partner Econ</h3>
                     </div>
-                    <ul className="soul-list text-lg space-y-4">
-                      <li className="!text-lg !mb-2"><i className="fa-solid fa-check !text-sm !w-6"></i> APC / vehicle / yacht builders</li>
-                      <li className="!text-lg !mb-2"><i className="fa-solid fa-check !text-sm !w-6"></i> Soul as AI copilot + diagnostics</li>
-                      <li className="!text-lg !mb-2"><i className="fa-solid fa-check !text-sm !w-6"></i> <span className="text-[#2CE0D0]">"Soul‑equipped" trim: ~$30k extra</span></li>
-                      <li className="!text-lg !mb-2"><i className="fa-solid fa-check !text-sm !w-6"></i> We earn per‑unit + integration fees</li>
+                    <ul className="space-y-3 text-base">
+                      <li className="flex items-start gap-3 text-white/90">
+                        <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
+                        <span>APC / vehicle / yacht builders</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-white/90">
+                        <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
+                        <span>Soul as AI copilot + diagnostics</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-white/90">
+                        <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
+                        <span className="text-cyan-white">"Soul‑equipped" trim: ~$30k extra</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-white/90">
+                        <i className="fa-solid fa-check text-cyan-white text-sm mt-1 flex-shrink-0"></i>
+                        <span>We earn per‑unit + integration fees</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
 
-                <div className="w-full max-w-4xl mx-auto mb-8">
-                  <div className="flex h-16 w-full relative rounded-md overflow-hidden border border-[#2CE0D0]">
-                    <div className="w-2/3 bg-gray-900 flex items-center justify-center border-r border-gray-700 relative">
-                      <span className="text-gray-400 font-mono text-lg font-bold z-10">Cost ~10k</span>
+                <div className="w-full max-w-3xl mx-auto mb-6">
+                  <div className="flex h-14 w-full relative rounded overflow-hidden border border-cyan-white/50">
+                    <div className="w-2/3 bg-gray-900 flex items-center justify-center border-r border-white/20 relative">
+                      <span className="text-white/60 font-mono text-base font-bold z-10">Cost ~10k</span>
                     </div>
-                    <div className="w-1/3 bg-gradient-to-r from-gray-200 to-white flex items-center justify-center relative">
-                      <span className="text-black font-mono text-lg font-bold">Soul Profit 5k+</span>
-                      <div className="absolute top-0 right-0 bottom-0 w-2 bg-[#2CE0D0] animate-pulse"></div>
+                    <div className="w-1/3 bg-gradient-to-r from-gray-300 to-white flex items-center justify-center relative">
+                      <span className="text-black font-mono text-base font-bold">Soul Profit 5k+</span>
+                      <div className="absolute top-0 right-0 bottom-0 w-1 bg-cyan-white"></div>
                     </div>
                   </div>
-                  <div className="flex justify-between text-xs text-[#2CE0D0] mt-2 px-1 uppercase tracking-wider font-semibold">
+                  <div className="flex justify-between text-xs text-cyan-white mt-2 px-1 uppercase tracking-wide font-semibold">
                     <span>Hardware</span>
                     <span>Margin</span>
                   </div>
                 </div>
 
-                <div className="text-center mt-8">
-                  <p className="text-[#94A3B8] text-sm italic border-t border-gray-800 inline-block pt-4 px-8">Partners keep the big ticket—Soul powers the experience.</p>
+                <div className="text-center mt-6">
+                  <p className="text-white/60 text-sm italic border-t border-white/10 inline-block pt-3 px-6">Partners keep the big ticket—Soul powers the experience.</p>
                 </div>
               </div>
             </div>
@@ -353,61 +309,69 @@ const Investors = () => {
 
         {/* Slide 5: Funding & Timeline */}
         {currentSlide === 4 && (
-          <div className="w-full h-full relative">
-            <div className="swoosh-bg" style={{ transform: 'scaleX(-1)' }}></div>
-            <div className="watermark">心</div>
+          <div className="slide-inner bg-black">
+            <div className="absolute inset-0 bg-gradient-radial from-cyan-white/5 to-transparent opacity-30"></div>
 
             <div className="h-full flex flex-col relative z-10">
-              <div className="px-16 pt-12 pb-8 border-b border-gray-900/50">
-                <h2 className="text-4xl font-bold uppercase tracking-widest text-silver-gradient">$900k SAFE <span className="text-[#2CE0D0] mx-4">→</span> From Demo to Deployments</h2>
+              <div className="px-12 pt-8 pb-6 border-b border-white/10">
+                <h2 className="text-3xl font-bold uppercase tracking-wider text-white">$900k SAFE <span className="text-cyan-white mx-3">→</span> From Demo to Deployments</h2>
               </div>
 
               <div className="flex-1 grid grid-cols-2">
-                <div className="p-16 border-r border-gray-900/50 flex flex-col justify-center">
-                  <h3 className="text-[#2CE0D0] font-bold uppercase tracking-wider mb-8 text-xl flex items-center gap-3">
+                <div className="p-10 border-r border-white/10 flex flex-col justify-center">
+                  <h3 className="text-cyan-white font-bold uppercase tracking-wide mb-6 text-lg flex items-center gap-3">
                     <i className="fa-solid fa-chart-pie"></i> Use of Funds
                   </h3>
-                  <ul className="soul-list">
-                    <li className="!mb-8"><i className="fa-solid fa-user-plus"></i> Hire 2 core engineers</li>
-                    <li className="!mb-8"><i className="fa-solid fa-screwdriver-wrench"></i> Build production‑ready chassis</li>
-                    <li className="!mb-8"><i className="fa-solid fa-building-flask"></i> Lab build‑out + key trade shows</li>
+                  <ul className="space-y-5">
+                    <li className="flex items-start gap-3 text-lg text-white/90">
+                      <i className="fa-solid fa-user-plus text-cyan-white flex-shrink-0 mt-1"></i>
+                      <span>Hire 2 core engineers</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-lg text-white/90">
+                      <i className="fa-solid fa-screwdriver-wrench text-cyan-white flex-shrink-0 mt-1"></i>
+                      <span>Build production‑ready chassis</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-lg text-white/90">
+                      <i className="fa-solid fa-building-flask text-cyan-white flex-shrink-0 mt-1"></i>
+                      <span>Lab build‑out + key trade shows</span>
+                    </li>
                   </ul>
                 </div>
 
-                <div className="p-16 relative">
-                  <div className="absolute left-16 top-16 bottom-16 w-0.5 bg-[#2CE0D0]/30"></div>
+                <div className="p-10 relative">
+                  <div className="absolute left-10 top-10 bottom-10 w-px bg-cyan-white/30"></div>
                   
-                  <div className="space-y-10 pl-10 relative">
+                  <div className="space-y-7 pl-8 relative">
                     <div className="relative">
-                      <div className="absolute -left-[45px] top-1.5 timeline-node bg-[#2CE0D0]"></div>
-                      <h4 className="text-white font-bold text-lg">Early Dec '25 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-[#2CE0D0]/50 text-[#2CE0D0] uppercase">Save Lives</span></h4>
-                      <p className="text-gray-400 text-sm mt-1">Sign first APC customer & Field offline demo</p>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
+                      <h4 className="text-white font-bold text-base">Early Dec '25 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white uppercase">Save Lives</span></h4>
+                      <p className="text-white/60 text-sm mt-1">Sign first APC customer & Field offline demo</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[45px] top-1.5 timeline-node"></div>
-                      <h4 className="text-white font-bold text-lg">Jan '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-gray-600 text-gray-400 uppercase">Change Lives</span></h4>
-                      <p className="text-gray-400 text-sm mt-1">Launch ed‑tech pilots at 2 sites</p>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
+                      <h4 className="text-white font-bold text-base">Jan '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Change Lives</span></h4>
+                      <p className="text-white/60 text-sm mt-1">Launch ed‑tech pilots at 2 sites</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[45px] top-1.5 timeline-node"></div>
-                      <h4 className="text-white font-bold text-lg">Spring '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-[#2CE0D0]/50 text-[#2CE0D0] uppercase">Paid Orders</span></h4>
-                      <p className="text-gray-400 text-sm mt-1">Convert pilots → paying Ed Edition. Legal deployments.</p>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
+                      <h4 className="text-white font-bold text-base">Spring '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-cyan-white/50 text-cyan-white uppercase">Paid Orders</span></h4>
+                      <p className="text-white/60 text-sm mt-1">Convert pilots → paying Ed Edition. Legal deployments.</p>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[45px] top-1.5 timeline-node"></div>
-                      <h4 className="text-white font-bold text-lg">SEMA '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-gray-600 text-gray-400 uppercase">Better Lives</span></h4>
-                      <p className="text-gray-400 text-sm mt-1">Premiere 12V classic talking car.</p>
+                      <div className="absolute -left-[37px] top-1.5 w-3 h-3 bg-black border-2 border-cyan-white rounded-full"></div>
+                      <h4 className="text-white font-bold text-base">SEMA '26 <span className="text-xs ml-2 py-0.5 px-2 rounded border border-white/30 text-white/60 uppercase">Better Lives</span></h4>
+                      <p className="text-white/60 text-sm mt-1">Premiere 12V classic talking car.</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="h-16 border-t border-[#2CE0D0]/50 bg-[#2CE0D0]/5 flex items-center justify-center">
-                <p className="text-[#2CE0D0] uppercase tracking-widest font-semibold text-sm">
-                  Next: meet the carry‑on box. <span className="text-white mx-4 opacity-50">|</span> Live demo: offline machine interpreter, no internet.
+              <div className="h-12 border-t border-cyan-white/30 bg-cyan-white/5 flex items-center justify-center">
+                <p className="text-cyan-white uppercase tracking-wide font-semibold text-sm">
+                  Next: meet the carry‑on box. <span className="text-white/50 mx-3">|</span> Live demo: offline machine interpreter, no internet.
                 </p>
               </div>
             </div>
