@@ -7,6 +7,7 @@ const Investors = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLandscape, setIsLandscape] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [scale, setScale] = useState(1);
   const totalSlides = 5;
 
   useEffect(() => {
@@ -44,6 +45,33 @@ const Investors = () => {
       window.removeEventListener('resize', checkMobile);
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+
+  // Calculate scale for mobile landscape
+  useEffect(() => {
+    const calculateScale = () => {
+      if (window.innerWidth <= 768) {
+        const designWidth = 1280;
+        const designHeight = 720;
+        const availableWidth = window.innerWidth - 32; // padding
+        const availableHeight = window.innerHeight - 80; // nav space
+        const scaleX = availableWidth / designWidth;
+        const scaleY = availableHeight / designHeight;
+        const newScale = Math.min(scaleX, scaleY);
+        setScale(Math.max(newScale, 0.3)); // minimum scale 0.3
+      } else {
+        setScale(1);
+      }
+    };
+    
+    calculateScale();
+    window.addEventListener('resize', calculateScale);
+    window.addEventListener('orientationchange', calculateScale);
+    
+    return () => {
+      window.removeEventListener('resize', calculateScale);
+      window.removeEventListener('orientationchange', calculateScale);
     };
   }, []);
 
@@ -87,46 +115,34 @@ const Investors = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-2 md:p-4 lg:p-10">
       <style>{`
+        .slide-container-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        }
+
         .slide-container {
-          width: 100%;
-          max-width: 1440px;
-          aspect-ratio: 16/9;
+          width: 1280px;
+          height: 720px;
           background-color: #000;
           position: relative;
           overflow: hidden;
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
           border: 1px solid rgba(0, 255, 255, 0.2);
+          transform: scale(${scale});
+          transform-origin: top center;
         }
 
-        /* Mobile landscape optimizations */
-        @media (max-width: 768px) and (orientation: landscape) {
+        @media (min-width: 769px) {
           .slide-container {
-            max-height: calc(100vh - 60px);
-            width: auto;
-          }
-          
-          .slide-inner {
-            font-size: 0.75rem;
-          }
-          
-          .slide-inner h2 {
-            font-size: 1.25rem !important;
-          }
-          
-          .slide-inner h3 {
-            font-size: 1rem !important;
-          }
-          
-          .slide-inner li,
-          .slide-inner p,
-          .slide-inner span {
-            font-size: 0.75rem !important;
+            max-width: 100%;
+            max-height: calc(100vh - 200px);
           }
         }
         
         .slide-inner {
-          min-width: 100%;
-          min-height: 100%;
+          width: 100%;
+          height: 100%;
           position: relative;
         }
 
@@ -178,7 +194,8 @@ const Investors = () => {
       </div>
 
       {/* Slide Container */}
-      <div className="slide-container">
+      <div className="slide-container-wrapper">
+        <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
           <div className="w-full h-full relative flex items-center justify-center bg-black">
@@ -502,6 +519,7 @@ const Investors = () => {
             </div>
           </div>
         )}
+      </div>
       </div>
 
       {/* Navigation Controls */}
