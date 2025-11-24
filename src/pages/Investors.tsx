@@ -146,12 +146,7 @@ const Investors = () => {
       `}</style>
 
       {/* Navigation */}
-      <div className="w-full max-w-[1280px] flex justify-between items-center mb-4">
-        <Link to="/sema">
-          <Button variant="ghost" className="text-white hover:text-[#2CE0D0]">
-            ← Back to SEMA
-          </Button>
-        </Link>
+      <div className="w-full max-w-[1280px] flex justify-end items-center mb-4">
         <div className="text-white text-sm">
           Slide {currentSlide + 1} / {totalSlides}
         </div>
@@ -161,11 +156,11 @@ const Investors = () => {
       <div className="slide-container">
         {/* Slide 1: Opening Image */}
         {currentSlide === 0 && (
-          <div className="w-full h-full relative">
+          <div className="w-full h-full relative flex items-center justify-center bg-[#05070A]">
             <img 
               src="/pitch-deck/opening-slide.png" 
               alt="Soul Interface Opening Slide" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         )}
