@@ -13,6 +13,7 @@ import Vision from "./pages/Vision";
 import Sema from "./pages/Sema";
 import Builders from "./pages/Builders";
 import Investors from "./pages/Investors";
+import Homeschool from "./pages/Homeschool";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/sema" element={<Sema />} />
           <Route path="/builders" element={<Builders />} />
           <Route path="/investors" element={<Investors />} />
+          <Route path="/homeschool" element={<Homeschool />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
