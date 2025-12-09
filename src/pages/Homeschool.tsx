@@ -130,14 +130,14 @@ const Homeschool = () => {
       {/* Section 2: Shark Image - Full Viewport */}
       <section className="bg-black overflow-visible py-8">
         <img 
-          src="/lovable-uploads/NetShark-corrected.png" 
+          src="/lovable-uploads/NetShark.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
         />
       </section>
 
       {/* Section 3: What's Lurking */}
-      <section className="px-6 py-20 bg-[#0a0a0f]">
+      <section className="px-6 py-20 bg-black">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
