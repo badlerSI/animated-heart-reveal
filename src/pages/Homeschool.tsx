@@ -361,7 +361,7 @@ const Homeschool = () => {
             style={{ color: '#7ab8b8' }}
           >
             Soul Interface was founded by Ben Adler, an 8th-grade science teacher from Oakland. 
-            He spent years watching kids get distracted, manipulated, and surveilled by the edtech they were given. 
+            He spent years watching kids circumvent every safeguard and get up to shockingly bad behavior on supposedly safe school computers. 
             This is his answer: AI that amplifies great teaching — without the sharks.
           </motion.p>
         </div>
