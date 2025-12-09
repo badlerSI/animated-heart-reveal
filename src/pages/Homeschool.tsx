@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, CircleDollarSign } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -67,6 +67,7 @@ const Homeschool = () => {
     { icon: Languages, title: "Multilingual Support", description: "Explains in your family's languages" },
     { icon: Gamepad2, title: "Story & Game Engine", description: "Turns lessons into adventures" },
     { icon: LayoutDashboard, title: "Parent Dashboard", description: "See progress, set limits" },
+    { icon: Bug, title: "$1K Bad Behavior Bug Bounty", description: "If you can make it do wrong, we want to fix it immediately" },
   ];
 
   const childrenOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30"];
@@ -129,12 +130,9 @@ const Homeschool = () => {
       {/* Section 2: Shark Image - Full Viewport */}
       <section className="bg-black overflow-visible py-8">
         <img 
-          src="/lovable-uploads/NetShark-bright.png" 
+          src="/lovable-uploads/NetShark-corrected.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
-          style={{
-            filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
-          }}
         />
       </section>
 
@@ -315,23 +313,6 @@ const Homeschool = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Bug Bounty Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-8 p-6 rounded-lg text-center border-2"
-            style={{ 
-              background: '#141418',
-              borderColor: '#00FFFF'
-            }}
-          >
-            <CircleDollarSign className="w-12 h-12 mx-auto mb-4" style={{ color: '#00FFFF' }} />
-            <h3 className="font-bold text-xl mb-2" style={{ color: '#00FFFF' }}>$1000 Bad Behavior Bug Bounty</h3>
-            <p style={{ color: '#7ab8b8' }}>If you can make it do wrong, we want to fix it immediately</p>
-          </motion.div>
         </div>
       </section>
 
