@@ -74,7 +74,7 @@ const Homeschool = () => {
   return (
     <div className="min-h-screen bg-black">
       {/* Section 1: Text Hero - Full Black Screen */}
-      <section className="min-h-[80vh] md:min-h-[60vh] pt-16 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-black">
+      <section className="min-h-[70vh] md:min-h-[60vh] pt-12 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-black">
         <div className="max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
