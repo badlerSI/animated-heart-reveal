@@ -28,7 +28,6 @@ const Homeschool = () => {
       metaDescription.setAttribute("content", "A private, offline AI tutor with Wikipedia, classic literature, and a massive curated library. Patent pending. No cloud. No ads. Works with any Chromebook.");
     }
 
-    // Show scroll prompt after 10 seconds
     const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
     return () => clearTimeout(timer);
   }, []);
@@ -81,17 +80,22 @@ const Homeschool = () => {
 
   const childrenOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30"];
 
+  // Unified cyan color
+  const cyan = "#2FC5ED";
+  const cyanMuted = "#5BA8C4";
+  const cyanDim = "#4A8DA8";
+
   return (
-    <div className="min-h-screen bg-black">
-      {/* Section 1: Text Hero - Full Black Screen */}
-      <section className="min-h-[70vh] md:min-h-[60vh] pt-12 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-black">
+    <div className="min-h-screen bg-[#0a0a0f]">
+      {/* Section 1: Text Hero */}
+      <section className="min-h-[70vh] md:min-h-[60vh] pt-12 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-[#0a0a0f]">
         <div className="max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             So you let your kids
             <br />
@@ -103,7 +107,7 @@ const Homeschool = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, delay: 2, ease: "easeOut" }}
             className="text-xl sm:text-2xl md:text-3xl mt-8"
-            style={{ color: '#7ab8b8', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            style={{ color: cyanMuted, fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             You think that's safe?
           </motion.p>
@@ -113,47 +117,47 @@ const Homeschool = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, delay: 4, ease: "easeOut" }}
             className="text-lg sm:text-xl md:text-2xl mt-6"
-            style={{ color: '#5a9898', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            style={{ color: cyanDim, fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Have you <em>seen</em> the internet lately?
           </motion.p>
         </div>
 
-        {/* Scroll indicator - appears after 10 seconds */}
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: showScrollPrompt ? 1 : 0 }}
           transition={{ duration: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-sm" style={{ color: '#00FFFF' }}>scroll</span>
+          <span className="text-sm" style={{ color: cyan }}>scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ChevronDown className="w-6 h-6" style={{ color: '#00FFFF' }} />
+            <ChevronDown className="w-6 h-6" style={{ color: cyan }} />
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Section 2: Shark Image - Full Viewport */}
-      <section className="bg-black overflow-visible py-8">
+      {/* Section 2: Shark Image */}
+      <section className="bg-[#0a0a0f] overflow-visible py-8">
         <img 
-          src="/lovable-uploads/NetShark.png" 
+          src="/lovable-uploads/shark3.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
         />
       </section>
 
       {/* Section 3: What's Lurking */}
-      <section className="px-6 py-20 bg-black">
+      <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             What's lurking in the deep?
           </motion.h2>
@@ -166,17 +170,14 @@ const Homeschool = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                className="p-4 sm:p-6 rounded-lg border"
-                style={{ 
-                  background: '#1a1a24',
-                  borderColor: '#00FFFF40'
-                }}
+                className="p-4 sm:p-6 rounded-xl border bg-[#12121a]"
+                style={{ borderColor: `${cyan}30` }}
               >
                 <div className="flex items-start gap-4">
-                  <danger.icon className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
+                  <danger.icon className="w-6 h-6 flex-shrink-0" style={{ color: cyan }} />
                   <div>
-                    <h3 className="font-bold text-lg" style={{ color: '#00FFFF' }}>{danger.title}</h3>
-                    <p style={{ color: '#7ab8b8' }}>{danger.description}</p>
+                    <h3 className="font-bold text-lg" style={{ color: cyan }}>{danger.title}</h3>
+                    <p style={{ color: cyanMuted }}>{danger.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -186,10 +187,7 @@ const Homeschool = () => {
       </section>
 
       {/* Section 4: The Pivot */}
-      <section 
-        className="px-6 py-24 text-center"
-        style={{ background: '#000000' }}
-      >
+      <section className="px-6 py-24 text-center bg-[#0a0a0f]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -198,14 +196,11 @@ const Homeschool = () => {
         >
           <h2 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"
-            style={{ color: '#00FFFF', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            style={{ color: cyan, fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             What if there was a GPT made just for learning?
           </h2>
-          <p 
-            className="text-lg sm:text-xl"
-            style={{ color: '#e0f4ff' }}
-          >
+          <p className="text-lg sm:text-xl text-[#e0f4ff]">
             No ads. No algorithms. No data leaving your home.
           </p>
         </motion.div>
@@ -222,11 +217,11 @@ const Homeschool = () => {
             className="flex flex-col items-center overflow-visible"
           >
             <img 
-              src="/lovable-uploads/SoulWaveMachine2.png" 
+              src="/lovable-uploads/SoulWaveMachine3.png" 
               alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto"
               style={{
-                filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
+                filter: `drop-shadow(0 0 15px rgba(47, 197, 237, 0.5)) drop-shadow(0 0 30px rgba(47, 197, 237, 0.25))`
               }}
             />
           </motion.div>
@@ -243,15 +238,12 @@ const Homeschool = () => {
             className="text-center mb-12"
           >
             <h2 
-              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[#f0f8ff]"
+              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
               Meet Soul Interface
             </h2>
-            <p 
-              className="text-xl sm:text-2xl"
-              style={{ color: '#00FFFF' }}
-            >
+            <p className="text-xl sm:text-2xl" style={{ color: cyan }}>
               A private AI that lives in your home
             </p>
           </motion.div>
@@ -260,8 +252,7 @@ const Homeschool = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center text-lg mb-12 max-w-2xl mx-auto"
-            style={{ color: '#e0f4ff' }}
+            className="text-center text-lg mb-12 max-w-2xl mx-auto text-[#e0f4ff]"
           >
             A patent-pending offline AI tower that connects to any Chromebook, laptop, or tablet your family already owns. 
             Your kids get a brilliant tutor, translator, and creative partner — without ever touching the open internet.
@@ -275,15 +266,12 @@ const Homeschool = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-lg text-center border"
-                style={{ 
-                  background: '#141418',
-                  borderColor: '#00FFFF40'
-                }}
+                className="p-6 rounded-xl text-center border bg-[#12121a]"
+                style={{ borderColor: `${cyan}30` }}
               >
-                <benefit.icon className="w-10 h-10 mx-auto mb-4" style={{ color: '#00FFFF' }} />
-                <h3 className="font-bold text-lg mb-2" style={{ color: '#f0f8ff' }}>{benefit.title}</h3>
-                <p style={{ color: '#7ab8b8' }}>{benefit.description}</p>
+                <benefit.icon className="w-10 h-10 mx-auto mb-4" style={{ color: cyan }} />
+                <h3 className="font-bold text-lg mb-2 text-[#f0f8ff]">{benefit.title}</h3>
+                <p style={{ color: cyanMuted }}>{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -291,14 +279,14 @@ const Homeschool = () => {
       </section>
 
       {/* Section 6: Features */}
-      <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
+      <section className="px-6 py-20 bg-[#0d0d14]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Everything they need to learn — nothing they don't
           </motion.h2>
@@ -311,13 +299,12 @@ const Homeschool = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-5 rounded-lg flex items-start gap-4"
-                style={{ background: '#141418' }}
+                className="p-5 rounded-xl flex items-start gap-4 bg-[#12121a]"
               >
-                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: '#00FFFF' }} />
+                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: cyan }} />
                 <div>
-                  <h3 className="font-bold" style={{ color: '#f0f8ff' }}>{feature.title}</h3>
-                  <p className="text-sm" style={{ color: '#7ab8b8' }}>{feature.description}</p>
+                  <h3 className="font-bold text-[#f0f8ff]">{feature.title}</h3>
+                  <p className="text-sm" style={{ color: cyanMuted }}>{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -325,15 +312,15 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 7: What's Inside - Content Library */}
-      <section className="px-6 py-20" style={{ background: '#080810' }}>
+      {/* Section 7: Content Library */}
+      <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             A complete learning library — already loaded
           </motion.h2>
@@ -342,7 +329,7 @@ const Homeschool = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center text-lg mb-12"
-            style={{ color: '#7ab8b8' }}
+            style={{ color: cyanMuted }}
           >
             No empty box. Soul Interface comes pre-loaded with a massive, curated knowledge base.
           </motion.p>
@@ -355,14 +342,11 @@ const Homeschool = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-5 rounded-lg flex items-center gap-4 border"
-                style={{ 
-                  background: '#0d0d14',
-                  borderColor: '#00FFFF30'
-                }}
+                className="p-5 rounded-xl flex items-center gap-4 border bg-[#0d0d14]"
+                style={{ borderColor: `${cyan}25` }}
               >
-                <item.icon className="w-7 h-7 flex-shrink-0" style={{ color: '#00FFFF' }} />
-                <p style={{ color: '#e0f4ff' }}>{item.text}</p>
+                <item.icon className="w-7 h-7 flex-shrink-0" style={{ color: cyan }} />
+                <p className="text-[#e0f4ff]">{item.text}</p>
               </motion.div>
             ))}
           </div>
@@ -370,61 +354,61 @@ const Homeschool = () => {
       </section>
 
       {/* Section 8: Chromebook Callout */}
-      <section className="px-6 py-12" style={{ background: '#00FFFF' }}>
+      <section className="px-6 py-12" style={{ background: cyan }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="space-y-3">
-            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
+            <p className="font-bold text-lg text-[#0a0a0f]">
               ✓ Works with any Chromebook being used in schools today
             </p>
-            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
+            <p className="font-bold text-lg text-[#0a0a0f]">
               ✓ No special hardware for your kids — just the tower for your home
             </p>
-            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
+            <p className="font-bold text-lg text-[#0a0a0f]">
               ✓ Set up in under an hour
             </p>
           </div>
         </div>
       </section>
 
-      {/* Section 8: Safety & Privacy */}
+      {/* Section 9: Safety & Privacy */}
       <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Your home. Your rules. Your data.
           </motion.h2>
 
-          <div className="space-y-4 text-lg" style={{ color: '#e0f4ff' }}>
+          <div className="space-y-4 text-lg text-[#e0f4ff]">
             <p className="flex items-center justify-center gap-3">
-              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
+              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: cyan }} />
               No student data in the cloud
             </p>
             <p className="flex items-center justify-center gap-3">
-              <UserCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
+              <UserCheck className="w-6 h-6 flex-shrink-0" style={{ color: cyan }} />
               You control your child's digital likeness
             </p>
             <p className="flex items-center justify-center gap-3">
-              <Bell className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
+              <Bell className="w-6 h-6 flex-shrink-0" style={{ color: cyan }} />
               Parent always in the loop
             </p>
           </div>
         </div>
       </section>
 
-      {/* Section 9: Founder Story */}
-      <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
+      {/* Section 10: Founder Story */}
+      <section className="px-6 py-20 bg-[#0d0d14]">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl font-bold mb-6"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl font-bold mb-6 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Built by a teacher who gets it
           </motion.h2>
@@ -434,7 +418,7 @@ const Homeschool = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-lg leading-relaxed"
-            style={{ color: '#7ab8b8' }}
+            style={{ color: cyanMuted }}
           >
             Soul Interface was founded by Ben Adler, an 8th-grade science teacher from Oakland. 
             He spent years watching kids circumvent every safeguard and get up to shockingly bad behavior on supposedly safe school computers. 
@@ -443,11 +427,8 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 10: CTA */}
-      <section 
-        className="px-6 py-24 text-center"
-        style={{ background: '#0a0a0f' }}
-      >
+      {/* Section 11: CTA */}
+      <section className="px-6 py-24 text-center bg-[#0a0a0f]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -455,8 +436,8 @@ const Homeschool = () => {
           className="max-w-xl mx-auto"
         >
           <h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Ready to take your kids offline?
           </h2>
@@ -468,20 +449,14 @@ const Homeschool = () => {
             transition={{ delay: 0.2 }}
             className="mb-8 p-6 rounded-xl border"
             style={{ 
-              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(139, 90, 43, 0.08) 100%)',
-              borderColor: '#00FFFF40'
+              background: `linear-gradient(135deg, rgba(47, 197, 237, 0.08) 0%, rgba(139, 90, 43, 0.08) 100%)`,
+              borderColor: `${cyan}30`
             }}
           >
-            <p 
-              className="text-lg sm:text-xl font-bold mb-2"
-              style={{ color: '#00FFFF' }}
-            >
+            <p className="text-lg sm:text-xl font-bold mb-2" style={{ color: cyan }}>
               Pre-Order Pioneer Edition Now for Q1 2026 Delivery
             </p>
-            <p 
-              className="text-sm sm:text-base"
-              style={{ color: '#c4a574' }}
-            >
+            <p className="text-sm sm:text-base text-[#c4a574]">
               Limited Edition Launch Case With Real Wood Veneer
             </p>
           </motion.div>
@@ -489,22 +464,21 @@ const Homeschool = () => {
           <Button
             onClick={() => setDemoModalOpen(true)}
             size="lg"
-            className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105 text-[#0a0a0f]"
             style={{ 
-              background: '#00FFFF',
-              color: '#0a0a0f',
-              boxShadow: '0 0 30px rgba(0, 255, 255, 0.4)'
+              background: cyan,
+              boxShadow: `0 0 30px rgba(47, 197, 237, 0.5)`
             }}
           >
             Request a Demo
           </Button>
 
-          <p className="mt-6" style={{ color: '#5a9898' }}>
+          <p className="mt-6" style={{ color: cyanDim }}>
             Questions? Email{" "}
             <a 
               href="mailto:contact@soulinterface.ai" 
               className="underline hover:no-underline"
-              style={{ color: '#00FFFF' }}
+              style={{ color: cyan }}
             >
               contact@soulinterface.ai
             </a>
@@ -515,82 +489,72 @@ const Homeschool = () => {
       {/* Demo Request Modal */}
       <Dialog open={demoModalOpen} onOpenChange={setDemoModalOpen}>
         <DialogContent 
-          className="max-w-lg border-0"
-          style={{ 
-            background: '#0d1520',
-            boxShadow: '0 0 60px rgba(0, 255, 255, 0.2)'
-          }}
+          className="max-w-lg border-0 bg-[#0d1520]"
+          style={{ boxShadow: `0 0 60px rgba(47, 197, 237, 0.25)` }}
         >
           <DialogHeader>
-            <DialogTitle 
-              className="text-2xl font-bold text-center"
-              style={{ color: '#f0f8ff' }}
-            >
+            <DialogTitle className="text-2xl font-bold text-center text-[#f0f8ff]">
               See Soul Interface in Action
             </DialogTitle>
             <DialogDescription className="text-center space-y-2 pt-2">
-              <p style={{ color: '#7ab8b8' }}>
-                Join us at <span style={{ color: '#00FFFF' }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+              <p style={{ color: cyanMuted }}>
+                Join us at <span style={{ color: cyan }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
               </p>
             </DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label htmlFor="name" style={{ color: '#e0f4ff' }}>Name</Label>
+              <Label htmlFor="name" className="text-[#e0f4ff]">Name</Label>
               <Input
                 id="name"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="border-0"
-                style={{ background: '#1a2535', color: '#f0f8ff' }}
+                className="border-0 bg-[#1a2535] text-[#f0f8ff]"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" style={{ color: '#e0f4ff' }}>Email</Label>
+              <Label htmlFor="email" className="text-[#e0f4ff]">Email</Label>
               <Input
                 id="email"
                 type="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="border-0"
-                style={{ background: '#1a2535', color: '#f0f8ff' }}
+                className="border-0 bg-[#1a2535] text-[#f0f8ff]"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="organization" style={{ color: '#e0f4ff' }}>Organization / School Name</Label>
+              <Label htmlFor="organization" className="text-[#e0f4ff]">Organization / School Name</Label>
               <Input
                 id="organization"
                 value={formData.organization}
                 onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                className="border-0"
-                style={{ background: '#1a2535', color: '#f0f8ff' }}
+                className="border-0 bg-[#1a2535] text-[#f0f8ff]"
               />
             </div>
 
             <div className="space-y-2">
-              <Label style={{ color: '#e0f4ff' }}>Number of Children per Class</Label>
+              <Label className="text-[#e0f4ff]">Number of Children per Class</Label>
               <Select
                 value={formData.childrenPerClass}
                 onValueChange={(value) => setFormData({ ...formData, childrenPerClass: value })}
               >
-                <SelectTrigger 
-                  className="border-0"
-                  style={{ background: '#1a2535', color: '#f0f8ff' }}
-                >
+                <SelectTrigger className="border-0 bg-[#1a2535] text-[#f0f8ff]">
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
-                <SelectContent style={{ background: '#1a2535', borderColor: '#00FFFF40' }}>
+                <SelectContent 
+                  className="bg-[#1a2535]"
+                  style={{ borderColor: `${cyan}30` }}
+                >
                   {childrenOptions.map((num) => (
                     <SelectItem 
                       key={num} 
                       value={num}
-                      style={{ color: '#f0f8ff' }}
-                      className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
+                      className="text-[#f0f8ff] focus:bg-[#2FC5ED20] focus:text-[#2FC5ED]"
                     >
                       {num}
                     </SelectItem>
@@ -600,43 +564,39 @@ const Homeschool = () => {
             </div>
 
             <div className="space-y-2">
-              <Label style={{ color: '#e0f4ff' }}>Preferred Demo Option</Label>
+              <Label className="text-[#e0f4ff]">Preferred Demo Option</Label>
               <Select
                 value={formData.demoOption}
                 onValueChange={(value) => setFormData({ ...formData, demoOption: value })}
               >
-                <SelectTrigger 
-                  className="border-0"
-                  style={{ background: '#1a2535', color: '#f0f8ff' }}
-                >
+                <SelectTrigger className="border-0 bg-[#1a2535] text-[#f0f8ff]">
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
-                <SelectContent style={{ background: '#1a2535', borderColor: '#00FFFF40' }}>
+                <SelectContent 
+                  className="bg-[#1a2535]"
+                  style={{ borderColor: `${cyan}30` }}
+                >
                   <SelectItem 
                     value="FETC 2026 Orlando (Jan 11-14)"
-                    style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
+                    className="text-[#f0f8ff] focus:bg-[#2FC5ED20] focus:text-[#2FC5ED]"
                   >
                     FETC 2026 in Orlando (Jan 11-14)
                   </SelectItem>
                   <SelectItem 
                     value="In-Person Florida (3rd week of Jan)"
-                    style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
+                    className="text-[#f0f8ff] focus:bg-[#2FC5ED20] focus:text-[#2FC5ED]"
                   >
                     In-Person Florida Demo (3rd week of Jan)
                   </SelectItem>
                   <SelectItem 
                     value="California / Northern Nevada In-Person (TBD)"
-                    style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
+                    className="text-[#f0f8ff] focus:bg-[#2FC5ED20] focus:text-[#2FC5ED]"
                   >
                     California / Northern Nevada In-Person (TBD)
                   </SelectItem>
                   <SelectItem 
                     value="Virtual Demo"
-                    style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
+                    className="text-[#f0f8ff] focus:bg-[#2FC5ED20] focus:text-[#2FC5ED]"
                   >
                     Virtual Demo
                   </SelectItem>
@@ -645,24 +605,22 @@ const Homeschool = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="message" style={{ color: '#e0f4ff' }}>Message (optional)</Label>
+              <Label htmlFor="message" className="text-[#e0f4ff]">Message (optional)</Label>
               <Textarea
                 id="message"
                 rows={3}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="border-0 resize-none"
-                style={{ background: '#1a2535', color: '#f0f8ff' }}
+                className="border-0 resize-none bg-[#1a2535] text-[#f0f8ff]"
               />
             </div>
 
             <Button
               type="submit"
-              className="w-full py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-[1.02]"
+              className="w-full py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-[1.02] text-[#0a0a0f]"
               style={{ 
-                background: '#00FFFF',
-                color: '#0a0a0f',
-                boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
+                background: cyan,
+                boxShadow: `0 0 20px rgba(47, 197, 237, 0.4)`
               }}
             >
               Submit Request
@@ -671,17 +629,17 @@ const Homeschool = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Section 11: Footer */}
-      <footer className="px-6 py-12 bg-black">
+      {/* Footer */}
+      <footer className="px-6 py-12 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p style={{ color: '#5a9898' }}>Soul Interface © 2025</p>
+            <p style={{ color: cyanDim }}>Soul Interface © 2025</p>
             
             <nav className="flex flex-wrap justify-center gap-6">
-              <Link to="/" className="hover:underline" style={{ color: '#7ab8b8' }}>Home</Link>
-              <Link to="/education" className="hover:underline" style={{ color: '#00FFFF' }}>Education</Link>
-              <Link to="/news" className="hover:underline" style={{ color: '#7ab8b8' }}>News</Link>
-              <Link to="/tech" className="hover:underline" style={{ color: '#7ab8b8' }}>Tech</Link>
+              <Link to="/" className="hover:underline" style={{ color: cyanMuted }}>Home</Link>
+              <Link to="/education" className="hover:underline" style={{ color: cyan }}>Education</Link>
+              <Link to="/news" className="hover:underline" style={{ color: cyanMuted }}>News</Link>
+              <Link to="/tech" className="hover:underline" style={{ color: cyanMuted }}>Tech</Link>
             </nav>
           </div>
         </div>
