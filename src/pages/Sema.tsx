@@ -107,12 +107,7 @@ const Sema = () => {
         </div>
 
         {/* Interest Form Links */}
-        <section className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-20 mb-20">
-          <Link to="/builders">
-            <Button size="lg" className="w-48">
-              For Builders
-            </Button>
-          </Link>
+        <section className="flex justify-center items-center mt-20 mb-20">
           <Link to="/tech">
             <Button size="lg" className="w-48">
               For Investors
