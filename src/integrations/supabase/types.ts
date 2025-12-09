@@ -14,39 +14,7 @@ export type Database = {
   }
   public: {
     Tables: {
-      builder_inquiries: {
-        Row: {
-          annual_production: string
-          company: string
-          created_at: string
-          email: string
-          id: string
-          phone: string | null
-          questions: string | null
-          vehicle_types: string
-        }
-        Insert: {
-          annual_production: string
-          company: string
-          created_at?: string
-          email: string
-          id?: string
-          phone?: string | null
-          questions?: string | null
-          vehicle_types: string
-        }
-        Update: {
-          annual_production?: string
-          company?: string
-          created_at?: string
-          email?: string
-          id?: string
-          phone?: string | null
-          questions?: string | null
-          vehicle_types?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
