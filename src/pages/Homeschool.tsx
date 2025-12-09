@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, CircleDollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -315,6 +315,23 @@ const Homeschool = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Bug Bounty Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 p-6 rounded-lg text-center border-2"
+            style={{ 
+              background: '#141418',
+              borderColor: '#00FFFF'
+            }}
+          >
+            <CircleDollarSign className="w-12 h-12 mx-auto mb-4" style={{ color: '#00FFFF' }} />
+            <h3 className="font-bold text-xl mb-2" style={{ color: '#00FFFF' }}>$1000 Bad Behavior Bug Bounty</h3>
+            <p style={{ color: '#7ab8b8' }}>If you can make it do wrong, we want to fix it immediately</p>
+          </motion.div>
         </div>
       </section>
 
