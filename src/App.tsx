@@ -32,7 +32,7 @@ const App = () => (
           <Route path="/sema" element={<Sema />} />
           <Route path="/builders" element={<Builders />} />
           <Route path="/investors" element={<Investors />} />
-          <Route path="/homeschool" element={<Homeschool />} />
+          <Route path="/education" element={<Homeschool />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
