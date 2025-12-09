@@ -467,11 +467,36 @@ const Homeschool = () => {
           className="max-w-xl mx-auto"
         >
           <h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
             style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Ready to take your kids offline?
           </h2>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mb-8 p-6 rounded-xl border"
+            style={{ 
+              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(139, 90, 43, 0.08) 100%)',
+              borderColor: '#00FFFF40'
+            }}
+          >
+            <p 
+              className="text-lg sm:text-xl font-bold mb-2"
+              style={{ color: '#00FFFF' }}
+            >
+              Pre-Order Pioneer Edition Now for Q1 2026 Delivery
+            </p>
+            <p 
+              className="text-sm sm:text-base"
+              style={{ color: '#c4a574' }}
+            >
+              Limited Edition Launch Case With Real Wood Veneer
+            </p>
+          </motion.div>
 
           <Button
             onClick={() => setDemoModalOpen(true)}
