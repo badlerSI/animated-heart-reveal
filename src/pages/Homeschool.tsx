@@ -178,7 +178,7 @@ const Homeschool = () => {
       {/* Section 4: The Pivot */}
       <section 
         className="px-6 py-24 text-center"
-        style={{ background: '#0d0d12' }}
+        style={{ background: '#000000' }}
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -190,7 +190,7 @@ const Homeschool = () => {
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"
             style={{ color: '#00FFFF', fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
-            What if there was an internet made just for learning?
+            What if there was a GPT made just for learning?
           </h2>
           <p 
             className="text-lg sm:text-xl"
@@ -214,7 +214,7 @@ const Homeschool = () => {
               <img 
                 src="/lovable-uploads/SoulWaveMachine2.png" 
                 alt="Soul Interface wave machine with surfer boy - offline AI learning device"
-              className="max-w-full h-auto"
+              className="max-w-full h-auto p-4"
               style={{
                 filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
               }}
