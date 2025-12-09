@@ -1,11 +1,25 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 const Homeschool = () => {
   const [showScrollPrompt, setShowScrollPrompt] = useState(false);
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    organization: "",
+    childrenPerClass: "",
+    demoOption: "",
+    message: ""
+  });
 
   useEffect(() => {
     document.title = "Soul Interface | Safe AI for Homeschool";
@@ -18,6 +32,21 @@ const Homeschool = () => {
     const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent("Demo Request - " + formData.demoOption);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Organization: ${formData.organization}\n` +
+      `Children per Class: ${formData.childrenPerClass}\n` +
+      `Preferred Demo: ${formData.demoOption}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    window.location.href = `mailto:contact@soulinterface.ai?subject=${subject}&body=${body}`;
+    setDemoModalOpen(false);
+  };
 
   const dangers = [
     { icon: AlertTriangle, title: "AI chatbots with no guardrails", description: "ready to answer any question" },
@@ -40,10 +69,12 @@ const Homeschool = () => {
     { icon: LayoutDashboard, title: "Parent Dashboard", description: "See progress, set limits" },
   ];
 
+  const childrenOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30"];
+
   return (
     <div className="min-h-screen bg-black">
       {/* Section 1: Text Hero - Full Black Screen */}
-      <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center relative bg-black">
+      <section className="min-h-[80vh] md:min-h-[60vh] pt-16 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-black">
         <div className="max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -293,9 +324,18 @@ const Homeschool = () => {
           </motion.h2>
 
           <div className="space-y-4 text-lg" style={{ color: '#e0f4ff' }}>
-            <p>🛡️ No student data in the cloud</p>
-            <p>🛡️ You control your child's digital likeness</p>
-            <p>🛡️ Parent always in the loop</p>
+            <p className="flex items-center justify-center gap-3">
+              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              No student data in the cloud
+            </p>
+            <p className="flex items-center justify-center gap-3">
+              <UserCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              You control your child's digital likeness
+            </p>
+            <p className="flex items-center justify-center gap-3">
+              <Bell className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              Parent always in the loop
+            </p>
           </div>
         </div>
       </section>
@@ -346,7 +386,7 @@ const Homeschool = () => {
           </h2>
 
           <Button
-            asChild
+            onClick={() => setDemoModalOpen(true)}
             size="lg"
             className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
             style={{ 
@@ -355,33 +395,190 @@ const Homeschool = () => {
               boxShadow: '0 0 30px rgba(61, 217, 217, 0.4)'
             }}
           >
-            <a href="mailto:hello@soulinterface.ai?subject=Homeschool Demo Request">
-              Request a Demo
-            </a>
+            Request a Demo
           </Button>
 
           <p className="mt-6" style={{ color: '#5a9898' }}>
             Questions? Email{" "}
             <a 
-              href="mailto:hello@soulinterface.ai" 
+              href="mailto:contact@soulinterface.ai" 
               className="underline hover:no-underline"
               style={{ color: '#3dd9d9' }}
             >
-              hello@soulinterface.ai
+              contact@soulinterface.ai
             </a>
           </p>
         </motion.div>
       </section>
 
+      {/* Demo Request Modal */}
+      <Dialog open={demoModalOpen} onOpenChange={setDemoModalOpen}>
+        <DialogContent 
+          className="max-w-lg border-0"
+          style={{ 
+            background: '#0d1520',
+            boxShadow: '0 0 60px rgba(61, 217, 217, 0.2)'
+          }}
+        >
+          <DialogHeader>
+            <DialogTitle 
+              className="text-2xl font-bold text-center"
+              style={{ color: '#f0f8ff' }}
+            >
+              See Soul Interface in Action
+            </DialogTitle>
+            <DialogDescription className="text-center space-y-2 pt-2">
+              <p style={{ color: '#7ab8b8' }}>
+                Join us at <span style={{ color: '#3dd9d9' }}>FETC 2026</span> in Orlando (January 13-16) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" style={{ color: '#e0f4ff' }}>Name</Label>
+              <Input
+                id="name"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="border-0"
+                style={{ background: '#1a2535', color: '#f0f8ff' }}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email" style={{ color: '#e0f4ff' }}>Email</Label>
+              <Input
+                id="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="border-0"
+                style={{ background: '#1a2535', color: '#f0f8ff' }}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="organization" style={{ color: '#e0f4ff' }}>Organization / School Name</Label>
+              <Input
+                id="organization"
+                value={formData.organization}
+                onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                className="border-0"
+                style={{ background: '#1a2535', color: '#f0f8ff' }}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label style={{ color: '#e0f4ff' }}>Number of Children per Class</Label>
+              <Select
+                value={formData.childrenPerClass}
+                onValueChange={(value) => setFormData({ ...formData, childrenPerClass: value })}
+              >
+                <SelectTrigger 
+                  className="border-0"
+                  style={{ background: '#1a2535', color: '#f0f8ff' }}
+                >
+                  <SelectValue placeholder="Select..." />
+                </SelectTrigger>
+                <SelectContent style={{ background: '#1a2535', borderColor: '#3dd9d940' }}>
+                  {childrenOptions.map((num) => (
+                    <SelectItem 
+                      key={num} 
+                      value={num}
+                      style={{ color: '#f0f8ff' }}
+                      className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                    >
+                      {num}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label style={{ color: '#e0f4ff' }}>Preferred Demo Option</Label>
+              <Select
+                value={formData.demoOption}
+                onValueChange={(value) => setFormData({ ...formData, demoOption: value })}
+              >
+                <SelectTrigger 
+                  className="border-0"
+                  style={{ background: '#1a2535', color: '#f0f8ff' }}
+                >
+                  <SelectValue placeholder="Select..." />
+                </SelectTrigger>
+                <SelectContent style={{ background: '#1a2535', borderColor: '#3dd9d940' }}>
+                  <SelectItem 
+                    value="FETC 2026 Orlando (Jan 13-16)"
+                    style={{ color: '#f0f8ff' }}
+                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                  >
+                    FETC 2026 in Orlando (Jan 13-16)
+                  </SelectItem>
+                  <SelectItem 
+                    value="In-Person Florida (3rd week of Jan)"
+                    style={{ color: '#f0f8ff' }}
+                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                  >
+                    In-Person Florida Demo (3rd week of Jan)
+                  </SelectItem>
+                  <SelectItem 
+                    value="California / Northern Nevada In-Person (TBD)"
+                    style={{ color: '#f0f8ff' }}
+                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                  >
+                    California / Northern Nevada In-Person (TBD)
+                  </SelectItem>
+                  <SelectItem 
+                    value="Virtual Demo"
+                    style={{ color: '#f0f8ff' }}
+                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                  >
+                    Virtual Demo
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message" style={{ color: '#e0f4ff' }}>Message (optional)</Label>
+              <Textarea
+                id="message"
+                rows={3}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="border-0 resize-none"
+                style={{ background: '#1a2535', color: '#f0f8ff' }}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-[1.02]"
+              style={{ 
+                background: '#3dd9d9',
+                color: '#0a0a0f',
+                boxShadow: '0 0 20px rgba(61, 217, 217, 0.3)'
+              }}
+            >
+              Submit Request
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
       {/* Section 11: Footer */}
       <footer className="px-6 py-12 bg-black">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p style={{ color: '#5a9898' }}>Soul Interface © 2024</p>
+            <p style={{ color: '#5a9898' }}>Soul Interface © 2025</p>
             
             <nav className="flex flex-wrap justify-center gap-6">
               <Link to="/" className="hover:underline" style={{ color: '#7ab8b8' }}>Home</Link>
-              <Link to="/homeschool" className="hover:underline" style={{ color: '#3dd9d9' }}>Education</Link>
+              <Link to="/education" className="hover:underline" style={{ color: '#3dd9d9' }}>Education</Link>
               <Link to="/investors" className="hover:underline" style={{ color: '#7ab8b8' }}>Investors</Link>
               <Link to="/tech" className="hover:underline" style={{ color: '#7ab8b8' }}>Tech</Link>
             </nav>
