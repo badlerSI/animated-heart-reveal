@@ -1,16 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Homeschool = () => {
+  const [showScrollPrompt, setShowScrollPrompt] = useState(false);
+
   useEffect(() => {
     document.title = "Soul Interface | Safe AI for Homeschool";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "A private, offline AI tutor that lives in your home. No cloud. No ads. No data harvesting. Works with any Chromebook.");
     }
+
+    // Show scroll prompt after 10 seconds
+    const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
+    return () => clearTimeout(timer);
   }, []);
 
   const dangers = [
@@ -36,25 +42,9 @@ const Homeschool = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Section 1: Hero with Shark Background */}
-      <section 
-        className="min-h-screen flex flex-col items-center justify-start px-6 pt-16 sm:pt-20 text-center relative"
-        style={{
-          backgroundImage: 'url(/lovable-uploads/NetShark.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        {/* Gradient overlay for text readability */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
-          }}
-        />
-
-        <div className="relative z-10 max-w-4xl">
+      {/* Section 1: Text Hero - Full Black Screen */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative bg-black">
+        <div className="max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -88,25 +78,33 @@ const Homeschool = () => {
           </motion.p>
         </div>
 
-        {/* Scroll indicator at bottom */}
+        {/* Scroll indicator - appears after 10 seconds */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          animate={{ opacity: showScrollPrompt ? 1 : 0 }}
+          transition={{ duration: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <div className="w-6 h-10 border-2 rounded-full flex justify-center" style={{ borderColor: '#3dd9d9' }}>
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-3 rounded-full mt-2"
-              style={{ background: '#3dd9d9' }}
-            />
-          </div>
+          <span className="text-sm" style={{ color: '#3dd9d9' }}>scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <ChevronDown className="w-6 h-6" style={{ color: '#3dd9d9' }} />
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Section 2: What's Lurking */}
+      {/* Section 2: Shark Image - Full Viewport */}
+      <section className="min-h-screen flex items-center justify-center bg-black px-4">
+        <img 
+          src="/lovable-uploads/NetShark.png" 
+          alt="Child surfing above shark - the dangers of the open internet"
+          className="max-h-[85vh] w-auto object-contain"
+        />
+      </section>
+
+      {/* Section 3: What's Lurking */}
       <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
@@ -146,7 +144,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 3: The Pivot */}
+      {/* Section 4: The Pivot */}
       <section 
         className="px-6 py-24 text-center"
         style={{ background: '#0d0d12' }}
@@ -172,7 +170,7 @@ const Homeschool = () => {
         </motion.div>
       </section>
 
-      {/* Section 4: The Solution */}
+      {/* Section 5: The Solution */}
       <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -229,7 +227,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 5: Features */}
+      {/* Section 6: Features */}
       <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
         <div className="max-w-4xl mx-auto">
           <motion.h2
@@ -264,7 +262,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 6: Chromebook Callout */}
+      {/* Section 7: Chromebook Callout */}
       <section className="px-6 py-12" style={{ background: '#3dd9d9' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="space-y-3">
@@ -281,7 +279,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 7: Safety & Privacy */}
+      {/* Section 8: Safety & Privacy */}
       <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
@@ -302,7 +300,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 8: Founder Story */}
+      {/* Section 9: Founder Story */}
       <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
@@ -329,7 +327,7 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 9: CTA */}
+      {/* Section 10: CTA */}
       <section 
         className="px-6 py-24 text-center"
         style={{ background: '#0a0a0f' }}
@@ -375,7 +373,7 @@ const Homeschool = () => {
         </motion.div>
       </section>
 
-      {/* Section 10: Footer */}
+      {/* Section 11: Footer */}
       <footer className="px-6 py-12 bg-black">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
