@@ -143,7 +143,7 @@ const Homeschool = () => {
       {/* Section 2: Shark Image */}
       <section className="bg-[#0a0a0f] overflow-visible py-8">
         <img 
-          src="/lovable-uploads/shark4.png" 
+          src="/lovable-uploads/shark6.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
         />
@@ -218,13 +218,13 @@ const Homeschool = () => {
           >
             {/* Base image - no glow */}
             <img 
-              src="/lovable-uploads/machine4.png" 
+              src="/lovable-uploads/machine4-clean.png" 
               alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto relative z-10"
             />
             {/* White pixel glow overlay - pulsing effect on kanji only */}
             <img 
-              src="/lovable-uploads/machine4.png" 
+              src="/lovable-uploads/machine4-clean.png"
               alt=""
               aria-hidden="true"
               className="max-w-full h-auto absolute inset-0 z-20 pointer-events-none"
