@@ -14,6 +14,7 @@ import Sema from "./pages/Sema";
 
 import Investors from "./pages/Investors";
 import Homeschool from "./pages/Homeschool";
+import ImageProcessor from "./pages/ImageProcessor";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           
           <Route path="/investors" element={<Investors />} />
           <Route path="/education" element={<Homeschool />} />
+          <Route path="/image-processor" element={<ImageProcessor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
