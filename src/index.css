@@ -124,15 +124,15 @@
   }
 }
 
-/* Pulsing glow for white kanji pixels */
+/* Pulsing glow for white overlay - faint and subtle */
 @keyframes kanjiPulse {
   0%, 100% {
-    opacity: 0.4;
-    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.5)) drop-shadow(0 0 12px rgba(255,255,255,0.3));
+    opacity: 0.25;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
   }
   50% {
-    opacity: 0.8;
-    filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 30px rgba(255,255,255,0.5)) drop-shadow(0 0 45px rgba(255,255,255,0.3));
+    opacity: 0.5;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4)) drop-shadow(0 0 16px rgba(255,255,255,0.2));
   }
 }
 
