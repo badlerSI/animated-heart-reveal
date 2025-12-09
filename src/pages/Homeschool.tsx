@@ -127,11 +127,14 @@ const Homeschool = () => {
       </section>
 
       {/* Section 2: Shark Image - Full Viewport */}
-      <section className="bg-black">
+      <section className="bg-black overflow-visible py-8">
         <img 
           src="/lovable-uploads/NetShark.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
+          }}
         />
       </section>
 
@@ -202,19 +205,19 @@ const Homeschool = () => {
       </section>
 
       {/* Soul Wave Machine Image */}
-      <section className="px-6 py-16 bg-[#0a0a0f]">
-        <div className="max-w-3xl mx-auto">
+      <section className="px-6 pt-24 pb-16 bg-[#0a0a0f] overflow-visible">
+        <div className="max-w-3xl mx-auto overflow-visible">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center"
+            className="flex justify-center overflow-visible"
           >
-              <img 
-                src="/lovable-uploads/SoulWaveMachine2.png" 
-                alt="Soul Interface wave machine with surfer boy - offline AI learning device"
-              className="max-w-full h-auto p-4"
+            <img 
+              src="/lovable-uploads/SoulWaveMachine2.png" 
+              alt="Soul Interface wave machine with surfer boy - offline AI learning device"
+              className="max-w-full h-auto"
               style={{
                 filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
               }}
