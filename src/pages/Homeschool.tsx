@@ -35,44 +35,65 @@ const Homeschool = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: '#0a1628' }}>
-      {/* Section 1: The Provocative Hook */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-4xl"
-          style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
-        >
-          So you let your kids surf the open internet...
-        </motion.h1>
+    <div className="min-h-screen bg-black">
+      {/* Section 1: Hero with Shark Background */}
+      <section 
+        className="min-h-screen flex flex-col items-center justify-start px-6 pt-16 sm:pt-20 text-center relative"
+        style={{
+          backgroundImage: 'url(/lovable-uploads/NetShark.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Gradient overlay for text readability */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%)',
+          }}
+        />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
-          className="text-xl sm:text-2xl md:text-3xl mt-8"
-          style={{ color: '#7ab8b8', fontFamily: 'Helvetica, Arial, sans-serif' }}
-        >
-          You think that's safe?
-        </motion.p>
+        <div className="relative z-10 max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+          >
+            So you let your kids
+            <br />
+            surf the open internet...
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, delay: 2.4, ease: "easeOut" }}
-          className="text-lg sm:text-xl md:text-2xl mt-6"
-          style={{ color: '#5a9898', fontFamily: 'Helvetica, Arial, sans-serif' }}
-        >
-          Have you <em>seen</em> the internet lately?
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, delay: 2, ease: "easeOut" }}
+            className="text-xl sm:text-2xl md:text-3xl mt-8"
+            style={{ color: '#7ab8b8', fontFamily: 'Helvetica, Arial, sans-serif' }}
+          >
+            You think that's safe?
+          </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, delay: 4, ease: "easeOut" }}
+            className="text-lg sm:text-xl md:text-2xl mt-6"
+            style={{ color: '#5a9898', fontFamily: 'Helvetica, Arial, sans-serif' }}
+          >
+            Have you <em>seen</em> the internet lately?
+          </motion.p>
+        </div>
+
+        {/* Scroll indicator at bottom */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 3.2 }}
-          className="mt-12"
+          transition={{ duration: 0.8, delay: 5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="w-6 h-10 border-2 rounded-full flex justify-center" style={{ borderColor: '#3dd9d9' }}>
             <motion.div
@@ -85,30 +106,8 @@ const Homeschool = () => {
         </motion.div>
       </section>
 
-      {/* Section 2: The Shark Image */}
-      <section className="w-full px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="max-w-4xl mx-auto"
-        >
-          <motion.img
-            src="/lovable-uploads/NetShark.png"
-            alt="Child on surfboard with shark lurking beneath - the hidden dangers of the open internet"
-            className="w-full h-auto rounded-lg"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ 
-              boxShadow: '0 0 60px rgba(61, 217, 217, 0.15)',
-            }}
-          />
-        </motion.div>
-      </section>
-
-      {/* Section 3: What's Lurking */}
-      <section className="px-6 py-20" style={{ background: '#0d2137' }}>
+      {/* Section 2: What's Lurking */}
+      <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -130,7 +129,7 @@ const Homeschool = () => {
                 transition={{ delay: index * 0.15 }}
                 className="p-4 sm:p-6 rounded-lg border"
                 style={{ 
-                  background: '#1a3a5c',
+                  background: '#1a1a24',
                   borderColor: '#ff4d4d40'
                 }}
               >
@@ -147,12 +146,10 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 4: The Pivot */}
+      {/* Section 3: The Pivot */}
       <section 
         className="px-6 py-24 text-center"
-        style={{ 
-          background: 'linear-gradient(180deg, #0d2137 0%, #1a3a5c 100%)'
-        }}
+        style={{ background: '#0d0d12' }}
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -175,8 +172,8 @@ const Homeschool = () => {
         </motion.div>
       </section>
 
-      {/* Section 5: The Solution */}
-      <section className="px-6 py-20" style={{ background: '#1a3a5c' }}>
+      {/* Section 4: The Solution */}
+      <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -219,7 +216,7 @@ const Homeschool = () => {
                 transition={{ delay: index * 0.1 }}
                 className="p-6 rounded-lg text-center border"
                 style={{ 
-                  background: '#0d213780',
+                  background: '#141418',
                   borderColor: '#3dd9d940'
                 }}
               >
@@ -232,8 +229,8 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 6: Features */}
-      <section className="px-6 py-20" style={{ background: '#1a4a6c' }}>
+      {/* Section 5: Features */}
+      <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -254,7 +251,7 @@ const Homeschool = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="p-5 rounded-lg flex items-start gap-4"
-                style={{ background: '#1a3a5c' }}
+                style={{ background: '#141418' }}
               >
                 <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: '#3dd9d9' }} />
                 <div>
@@ -267,25 +264,25 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 7: Chromebook Callout */}
+      {/* Section 6: Chromebook Callout */}
       <section className="px-6 py-12" style={{ background: '#3dd9d9' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="space-y-3">
-            <p className="font-bold text-lg" style={{ color: '#0a1628' }}>
+            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
               ✓ Works with any Chromebook being used in schools today
             </p>
-            <p className="font-bold text-lg" style={{ color: '#0a1628' }}>
+            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
               ✓ No special hardware for your kids — just the tower for your home
             </p>
-            <p className="font-bold text-lg" style={{ color: '#0a1628' }}>
+            <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
               ✓ Set up in under an hour
             </p>
           </div>
         </div>
       </section>
 
-      {/* Section 8: Safety & Privacy */}
-      <section className="px-6 py-20" style={{ background: '#1a3a5c' }}>
+      {/* Section 7: Safety & Privacy */}
+      <section className="px-6 py-20 bg-[#0a0a0f]">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -305,8 +302,8 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 9: Founder Story */}
-      <section className="px-6 py-20" style={{ background: '#0d2137' }}>
+      {/* Section 8: Founder Story */}
+      <section className="px-6 py-20" style={{ background: '#0d0d12' }}>
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -332,12 +329,10 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 10: CTA */}
+      {/* Section 9: CTA */}
       <section 
         className="px-6 py-24 text-center"
-        style={{ 
-          background: 'linear-gradient(180deg, #0d2137 0%, #1a4a6c 100%)'
-        }}
+        style={{ background: '#0a0a0f' }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -355,10 +350,10 @@ const Homeschool = () => {
           <Button
             asChild
             size="lg"
-            className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300"
+            className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
             style={{ 
               background: '#3dd9d9',
-              color: '#0a1628',
+              color: '#0a0a0f',
               boxShadow: '0 0 30px rgba(61, 217, 217, 0.4)'
             }}
           >
@@ -380,8 +375,8 @@ const Homeschool = () => {
         </motion.div>
       </section>
 
-      {/* Section 11: Footer */}
-      <footer className="px-6 py-12" style={{ background: '#0a1628' }}>
+      {/* Section 10: Footer */}
+      <footer className="px-6 py-12 bg-black">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <p style={{ color: '#5a9898' }}>Soul Interface © 2024</p>
