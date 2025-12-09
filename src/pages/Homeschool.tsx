@@ -216,7 +216,7 @@ const Homeschool = () => {
                 alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto"
               style={{
-                filter: 'drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.3))'
+                filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
               }}
             />
           </motion.div>
@@ -601,7 +601,7 @@ const Homeschool = () => {
             <nav className="flex flex-wrap justify-center gap-6">
               <Link to="/" className="hover:underline" style={{ color: '#7ab8b8' }}>Home</Link>
               <Link to="/education" className="hover:underline" style={{ color: '#00FFFF' }}>Education</Link>
-              <Link to="/investors" className="hover:underline" style={{ color: '#7ab8b8' }}>Investors</Link>
+              <Link to="/news" className="hover:underline" style={{ color: '#7ab8b8' }}>News</Link>
               <Link to="/tech" className="hover:underline" style={{ color: '#7ab8b8' }}>Tech</Link>
             </nav>
           </div>
