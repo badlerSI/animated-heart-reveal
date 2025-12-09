@@ -1,0 +1,1 @@
+DROP TABLE public.builder_inquiries;
