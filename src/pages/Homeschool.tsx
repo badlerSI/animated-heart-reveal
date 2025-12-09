@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug, Cpu, Library, BookText, ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -25,7 +25,7 @@ const Homeschool = () => {
     document.title = "Soul Interface | Safe AI for Homeschool";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "A private, offline AI tutor that lives in your home. No cloud. No ads. No data harvesting. Works with any Chromebook.");
+      metaDescription.setAttribute("content", "A private, offline AI tutor with Wikipedia, classic literature, and a massive curated library. Patent pending. No cloud. No ads. Works with any Chromebook.");
     }
 
     // Show scroll prompt after 10 seconds
@@ -67,7 +67,14 @@ const Homeschool = () => {
     { icon: Languages, title: "Multilingual Support", description: "Explains in your family's languages" },
     { icon: Gamepad2, title: "Story & Game Engine", description: "Turns lessons into adventures" },
     { icon: LayoutDashboard, title: "Parent Dashboard", description: "See progress, set limits" },
-    { icon: Bug, title: "$1K Bad Behavior Bug Bounty", description: "If you can make it do wrong, we want to fix it immediately" },
+    { icon: Cpu, title: "Chromebook Supercharger", description: "Run Blender, simulations, and advanced apps from simple devices" },
+  ];
+
+  const libraryItems = [
+    { icon: Library, text: "All of Wikipedia — age-filtered and safe" },
+    { icon: BookText, text: "Thousands of public domain classics with original illustrations" },
+    { icon: ImagePlus, text: "Curated Wikimedia images and educational resources" },
+    { icon: Settings, text: "Add your own curriculum, books, and materials" },
   ];
 
   const childrenOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30"];
@@ -210,7 +217,7 @@ const Homeschool = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center overflow-visible"
+            className="flex flex-col items-center overflow-visible"
           >
             <img 
               src="/lovable-uploads/SoulWaveMachine2.png" 
@@ -220,6 +227,20 @@ const Homeschool = () => {
                 filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
               }}
             />
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="mt-4 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full border"
+              style={{ 
+                color: '#00FFFF',
+                borderColor: '#00FFFF60',
+                background: 'rgba(0, 255, 255, 0.1)'
+              }}
+            >
+              Patent Pending Architecture
+            </motion.span>
           </motion.div>
         </div>
       </section>
@@ -316,7 +337,51 @@ const Homeschool = () => {
         </div>
       </section>
 
-      {/* Section 7: Chromebook Callout */}
+      {/* Section 7: What's Inside - Content Library */}
+      <section className="px-6 py-20" style={{ background: '#080810' }}>
+        <div className="max-w-4xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4"
+            style={{ color: '#f0f8ff', fontFamily: 'Helvetica, Arial, sans-serif' }}
+          >
+            A complete learning library — already loaded
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-lg mb-12"
+            style={{ color: '#7ab8b8' }}
+          >
+            No empty box. Soul Interface comes pre-loaded with a massive, curated knowledge base.
+          </motion.p>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {libraryItems.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-5 rounded-lg flex items-center gap-4 border"
+                style={{ 
+                  background: '#0d0d14',
+                  borderColor: '#00FFFF30'
+                }}
+              >
+                <item.icon className="w-7 h-7 flex-shrink-0" style={{ color: '#00FFFF' }} />
+                <p style={{ color: '#e0f4ff' }}>{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 8: Chromebook Callout */}
       <section className="px-6 py-12" style={{ background: '#00FFFF' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="space-y-3">
