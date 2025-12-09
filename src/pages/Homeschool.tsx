@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug, Cpu, Library, BookText, ImagePlus } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug, Cpu, Library, BookText, ImagePlus, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -66,8 +66,10 @@ const Homeschool = () => {
     { icon: BookOpen, title: "Adaptive Assessments", description: "Quizzes that meet them where they are" },
     { icon: Languages, title: "Multilingual Support", description: "Explains in your family's languages" },
     { icon: Gamepad2, title: "Story & Game Engine", description: "Turns lessons into adventures" },
+    { icon: Palette, title: "AI Creative Labs", description: "Make games, music, and art — AI as copilot" },
     { icon: LayoutDashboard, title: "Parent Dashboard", description: "See progress, set limits" },
-    { icon: Cpu, title: "Chromebook Supercharger", description: "Run Blender, simulations, and advanced apps from simple devices" },
+    { icon: Bug, title: "$1K Bad Behavior Bug Bounty", description: "Report bypasses, get paid" },
+    { icon: Cpu, title: "Chromebook Supercharger", description: "Run Blender, simulations, and advanced apps" },
   ];
 
   const libraryItems = [
