@@ -133,7 +133,7 @@ const Homeschool = () => {
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
           style={{
-            filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
+            filter: 'drop-shadow(0 0 15px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 35px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 60px rgba(0, 255, 255, 0.2))'
           }}
         />
       </section>
