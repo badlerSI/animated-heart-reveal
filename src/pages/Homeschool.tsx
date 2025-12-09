@@ -116,12 +116,12 @@ const Homeschool = () => {
           transition={{ duration: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-sm" style={{ color: '#3dd9d9' }}>scroll</span>
+          <span className="text-sm" style={{ color: '#00FFFF' }}>scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ChevronDown className="w-6 h-6" style={{ color: '#3dd9d9' }} />
+            <ChevronDown className="w-6 h-6" style={{ color: '#00FFFF' }} />
           </motion.div>
         </motion.div>
       </section>
@@ -159,13 +159,13 @@ const Homeschool = () => {
                 className="p-4 sm:p-6 rounded-lg border"
                 style={{ 
                   background: '#1a1a24',
-                  borderColor: '#3dd9d940'
+                  borderColor: '#00FFFF40'
                 }}
               >
                 <div className="flex items-start gap-4">
-                  <danger.icon className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+                  <danger.icon className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
                   <div>
-                    <h3 className="font-bold text-lg" style={{ color: '#3dd9d9' }}>{danger.title}</h3>
+                    <h3 className="font-bold text-lg" style={{ color: '#00FFFF' }}>{danger.title}</h3>
                     <p style={{ color: '#7ab8b8' }}>{danger.description}</p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ const Homeschool = () => {
         >
           <h2 
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"
-            style={{ color: '#3dd9d9', fontFamily: 'Helvetica, Arial, sans-serif' }}
+            style={{ color: '#00FFFF', fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             What if there was an internet made just for learning?
           </h2>
@@ -199,6 +199,28 @@ const Homeschool = () => {
             No ads. No algorithms. No data leaving your home.
           </p>
         </motion.div>
+      </section>
+
+      {/* Soul Wave Machine Image */}
+      <section className="px-6 py-16 bg-[#0a0a0f]">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex justify-center"
+          >
+            <img 
+              src="/lovable-uploads/SoulWaveMachine.png" 
+              alt="Soul Interface wave machine with surfer boy - offline AI learning device" 
+              className="max-w-full h-auto"
+              style={{
+                filter: 'drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.3))'
+              }}
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* Section 5: The Solution */}
@@ -218,7 +240,7 @@ const Homeschool = () => {
             </h2>
             <p 
               className="text-xl sm:text-2xl"
-              style={{ color: '#3dd9d9' }}
+              style={{ color: '#00FFFF' }}
             >
               A private AI that lives in your home
             </p>
@@ -246,10 +268,10 @@ const Homeschool = () => {
                 className="p-6 rounded-lg text-center border"
                 style={{ 
                   background: '#141418',
-                  borderColor: '#3dd9d940'
+                  borderColor: '#00FFFF40'
                 }}
               >
-                <benefit.icon className="w-10 h-10 mx-auto mb-4" style={{ color: '#3dd9d9' }} />
+                <benefit.icon className="w-10 h-10 mx-auto mb-4" style={{ color: '#00FFFF' }} />
                 <h3 className="font-bold text-lg mb-2" style={{ color: '#f0f8ff' }}>{benefit.title}</h3>
                 <p style={{ color: '#7ab8b8' }}>{benefit.description}</p>
               </motion.div>
@@ -282,7 +304,7 @@ const Homeschool = () => {
                 className="p-5 rounded-lg flex items-start gap-4"
                 style={{ background: '#141418' }}
               >
-                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: '#00FFFF' }} />
                 <div>
                   <h3 className="font-bold" style={{ color: '#f0f8ff' }}>{feature.title}</h3>
                   <p className="text-sm" style={{ color: '#7ab8b8' }}>{feature.description}</p>
@@ -294,7 +316,7 @@ const Homeschool = () => {
       </section>
 
       {/* Section 7: Chromebook Callout */}
-      <section className="px-6 py-12" style={{ background: '#3dd9d9' }}>
+      <section className="px-6 py-12" style={{ background: '#00FFFF' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="space-y-3">
             <p className="font-bold text-lg" style={{ color: '#0a0a0f' }}>
@@ -325,15 +347,15 @@ const Homeschool = () => {
 
           <div className="space-y-4 text-lg" style={{ color: '#e0f4ff' }}>
             <p className="flex items-center justify-center gap-3">
-              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              <ShieldCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
               No student data in the cloud
             </p>
             <p className="flex items-center justify-center gap-3">
-              <UserCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              <UserCheck className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
               You control your child's digital likeness
             </p>
             <p className="flex items-center justify-center gap-3">
-              <Bell className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
+              <Bell className="w-6 h-6 flex-shrink-0" style={{ color: '#00FFFF' }} />
               Parent always in the loop
             </p>
           </div>
@@ -390,9 +412,9 @@ const Homeschool = () => {
             size="lg"
             className="w-full sm:w-auto px-12 py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105"
             style={{ 
-              background: '#3dd9d9',
+              background: '#00FFFF',
               color: '#0a0a0f',
-              boxShadow: '0 0 30px rgba(61, 217, 217, 0.4)'
+              boxShadow: '0 0 30px rgba(0, 255, 255, 0.4)'
             }}
           >
             Request a Demo
@@ -403,7 +425,7 @@ const Homeschool = () => {
             <a 
               href="mailto:contact@soulinterface.ai" 
               className="underline hover:no-underline"
-              style={{ color: '#3dd9d9' }}
+              style={{ color: '#00FFFF' }}
             >
               contact@soulinterface.ai
             </a>
@@ -417,7 +439,7 @@ const Homeschool = () => {
           className="max-w-lg border-0"
           style={{ 
             background: '#0d1520',
-            boxShadow: '0 0 60px rgba(61, 217, 217, 0.2)'
+            boxShadow: '0 0 60px rgba(0, 255, 255, 0.2)'
           }}
         >
           <DialogHeader>
@@ -429,7 +451,7 @@ const Homeschool = () => {
             </DialogTitle>
             <DialogDescription className="text-center space-y-2 pt-2">
               <p style={{ color: '#7ab8b8' }}>
-                Join us at <span style={{ color: '#3dd9d9' }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+                Join us at <span style={{ color: '#00FFFF' }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
               </p>
             </DialogDescription>
           </DialogHeader>
@@ -483,13 +505,13 @@ const Homeschool = () => {
                 >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
-                <SelectContent style={{ background: '#1a2535', borderColor: '#3dd9d940' }}>
+                <SelectContent style={{ background: '#1a2535', borderColor: '#00FFFF40' }}>
                   {childrenOptions.map((num) => (
                     <SelectItem 
                       key={num} 
                       value={num}
                       style={{ color: '#f0f8ff' }}
-                      className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                      className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
                     >
                       {num}
                     </SelectItem>
@@ -510,32 +532,32 @@ const Homeschool = () => {
                 >
                   <SelectValue placeholder="Select..." />
                 </SelectTrigger>
-                <SelectContent style={{ background: '#1a2535', borderColor: '#3dd9d940' }}>
+                <SelectContent style={{ background: '#1a2535', borderColor: '#00FFFF40' }}>
                   <SelectItem 
                     value="FETC 2026 Orlando (Jan 11-14)"
                     style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
                   >
                     FETC 2026 in Orlando (Jan 11-14)
                   </SelectItem>
                   <SelectItem 
                     value="In-Person Florida (3rd week of Jan)"
                     style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
                   >
                     In-Person Florida Demo (3rd week of Jan)
                   </SelectItem>
                   <SelectItem 
                     value="California / Northern Nevada In-Person (TBD)"
                     style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
                   >
                     California / Northern Nevada In-Person (TBD)
                   </SelectItem>
                   <SelectItem 
                     value="Virtual Demo"
                     style={{ color: '#f0f8ff' }}
-                    className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
+                    className="focus:bg-[#00FFFF20] focus:text-[#00FFFF]"
                   >
                     Virtual Demo
                   </SelectItem>
@@ -559,9 +581,9 @@ const Homeschool = () => {
               type="submit"
               className="w-full py-6 text-lg font-bold rounded-full transition-all duration-300 hover:scale-[1.02]"
               style={{ 
-                background: '#3dd9d9',
+                background: '#00FFFF',
                 color: '#0a0a0f',
-                boxShadow: '0 0 20px rgba(61, 217, 217, 0.3)'
+                boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
               }}
             >
               Submit Request
@@ -578,7 +600,7 @@ const Homeschool = () => {
             
             <nav className="flex flex-wrap justify-center gap-6">
               <Link to="/" className="hover:underline" style={{ color: '#7ab8b8' }}>Home</Link>
-              <Link to="/education" className="hover:underline" style={{ color: '#3dd9d9' }}>Education</Link>
+              <Link to="/education" className="hover:underline" style={{ color: '#00FFFF' }}>Education</Link>
               <Link to="/investors" className="hover:underline" style={{ color: '#7ab8b8' }}>Investors</Link>
               <Link to="/tech" className="hover:underline" style={{ color: '#7ab8b8' }}>Tech</Link>
             </nav>
