@@ -429,7 +429,7 @@ const Homeschool = () => {
             </DialogTitle>
             <DialogDescription className="text-center space-y-2 pt-2">
               <p style={{ color: '#7ab8b8' }}>
-                Join us at <span style={{ color: '#3dd9d9' }}>FETC 2026</span> in Orlando (January 13-16) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+                Join us at <span style={{ color: '#3dd9d9' }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
               </p>
             </DialogDescription>
           </DialogHeader>
@@ -512,11 +512,11 @@ const Homeschool = () => {
                 </SelectTrigger>
                 <SelectContent style={{ background: '#1a2535', borderColor: '#3dd9d940' }}>
                   <SelectItem 
-                    value="FETC 2026 Orlando (Jan 13-16)"
+                    value="FETC 2026 Orlando (Jan 11-14)"
                     style={{ color: '#f0f8ff' }}
                     className="focus:bg-[#3dd9d920] focus:text-[#3dd9d9]"
                   >
-                    FETC 2026 in Orlando (Jan 13-16)
+                    FETC 2026 in Orlando (Jan 11-14)
                   </SelectItem>
                   <SelectItem 
                     value="In-Person Florida (3rd week of Jan)"
