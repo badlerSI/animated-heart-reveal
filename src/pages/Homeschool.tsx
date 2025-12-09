@@ -211,9 +211,9 @@ const Homeschool = () => {
             transition={{ duration: 0.8 }}
             className="flex justify-center"
           >
-            <img 
-              src="/lovable-uploads/SoulWaveMachine.png" 
-              alt="Soul Interface wave machine with surfer boy - offline AI learning device" 
+              <img 
+                src="/lovable-uploads/SoulWaveMachine2.png" 
+                alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto"
               style={{
                 filter: 'drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.3))'
