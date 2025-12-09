@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown } from "lucide-react";
+import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Homeschool = () => {
@@ -20,10 +20,10 @@ const Homeschool = () => {
   }, []);
 
   const dangers = [
-    { icon: "🦈", title: "AI chatbots with no guardrails", description: "ready to answer any question" },
-    { icon: "🦈", title: "Data harvesters", description: "your child's every click, sold to advertisers" },
-    { icon: "🦈", title: "Algorithmic rabbit holes", description: "designed to addict, not educate" },
-    { icon: "🦈", title: "Deepfakes and manipulation", description: "they can't tell what's real anymore" },
+    { icon: AlertTriangle, title: "AI chatbots with no guardrails", description: "ready to answer any question" },
+    { icon: Eye, title: "Data harvesters", description: "your child's every click, sold to advertisers" },
+    { icon: Radio, title: "Algorithmic rabbit holes", description: "designed to addict, not educate" },
+    { icon: Skull, title: "Deepfakes and manipulation", description: "they can't tell what's real anymore" },
   ];
 
   const benefits = [
@@ -96,11 +96,11 @@ const Homeschool = () => {
       </section>
 
       {/* Section 2: Shark Image - Full Viewport */}
-      <section className="min-h-screen flex items-center justify-center bg-black px-4">
+      <section className="bg-black">
         <img 
           src="/lovable-uploads/NetShark.png" 
           alt="Child surfing above shark - the dangers of the open internet"
-          className="max-h-[85vh] w-auto object-contain"
+          className="w-full h-auto"
         />
       </section>
 
@@ -128,13 +128,13 @@ const Homeschool = () => {
                 className="p-4 sm:p-6 rounded-lg border"
                 style={{ 
                   background: '#1a1a24',
-                  borderColor: '#ff4d4d40'
+                  borderColor: '#3dd9d940'
                 }}
               >
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl">{danger.icon}</span>
+                  <danger.icon className="w-6 h-6 flex-shrink-0" style={{ color: '#3dd9d9' }} />
                   <div>
-                    <h3 className="font-bold text-lg" style={{ color: '#ff6b35' }}>{danger.title}</h3>
+                    <h3 className="font-bold text-lg" style={{ color: '#3dd9d9' }}>{danger.title}</h3>
                     <p style={{ color: '#7ab8b8' }}>{danger.description}</p>
                   </div>
                 </div>
