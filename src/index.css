@@ -124,6 +124,18 @@
   }
 }
 
+/* Pulsing glow for white kanji pixels */
+@keyframes kanjiPulse {
+  0%, 100% {
+    opacity: 0.4;
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.5)) drop-shadow(0 0 12px rgba(255,255,255,0.3));
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.8)) drop-shadow(0 0 30px rgba(255,255,255,0.5)) drop-shadow(0 0 45px rgba(255,255,255,0.3));
+  }
+}
+
 /* Ensure static wave with neon glow fades in properly */
 .static-wave.neon-glow.fade-in {
   animation: fadeIn 0.18s ease-out forwards, flickerGlow 3s ease-in-out infinite alternate;
