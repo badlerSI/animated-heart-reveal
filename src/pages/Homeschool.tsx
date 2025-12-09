@@ -227,20 +227,6 @@ const Homeschool = () => {
                 filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.2))'
               }}
             />
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="mt-4 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full border"
-              style={{ 
-                color: '#00FFFF',
-                borderColor: '#00FFFF60',
-                background: 'rgba(0, 255, 255, 0.1)'
-              }}
-            >
-              Patent Pending Architecture
-            </motion.span>
           </motion.div>
         </div>
       </section>
@@ -275,7 +261,7 @@ const Homeschool = () => {
             className="text-center text-lg mb-12 max-w-2xl mx-auto"
             style={{ color: '#e0f4ff' }}
           >
-            An offline AI tower that connects to any Chromebook, laptop, or tablet your family already owns. 
+            A patent-pending offline AI tower that connects to any Chromebook, laptop, or tablet your family already owns. 
             Your kids get a brilliant tutor, translator, and creative partner — without ever touching the open internet.
           </motion.p>
 
