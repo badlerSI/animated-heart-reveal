@@ -143,7 +143,7 @@ const Homeschool = () => {
       {/* Section 2: Shark Image */}
       <section className="bg-[#0a0a0f] overflow-visible py-8">
         <img 
-          src="/lovable-uploads/shark6.png" 
+          src="/lovable-uploads/shark7.png" 
           alt="Child surfing above shark - the dangers of the open internet"
           className="w-full h-auto"
         />
