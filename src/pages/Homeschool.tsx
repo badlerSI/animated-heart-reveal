@@ -216,22 +216,21 @@ const Homeschool = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center overflow-visible relative"
           >
-            {/* Base image - no glow */}
+            {/* Base image - cyan lines, no effects */}
             <img 
-              src="/lovable-uploads/machine4-clean.png" 
+              src="/lovable-uploads/SoulWaveMachineBlue.png" 
               alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto relative z-10"
             />
-            {/* White pixel glow overlay - pulsing effect on kanji only */}
+            {/* White glow overlay - subtle pulsing effect */}
             <img 
-              src="/lovable-uploads/machine4-clean.png"
+              src="/lovable-uploads/SoulWaveMachineWhite.png"
               alt=""
               aria-hidden="true"
               className="max-w-full h-auto absolute inset-0 z-20 pointer-events-none"
               style={{
-                filter: 'brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.7)) drop-shadow(0 0 20px rgba(255,255,255,0.4))',
                 mixBlendMode: 'screen',
-                animation: 'kanjiPulse 2.5s ease-in-out infinite'
+                animation: 'kanjiPulse 3s ease-in-out infinite'
               }}
             />
           </motion.div>
