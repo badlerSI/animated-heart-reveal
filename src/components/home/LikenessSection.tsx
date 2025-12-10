@@ -1,4 +1,4 @@
-import { Palette, Users } from "lucide-react";
+import { Palette } from "lucide-react";
 
 const LikenessSection = () => {
   return (
@@ -8,35 +8,26 @@ const LikenessSection = () => {
         <div className="flex justify-center mb-8">
           <img 
             src="/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
-            alt="Your Likeness Your Legacy"
+            alt="Forge Your Ideal AI Persona"
             className="max-w-xs md:max-w-sm w-full h-auto object-contain neon-glow"
           />
         </div>
         
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Your Likeness. Your Legacy.
+            Forge Your Ideal AI Persona
           </h2>
           <p className="text-gray-400 text-lg">
-            Create AI art, preserve memories, and build digital experiences—all without your data ever leaving home.
+            You wouldn't find your ideal spouse on a list of four personalities, so why does big tech only give you that range for AI? Make any persona you can imagine, for your ideal AI companion (and no, not like that—if you want a bot to talk dirty to you, there are many <em>other</em> companies who want your business).
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white/5 border border-white/10 rounded-xl p-8">
-            <Palette className="w-10 h-10 mb-4" style={{ color: "#2FC5ED" }} />
-            <h3 className="text-xl font-semibold text-white mb-3">Local AI Art</h3>
+        <div className="flex justify-center">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-8 max-w-lg">
+            <Palette className="w-10 h-10 mb-4" style={{ color: "#1bbdc5" }} />
+            <h3 className="text-xl font-semibold text-white mb-3">Local Training = Family Privacy</h3>
             <p className="text-gray-400">
-              Generate images of your family, your pets, your imagination—processed entirely on your device. 
-              No uploads, no training data harvesting, no surprises.
-            </p>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-8">
-            <Users className="w-10 h-10 mb-4" style={{ color: "#2FC5ED" }} />
-            <h3 className="text-xl font-semibold text-white mb-3">Family Privacy</h3>
-            <p className="text-gray-400">
-              Your children's faces, your loved ones' voices—they stay with you. 
-              Create memories and experiences without feeding the machine.
+              Train a model to use your children's faces, or your loved ones' voices entirely on device. Make memorable creations without the keys to your likeness being on the web.
             </p>
           </div>
         </div>
