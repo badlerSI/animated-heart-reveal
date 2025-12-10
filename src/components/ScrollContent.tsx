@@ -4,7 +4,6 @@ import HeartNavigation from "./HeartNavigation";
 import HeroSection from "./home/HeroSection";
 import HowItWorksSection from "./home/HowItWorksSection";
 import ReasoningSection from "./home/ReasoningSection";
-import UseCasesSection from "./home/UseCasesSection";
 import FAQSection from "./home/FAQSection";
 import ClosingCTASection from "./home/ClosingCTASection";
 import Footer from "./home/Footer";
@@ -92,7 +91,6 @@ const ScrollContent = () => {
       <HeroSection />
       <HowItWorksSection />
       <ReasoningSection />
-      <UseCasesSection />
       <FAQSection />
       <ClosingCTASection />
 

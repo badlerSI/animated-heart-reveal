@@ -9,15 +9,17 @@ const ClosingCTASection = () => {
       </h2>
       
       <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-        Whether you're commuting{" "}
+        Whether you're{" "}
         <Link to="/landvehicles" className="narrative-link">on the move</Link>,
-        teaching{" "}
-        <Link to="/education" className="narrative-link">in the classroom</Link>,
-        securing data{" "}
+        helping your{" "}
+        <Link to="/education" className="narrative-link">kids learn safely</Link>,
+        managing sensitive data{" "}
         <Link to="/work" className="narrative-link">at work</Link>,
-        or preparing for the unexpected{" "}
-        <Link to="/survival" className="narrative-link">just in case</Link>
-        —Soul Interface is built for you.
+        riding{" "}
+        <Link to="/robotaxi" className="narrative-link">in a robotaxi</Link>,
+        or{" "}
+        <Link to="/survival" className="narrative-link">getting prepared for anything</Link>,
+        Soul Interface is Powerful, Offline, Sovereign AI.
       </p>
 
     </section>
