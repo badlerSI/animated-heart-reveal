@@ -1,6 +1,7 @@
 
-import { useEffect, useRef } from "react";
-import HeartNavigation from "./HeartNavigation";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import HeroSection from "./home/HeroSection";
 import HowItWorksSection from "./home/HowItWorksSection";
 import ReasoningSection from "./home/ReasoningSection";
@@ -18,6 +19,13 @@ import "./scrollContent.css";
 const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const elementStates = useRef<Map<Element, { lastVisibleRatio: number }>>(new Map());
+  const [showScrollPrompt, setShowScrollPrompt] = useState(false);
+
+  // Show scroll prompt after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const onIntersect: IntersectionObserverCallback = (entries) => {
@@ -83,20 +91,33 @@ const ScrollContent = () => {
 
   /* ------------------------  page body ------------------------ */
   return (
-    <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
+    <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto relative">
+      {/* Scroll Prompt */}
+      {showScrollPrompt && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1"
+          style={{ color: "#1bbdc5" }}
+        >
+          <span className="text-sm font-medium tracking-wide">scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown size={24} />
+          </motion.div>
+        </motion.div>
+      )}
+
       <div className="h-32" />
 
-      {/* New Homepage Sections */}
+      {/* Homepage Sections */}
       <HeroSection />
       <HowItWorksSection />
       <ReasoningSection />
       <FAQSection />
       <ClosingCTASection />
-
-      {/* Heart Navigation */}
-      <div className="mt-16">
-        <HeartNavigation />
-      </div>
 
       <Footer />
     </div>

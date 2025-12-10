@@ -19,14 +19,14 @@ export const useAnimationSequence = (
         const fps = 30; // Same as defined in CSS
         const wave25Delay = 2000 + ((24 / fps) * 1000); // Base wave delay + time until frame 25
         
-        // Define the animation sequence with specific timing - UPDATED ORDER
+        // Define the animation sequence with specific timing - SPED UP
         const sequence: AnimationSequenceItem[] = [
           { element: "connect", delay: 0 },
-          { element: "line", delay: 500 },
-          { element: "interface", delay: 1000 },
-          { element: "soul", delay: 1500 },
-          { element: "wave", delay: 2000 },
-          { element: "heart", delay: wave25Delay } // Synchronized with Wave_25
+          { element: "line", delay: 300 },
+          { element: "interface", delay: 600 },
+          { element: "soul", delay: 900 },
+          { element: "wave", delay: 1200 },
+          { element: "heart", delay: 1600 }
         ];
         
         // Show elements in sequence
