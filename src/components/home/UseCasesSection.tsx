@@ -17,7 +17,7 @@ const UseCasesSection = () => {
         <Link to="/education" className="narrative-link">
           kids learn safely
         </Link>
-        ,{" "}
+        , managing sensitive data{" "}
         <Link to="/work" className="narrative-link">
           at work
         </Link>

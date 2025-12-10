@@ -2,11 +2,9 @@
 import { useEffect, useRef } from "react";
 import HeartNavigation from "./HeartNavigation";
 import HeroSection from "./home/HeroSection";
-import OneSentenceSection from "./home/OneSentenceSection";
 import HowItWorksSection from "./home/HowItWorksSection";
 import ReasoningSection from "./home/ReasoningSection";
 import UseCasesSection from "./home/UseCasesSection";
-import LikenessSection from "./home/LikenessSection";
 import FAQSection from "./home/FAQSection";
 import ClosingCTASection from "./home/ClosingCTASection";
 import Footer from "./home/Footer";
@@ -92,11 +90,9 @@ const ScrollContent = () => {
 
       {/* New Homepage Sections */}
       <HeroSection />
-      <OneSentenceSection />
       <HowItWorksSection />
       <ReasoningSection />
       <UseCasesSection />
-      <LikenessSection />
       <FAQSection />
       <ClosingCTASection />
 
