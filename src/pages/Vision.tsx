@@ -85,10 +85,10 @@ const Vision = () => {
                 We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
               </p>
               <p className="mb-6">
-                At Soul Interface, the user is never actually the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a comprehensive suite of AI native software like has never been offered before.
+                At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
               </p>
               <p className="mb-6">
-                No subscriptions, no ads, no way for your data to even be transmitted out, and free updates as long as you own the system. We believe in pushing the limits of cutting edge hardware and models, to get all of the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
+                No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
               </p>
               <p>
                 We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
@@ -125,10 +125,10 @@ const Vision = () => {
                 We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
               </p>
               <p>
-                At Soul Interface, the user is never actually the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a comprehensive suite of AI native software like has never been offered before.
+                At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
               </p>
               <p>
-                No subscriptions, no ads, no way for your data to even be transmitted out, and free updates as long as you own the system. We believe in pushing the limits of cutting edge hardware and models, to get all of the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
+                No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
               </p>
               <p>
                 We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
