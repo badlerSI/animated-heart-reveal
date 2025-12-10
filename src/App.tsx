@@ -11,9 +11,11 @@ import Partner from "./pages/Partner";
 import News from "./pages/News";
 import Vision from "./pages/Vision";
 import Sema from "./pages/Sema";
-
 import Investors from "./pages/Investors";
 import Homeschool from "./pages/Homeschool";
+import LandVehicles from "./pages/LandVehicles";
+import Work from "./pages/Work";
+import Survival from "./pages/Survival";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,9 @@ const App = () => (
           
           <Route path="/investors" element={<Investors />} />
           <Route path="/education" element={<Homeschool />} />
+          <Route path="/landvehicles" element={<LandVehicles />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/survival" element={<Survival />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

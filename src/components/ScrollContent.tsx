@@ -1,7 +1,15 @@
 
 import { useEffect, useRef } from "react";
-import FeatureBlock from "./FeatureBlock";
 import HeartNavigation from "./HeartNavigation";
+import HeroSection from "./home/HeroSection";
+import OneSentenceSection from "./home/OneSentenceSection";
+import HowItWorksSection from "./home/HowItWorksSection";
+import UseCasesSection from "./home/UseCasesSection";
+import LikenessSection from "./home/LikenessSection";
+import TechPreviewSection from "./home/TechPreviewSection";
+import FAQSection from "./home/FAQSection";
+import ClosingCTASection from "./home/ClosingCTASection";
+import Footer from "./home/Footer";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
@@ -75,95 +83,24 @@ const ScrollContent = () => {
   /* ------------------------  page body ------------------------ */
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto">
-      <div className="h-64" />
+      <div className="h-32" />
 
-      <FeatureBlock 
-        id="soul-inside-car"
-        heading="Soul Inside the Car — Not the Cloud"
-        imgSrc="/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png"
-        imgAlt="Soul Interface illustration"
-      >
-        All language processing happens on the automotive-grade GPU that rides beside the main ECU—nothing leaves the cabin. The patent-pending architecture gives you answers in under a second, works even with zero bars, and erases cloud fees and privacy worries.  
-      </FeatureBlock>
-
-      <FeatureBlock 
-        id="no-screens-no-problem"
-        heading="No Screens? No Problem"
-        imgSrc="/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png"
-        imgAlt="Car dashboard with microphone illustration"
-      >
-        Touchscreens can take a driver's eyes off the road for over twenty
-        seconds, and can spoil an otherwise gorgeous interior besides.
-        <br />
-        <br />
-        With Soul Interface you speak naturally to run navigation, music,
-        climate and much more; no menu mazes, no glare, no "safety lockouts."
-        Your dash stays clean, your focus stays forward.
-      </FeatureBlock>
-
-      <FeatureBlock 
-        id="forge-soul-of-ride"
-        heading="Forge the Soul of Your Ride"
-        imgSrc="/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
-        imgAlt="Soul forging illustration"
-      >
-        Ask for a brand-new persona—any accent, attitude, or back-story—and Soul Interface creates it on-device in seconds. No presets, so your imagination is the only limit. A folksy soccer coach? Sure! Winston Churchil trapped in the body of a kindergartner? Hey, you do you! Swapping on the fly is easy thanks to LoRA overlays smaller than a podcast. Your personas load in a snap.
-      </FeatureBlock>
-
-      <FeatureBlock 
-        id="intelligent-interface"
-        heading="An Intelligent Interface"
-        imgSrc="/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
-        imgAlt="Brain illustration"
-      >
-        A 16 GB offline knowledge vault rides everywhere you go. Soul Interface
-        can answer trivia, quote Mark Twain, decode warning lights in plain language, and
-        suggest fixes before you even decide if you need to pull over. Need fresh traffic or weather?
-        Drop in a one-way update from your phone—data flows in, never back out.
-      </FeatureBlock>
-
-
-      <FeatureBlock 
-        id="charlemagne-quote"
-        heading={<span className="italic">"To have another language is to possess a second soul"         <br /> —Charlemagne</span>}
-        imgSrc="/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png"
-        imgAlt="Soul speak illustration"
-      >
-        Conversations among passengers from around the globe flow freely: Soul Interface translates
-        speech across sixteen languages almost instantly, all offline.
-        <br />
-        <br />
-        Prefer to learn? Switch to Tutor Mode and practice phrases while the
-        assistant corrects pronunciation on the fly—perfect prep for that
-        long-awaited trip to Italy.
-      </FeatureBlock>
-
-      <FeatureBlock 
-        id="robotaxi-cabbie"
-        heading="Robotaxi, Meet Your Portable AI Cabbie"
-        imgSrc="/lovable-uploads/c8fa6aa6-32f8-4f39-a115-d523a9f46288.png"
-        imgAlt="Robotaxi illustration"
-      >
-        Your personal chauffeur lives on your phone. Step into a Soul Interface-equipped
-        robotaxi and your custom-crafted persona—with your seat settings,
-        conversation preferences, and small-talk history—loads in a blink.
-        Step out, and it purges itself from the vehicle within seconds. Fleet
-        operators deliver bespoke rides; passengers keep total privacy.
-      </FeatureBlock>
-
-      <FeatureBlock 
-        id="keep-soul-safe"
-        heading="Keep Your Car's Soul Safe"
-        imgSrc="/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png"
-        imgAlt="Heart lock security illustration"
-      >
-        You can keep a secure backup hidden away—like a horcrux minus the dark magic—in case anything happens to your car, and securely transfer it when you get a new ride. Updates install on a spare software partition first, so there's always a safe version to fall back on. Preserve your treasured personas for life.
-      </FeatureBlock>
+      {/* New Homepage Sections */}
+      <HeroSection />
+      <OneSentenceSection />
+      <HowItWorksSection />
+      <UseCasesSection />
+      <LikenessSection />
+      <TechPreviewSection />
+      <FAQSection />
+      <ClosingCTASection />
 
       {/* Heart Navigation */}
-      <div className="mt-32">
+      <div className="mt-16">
         <HeartNavigation />
       </div>
+
+      <Footer />
     </div>
   );
 };
