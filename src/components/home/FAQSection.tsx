@@ -21,7 +21,7 @@ const FAQSection = () => {
     },
     {
       question: "Is it really completely offline?",
-      answer: "Yes. A cutting-edge GPU handles all inference locally. Zero bars, zero cloud, zero subscription fees. It works in tunnels, deserts, or anywhere else."
+      answer: "Yes. A cutting-edge GPU handles all inference locally, but is also capable of filtering web searches when connected to the internet, to give you the information you want, and none of the junk."
     },
     {
       question: "How do I back up my data?",
