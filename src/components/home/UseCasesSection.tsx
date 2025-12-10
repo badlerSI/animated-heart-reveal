@@ -8,36 +8,29 @@ const UseCasesSection = () => {
         One Platform. Endless Possibilities.
       </h2>
       
-      <div className="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed space-y-6">
-        <p>
-          Whether you're{" "}
-          <Link to="/landvehicles" className="narrative-link">
-            on the move
-          </Link>
-          , riding{" "}
-          <Link to="/robotaxi" className="narrative-link">
-            in a robotaxi
-          </Link>
-          , helping your{" "}
-          <Link to="/education" className="narrative-link">
-            kids learn safely
-          </Link>
-          , or{" "}
-          <Link to="/work" className="narrative-link">
-            at work
-          </Link>
-          {" "}where you need powerful AI and data leakage is not an option—Soul Interface adapts to your world.
-        </p>
-        
-        <p>
-          And for those who think ahead, who prepare for when infrastructure fails and the grid goes dark,
-          there's a version built{" "}
-          <Link to="/survival" className="narrative-link">
-            just in case
-          </Link>
-          . Complete with its own AI weather station.
-        </p>
-      </div>
+      <p className="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed">
+        Whether you're{" "}
+        <Link to="/landvehicles" className="narrative-link">
+          on the move
+        </Link>
+        , helping your{" "}
+        <Link to="/education" className="narrative-link">
+          kids learn safely
+        </Link>
+        ,{" "}
+        <Link to="/work" className="narrative-link">
+          at work
+        </Link>
+        , riding{" "}
+        <Link to="/robotaxi" className="narrative-link">
+          in a robotaxi
+        </Link>
+        , or{" "}
+        <Link to="/survival" className="narrative-link">
+          being prepared for anything
+        </Link>
+        , Soul Interface is Powerful, Offline, Sovereign AI.
+      </p>
     </section>
   );
 };
