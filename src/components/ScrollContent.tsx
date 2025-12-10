@@ -20,11 +20,28 @@ const ScrollContent = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const elementStates = useRef<Map<Element, { lastVisibleRatio: number }>>(new Map());
   const [showScrollPrompt, setShowScrollPrompt] = useState(false);
+  const [hasReachedBottom, setHasReachedBottom] = useState(false);
 
   // Show scroll prompt after 10 seconds
   useEffect(() => {
     const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Hide scroll prompt when user reaches bottom
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const threshold = 100;
+      
+      if (scrollPosition >= pageHeight - threshold) {
+        setHasReachedBottom(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -93,7 +110,7 @@ const ScrollContent = () => {
   return (
     <div className="px-4 md:px-8 lg:px-16 pb-24 max-w-6xl mx-auto relative">
       {/* Scroll Prompt */}
-      {showScrollPrompt && (
+      {showScrollPrompt && !hasReachedBottom && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
