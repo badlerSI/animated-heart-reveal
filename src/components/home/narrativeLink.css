@@ -1,0 +1,17 @@
+/* Narrative inline links - lightly glowing cyan text */
+.narrative-link {
+  color: #2FC5ED;
+  text-decoration: none;
+  text-shadow: 
+    0 0 8px rgba(47, 197, 237, 0.4),
+    0 0 16px rgba(47, 197, 237, 0.2);
+  transition: all 0.3s ease;
+}
+
+.narrative-link:hover {
+  color: #ffffff;
+  text-shadow: 
+    0 0 12px rgba(47, 197, 237, 0.6),
+    0 0 24px rgba(47, 197, 237, 0.4),
+    0 0 36px rgba(47, 197, 237, 0.2);
+}
