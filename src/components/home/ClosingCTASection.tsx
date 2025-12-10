@@ -20,20 +20,6 @@ const ClosingCTASection = () => {
         —Soul Interface is built for you.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-        <Link 
-          to="/partner"
-          className="bg-[#2FC5ED] text-black font-semibold px-8 py-4 rounded-lg hover:bg-white transition-colors"
-        >
-          Partner With Us
-        </Link>
-        <a 
-          href="mailto:contact@soulinterface.ai"
-          className="border border-[#2FC5ED] text-[#2FC5ED] font-semibold px-8 py-4 rounded-lg hover:bg-[#2FC5ED]/10 transition-colors"
-        >
-          Get in Touch
-        </a>
-      </div>
     </section>
   );
 };
