@@ -13,7 +13,7 @@ const ReasoningSection = () => {
             See Its Reasoning. Every Time.
           </h3>
           <p className="text-gray-400 leading-relaxed">
-            Unlike cloud AI that hides its logic in a mysterious black box, Soul Interface shows you exactly how it thinks. Every response includes the full reasoning chain and cites its sources—so you can verify, learn, and trust. No hallucinations. No guesswork.
+            Unlike cloud AI that hides its logic in a mysterious black box, Soul Interface shows the full reasoning chain and cites its sources—so you can verify, learn, and trust. No hallucinations. No guesswork.
           </p>
         </div>
 

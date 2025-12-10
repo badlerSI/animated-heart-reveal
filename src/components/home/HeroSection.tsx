@@ -30,7 +30,7 @@ const HeroSection = () => {
           <Shield className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Private by Default</h3>
           <p className="text-gray-400">
-            Your conversations never leave your device. No eavesdropping, no data mining, no third-party access.
+            Your conversations never leave your device. No eavesdropping, no data mining, no advertisements!
           </p>
         </div>
         <div className="text-center p-6">
