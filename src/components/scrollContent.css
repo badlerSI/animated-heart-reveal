@@ -47,72 +47,72 @@
   }
 }
 
-/* Glow effect for links */
+/* Glow effect for links - unified brand cyan #2FC5ED */
 .text-glow:hover {
-  text-shadow: 0 0 8px rgba(80, 210, 240, 0.7);
+  text-shadow: 0 0 8px rgba(47, 197, 237, 0.7);
   transition: text-shadow 0.3s ease;
 }
 
-/* Flickering neon glow for images */
+/* Flickering neon glow for images - unified brand cyan #2FC5ED */
 .neon-glow {
-  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+  filter: drop-shadow(0 0 8px rgba(47, 197, 237, 0.6));
   animation: neon-flicker 3s ease-in-out infinite;
 }
 
 @keyframes neon-flicker {
   0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.6));
+    filter: drop-shadow(0 0 8px rgba(47, 197, 237, 0.6));
   }
   25% {
-    filter: drop-shadow(0 0 12px rgba(51, 243, 240, 0.8));
+    filter: drop-shadow(0 0 12px rgba(47, 197, 237, 0.8));
   }
   50% {
-    filter: drop-shadow(0 0 6px rgba(51, 243, 240, 0.4));
+    filter: drop-shadow(0 0 6px rgba(47, 197, 237, 0.4));
   }
   75% {
-    filter: drop-shadow(0 0 10px rgba(51, 243, 240, 0.7));
+    filter: drop-shadow(0 0 10px rgba(47, 197, 237, 0.7));
   }
 }
 
-/* Heart navigation glow effects */
+/* Heart navigation glow effects - unified brand cyan #2FC5ED */
 .neon-glow-dim {
-  filter: drop-shadow(0 0 8px rgba(51, 243, 240, 0.4));
+  filter: drop-shadow(0 0 8px rgba(47, 197, 237, 0.4));
   transition: filter 0.3s ease;
 }
 
 .neon-glow-bright {
-  filter: drop-shadow(0 0 15px rgba(51, 243, 240, 0.8));
+  filter: drop-shadow(0 0 15px rgba(47, 197, 237, 0.8));
   transition: filter 0.3s ease;
 }
 
-/* New heart navigation glow effects */
+/* New heart navigation glow effects - unified brand cyan #2FC5ED */
 .heart-glow-initial {
-  filter: drop-shadow(0 0 1px rgba(0, 255, 255, 0.9));
+  filter: drop-shadow(0 0 1px rgba(47, 197, 237, 0.9));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-hover {
-  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+  filter: drop-shadow(0 0 4px rgba(47, 197, 237, 1))
+          drop-shadow(0 0 8px rgba(47, 197, 237, 0.8));
   transition: filter 0.3s ease;
 }
 
 .heart-glow-clicked {
-  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 9px rgba(0, 255, 255, 0.9));
+  filter: drop-shadow(0 0 5px rgba(47, 197, 237, 1))
+          drop-shadow(0 0 9px rgba(47, 197, 237, 0.9));
   transition: filter 0.1s ease;
 }
 
-/* Individual navigation piece glow effects */
+/* Individual navigation piece glow effects - unified brand cyan #2FC5ED */
 .nav-piece {
-  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.4));
+  filter: drop-shadow(0 0 2px rgba(47, 197, 237, 0.4));
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .nav-piece:hover,
 .nav-piece.heart-glow-hover {
-  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 1))
-          drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
+  filter: drop-shadow(0 0 6px rgba(47, 197, 237, 1))
+          drop-shadow(0 0 12px rgba(47, 197, 237, 0.6));
 }
 
 /* Add custom font styles to body */

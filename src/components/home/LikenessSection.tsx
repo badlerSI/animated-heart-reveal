@@ -7,8 +7,8 @@ const LikenessSection = () => {
         {/* Section visual */}
         <div className="flex justify-center mb-8">
           <img 
-            src="/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
-            alt="Family and global passengers"
+            src="/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
+            alt="Your Likeness Your Legacy"
             className="max-w-xs md:max-w-sm w-full h-auto object-contain neon-glow"
           />
         </div>

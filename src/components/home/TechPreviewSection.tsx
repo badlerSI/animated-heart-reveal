@@ -9,7 +9,7 @@ const TechPreviewSection = () => {
           {/* Tech visual */}
           <div className="md:w-1/3 flex justify-center">
             <img 
-              src="/lovable-uploads/bd79ccdb-0112-437e-b109-b3f284009e34.png"
+              src="/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png"
               alt="Soul Forge technology"
               className="max-w-[200px] w-full h-auto object-contain neon-glow"
             />

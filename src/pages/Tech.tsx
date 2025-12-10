@@ -97,18 +97,18 @@ const Tech = () => {
             href="mailto:tech@soulinterface.ai"
             className="text-cyan-white hover:text-cyan-300 transition-all duration-300"
             style={{
-              textShadow: "0 0 8px rgba(0, 255, 255, 0.6)",
-              filter: "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))"
+              textShadow: "0 0 8px rgba(47, 197, 237, 0.6)",
+              filter: "drop-shadow(0 0 4px rgba(47, 197, 237, 0.4))"
             }}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
-              target.style.textShadow = "0 0 12px rgba(0, 255, 255, 0.9)";
-              target.style.filter = "drop-shadow(0 0 8px rgba(0, 255, 255, 0.7))";
+              target.style.textShadow = "0 0 12px rgba(47, 197, 237, 0.9)";
+              target.style.filter = "drop-shadow(0 0 8px rgba(47, 197, 237, 0.7))";
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
-              target.style.textShadow = "0 0 8px rgba(0, 255, 255, 0.6)";
-              target.style.filter = "drop-shadow(0 0 4px rgba(0, 255, 255, 0.4))";
+              target.style.textShadow = "0 0 8px rgba(47, 197, 237, 0.6)";
+              target.style.filter = "drop-shadow(0 0 4px rgba(47, 197, 237, 0.4))";
             }}
           >
             tech@soulinterface.ai

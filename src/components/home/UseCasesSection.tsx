@@ -14,6 +14,10 @@ const UseCasesSection = () => {
           <Link to="/landvehicles" className="narrative-link">
             on the move
           </Link>
+          , riding autonomously into the future{" "}
+          <Link to="/robotaxi" className="narrative-link">
+            in a robotaxi
+          </Link>
           , helping your kids learn safely{" "}
           <Link to="/education" className="narrative-link">
             in the classroom
