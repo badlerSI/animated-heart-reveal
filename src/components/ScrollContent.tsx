@@ -6,7 +6,6 @@ import OneSentenceSection from "./home/OneSentenceSection";
 import HowItWorksSection from "./home/HowItWorksSection";
 import UseCasesSection from "./home/UseCasesSection";
 import LikenessSection from "./home/LikenessSection";
-import TechPreviewSection from "./home/TechPreviewSection";
 import FAQSection from "./home/FAQSection";
 import ClosingCTASection from "./home/ClosingCTASection";
 import Footer from "./home/Footer";
@@ -91,7 +90,6 @@ const ScrollContent = () => {
       <HowItWorksSection />
       <UseCasesSection />
       <LikenessSection />
-      <TechPreviewSection />
       <FAQSection />
       <ClosingCTASection />
 

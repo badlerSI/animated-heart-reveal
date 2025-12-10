@@ -5,7 +5,7 @@ const HowItWorksSection = () => {
     {
       title: "Under the Hood",
       description: "Automotive-grade silicon, patent-pending architecture, and a passion for privacy.",
-      image: "/lovable-uploads/3727b0cf-8a17-44f2-97e2-67cc2b9dfb17.png",
+      image: "/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png",
       link: "/tech"
     },
     {
