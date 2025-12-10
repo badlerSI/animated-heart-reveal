@@ -115,7 +115,7 @@ const Partner = () => {
           >
             AiSha LLC
           </a>{" "}
-          to integrate Soul Interface into the greatest 240Zs ever conceived. Steel with a real soul, premiering Q3 2025.
+          to bring, Ace, the first internet-free conversational car to SEMA 2025! Hundreds of attendees had fun talking to her in more than half a dozen languages.
         </p>
       </div>
 
