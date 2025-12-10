@@ -1,22 +1,22 @@
 const HowItWorksSection = () => {
   const pillars = [
     {
-      title: "Under the Hood",
-      description: "Powered by cutting-edge NVIDIA® chips, patent-pending architecture, and a passion for privacy.",
+      title: "Drives Your AI",
+      description: "Powered by cutting-edge NVIDIA® chips, reasoning models, patent-pending architecture, and a passion for privacy.",
       image: "/lovable-uploads/c13f6db9-d014-4b65-a508-146774c40386.png"
     },
     {
-      title: "Offline Knowledge Base",
+      title: "Lets You Know",
       description: "Massive offline vault with Wikipedia, manuals, and custom databases you control.",
       image: "/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
     },
     {
-      title: "Dozens of Languages",
+      title: "Speaks Your Language",
       description: "Able to understand >100 and speak >30 languages, Soul Interface can interpret or tutor in many tongues.",
       image: "/lovable-uploads/multilingual-soul.png"
     },
     {
-      title: "Your Data, Locked",
+      title: "Defends Your Data",
       description: "Encrypted storage, secure backups, and zero external transmission.",
       image: "/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png"
     }
