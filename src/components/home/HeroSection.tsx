@@ -3,6 +3,15 @@ import { Shield, Car, Key } from "lucide-react";
 const HeroSection = () => {
   return (
     <section className="reveal py-24 md:py-32">
+      {/* Hero visual */}
+      <div className="flex justify-center mb-12">
+        <img 
+          src="/lovable-uploads/d67c9fd9-4ef2-441c-93c7-3b0ed420d47f.png"
+          alt="Soul Interface in car dashboard"
+          className="max-w-md md:max-w-lg w-full h-auto object-contain neon-glow"
+        />
+      </div>
+      
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
           Your AI. Your Rules.
