@@ -11,7 +11,7 @@ const Vision = () => {
     // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "See how we imagine a future of total automotive freedom.");
+      metaDescription.setAttribute("content", "Personal, Private, Sovereign AI — own your own AI systems outright.");
     }
 
     // Set canonical URL
@@ -28,7 +28,7 @@ const Vision = () => {
       'og:type': 'article',
       'og:url': 'https://soulinterface.ai/vision',
       'og:title': 'Our Vision — Soul Interface',
-      'og:description': "See how we imagine a future of total automotive freedom.",
+      'og:description': "Personal, Private, Sovereign AI — own your own AI systems outright.",
       'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png',
       'og:image:width': '1200',
@@ -50,7 +50,7 @@ const Vision = () => {
     const twitterTags = {
       'twitter:card': 'summary_large_image',
       'twitter:title': 'Our Vision — Soul Interface',
-      'twitter:description': "See how we imagine a future of total automotive freedom.",
+      'twitter:description': "Personal, Private, Sovereign AI — own your own AI systems outright.",
       'twitter:image': '/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png'
     };
 
@@ -82,13 +82,16 @@ const Vision = () => {
           <div className="md:w-3/5 space-y-6">
             <div className="text-lg lg:text-xl xl:text-2xl leading-relaxed text-cyan-white/90 font-outfit">
               <p className="mb-6">
-                We believe the most powerful computers ever put in a car shouldn't just look outward—they should look within. While the industry races toward autonomous driving, we're pioneering something equally transformative: automotive AI that truly understands you.
+                We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
               </p>
               <p className="mb-6">
-                Imagine vehicles free from the tyranny of screens, where natural conversation replaces menu mazes. Where your car's intelligence stays private, powerful, and personal. Where cutting-edge GPUs create not just safety features, but genuine companionship for every journey.
+                At Soul Interface, the user is never actually the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a comprehensive suite of AI native software like has never been offered before.
+              </p>
+              <p className="mb-6">
+                No subscriptions, no ads, no way for your data to even be transmitted out, and free updates as long as you own the system. We believe in pushing the limits of cutting edge hardware and models, to get all of the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
               </p>
               <p>
-                We're assembling existing technologies in revolutionary ways to make cars more human, not less. While others build for a future where everyone increasingly ignores the road, we're building for drivers who love the journey. Soul Interface doesn't replace driving engagement—it turbocharges it, all while keeping your eyes on the road, with both hands on the wheel, and your left foot on the clutch.
+                We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
               </p>
             </div>
           </div>
@@ -119,13 +122,16 @@ const Vision = () => {
           <div className="w-full">
             <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4">
               <p>
-                We believe the most powerful computers ever put in a car shouldn't just look outward—they should look within. While the industry races toward autonomous driving, we're pioneering something equally transformative: automotive AI that truly understands you.
+                We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
               </p>
               <p>
-                Imagine vehicles free from the tyranny of screens, where natural conversation replaces menu mazes. Where your car's intelligence stays private, powerful, and personal. Where cutting-edge GPUs create not just safety features, but genuine companionship for every journey.
+                At Soul Interface, the user is never actually the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a comprehensive suite of AI native software like has never been offered before.
               </p>
               <p>
-                We're assembling existing technologies in revolutionary ways to make cars more human, not less. While others build for a future where everyone increasingly ignores the road, we're building for drivers who love the journey. Soul Interface doesn't replace driving engagement—it turbocharges it, all while keeping your eyes on the road, with both hands on the wheel, and your left foot on the clutch.
+                No subscriptions, no ads, no way for your data to even be transmitted out, and free updates as long as you own the system. We believe in pushing the limits of cutting edge hardware and models, to get all of the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
+              </p>
+              <p>
+                We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
               </p>
             </div>
           </div>
