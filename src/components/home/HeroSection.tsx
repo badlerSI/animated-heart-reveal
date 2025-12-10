@@ -20,7 +20,7 @@ const HeroSection = () => {
         </h1>
         <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
           Soul Interface is a sovereign AI that lives with you, not on someone else's server.
-          Private by design, powerful by nature.
+          Private by design, powerful by nature. No subscriptions, ever.
         </p>
       </div>
 
