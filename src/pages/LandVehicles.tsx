@@ -17,7 +17,7 @@ const LandVehicles = () => {
         Cloud-free AI for vehicles. Your personal assistant rides with you—offline, private, and always ready.
       </p>
       <Link 
-        to="/" 
+        to="/#use-cases" 
         className="inline-flex items-center gap-2 text-[#2FC5ED] hover:text-white transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />

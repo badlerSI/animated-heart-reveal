@@ -3,30 +3,30 @@ import "../home/narrativeLink.css";
 
 const UseCasesSection = () => {
   return (
-    <section className="reveal py-20 md:py-28">
+    <section id="use-cases" className="reveal py-20 md:py-28">
       <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
         One Platform. Endless Possibilities.
       </h2>
       
       <div className="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed space-y-6">
         <p>
-          Whether you're navigating rush hour{" "}
+          Whether you're{" "}
           <Link to="/landvehicles" className="narrative-link">
             on the move
           </Link>
-          , riding autonomously into the future{" "}
+          , riding{" "}
           <Link to="/robotaxi" className="narrative-link">
             in a robotaxi
           </Link>
-          , helping your kids learn safely{" "}
+          , helping your{" "}
           <Link to="/education" className="narrative-link">
-            in the classroom
+            kids learn safely
           </Link>
-          , or handling sensitive data in environments where transmission simply isn't allowed{" "}
+          , or{" "}
           <Link to="/work" className="narrative-link">
             at work
           </Link>
-          —Soul Interface adapts to your world.
+          {" "}where you need powerful AI and data leakage is not an option—Soul Interface adapts to your world.
         </p>
         
         <p>

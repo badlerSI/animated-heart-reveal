@@ -645,7 +645,7 @@ const Homeschool = () => {
             <p style={{ color: cyanDim }}>Soul Interface © 2025</p>
             
             <nav className="flex flex-wrap justify-center gap-6">
-              <Link to="/" className="hover:underline" style={{ color: cyanMuted }}>Home</Link>
+              <Link to="/#use-cases" className="hover:underline" style={{ color: cyanMuted }}>Home</Link>
               <Link to="/education" className="hover:underline" style={{ color: cyan }}>Education</Link>
               <Link to="/news" className="hover:underline" style={{ color: cyanMuted }}>News</Link>
               <Link to="/tech" className="hover:underline" style={{ color: cyanMuted }}>Tech</Link>

@@ -17,7 +17,7 @@ const Survival = () => {
         Off-grid AI for when the world goes dark. Run your own weather station, access critical knowledge, and stay informed—no internet required.
       </p>
       <Link 
-        to="/" 
+        to="/#use-cases" 
         className="inline-flex items-center gap-2 text-[#2FC5ED] hover:text-white transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
