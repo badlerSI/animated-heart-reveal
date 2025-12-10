@@ -43,11 +43,16 @@ const ScrollContent = () => {
 
         /* separate opacity calculations for fade-in vs fade-out */
         let opacity;
+        const isExtended = el.classList.contains("reveal-extended");
+        
         if (isBecomingVisible || ratio >= 0.70) {
           // Fade-in: starts at 1% visibility, completes at 40% (sooner than before)
           opacity = Math.max(0, Math.min(1, (ratio - 0.01) / 0.39));
+        } else if (isExtended) {
+          // Extended fade-out: starts at 50% visibility, completes at 5%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.45));
         } else {
-          // Fade-out: starts at 70% visibility, completes at 10%
+          // Normal fade-out: starts at 70% visibility, completes at 10%
           opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.60));
         }
         

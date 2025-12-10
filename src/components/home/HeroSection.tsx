@@ -1,8 +1,8 @@
-import { Shield, Car, Key } from "lucide-react";
+import { Shield, Car, HeartPulse } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="reveal py-24 md:py-32">
+    <section className="reveal reveal-extended py-24 md:py-32">
       {/* Hero visual */}
       <div className="flex justify-center mb-12">
         <img 
@@ -41,8 +41,8 @@ const HeroSection = () => {
           </p>
         </div>
         <div className="text-center p-6">
-          <Key className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
-          <h3 className="text-xl font-semibold text-white mb-2">Truly Yours</h3>
+          <HeartPulse className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
+          <h3 className="text-xl font-semibold text-white mb-2">Yours, Truly</h3>
           <p className="text-gray-400">
             Create custom personas, voices, and knowledge bases. Your AI reflects you—not a corporate template.
           </p>
