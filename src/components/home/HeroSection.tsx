@@ -16,7 +16,7 @@ const HeroSection = () => {
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
           Your AI. Your Rules.
           <br />
-          <span className="text-[#2FC5ED]">No Cloud Required.</span>
+          <span className="text-[#1bbdc5]">No Cloud Required.</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
           Soul Interface is a sovereign AI that lives with you—not on someone else's server.
@@ -27,21 +27,21 @@ const HeroSection = () => {
       {/* Why Sovereign AI - 3 pillars */}
       <div className="grid md:grid-cols-3 gap-8 mt-16">
         <div className="text-center p-6">
-          <Shield className="w-12 h-12 mx-auto mb-4" style={{ color: "#2FC5ED" }} />
+          <Shield className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Private by Default</h3>
           <p className="text-gray-400">
             Your conversations never leave your device. No eavesdropping, no data mining, no third-party access.
           </p>
         </div>
         <div className="text-center p-6">
-          <Car className="w-12 h-12 mx-auto mb-4" style={{ color: "#2FC5ED" }} />
+          <Car className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Works Anywhere</h3>
           <p className="text-gray-400">
             Zero bars? No problem. Soul Interface runs entirely offline—in tunnels, deserts, or the middle of the ocean.
           </p>
         </div>
         <div className="text-center p-6">
-          <Key className="w-12 h-12 mx-auto mb-4" style={{ color: "#2FC5ED" }} />
+          <Key className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Truly Yours</h3>
           <p className="text-gray-400">
             Create custom personas, voices, and knowledge bases. Your AI reflects you—not a corporate template.
