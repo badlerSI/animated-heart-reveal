@@ -14,9 +14,9 @@ const HowItWorksSection = () => {
       image: "/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
     },
     {
-      title: "16 Languages",
-      description: "Real-time translation and language tutoring, all processed on-device.",
-      image: "/lovable-uploads/714602df-a4da-4ca2-94aa-d221088d53f3.png"
+      title: "Dozens of Languages",
+      description: "Able to understand >100 and speak >30 languages, Soul Interface can interpret or tutor in many tongues.",
+      image: "/lovable-uploads/multilingual-soul.png"
     },
     {
       title: "Your Data, Locked",
