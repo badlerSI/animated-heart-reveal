@@ -17,7 +17,7 @@ const FAQSection = () => {
     },
     {
       question: "Can I create custom personas?",
-      answer: "Absolutely. Ask for any accent, personality, or backstory and Soul Interface generates it on-device in seconds. Swap between personas instantly with tiny LoRA overlays."
+      answer: "Absolutely! We don't limit you to 4 options, mix and blend different voice, accent and character traits until you create your ideal AI companion's persona. And create and save as many as you like!"
     },
     {
       question: "Is it really completely offline?",
