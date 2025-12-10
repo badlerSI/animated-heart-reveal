@@ -21,7 +21,7 @@ const FAQSection = () => {
     },
     {
       question: "Is it really completely offline?",
-      answer: "Yes. The automotive-grade GPU handles all processing locally. Zero bars, zero cloud, zero subscription fees. It works in tunnels, deserts, or anywhere else."
+      answer: "Yes. A cutting-edge GPU handles all inference locally. Zero bars, zero cloud, zero subscription fees. It works in tunnels, deserts, or anywhere else."
     },
     {
       question: "How do I back up my data?",
@@ -29,7 +29,7 @@ const FAQSection = () => {
     },
     {
       question: "What languages are supported?",
-      answer: "Soul Interface translates and tutors across 16 languages in real-time, all processed offline. Perfect for travel, learning, or multilingual households."
+      answer: "Soul Interface can understand over 100 languages and speak over 30—all processed offline. Perfect for travel, learning, or multilingual households."
     }
   ];
 
@@ -45,9 +45,9 @@ const FAQSection = () => {
             <AccordionItem 
               key={index} 
               value={`item-${index}`}
-              className="bg-white/5 border border-white/10 rounded-xl px-6 data-[state=open]:border-[#2FC5ED]/30"
+              className="bg-white/5 border border-white/10 rounded-xl px-6 data-[state=open]:border-[#1bbdc5]/30"
             >
-              <AccordionTrigger className="text-white hover:text-[#2FC5ED] text-left py-5">
+              <AccordionTrigger className="text-white hover:text-[#1bbdc5] text-left py-5">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-gray-400 pb-5">
