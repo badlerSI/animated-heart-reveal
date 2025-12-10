@@ -24,7 +24,7 @@ const ScrollContent = () => {
 
   // Show scroll prompt after 10 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
+    const timer = setTimeout(() => setShowScrollPrompt(true), 7000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -114,7 +114,7 @@ const ScrollContent = () => {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1"
+          className="fixed bottom-8 left-0 right-0 z-50 flex flex-col items-center justify-center gap-1"
           style={{ color: "#1bbdc5" }}
         >
           <span className="text-sm font-medium tracking-wide">scroll</span>
