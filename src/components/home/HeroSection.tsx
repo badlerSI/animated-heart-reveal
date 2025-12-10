@@ -19,7 +19,7 @@ const HeroSection = () => {
           <span className="text-[#1bbdc5]">No Cloud Required.</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-          Soul Interface is a sovereign AI that lives with you—not on someone else's server.
+          Soul Interface is a sovereign AI that lives with you, not on someone else's server.
           Private by design, powerful by nature.
         </p>
       </div>
@@ -37,14 +37,14 @@ const HeroSection = () => {
           <Car className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Works Anywhere</h3>
           <p className="text-gray-400">
-            Zero bars? No problem. Soul Interface runs entirely offline—in tunnels, deserts, or the middle of the ocean.
+            Zero bars? No problem. Soul Interface runs entirely offline, even in tunnels, deserts, or the middle of the ocean.
           </p>
         </div>
         <div className="text-center p-6">
           <HeartPulse className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Yours, Truly</h3>
           <p className="text-gray-400">
-            Create custom personas, voices, and knowledge bases. Your AI reflects you—not a corporate template.
+            Create custom personas, voices, and knowledge bases. Your AI reflects you, not a corporate template.
           </p>
         </div>
       </div>

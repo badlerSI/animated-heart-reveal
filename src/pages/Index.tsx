@@ -5,7 +5,7 @@ import ScrollContent from "../components/ScrollContent";
 const Index = () => {
   useEffect(() => {
     // Set page title
-    document.title = "Soul Interface — Cloud-Free AI Assistant";
+    document.title = "Soul Interface | Sovereign AI";
     
     // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -26,7 +26,7 @@ const Index = () => {
     const ogTags = {
       'og:type': 'website',
       'og:url': 'https://soulinterface.ai/',
-      'og:title': 'Soul Interface — Cloud-Free AI Assistant',
+      'og:title': 'Soul Interface | Sovereign AI',
       'og:description': "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant.",
       'og:site_name': 'Soul Interface',
       'og:image': '/lovable-uploads/4f6fbcc1-56c4-4684-b67c-dbf671788af0.png',
@@ -48,7 +48,7 @@ const Index = () => {
     // Set Twitter Card meta tags
     const twitterTags = {
       'twitter:card': 'summary_large_image',
-      'twitter:title': 'Soul Interface — Cloud-Free AI Assistant',
+      'twitter:title': 'Soul Interface | Sovereign AI',
       'twitter:description': "Cloud-free, screen-optional, privacy-centered, in-vehicle, customizable AI assistant.",
       'twitter:image': '/lovable-uploads/4f6fbcc1-56c4-4684-b67c-dbf671788af0.png'
     };
