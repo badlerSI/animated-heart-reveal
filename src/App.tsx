@@ -16,6 +16,7 @@ import Homeschool from "./pages/Homeschool";
 import LandVehicles from "./pages/LandVehicles";
 import Work from "./pages/Work";
 import Survival from "./pages/Survival";
+import Robotaxi from "./pages/Robotaxi";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/landvehicles" element={<LandVehicles />} />
           <Route path="/work" element={<Work />} />
           <Route path="/survival" element={<Survival />} />
+          <Route path="/robotaxi" element={<Robotaxi />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
