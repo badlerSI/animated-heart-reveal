@@ -42,15 +42,15 @@ const ScrollContent = () => {
         let opacity;
         const isExtended = el.classList.contains("reveal-extended");
         
-        if (isBecomingVisible || ratio >= 0.70) {
-          // Fade-in: starts at 1% visibility, completes at 40% (sooner than before)
-          opacity = Math.max(0, Math.min(1, (ratio - 0.01) / 0.39));
+        if (isBecomingVisible || ratio >= 0.35) {
+          // Fade-in: starts at 0% visibility, completes at 30%
+          opacity = Math.min(1, ratio / 0.30);
         } else if (isExtended) {
-          // Extended fade-out: starts at 50% visibility, completes at 5%
-          opacity = Math.max(0, Math.min(1, (ratio - 0.05) / 0.45));
+          // Extended fade-out: more gradual, starts at 26%, gone at 1%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.01) / 0.25));
         } else {
-          // Normal fade-out: starts at 70% visibility, completes at 10%
-          opacity = Math.max(0, Math.min(1, (ratio - 0.10) / 0.60));
+          // Normal fade-out: starts at 32%, gone at 2%
+          opacity = Math.max(0, Math.min(1, (ratio - 0.02) / 0.30));
         }
         
         const translate = 60 * (1 - opacity);           // match CSS 60 px
@@ -63,11 +63,10 @@ const ScrollContent = () => {
       });
     };
 
-    /* rootMargin bottom –50% ➜ element considered "exiting"
-       while still giving fade-out time but ensuring visibility */
+    /* rootMargin bottom –20% ➜ elements detected earlier when entering */
     const observer = new IntersectionObserver(onIntersect, {
       root: null,
-      rootMargin: "0px 0px -50% 0px",
+      rootMargin: "0px 0px -20% 0px",
       threshold: Array.from({ length: 21 }, (_, i) => i / 20) // 0, .05 … 1
     });
 
