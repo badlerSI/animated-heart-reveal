@@ -101,10 +101,8 @@ const Extreme = () => {
   ];
 
   const ruggedization = [
-    { icon: Battery, title: "12V/24V Native", description: "Runs directly from vehicle or solar power systems." },
     { icon: Shield, title: "EMP-Resistant Design", description: "Faraday-ready enclosure options for ultimate protection." },
     { icon: Wifi, title: "Mesh Networking", description: "Create local networks with no external infrastructure." },
-    { icon: Server, title: "Solid State Storage", description: "No moving parts. Survives drops, vibration, extreme temps." },
     { icon: Lock, title: "Encrypted Storage", description: "Your data stays yours, even if the unit is compromised." },
     { icon: Mountain, title: "Extreme Conditions", description: "Operates from -20°F to 120°F. Desert to arctic." },
   ];
