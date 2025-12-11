@@ -160,7 +160,7 @@ const Work = () => {
                 className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
                 style={{
                   mixBlendMode: 'screen',
-                  animation: 'cyanPulse 3s ease-in-out infinite'
+                  animation: 'cyanPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite'
                 }}
               />
             </div>
