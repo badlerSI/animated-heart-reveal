@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { useImagePreloader } from "@/components/animated-logo/useImagePreloader";
 import { motion } from "framer-motion";
 import { 
   Shield, 
@@ -33,6 +34,13 @@ const Work = () => {
   useEffect(() => {
     document.title = "At Work — Soul Interface";
   }, []);
+
+  // Preload images for smooth loading
+  const imageUrls = useMemo(() => [
+    "/lovable-uploads/TapeCutter.png",
+    "/lovable-uploads/cuttape.png"
+  ], []);
+  const imagesLoaded = useImagePreloader(imageUrls);
 
   // Matching education page color scheme
   const cyan = "#1bbdc5";
@@ -190,16 +198,24 @@ const Work = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            {/* Image container - full width edge-to-edge */}
-            <div className="relative w-screen -mx-4 md:-mx-8 lg:-mx-16">
+            {/* Image container - full width edge-to-edge with smooth fade-in */}
+            <div 
+              className="relative w-screen -mx-4 md:-mx-8 lg:-mx-16"
+              style={{
+                opacity: imagesLoaded ? 1 : 0,
+                transition: 'opacity 0.5s ease-in-out',
+              }}
+            >
               {/* Base image - TapeCutter (心 blade) with glow effect */}
               <img 
                 src="/lovable-uploads/TapeCutter.png" 
                 alt="Soul Interface cuts through red tape"
                 className="w-full h-auto relative z-10"
                 style={{
-                  WebkitAnimation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-                  animation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                  ...(imagesLoaded && {
+                    WebkitAnimation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                    animation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                  }),
                   WebkitTransform: 'translateZ(0)',
                   transform: 'translateZ(0)',
                   willChange: 'opacity, filter',
