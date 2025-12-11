@@ -124,32 +124,80 @@ const Work = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Hero Section */}
-      <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 pt-16 pb-12 text-center bg-[#0a0a0f]">
+      {/* Hero Section - Simplified */}
+      <section className="flex flex-col items-center justify-center px-6 pt-20 pb-8 text-center bg-[#0a0a0f]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <Server className="w-16 h-16 mx-auto mb-6" style={{ color: cyan }} />
+          <Server className="w-12 h-12 mx-auto mb-4" style={{ color: cyan }} />
           <h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#f0f8ff]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-[#f0f8ff]"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Soul Interface for Work
           </h1>
           <p 
-            className="text-xl sm:text-2xl mb-8"
+            className="text-lg sm:text-xl"
             style={{ color: cyan }}
           >
             Sovereign AI Without the Compliance Headache
           </p>
-          <p className="text-lg text-[#e0f4ff] max-w-2xl mx-auto leading-relaxed">
-            A portable, sovereign AI appliance you buy once and own outright. No cloud, no subscriptions, 
-            no surprise risk reviews — just fast, private AI inside your own four walls.
-          </p>
         </motion.div>
+      </section>
+
+      {/* Visual Centerpiece - AI Unbound by Red Tape */}
+      <section className="px-6 py-12 bg-[#0a0a0f]">
+        <div className="max-w-3xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 text-[#f0f8ff]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+          >
+            AI Unbound by Red Tape
+          </motion.h2>
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center relative"
+          >
+            {/* Base image - red tape figure with lightning */}
+            <img 
+              src="/lovable-uploads/RedTape-2.png" 
+              alt="Figure breaking free from red tape with AI energy"
+              className="max-w-full h-auto relative z-10"
+            />
+            {/* Cyan glow overlay - pulsing effect */}
+            <img 
+              src="/lovable-uploads/TapeGlow.png"
+              alt=""
+              aria-hidden="true"
+              className="max-w-full h-auto absolute inset-0 z-20 pointer-events-none"
+              style={{
+                mixBlendMode: 'screen',
+                animation: 'cyanPulse 3s ease-in-out infinite'
+              }}
+            />
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center text-lg mt-8 max-w-2xl mx-auto text-[#e0f4ff]"
+          >
+            A portable, sovereign AI appliance you buy once and own outright. No cloud, no subscriptions, 
+            no surprise risk reviews.
+          </motion.p>
+        </div>
       </section>
 
       {/* The Problem Section */}
