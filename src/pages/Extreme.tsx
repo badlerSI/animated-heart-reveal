@@ -104,7 +104,7 @@ const Extreme = () => {
     { icon: Shield, title: "EMP-Resistant Design", description: "Faraday-ready enclosure options for ultimate protection." },
     { icon: Wifi, title: "Mesh Networking", description: "Create local networks with no external infrastructure." },
     { icon: Lock, title: "Encrypted Storage", description: "Your data stays yours, even if the unit is compromised." },
-    { icon: Mountain, title: "Extreme Conditions", description: "Operates from -20°F to 120°F. Desert to arctic." },
+    { icon: Mountain, title: "Extreme Conditions", description: "Built for harsh environments. Desert heat to arctic cold." },
   ];
 
   return (
