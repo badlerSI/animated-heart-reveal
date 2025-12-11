@@ -129,54 +129,62 @@ const Work = () => {
         {`
           @-webkit-keyframes cyanPulseExtreme {
             0%, 100% {
-              opacity: 0.85;
-              -webkit-filter: 
-                drop-shadow(0 0 20px rgba(255, 255, 255, 1)) 
-                drop-shadow(0 0 60px rgba(27, 189, 197, 1))
-                drop-shadow(0 0 120px rgba(27, 189, 197, 0.8));
-              filter: 
-                drop-shadow(0 0 20px rgba(255, 255, 255, 1)) 
-                drop-shadow(0 0 60px rgba(27, 189, 197, 1))
-                drop-shadow(0 0 120px rgba(27, 189, 197, 0.8));
-            }
-            50% {
               opacity: 1;
               -webkit-filter: 
                 drop-shadow(0 0 40px rgba(255, 255, 255, 1)) 
                 drop-shadow(0 0 100px rgba(27, 189, 197, 1))
                 drop-shadow(0 0 200px rgba(27, 189, 197, 0.9))
-                drop-shadow(0 0 300px rgba(27, 189, 197, 0.6));
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.7));
               filter: 
                 drop-shadow(0 0 40px rgba(255, 255, 255, 1)) 
                 drop-shadow(0 0 100px rgba(27, 189, 197, 1))
                 drop-shadow(0 0 200px rgba(27, 189, 197, 0.9))
-                drop-shadow(0 0 300px rgba(27, 189, 197, 0.6));
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.7));
+            }
+            50% {
+              opacity: 1;
+              -webkit-filter: 
+                drop-shadow(0 0 80px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 160px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.95))
+                drop-shadow(0 0 450px rgba(27, 189, 197, 0.8))
+                drop-shadow(0 0 600px rgba(27, 189, 197, 0.5));
+              filter: 
+                drop-shadow(0 0 80px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 160px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.95))
+                drop-shadow(0 0 450px rgba(27, 189, 197, 0.8))
+                drop-shadow(0 0 600px rgba(27, 189, 197, 0.5));
             }
           }
           @keyframes cyanPulseExtreme {
             0%, 100% {
-              opacity: 0.85;
-              -webkit-filter: 
-                drop-shadow(0 0 20px rgba(255, 255, 255, 1)) 
-                drop-shadow(0 0 60px rgba(27, 189, 197, 1))
-                drop-shadow(0 0 120px rgba(27, 189, 197, 0.8));
-              filter: 
-                drop-shadow(0 0 20px rgba(255, 255, 255, 1)) 
-                drop-shadow(0 0 60px rgba(27, 189, 197, 1))
-                drop-shadow(0 0 120px rgba(27, 189, 197, 0.8));
-            }
-            50% {
               opacity: 1;
               -webkit-filter: 
                 drop-shadow(0 0 40px rgba(255, 255, 255, 1)) 
                 drop-shadow(0 0 100px rgba(27, 189, 197, 1))
                 drop-shadow(0 0 200px rgba(27, 189, 197, 0.9))
-                drop-shadow(0 0 300px rgba(27, 189, 197, 0.6));
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.7));
               filter: 
                 drop-shadow(0 0 40px rgba(255, 255, 255, 1)) 
                 drop-shadow(0 0 100px rgba(27, 189, 197, 1))
                 drop-shadow(0 0 200px rgba(27, 189, 197, 0.9))
-                drop-shadow(0 0 300px rgba(27, 189, 197, 0.6));
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.7));
+            }
+            50% {
+              opacity: 1;
+              -webkit-filter: 
+                drop-shadow(0 0 80px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 160px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.95))
+                drop-shadow(0 0 450px rgba(27, 189, 197, 0.8))
+                drop-shadow(0 0 600px rgba(27, 189, 197, 0.5));
+              filter: 
+                drop-shadow(0 0 80px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 160px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 300px rgba(27, 189, 197, 0.95))
+                drop-shadow(0 0 450px rgba(27, 189, 197, 0.8))
+                drop-shadow(0 0 600px rgba(27, 189, 197, 0.5));
             }
           }
         `}
