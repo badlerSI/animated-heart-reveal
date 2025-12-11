@@ -142,25 +142,28 @@ const Work = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center relative"
+            className="flex flex-col items-center"
           >
-            {/* Base image - red tape figure with lightning */}
-            <img 
-              src="/lovable-uploads/RedTape-2.png" 
-              alt="Figure breaking free from red tape with AI energy"
-              className="max-w-full h-auto relative z-10"
-            />
-            {/* Cyan glow overlay - pulsing effect */}
-            <img 
-              src="/lovable-uploads/TapeGlow.png"
-              alt=""
-              aria-hidden="true"
-              className="max-w-full h-auto absolute inset-0 z-20 pointer-events-none"
-              style={{
-                mixBlendMode: 'screen',
-                animation: 'cyanPulse 3s ease-in-out infinite'
-              }}
-            />
+            {/* Image container - relative wrapper for proper overlay alignment */}
+            <div className="relative inline-block">
+              {/* Base image - red tape figure with lightning */}
+              <img 
+                src="/lovable-uploads/RedTape-2.png" 
+                alt="Figure breaking free from red tape with AI energy"
+                className="max-w-full h-auto relative z-10"
+              />
+              {/* Cyan glow overlay - pulsing effect */}
+              <img 
+                src="/lovable-uploads/TapeGlow.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"
+                style={{
+                  mixBlendMode: 'screen',
+                  animation: 'cyanPulse 3s ease-in-out infinite'
+                }}
+              />
+            </div>
           </motion.div>
 
           <motion.p
