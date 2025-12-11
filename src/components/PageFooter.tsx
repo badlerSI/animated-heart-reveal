@@ -10,7 +10,7 @@ interface PageFooterProps {
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Educational", path: "/education" },
-  { label: "Vehicular", path: "/vehicles" },
+  { label: "Vehicular", path: "/vehicular" },
   { label: "Workplace", path: "/work" },
   { label: "Autonomous", path: "/autonomous" },
   { label: "Extreme", path: "/extreme" },
