@@ -238,7 +238,13 @@ const Extreme = () => {
                 alt=""
                 className="absolute top-0 left-0 max-w-full h-auto rounded-xl pointer-events-none"
                 style={{
-                  animation: 'heartPulseA 3s ease-in-out infinite'
+                  WebkitAnimation: 'heartPulseA 3s ease-in-out infinite',
+                  animation: 'heartPulseA 3s ease-in-out infinite',
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
+                  willChange: 'opacity, filter'
                 }}
               />
               {/* Bunker heart overlay - pulses opposite phase */}
@@ -247,7 +253,13 @@ const Extreme = () => {
                 alt=""
                 className="absolute top-0 left-0 max-w-full h-auto rounded-xl pointer-events-none"
                 style={{
-                  animation: 'heartPulseB 3s ease-in-out infinite'
+                  WebkitAnimation: 'heartPulseB 3s ease-in-out infinite',
+                  animation: 'heartPulseB 3s ease-in-out infinite',
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
+                  willChange: 'opacity, filter'
                 }}
               />
             </div>
@@ -274,38 +286,54 @@ const Extreme = () => {
         </div>
       </section>
 
-      {/* CSS for alternating heart pulse animations */}
+      {/* CSS for alternating heart pulse animations - iOS Safari compatible */}
       <style>{`
-        @keyframes heartPulseA {
+        @-webkit-keyframes heartPulseA {
           0%, 100% { 
             opacity: 1; 
-            filter: 
-              drop-shadow(0 0 8px rgba(255, 255, 255, 1))
-              drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
-              drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
-              drop-shadow(0 0 60px rgba(125, 217, 168, 0.4));
+            -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
           }
           50% { 
             opacity: 0.45; 
-            filter: 
-              drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))
-              drop-shadow(0 0 12px rgba(125, 217, 168, 0.2));
+            -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+          }
+        }
+        @keyframes heartPulseA {
+          0%, 100% { 
+            opacity: 1; 
+            -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
+          }
+          50% { 
+            opacity: 0.45; 
+            -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+          }
+        }
+        @-webkit-keyframes heartPulseB {
+          0%, 100% { 
+            opacity: 0.45; 
+            -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+          }
+          50% { 
+            opacity: 1; 
+            -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
           }
         }
         @keyframes heartPulseB {
           0%, 100% { 
             opacity: 0.45; 
-            filter: 
-              drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))
-              drop-shadow(0 0 12px rgba(125, 217, 168, 0.2));
+            -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
           }
           50% { 
             opacity: 1; 
-            filter: 
-              drop-shadow(0 0 8px rgba(255, 255, 255, 1))
-              drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
-              drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
-              drop-shadow(0 0 60px rgba(125, 217, 168, 0.4));
+            -webkit-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(125, 217, 168, 0.5));
           }
         }
       `}</style>
