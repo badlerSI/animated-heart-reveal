@@ -17,6 +17,7 @@ import Vehicular from "./pages/Vehicular";
 import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
 import Autonomous from "./pages/Autonomous";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/tech" element={<Tech />} />
