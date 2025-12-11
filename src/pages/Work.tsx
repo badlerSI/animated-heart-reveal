@@ -124,32 +124,8 @@ const Work = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Hero Section - Simplified */}
-      <section className="flex flex-col items-center justify-center px-6 pt-20 pb-8 text-center bg-[#0a0a0f]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl"
-        >
-          <Server className="w-12 h-12 mx-auto mb-4" style={{ color: cyan }} />
-          <h1 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-[#f0f8ff]"
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-          >
-            Soul Interface for Work
-          </h1>
-          <p 
-            className="text-lg sm:text-xl"
-            style={{ color: cyan }}
-          >
-            Sovereign AI Without the Compliance Headache
-          </p>
-        </motion.div>
-      </section>
-
       {/* Visual Centerpiece - AI Unbound by Red Tape */}
-      <section className="px-6 py-12 bg-[#0a0a0f]">
+      <section className="px-6 pt-20 pb-12 bg-[#0a0a0f]">
         <div className="max-w-3xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
