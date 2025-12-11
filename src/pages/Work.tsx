@@ -152,7 +152,7 @@ const Work = () => {
                 alt="Figure breaking free from red tape with AI energy"
                 className="max-w-full h-auto relative z-10"
               />
-              {/* Cyan glow overlay - pulsing effect */}
+              {/* Cyan glow overlay - pulsing effect - iOS Safari compatible */}
               <img 
                 src="/lovable-uploads/TapeGlow.png"
                 alt=""
@@ -160,7 +160,13 @@ const Work = () => {
                 className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
                 style={{
                   mixBlendMode: 'screen',
-                  animation: 'cyanPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite'
+                  WebkitAnimation: 'cyanPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                  animation: 'cyanPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
+                  willChange: 'opacity, filter'
                 }}
               />
             </div>

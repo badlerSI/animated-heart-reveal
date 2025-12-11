@@ -222,7 +222,7 @@ const Homeschool = () => {
               alt="Soul Interface wave machine with surfer boy - offline AI learning device"
               className="max-w-full h-auto relative z-10"
             />
-            {/* White glow overlay - subtle pulsing effect */}
+            {/* White glow overlay - subtle pulsing effect - iOS Safari compatible */}
             <img 
               src="/lovable-uploads/SoulWaveMachineWhite.png"
               alt=""
@@ -230,7 +230,13 @@ const Homeschool = () => {
               className="max-w-full h-auto absolute inset-0 z-20 pointer-events-none"
               style={{
                 mixBlendMode: 'screen',
-                animation: 'kanjiPulse 3s ease-in-out infinite'
+                WebkitAnimation: 'kanjiPulse 3s ease-in-out infinite',
+                animation: 'kanjiPulse 3s ease-in-out infinite',
+                WebkitTransform: 'translateZ(0)',
+                transform: 'translateZ(0)',
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
+                willChange: 'opacity, filter'
               }}
             />
           </motion.div>
