@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import PageFooter from "@/components/PageFooter";
 
-const Robotaxi = () => {
+const Autonomous = () => {
   useEffect(() => {
-    document.title = "Soul Interface — Robotaxi";
+    document.title = "Soul Interface — Autonomous";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -31,7 +31,7 @@ const Robotaxi = () => {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-6">
-          Robotaxi
+          Autonomous
         </h1>
         
         <p className="text-xl text-gray-400 text-center max-w-2xl mb-12">
@@ -48,4 +48,4 @@ const Robotaxi = () => {
   );
 };
 
-export default Robotaxi;
+export default Autonomous;

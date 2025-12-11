@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Shield } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 
-const Survival = () => {
+const Extreme = () => {
   useEffect(() => {
     document.title = "Just in Case — Soul Interface";
   }, []);
@@ -23,4 +23,4 @@ const Survival = () => {
   );
 };
 
-export default Survival;
+export default Extreme;

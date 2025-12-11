@@ -9,8 +9,8 @@ const navLinks = [
   { label: "Educational", path: "/education" },
   { label: "Vehicular", path: "/vehicles" },
   { label: "Workplace", path: "/work" },
-  { label: "Autonomous Vehicle", path: "/robotaxi" },
-  { label: "Extreme", path: "/survival" },
+  { label: "Autonomous", path: "/autonomous" },
+  { label: "Extreme", path: "/extreme" },
 ];
 
 const PageFooter = ({ glowing = false }: PageFooterProps) => {

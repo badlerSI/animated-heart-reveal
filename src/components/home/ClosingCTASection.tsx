@@ -16,9 +16,9 @@ const ClosingCTASection = () => {
         managing sensitive data{" "}
         <Link to="/work" className="narrative-link">at work</Link>,
         riding{" "}
-        <Link to="/robotaxi" className="narrative-link">in a robotaxi</Link>,
+        <Link to="/autonomous" className="narrative-link">in a robotaxi</Link>,
         or{" "}
-        <Link to="/survival" className="narrative-link">getting prepared for anything</Link>,
+        <Link to="/extreme" className="narrative-link">getting prepared for anything</Link>,
         Soul Interface is Powerful, Offline, Sovereign AI.
       </p>
 

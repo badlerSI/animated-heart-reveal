@@ -6,8 +6,8 @@ const navLinks = [
   { label: "Educational", path: "/education" },
   { label: "Vehicular", path: "/vehicles" },
   { label: "Workplace", path: "/work" },
-  { label: "Autonomous Vehicle", path: "/robotaxi" },
-  { label: "Extreme", path: "/survival" },
+  { label: "Autonomous", path: "/autonomous" },
+  { label: "Extreme", path: "/extreme" },
 ];
 
 const Sema = () => {
@@ -47,7 +47,7 @@ const Sema = () => {
       />
       
       {/* Dark overlay for text readability */}
-      <div className="fixed inset-0 z-0 bg-black/60" />
+      <div className="fixed inset-0 z-0 bg-black/40" />
       
       {/* Main content */}
       <div className="flex-1 relative z-10 flex flex-col items-center justify-center px-6 text-center">
@@ -63,7 +63,7 @@ const Sema = () => {
       </div>
       
       {/* Glowing footer navigation */}
-      <footer className="relative z-10 px-6 py-12 bg-black/50 backdrop-blur-sm">
+      <footer className="relative z-10 px-6 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <p style={{ color: cyanDim, textShadow: `0 0 8px ${cyanDim}` }}>
