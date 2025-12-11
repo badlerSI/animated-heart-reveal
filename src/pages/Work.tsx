@@ -190,22 +190,14 @@ const Work = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            {/* Image container - tight glow on overlay image only */}
+            {/* Image container - TapeCutter with glow, cuttape on top */}
             <div className="relative inline-block">
-              {/* Base image - red tape figure with lightning */}
+              {/* Base image - TapeCutter (心 blade) with glow effect */}
               <img 
-                src="/lovable-uploads/RedTape-2.png" 
-                alt="Figure breaking free from red tape with AI energy"
+                src="/lovable-uploads/TapeCutter.png" 
+                alt="Soul Interface cuts through red tape"
                 className="max-w-full h-auto relative z-10"
-              />
-              {/* Cyan accent overlay - tight drop-shadow glow */}
-              <img 
-                src="/lovable-uploads/TapeGlow.png"
-                alt=""
-                aria-hidden="true"
-                className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
                 style={{
-                  mixBlendMode: 'screen',
                   WebkitAnimation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
                   animation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
                   WebkitTransform: 'translateZ(0)',
@@ -214,6 +206,13 @@ const Work = () => {
                   WebkitBackfaceVisibility: 'hidden',
                   backfaceVisibility: 'hidden',
                 }}
+              />
+              {/* Cut tape overlay - on top, no glow */}
+              <img 
+                src="/lovable-uploads/cuttape.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
               />
             </div>
           </motion.div>
