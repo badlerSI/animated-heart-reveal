@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import PageFooter from "@/components/PageFooter";
 
-const Vehicles = () => {
+const Vehicular = () => {
   useEffect(() => {
-    document.title = "Vehicles — Soul Interface";
+    document.title = "Vehicular — Soul Interface";
   }, []);
 
   return (
@@ -25,11 +25,11 @@ const Vehicles = () => {
         {/* Content */}
         <div className="relative z-10 max-w-3xl">
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-            In 2025 we built our first automotive prototype, and from Monterey to SEMA, we met with enthusiasts and builders from 3 continents. Our promise of privacy, "What you say in the car, stays in the car," as well as navigation and full infotainment control, even with no service, really resonated.
+            In 2025 we built our first automotive prototype, and from Monterey to SEMA, we met with enthusiasts and builders from 3 continents. Our promise of privacy, "What you say in the car, stays in the car," as well as navigation and full infotainment control, even with no screen and zero bars of service, really resonated.
           </p>
           
           <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed">
-            We have garnered interest in putting reasoning, screen-optional, sovereign AI in conveyances from motorhomes to motorcycles, and are already working on novel solutions to previously intractable problems.
+            We have garnered interest in putting reasoning, capable, sovereign AI in conveyances from motorhomes to motorcycles, and are already working on novel solutions to previously intractable problems.
           </p>
           
           <p 
@@ -52,4 +52,4 @@ const Vehicles = () => {
   );
 };
 
-export default Vehicles;
+export default Vehicular;
