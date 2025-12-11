@@ -29,15 +29,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PageFooter from "@/components/PageFooter";
-import bunkerCutaway from "@/assets/bunker-cutaway.png";
+import bunkerBase from "@/assets/bunker-base.png";
+import truckHeart from "@/assets/truck-heart.png";
+import bunkerHeart from "@/assets/bunker-heart.png";
 
 const Extreme = () => {
   useEffect(() => {
     document.title = "Just in Case — Soul Interface";
   }, []);
 
-  const cyan = "#1bbdc5";
-  const cyanMuted = "#5BA8C4";
+  // Seafoam green theme extracted from bunker image
+  const seafoam = "#4CAF7C";
+  const seafoamMuted = "#6B9E82";
+  const seafoamPastel = "#7DD9A8";
 
   const whyPrepare = [
     { icon: Zap, title: "Grid Failure", description: "Power outages lasting days or weeks. No internet, no cell towers." },
@@ -127,7 +131,7 @@ const Extreme = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
             className="text-xl sm:text-2xl mt-8"
-            style={{ color: cyanMuted, fontFamily: 'Helvetica, Arial, sans-serif' }}
+            style={{ color: seafoamMuted, fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             Off-grid AI for when the world goes sideways.
           </motion.p>
@@ -143,7 +147,7 @@ const Extreme = () => {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ChevronDown className="w-6 h-6" style={{ color: cyan }} />
+            <ChevronDown className="w-6 h-6" style={{ color: seafoam }} />
           </motion.div>
         </motion.div>
       </section>
@@ -165,7 +169,7 @@ const Extreme = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center text-lg mb-12 max-w-2xl mx-auto"
-            style={{ color: cyanMuted }}
+            style={{ color: seafoamMuted }}
           >
             Most AI requires the cloud. When the cloud disappears, so does your access to knowledge. 
             Soul Interface works entirely offline, from day one.
@@ -180,11 +184,11 @@ const Extreme = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="p-6 rounded-xl text-center border bg-[#12121a]"
-                style={{ borderColor: `${cyan}30` }}
+                style={{ borderColor: `${seafoam}30` }}
               >
-                <item.icon className="w-10 h-10 mx-auto mb-4" style={{ color: cyan }} />
+                <item.icon className="w-10 h-10 mx-auto mb-4" style={{ color: seafoam }} />
                 <h3 className="font-bold text-lg mb-2 text-[#f0f8ff]">{item.title}</h3>
-                <p style={{ color: cyanMuted }}>{item.description}</p>
+                <p style={{ color: seafoamMuted }}>{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -208,12 +212,12 @@ const Extreme = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center text-lg mb-10 max-w-2xl mx-auto"
-            style={{ color: cyanMuted }}
+            style={{ color: seafoamMuted }}
           >
             One node in your vehicle. One node in your bunker. Both synchronized, both sovereign.
           </motion.p>
 
-          {/* Bunker Cutaway Image */}
+          {/* Bunker Cutaway Image with Alternating Heart Pulse */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -221,13 +225,32 @@ const Extreme = () => {
             transition={{ duration: 0.8 }}
             className="flex justify-center mb-12"
           >
-            <div className="relative">
+            <div className="relative inline-block">
+              {/* Base architectural image with faint pastel green glow */}
               <img 
-                src={bunkerCutaway}
+                src={bunkerBase}
                 alt="Twin-node architecture: garage with vehicle node and underground bunker with base station"
                 className="max-w-full h-auto rounded-xl"
                 style={{
-                  filter: 'drop-shadow(0 0 30px rgba(27, 189, 197, 0.3))'
+                  filter: `drop-shadow(0 0 40px rgba(125, 217, 168, 0.25))`
+                }}
+              />
+              {/* Truck heart overlay - pulses bright white */}
+              <img 
+                src={truckHeart}
+                alt=""
+                className="absolute top-0 left-0 max-w-full h-auto rounded-xl pointer-events-none"
+                style={{
+                  animation: 'heartPulseA 3s ease-in-out infinite'
+                }}
+              />
+              {/* Bunker heart overlay - pulses opposite phase */}
+              <img 
+                src={bunkerHeart}
+                alt=""
+                className="absolute top-0 left-0 max-w-full h-auto rounded-xl pointer-events-none"
+                style={{
+                  animation: 'heartPulseB 3s ease-in-out infinite'
                 }}
               />
             </div>
@@ -243,16 +266,40 @@ const Extreme = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="p-6 rounded-xl text-center border bg-[#12121a]"
-                style={{ borderColor: `${cyan}30` }}
+                style={{ borderColor: `${seafoam}30` }}
               >
-                <feature.icon className="w-10 h-10 mx-auto mb-4" style={{ color: cyan }} />
+                <feature.icon className="w-10 h-10 mx-auto mb-4" style={{ color: seafoam }} />
                 <h3 className="font-bold text-lg mb-2 text-[#f0f8ff]">{feature.title}</h3>
-                <p style={{ color: cyanMuted }}>{feature.description}</p>
+                <p style={{ color: seafoamMuted }}>{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* CSS for alternating heart pulse animations */}
+      <style>{`
+        @keyframes heartPulseA {
+          0%, 100% { 
+            opacity: 1; 
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+          }
+          50% { 
+            opacity: 0.15; 
+            filter: none;
+          }
+        }
+        @keyframes heartPulseB {
+          0%, 100% { 
+            opacity: 0.15; 
+            filter: none;
+          }
+          50% { 
+            opacity: 1; 
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+          }
+        }
+      `}</style>
 
       {/* Use Cases Accordion */}
       <section className="px-6 py-20 bg-[#0d0d14]">
@@ -271,7 +318,7 @@ const Extreme = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center text-lg mb-12"
-            style={{ color: cyanMuted }}
+            style={{ color: seafoamMuted }}
           >
             A complete AI companion for extended off-grid living.
           </motion.p>
@@ -288,14 +335,14 @@ const Extreme = () => {
                 <AccordionItem 
                   value={useCase.id} 
                   className="rounded-xl border bg-[#12121a] px-6"
-                  style={{ borderColor: `${cyan}30` }}
+                  style={{ borderColor: `${seafoam}30` }}
                 >
                   <AccordionTrigger className="hover:no-underline py-5">
                     <div className="flex items-center gap-4 text-left">
-                      <useCase.icon className="w-6 h-6 flex-shrink-0" style={{ color: cyan }} />
+                      <useCase.icon className="w-6 h-6 flex-shrink-0" style={{ color: seafoam }} />
                       <div>
                         <span className="font-bold text-lg text-[#f0f8ff]">{useCase.title}</span>
-                        <p className="text-sm mt-1" style={{ color: cyanMuted }}>{useCase.description}</p>
+                        <p className="text-sm mt-1" style={{ color: seafoamMuted }}>{useCase.description}</p>
                       </div>
                     </div>
                   </AccordionTrigger>
@@ -328,7 +375,7 @@ const Extreme = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center text-lg mb-12"
-            style={{ color: cyanMuted }}
+            style={{ color: seafoamMuted }}
           >
             Designed for the environments where you'll actually need it.
           </motion.p>
@@ -343,10 +390,10 @@ const Extreme = () => {
                 transition={{ delay: index * 0.1 }}
                 className="p-5 rounded-xl flex items-start gap-4 bg-[#12121a]"
               >
-                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: cyan }} />
+                <feature.icon className="w-8 h-8 flex-shrink-0" style={{ color: seafoam }} />
                 <div>
                   <h3 className="font-bold text-[#f0f8ff]">{feature.title}</h3>
-                  <p className="text-sm" style={{ color: cyanMuted }}>{feature.description}</p>
+                  <p className="text-sm" style={{ color: seafoamMuted }}>{feature.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -374,7 +421,7 @@ const Extreme = () => {
             className="space-y-4 text-lg text-[#e0f4ff]"
           >
             <p>No subscriptions. No cloud dependencies. No monthly fees.</p>
-            <p style={{ color: cyan }}>
+            <p style={{ color: seafoam }}>
               When everything else stops working, your AI keeps running.
             </p>
           </motion.div>
@@ -382,7 +429,7 @@ const Extreme = () => {
       </section>
 
       {/* Eagle Scout Callout */}
-      <section className="px-6 py-12" style={{ background: cyan }}>
+      <section className="px-6 py-12" style={{ background: seafoam }}>
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-lg sm:text-xl font-medium text-[#0a0a0f]">
             Designed by an Eagle Scout who learned: the best time to prepare is before you need to.
@@ -407,7 +454,7 @@ const Extreme = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-lg mb-8"
-            style={{ color: cyanMuted }}
+            style={{ color: seafoamMuted }}
           >
             Contact us to discuss your preparedness needs and custom configurations.
           </motion.p>
@@ -418,7 +465,7 @@ const Extreme = () => {
             href="mailto:contact@soulinterface.ai?subject=Extreme%20Preparedness%20Inquiry"
             className="inline-block px-8 py-4 rounded-xl font-bold text-lg transition-all hover:scale-105"
             style={{ 
-              backgroundColor: cyan, 
+              backgroundColor: seafoam, 
               color: '#0a0a0f',
             }}
           >
