@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Building2, ArrowLeft } from "lucide-react";
+import { Building2 } from "lucide-react";
+import PageFooter from "@/components/PageFooter";
 
 const Work = () => {
   useEffect(() => {
@@ -8,21 +8,17 @@ const Work = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center justify-center px-6 text-center">
-      <Building2 className="w-20 h-20 mb-8" style={{ color: "#2FC5ED" }} />
-      <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-        At Work
-      </h1>
-      <p className="text-xl text-gray-400 max-w-xl mb-12">
-        Air-gapped AI for secure environments. When data transmission isn't allowed, Soul Interface delivers intelligence without the leak.
-      </p>
-      <Link 
-        to="/#use-cases" 
-        className="inline-flex items-center gap-2 text-[#2FC5ED] hover:text-white transition-colors"
-      >
-        <ArrowLeft className="w-5 h-5" />
-        Back to Home
-      </Link>
+    <div className="min-h-screen bg-[#0d0d12] flex flex-col">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
+        <Building2 className="w-20 h-20 mb-8" style={{ color: "#1bbdc5" }} />
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          At Work
+        </h1>
+        <p className="text-xl text-gray-400 max-w-xl mb-12">
+          Air-gapped AI for secure environments. When data transmission isn't allowed, Soul Interface delivers intelligence without the leak.
+        </p>
+      </div>
+      <PageFooter />
     </div>
   );
 };

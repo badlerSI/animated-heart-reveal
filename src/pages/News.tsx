@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useImagePreloader } from "../hooks/useImagePreloader";
+import PageFooter from "@/components/PageFooter";
 
 const WEB_APP_URL =
   "https://script.google.com/macros/s/AKfycbx_YHdex8SAepSgvrBr6undMUd-RBIlHAxoLQhBvMFeaRocwEtJMoWPXRZ2lQCY8Al0rQ/exec";
@@ -12,16 +13,13 @@ export default function News() {
   const imageLoaded = useImagePreloader("/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png");
 
   useEffect(() => {
-    // Set page title
     document.title = "News — Soul Interface";
     
-    // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Stay up to date with the latest news from Soul Interface.");
     }
 
-    // Set canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonical) {
       canonical = document.createElement('link');
@@ -30,7 +28,6 @@ export default function News() {
     }
     canonical.href = 'https://soulinterface.ai/news';
 
-    // Set Open Graph meta tags
     const ogTags = {
       'og:type': 'article',
       'og:url': 'https://soulinterface.ai/news',
@@ -53,7 +50,6 @@ export default function News() {
       meta.content = content;
     });
 
-    // Set Twitter Card meta tags
     const twitterTags = {
       'twitter:card': 'summary_large_image',
       'twitter:title': 'News — Soul Interface',
@@ -71,7 +67,6 @@ export default function News() {
       meta.content = content;
     });
 
-    // Cleanup function to reset to home page meta
     return () => {
       document.title = "Soul Interface — Cloud-Free AI Assistant";
       if (metaDescription) {
@@ -86,13 +81,11 @@ export default function News() {
     setMsg("Submitting…");
 
     try {
-      // Send GET request in no-cors mode (browser won't try to read JSON)
       await fetch(
         `${WEB_APP_URL}?email=${encodeURIComponent(email)}`,
-        { mode: "no-cors" }         // ← key change
+        { mode: "no-cors" }
       );
 
-      // If no exception, assume success
       setMsg("🎉 Thanks for subscribing!");
       setEmail("");
     } catch (err) {
@@ -104,55 +97,58 @@ export default function News() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d12] flex flex-col items-center px-4 py-16">
-      <div className="w-full max-w-4xl mb-16 relative">
-        {!imageLoaded && (
-          <div className="w-full h-32 bg-[#0d0d12] animate-pulse rounded"></div>
-        )}
-        <img
-          src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
-          alt="Soul Dispatch"
-          className={`w-full object-contain neon-glow transition-opacity duration-500 ${
-            imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
-          }`}
-        />
-      </div>
-
-      <div className="max-w-4xl text-center mb-8">
-        <p className="text-lg md:text-xl text-cyan-white/90">
-          Sign up for the Soul Dispatch and be first to know about updates!
-        </p>
-      </div>
-
-      <div className="max-w-md w-full">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            required
-            disabled={busy}
-            className="px-4 py-3 rounded bg-[#0d0d12] border border-cyan-white/30 text-cyan-white"
-          />
-          <button
-            disabled={busy}
-            className="px-4 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded disabled:opacity-50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
-          >
-            {busy ? "Subscribing…" : "Subscribe"}
-          </button>
-        </form>
-
-        {msg && (
-          <p
-            className={`mt-4 text-center text-sm ${
-              msg.startsWith("🎉") ? "text-green-400" : "text-red-400"
+    <div className="min-h-screen bg-[#0d0d12] flex flex-col">
+      <div className="flex-1 flex flex-col items-center px-4 py-16">
+        <div className="w-full max-w-4xl mb-16 relative">
+          {!imageLoaded && (
+            <div className="w-full h-32 bg-[#0d0d12] animate-pulse rounded"></div>
+          )}
+          <img
+            src="/lovable-uploads/b2023677-4e76-487d-846a-52cf5c1e8d17.png"
+            alt="Soul Dispatch"
+            className={`w-full object-contain neon-glow transition-opacity duration-500 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0 absolute top-0'
             }`}
-          >
-            {msg}
+          />
+        </div>
+
+        <div className="max-w-4xl text-center mb-8">
+          <p className="text-lg md:text-xl text-cyan-white/90">
+            Sign up for the Soul Dispatch and be first to know about updates!
           </p>
-        )}
+        </div>
+
+        <div className="max-w-md w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              disabled={busy}
+              className="px-4 py-3 rounded bg-[#0d0d12] border border-cyan-white/30 text-cyan-white"
+            />
+            <button
+              disabled={busy}
+              className="px-4 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded disabled:opacity-50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
+            >
+              {busy ? "Subscribing…" : "Subscribe"}
+            </button>
+          </form>
+
+          {msg && (
+            <p
+              className={`mt-4 text-center text-sm ${
+                msg.startsWith("🎉") ? "text-green-400" : "text-red-400"
+              }`}
+            >
+              {msg}
+            </p>
+          )}
+        </div>
       </div>
+      <PageFooter />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug, Cpu, Library, BookText, ImagePlus, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -8,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import PageFooter from "@/components/PageFooter";
 
 const Homeschool = () => {
   const [showScrollPrompt, setShowScrollPrompt] = useState(false);
@@ -639,20 +639,7 @@ const Homeschool = () => {
       </Dialog>
 
       {/* Footer */}
-      <footer className="px-6 py-12 bg-[#0a0a0f]">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p style={{ color: cyanDim }}>Soul Interface © 2025</p>
-            
-            <nav className="flex flex-wrap justify-center gap-6">
-              <Link to="/#use-cases" className="hover:underline" style={{ color: cyanMuted }}>Home</Link>
-              <Link to="/education" className="hover:underline" style={{ color: cyan }}>Education</Link>
-              <Link to="/news" className="hover:underline" style={{ color: cyanMuted }}>News</Link>
-              <Link to="/tech" className="hover:underline" style={{ color: cyanMuted }}>Tech</Link>
-            </nav>
-          </div>
-        </div>
-      </footer>
+      <PageFooter />
     </div>
   );
 };
