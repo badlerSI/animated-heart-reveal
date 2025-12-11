@@ -118,7 +118,7 @@ const Work = () => {
   const ownershipPoints = [
     { icon: DollarSign, title: "No Subscriptions, Ever", description: "One purchase, it's yours. No per-seat tax. No usage-based surprises." },
     { icon: Infinity, title: "Free Updates for Life", description: "Updating your software doesn't cost us anything to distribute, so we don't charge you anything." },
-    { icon: Server, title: "Complete Out of the Box", description: "Comes with a full, capable software suite and extensive databases by default." },
+    { icon: Server, title: "Complete Out of the Box", description: "Comes with the full Soul Stack — our comprehensive software suite and extensive databases — included with every unit." },
     { icon: Settings, title: "Fully Customizable", description: "We can add whatever you need — industry-specific data, specialized configurations, custom integrations." },
   ];
 
@@ -222,7 +222,7 @@ const Work = () => {
             viewport={{ once: true }}
             className="text-lg mb-8 max-w-2xl mx-auto text-[#e0f4ff]"
           >
-            Soul Interface for Work is a compact, high-end AI workstation running the full Soul stack entirely offline. 
+            Soul Interface for Work is a compact, high-end AI workstation running the full Soul Stack entirely offline. 
             Roll it off a flight, into a rack, or under a desk. Your team accesses it over your internal network 
             like a private, on-prem AI "cloud" — except there is no external API, no streaming of customer data, 
             and you own the stack end-to-end.

@@ -340,7 +340,7 @@ const Homeschool = () => {
             className="text-center text-lg mb-12"
             style={{ color: cyanMuted }}
           >
-            No empty box. Soul Interface comes pre-loaded with a massive, curated knowledge base.
+            No empty box. Soul Interface comes pre-loaded with the <span className="font-semibold" style={{ color: cyan }}>Soul Stack</span> — our massive, curated knowledge base.
           </motion.p>
 
           <div className="grid gap-4 sm:grid-cols-2">
