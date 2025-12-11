@@ -157,7 +157,7 @@ const Work = () => {
                 src="/lovable-uploads/TapeGlow.png"
                 alt=""
                 aria-hidden="true"
-                className="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"
+                className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
                 style={{
                   mixBlendMode: 'screen',
                   animation: 'cyanPulse 3s ease-in-out infinite'
