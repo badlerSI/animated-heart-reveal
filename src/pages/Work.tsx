@@ -124,38 +124,48 @@ const Work = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      {/* iOS-Safe Glow Animation - Uses radial gradient + opacity/scale only */}
+      {/* Tight radius glow - small blur values for iOS Safari compatibility */}
       <style>
         {`
-          @-webkit-keyframes glowPulse {
+          @-webkit-keyframes cyanPulseTight {
             0%, 100% {
-              opacity: 0.85;
-              -webkit-transform: scale(1);
-              transform: scale(1);
+              opacity: 0.9;
+              -webkit-filter: 
+                drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 0.9));
+              filter: 
+                drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 0.9));
             }
             50% {
               opacity: 1;
-              -webkit-transform: scale(1.2);
-              transform: scale(1.2);
+              -webkit-filter: 
+                drop-shadow(0 0 12px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 40px rgba(27, 189, 197, 0.95));
+              filter: 
+                drop-shadow(0 0 12px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 40px rgba(27, 189, 197, 0.95));
             }
           }
-          @keyframes glowPulse {
+          @keyframes cyanPulseTight {
             0%, 100% {
-              opacity: 0.85;
-              transform: scale(1);
+              opacity: 0.9;
+              filter: 
+                drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 0.9));
             }
             50% {
               opacity: 1;
-              transform: scale(1.2);
+              filter: 
+                drop-shadow(0 0 12px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 25px rgba(27, 189, 197, 1))
+                drop-shadow(0 0 40px rgba(27, 189, 197, 0.95));
             }
-          }
-          @-webkit-keyframes opacityPulse {
-            0%, 100% { opacity: 0.9; }
-            50% { opacity: 1; }
-          }
-          @keyframes opacityPulse {
-            0%, 100% { opacity: 0.9; }
-            50% { opacity: 1; }
           }
         `}
       </style>
@@ -180,30 +190,15 @@ const Work = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            {/* Image container with radial gradient glow behind */}
+            {/* Image container - tight glow on overlay image only */}
             <div className="relative inline-block">
-              {/* Pulsing radial gradient glow - BEHIND everything, iOS-safe */}
-              <div 
-                className="absolute inset-0 z-0 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 10%, rgba(27,189,197,0.9) 25%, rgba(27,189,197,0.6) 45%, rgba(27,189,197,0.3) 65%, transparent 85%)',
-                  WebkitFilter: 'blur(60px)',
-                  filter: 'blur(60px)',
-                  WebkitAnimation: 'glowPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-                  animation: 'glowPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-                  WebkitTransform: 'translateZ(0)',
-                  transform: 'translateZ(0)',
-                  margin: '-20%',
-                  padding: '20%',
-                }}
-              />
               {/* Base image - red tape figure with lightning */}
               <img 
                 src="/lovable-uploads/RedTape-2.png" 
                 alt="Figure breaking free from red tape with AI energy"
                 className="max-w-full h-auto relative z-10"
               />
-              {/* Cyan accent overlay - simple opacity pulse, no filters */}
+              {/* Cyan accent overlay - tight drop-shadow glow */}
               <img 
                 src="/lovable-uploads/TapeGlow.png"
                 alt=""
@@ -211,10 +206,13 @@ const Work = () => {
                 className="absolute top-0 left-0 max-w-full h-auto z-20 pointer-events-none"
                 style={{
                   mixBlendMode: 'screen',
-                  WebkitAnimation: 'opacityPulse 2s ease-in-out infinite',
-                  animation: 'opacityPulse 2s ease-in-out infinite',
+                  WebkitAnimation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+                  animation: 'cyanPulseTight 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
                   WebkitTransform: 'translateZ(0)',
                   transform: 'translateZ(0)',
+                  willChange: 'opacity, filter',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
                 }}
               />
             </div>
