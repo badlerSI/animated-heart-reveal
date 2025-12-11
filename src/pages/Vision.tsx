@@ -1,20 +1,18 @@
 import { useEffect } from "react";
 import { useImagePreloader } from "../hooks/useImagePreloader";
+import PageFooter from "@/components/PageFooter";
 
 const Vision = () => {
   const imageLoaded = useImagePreloader("/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png");
 
   useEffect(() => {
-    // Set page title
     document.title = "Our Vision — Soul Interface";
     
-    // Set meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Personal, Private, Sovereign AI — own your own AI systems outright.");
     }
 
-    // Set canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonical) {
       canonical = document.createElement('link');
@@ -23,7 +21,6 @@ const Vision = () => {
     }
     canonical.href = 'https://soulinterface.ai/vision';
 
-    // Set Open Graph meta tags
     const ogTags = {
       'og:type': 'article',
       'og:url': 'https://soulinterface.ai/vision',
@@ -46,7 +43,6 @@ const Vision = () => {
       meta.content = content;
     });
 
-    // Set Twitter Card meta tags
     const twitterTags = {
       'twitter:card': 'summary_large_image',
       'twitter:title': 'Our Vision — Soul Interface',
@@ -64,7 +60,6 @@ const Vision = () => {
       meta.content = content;
     });
 
-    // Cleanup function to reset to home page meta
     return () => {
       document.title = "Soul Interface — Cloud-Free AI Assistant";
       if (metaDescription) {
@@ -74,88 +69,87 @@ const Vision = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0d0d12] flex items-center justify-center overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-8">
-        {/* Desktop Layout: Side by side */}
-        <div className="hidden md:flex md:items-center md:gap-8 h-screen">
-          {/* Left column - Text (60%) */}
-          <div className="md:w-3/5 space-y-6">
-            <div className="text-lg lg:text-xl xl:text-2xl leading-relaxed text-cyan-white/90 font-outfit">
-              <p className="mb-6">
-                We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
-              </p>
-              <p className="mb-6">
-                At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
-              </p>
-              <p className="mb-6">
-                No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
-              </p>
-              <p>
-                We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
-              </p>
+    <div className="min-h-screen bg-[#0d0d12] flex flex-col">
+      <div className="flex-1 flex items-center justify-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-8">
+          {/* Desktop Layout */}
+          <div className="hidden md:flex md:items-center md:gap-8 min-h-[80vh]">
+            <div className="md:w-3/5 space-y-6">
+              <div className="text-lg lg:text-xl xl:text-2xl leading-relaxed text-cyan-white/90 font-outfit">
+                <p className="mb-6">
+                  We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
+                </p>
+                <p className="mb-6">
+                  At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
+                </p>
+                <p className="mb-6">
+                  No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
+                </p>
+                <p>
+                  We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
+                </p>
+              </div>
+            </div>
+
+            <div className="md:w-2/5 flex justify-center items-center relative">
+              {!imageLoaded && (
+                <div className="w-full h-96 bg-[#0d0d12] animate-pulse rounded"></div>
+              )}
+              <img
+                src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
+                alt="Vision illustration"
+                className={`object-contain w-full h-full max-h-[90vh] opacity-80 transition-opacity duration-500 ${
+                  imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
+                }`}
+                style={{
+                  filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
+                  animation: "flickerGlow 3s ease-in-out infinite alternate"
+                }}
+                loading="lazy"
+              />
             </div>
           </div>
 
-          {/* Right column - Image (40%) */}
-          <div className="md:w-2/5 flex justify-center items-center relative">
-            {!imageLoaded && (
-              <div className="w-full h-96 bg-[#0d0d12] animate-pulse rounded"></div>
-            )}
-            <img
-              src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
-              alt="Vision illustration"
-              className={`object-contain w-full h-full max-h-[90vh] opacity-80 transition-opacity duration-500 ${
-                imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
-              }`}
-              style={{
-                filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
-                animation: "flickerGlow 3s ease-in-out infinite alternate"
-              }}
-              loading="lazy"
-            />
-          </div>
-        </div>
-
-        {/* Mobile Layout: Same as desktop but stacked vertically */}
-        <div className="md:hidden flex flex-col items-center gap-8 min-h-screen justify-center px-6">
-          {/* Text */}
-          <div className="w-full">
-            <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4">
-              <p>
-                We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
-              </p>
-              <p>
-                At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
-              </p>
-              <p>
-                No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
-              </p>
-              <p>
-                We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
-              </p>
+          {/* Mobile Layout */}
+          <div className="md:hidden flex flex-col items-center gap-8 min-h-screen justify-center px-6">
+            <div className="w-full">
+              <div className="text-base leading-relaxed text-cyan-white/95 font-outfit space-y-4">
+                <p>
+                  We trade our privacy for convenience at almost any opportunity, we tell chatbots our most personal information carelessly, and we trust big tech too much. Even a company that starts with the best of intentions can metamorphose into something grotesque if its business model depends on it. How long does anyone resist the temptation to advertise?
+                </p>
+                <p>
+                  At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a vehicle or a carryon, it is Personal, Private, Sovereign AI, preloaded with a suite of AI native software like has never been offered before.
+                </p>
+                <p>
+                  No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system. We push cutting edge hardware and models, to get the utility of our Information age, without wading through the cesspool that the Ouroboros Internet has become. That's why we have all the text of Wikipedia, and a carefully curated library of multimedia entries and classic works, some fully illustrated. To that, you can add your own content and make it easily and intelligently searchable.
+                </p>
+                <p>
+                  We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Image */}
-          <div className="w-full flex justify-center relative">
-            {!imageLoaded && (
-              <div className="w-full max-w-md h-64 bg-[#0d0d12] animate-pulse rounded"></div>
-            )}
-            <img
-              src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
-              alt="Vision illustration"
-              className={`object-contain w-full max-w-md h-auto opacity-80 transition-opacity duration-500 ${
-                imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
-              }`}
-              style={{
-                filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
-                animation: "flickerGlow 3s ease-in-out infinite alternate"
-              }}
-              loading="lazy"
-            />
+            <div className="w-full flex justify-center relative">
+              {!imageLoaded && (
+                <div className="w-full max-w-md h-64 bg-[#0d0d12] animate-pulse rounded"></div>
+              )}
+              <img
+                src="/lovable-uploads/e6e23cf2-c76d-4008-b21a-185e409bcf82.png"
+                alt="Vision illustration"
+                className={`object-contain w-full max-w-md h-auto opacity-80 transition-opacity duration-500 ${
+                  imageLoaded ? 'opacity-80' : 'opacity-0 absolute top-0'
+                }`}
+                style={{
+                  filter: "drop-shadow(0 0 4px rgba(51, 240, 240, 0.5))",
+                  animation: "flickerGlow 3s ease-in-out infinite alternate"
+                }}
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
+      <PageFooter />
     </div>
   );
 };

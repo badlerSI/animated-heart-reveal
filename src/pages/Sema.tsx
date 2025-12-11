@@ -1,159 +1,98 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import heartLogo from "@/assets/heart-logo.png";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbx_YHdex8SAepSgvrBr6undMUd-RBIlHAxoLQhBvMFeaRocwEtJMoWPXRZ2lQCY8Al0rQ/exec";
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "Educational", path: "/education" },
+  { label: "Vehicular", path: "/vehicles" },
+  { label: "Workplace", path: "/work" },
+  { label: "Autonomous Vehicle", path: "/robotaxi" },
+  { label: "Extreme", path: "/survival" },
+];
 
 const Sema = () => {
-  const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
-  const [busy, setBusy] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const cyan = "#1bbdc5";
+  const cyanMuted = "#5BA8C4";
+  const cyanDim = "#4A8DA8";
 
   useEffect(() => {
-    document.title = "SEMA - Soul Interface";
+    document.title = "SEMA 2025 — Soul Interface";
+    
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "SEMA - Connecting builders, investors, and end customers through Soul Interface technology"
-      );
+      metaDescription.setAttribute("content", "Ace at SEMA 2025 - Soul Interface's first automotive AI prototype.");
     }
+
+    return () => {
+      document.title = "Soul Interface | Sovereign AI";
+      if (metaDescription) {
+        metaDescription.setAttribute("content", "Cloud-free, screen-optional, privacy-centered, customizable AI assistant");
+      }
+    };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setMsg("Submitting…");
-
-    try {
-      await fetch(
-        `${WEB_APP_URL}?email=${encodeURIComponent(email)}`,
-        { mode: "no-cors" }
-      );
-      setMsg("🎉 Thanks for subscribing!");
-      setEmail("");
-    } catch (err) {
-      console.error(err);
-      setMsg("⚠️ Network error. Please try later.");
-    } finally {
-      setBusy(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="container mx-auto px-4 py-16">
-        <Link to="/">
-          <Button variant="ghost" className="mb-8">
-            ← Back to Home
-          </Button>
-        </Link>
-
-        <h1 className="text-4xl md:text-6xl font-bold mb-16 text-center flex items-center justify-center gap-4">
-          <img src={heartLogo} alt="Heart" className="w-12 h-12 md:w-16 md:h-16" />
-          <span>Soul Interface</span>
-        </h1>
-
-        <div className="max-w-4xl mx-auto space-y-12">
-          {/* One System to Do it All */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">One System to Do it All</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Soul Interface's patent-pending architecture is designed especially for applications where for reasons of taste, simplicity, or safety, screens are not desired. It replaces every infotainment system in a modern car's interior with one interface that never takes your eyes off the road.
-            </p>
-          </section>
-
-          {/* True Luxury */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">True Luxury</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Give your customers' vehicles the ability to do things that no car on the road today, and not even any smartphone can do. A clientele that expects bespoke touches at every turn should not have to settle for choosing among a handful of personas for their ride. We let customers imbue their car's digital soul with whatever species, ages, genders, accents, temperaments and interests they desire.
-            </p>
-          </section>
-
-          {/* What you Say in the car Stays in the Car */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">What you Say in the car Stays in the Car</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Soul Interface is private by design, processing all of your utterances on device. Nothing you say can be recorded, intercepted, saved or sold to marketers.
-            </p>
-          </section>
-
-          {/* Upfront pricing */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">Upfront pricing, easy upgrades, no subscriptions</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Your customers can rest assured that once they have a vehicle fully integrated with Soul Interface, they own it outright. There are no subscriptions, ever. For periodic software upgrades, we mail them a simple plug in, wait, and unplug USB for their convenience.
-            </p>
-          </section>
-
-          {/* Zero to One */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">Zero to One</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Soul Interface has invented the personal, private, cloud-free AI market and demonstrated its proof of concept at SEMA 2025, with the only conversational car among the thousands of vehicles present. Now we are seeking funding in a strictly capped seed round in order to develop a fully functioning prototype that will prove itself on the road from Oakland to SEMA 2026.
-            </p>
-          </section>
-
-          {/* This Moment in AI */}
-          <section>
-            <h2 className="text-3xl font-bold mb-4">This Moment in AI</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Advancement in language models in recent years have taken the world by storm. Increases in the power of models small enough to run locally in the last year has been even more rapid, regularly unlocking new capabilities. 2025 marks the first conversational AI interface at SEMA, it will not be the last.
-            </p>
-          </section>
-        </div>
-
-        {/* Interest Form Links */}
-        <section className="flex justify-center items-center mt-20 mb-20">
-          <Link to="/tech">
-            <Button size="lg" className="w-48">
-              For Investors
-            </Button>
-          </Link>
-        </section>
-
-        {/* Newsletter Signup */}
-        <section className="max-w-2xl mx-auto mt-20">
-          <div className="text-center mb-8">
-            <p className="text-lg md:text-xl text-muted-foreground">
-              Sign up for the Soul Dispatch and be first to know about updates!
-            </p>
-          </div>
-
-          <div className="max-w-md mx-auto">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                disabled={busy}
-                className="px-4 py-3 rounded bg-background border border-input text-foreground"
-              />
-              <button
-                disabled={busy}
-                className="px-4 py-3 bg-black hover:bg-black/90 text-white rounded disabled:opacity-50 transition-all duration-300"
-              >
-                {busy ? "Subscribing…" : "Subscribe"}
-              </button>
-            </form>
-
-            {msg && (
-              <p
-                className={`mt-4 text-center text-sm ${
-                  msg.startsWith("🎉") ? "text-green-400" : "text-red-400"
-                }`}
-              >
-                {msg}
-              </p>
-            )}
-          </div>
-        </section>
+    <div className="min-h-screen flex flex-col relative">
+      {/* Full-screen background image */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: `url('/lovable-uploads/ace-sema-2025.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* Dark overlay for text readability */}
+      <div className="fixed inset-0 z-0 bg-black/60" />
+      
+      {/* Main content */}
+      <div className="flex-1 relative z-10 flex flex-col items-center justify-center px-6 text-center">
+        <p 
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold max-w-4xl leading-relaxed"
+          style={{
+            color: cyan,
+            textShadow: `0 0 10px ${cyan}, 0 0 20px ${cyan}, 0 0 30px ${cyan}, 0 0 40px ${cyan}`
+          }}
+        >
+          Ace had a ton of fun talking with all of you at SEMA 2025! Can't wait for SEMA 2026!
+        </p>
       </div>
+      
+      {/* Glowing footer navigation */}
+      <footer className="relative z-10 px-6 py-12 bg-black/50 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p style={{ color: cyanDim, textShadow: `0 0 8px ${cyanDim}` }}>
+              Soul Interface © 2025
+            </p>
+            
+            <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
+              {navLinks.map((link) => {
+                const isActive = currentPath === link.path;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="hover:underline transition-colors text-sm sm:text-base"
+                    style={{
+                      color: isActive ? cyan : cyanMuted,
+                      textShadow: isActive 
+                        ? `0 0 10px ${cyan}, 0 0 20px ${cyan}, 0 0 30px ${cyan}` 
+                        : `0 0 8px ${cyanMuted}`,
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
