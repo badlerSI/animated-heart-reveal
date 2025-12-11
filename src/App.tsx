@@ -13,7 +13,7 @@ import Vision from "./pages/Vision";
 import Sema from "./pages/Sema";
 import Investors from "./pages/Investors";
 import Homeschool from "./pages/Homeschool";
-import Vehicles from "./pages/Vehicles";
+import Vehicular from "./pages/Vehicular";
 import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
 import Autonomous from "./pages/Autonomous";
@@ -36,7 +36,7 @@ const App = () => (
           
           <Route path="/investors" element={<Investors />} />
           <Route path="/education" element={<Homeschool />} />
-          <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/vehicular" element={<Vehicular />} />
           <Route path="/work" element={<Work />} />
           <Route path="/extreme" element={<Extreme />} />
           <Route path="/autonomous" element={<Autonomous />} />

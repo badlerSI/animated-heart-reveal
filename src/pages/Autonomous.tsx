@@ -36,7 +36,8 @@ const Autonomous = () => {
         
         <p className="text-xl text-gray-400 text-center max-w-2xl mb-12">
           Autonomous vehicles deserve autonomous AI. Soul Interface brings cloud-free intelligence 
-          to the next generation of transportation—keeping passengers safe, entertained, and private.
+          to the next generation of transportation, letting riders bring their custom-persona AI 
+          chauffeur with them on their device, and keeping all conversations private.
         </p>
 
         <p className="text-lg text-[#1bbdc5] text-center mb-12">
