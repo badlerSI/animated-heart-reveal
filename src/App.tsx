@@ -15,8 +15,8 @@ import Investors from "./pages/Investors";
 import Homeschool from "./pages/Homeschool";
 import Vehicles from "./pages/Vehicles";
 import Work from "./pages/Work";
-import Survival from "./pages/Survival";
-import Robotaxi from "./pages/Robotaxi";
+import Extreme from "./pages/Extreme";
+import Autonomous from "./pages/Autonomous";
 
 const queryClient = new QueryClient();
 
@@ -38,8 +38,8 @@ const App = () => (
           <Route path="/education" element={<Homeschool />} />
           <Route path="/vehicles" element={<Vehicles />} />
           <Route path="/work" element={<Work />} />
-          <Route path="/survival" element={<Survival />} />
-          <Route path="/robotaxi" element={<Robotaxi />} />
+          <Route path="/extreme" element={<Extreme />} />
+          <Route path="/autonomous" element={<Autonomous />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

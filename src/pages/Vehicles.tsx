@@ -18,7 +18,7 @@ const Vehicles = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            opacity: 0.1
+            opacity: 0.22
           }}
         />
         
