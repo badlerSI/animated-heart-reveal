@@ -10,7 +10,7 @@ const ClosingCTASection = () => {
       
       <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
         Whether you're{" "}
-        <Link to="/landvehicles" className="narrative-link">on the move</Link>,
+        <Link to="/vehicles" className="narrative-link">on the move</Link>,
         helping your{" "}
         <Link to="/education" className="narrative-link">kids learn safely</Link>,
         managing sensitive data{" "}
