@@ -133,7 +133,7 @@ const Extreme = () => {
             className="text-xl sm:text-2xl mt-8"
             style={{ color: seafoamMuted, fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
-            Off-grid AI for when the world goes sideways.
+            Sovereign AI for when it matters most.
           </motion.p>
         </div>
 
@@ -171,8 +171,7 @@ const Extreme = () => {
             className="text-center text-lg mb-12 max-w-2xl mx-auto"
             style={{ color: seafoamMuted }}
           >
-            Most AI requires the cloud. When the cloud disappears, so does your access to knowledge. 
-            Soul Interface works entirely offline, from day one.
+            Most AI dies with the cloud. Soul Interface doesn't.
           </motion.p>
 
           <div className="grid gap-6 sm:grid-cols-3">
@@ -214,7 +213,7 @@ const Extreme = () => {
             className="text-center text-lg mb-10 max-w-2xl mx-auto"
             style={{ color: seafoamMuted }}
           >
-            One node in your vehicle. One node in your bunker. Both synchronized, both sovereign.
+            One in your vehicle. One in your bunker. Synchronized. Sovereign.
           </motion.p>
 
           {/* Bunker Cutaway Image with Alternating Heart Pulse */}
@@ -282,21 +281,33 @@ const Extreme = () => {
         @keyframes heartPulseA {
           0%, 100% { 
             opacity: 1; 
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+            filter: 
+              drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+              drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
+              drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+              drop-shadow(0 0 60px rgba(125, 217, 168, 0.4));
           }
           50% { 
-            opacity: 0.15; 
-            filter: none;
+            opacity: 0.45; 
+            filter: 
+              drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))
+              drop-shadow(0 0 12px rgba(125, 217, 168, 0.2));
           }
         }
         @keyframes heartPulseB {
           0%, 100% { 
-            opacity: 0.15; 
-            filter: none;
+            opacity: 0.45; 
+            filter: 
+              drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))
+              drop-shadow(0 0 12px rgba(125, 217, 168, 0.2));
           }
           50% { 
             opacity: 1; 
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+            filter: 
+              drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+              drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
+              drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+              drop-shadow(0 0 60px rgba(125, 217, 168, 0.4));
           }
         }
       `}</style>
@@ -320,7 +331,7 @@ const Extreme = () => {
             className="text-center text-lg mb-12"
             style={{ color: seafoamMuted }}
           >
-            A complete AI companion for extended off-grid living.
+            A complete AI companion for off-grid living.
           </motion.p>
 
           <Accordion type="single" collapsible className="space-y-4">
@@ -420,7 +431,7 @@ const Extreme = () => {
             viewport={{ once: true }}
             className="space-y-4 text-lg text-[#e0f4ff]"
           >
-            <p>No subscriptions. No cloud dependencies. No monthly fees.</p>
+            <p>No subscriptions. No cloud. No compromise.</p>
             <p style={{ color: seafoam }}>
               When everything else stops working, your AI keeps running.
             </p>
@@ -474,7 +485,11 @@ const Extreme = () => {
         </div>
       </section>
 
-      <PageFooter />
+      <PageFooter 
+        accentColor="#4CAF7C"
+        mutedColor="#6B9E82"
+        dimColor="#5A8A6A"
+      />
     </div>
   );
 };
