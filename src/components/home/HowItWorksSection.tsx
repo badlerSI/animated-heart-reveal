@@ -7,7 +7,7 @@ const HowItWorksSection = () => {
     },
     {
       title: "Lets You Know",
-      description: "Massive offline vault with Wikipedia, manuals, and custom databases you control.",
+      description: "The Soul Stack — a massive offline vault with Wikipedia, manuals, and custom databases you control.",
       image: "/lovable-uploads/c609b325-c513-4588-8286-5c1f49e84b86.png"
     },
     {
