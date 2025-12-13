@@ -22,7 +22,7 @@ const Homeschool = () => {
   });
 
   useEffect(() => {
-    document.title = "Soul Interface | Safe AI for Homeschool";
+    document.title = "Soul Interface | Safe AI for Education";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "A private, offline AI tutor with Wikipedia, classic literature, and a massive curated library. Patent pending. No cloud. No ads. Works with any Chromebook.");
@@ -55,7 +55,7 @@ const Homeschool = () => {
   ];
 
   const benefits = [
-    { icon: Shield, title: "Completely Offline", description: "All AI runs locally. No data ever leaves your home." },
+    { icon: Shield, title: "Completely Offline", description: "All AI runs locally. No data ever leaves your local network." },
     { icon: Wifi, title: "Works with Any Device", description: "Chromebooks, tablets, laptops — whatever you've got." },
     { icon: Settings, title: "You're in Control", description: "You decide what's allowed, when it's on, and what it teaches." },
   ];
@@ -201,7 +201,7 @@ const Homeschool = () => {
             What if there was a GPT made just for learning?
           </h2>
           <p className="text-lg sm:text-xl text-[#e0f4ff]">
-            No ads. No algorithms. No data leaving your home.
+            No ads. No algorithms. No data leaving your local network.
           </p>
         </motion.div>
       </section>
@@ -259,7 +259,7 @@ const Homeschool = () => {
               Meet Soul Interface
             </h2>
             <p className="text-xl sm:text-2xl" style={{ color: cyan }}>
-              A private AI that lives in your home
+              A private AI that lives on your local network
             </p>
           </motion.div>
 
@@ -376,7 +376,7 @@ const Homeschool = () => {
               ✓ Works with any Chromebook being used in schools today
             </p>
             <p className="font-bold text-lg text-[#0a0a0f]">
-              ✓ No special hardware for your kids — just the tower for your home
+              ✓ No special hardware for students — just the tower for your site
             </p>
             <p className="font-bold text-lg text-[#0a0a0f]">
               ✓ Set up in under an hour
@@ -395,7 +395,7 @@ const Homeschool = () => {
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-[#f0f8ff]"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
-            Your home. Your rules. Your data.
+            Your Students. Your Rules. Your Data.
           </motion.h2>
 
           <div className="space-y-4 text-lg text-[#e0f4ff]">
