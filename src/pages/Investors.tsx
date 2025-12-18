@@ -128,7 +128,6 @@ const Investors = () => {
         className="relative bg-black overflow-hidden"
         style={slideStyle}
       >
-        {/* Slide 1: Title */}
         {currentSlide === 1 && (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-12"
             style={{ background: "radial-gradient(ellipse at center, rgba(27,189,197,0.1) 0%, transparent 70%)" }}>
@@ -140,7 +139,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 2: SEMA Proving Ground */}
         {currentSlide === 2 && (
           <div className="absolute inset-0 p-8 md:p-12 overflow-hidden">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">01 SEMA PROVING GROUND</p>
@@ -164,7 +162,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 3: Full Disclosure */}
         {currentSlide === 3 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <h2 className="text-3xl font-bold text-white mb-2">Full Disclosure</h2>
@@ -189,7 +186,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 4: The Problem */}
         {currentSlide === 4 && (
           <div className="absolute inset-0 p-8 md:p-12 flex flex-col">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE PROBLEM</p>
@@ -213,7 +209,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 5: The Solution */}
         {currentSlide === 5 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE SOLUTION</p>
@@ -242,7 +237,7 @@ const Investors = () => {
                     <p className="text-gray-300">Yeah, why is the sky blue? Is it true that it is reflecting the ocean?</p>
                   </div>
                   <div className="bg-[#1bbdc5]/10 border border-[#1bbdc5]/30 rounded-lg p-3">
-                    <p className="text-gray-200">Sure, that's a little off topic, but since you finished early, I would love to help you explore this phenomenon. First let me ask you, is the sky always blue? That could help us answer the reflection question. Also, what do you know about Rainbows?</p>
+                    <p className="text-gray-200">Sure, that is a little off topic, but since you finished early, I would love to help you explore this phenomenon. First let me ask you, is the sky always blue?</p>
                   </div>
                 </div>
               </div>
@@ -250,7 +245,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 6: Cancel the Stack */}
         {currentSlide === 6 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <h2 className="text-3xl font-bold text-white mb-1">ONE PURCHASE.</h2>
@@ -258,10 +252,10 @@ const Investors = () => {
             <p className="text-gray-400 mb-6">Replace subscriptions with an owned classroom OS</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
               {[
-                { title: "CURRICULUM", subtitle: "Lesson Plans & Flow", text: "Generate standards-aligned lessons and daily plans in minutes. Keep everything offline and teacher-controlled." },
-                { title: "ASSESSMENT", subtitle: "Testing & Feedback", text: "Adaptive quizzes, grading support, and immediate feedback—without training on student work." },
-                { title: "CLASSROOM MODE", subtitle: "Substitute-Safe", text: "Any warm body can run class with guardrails. Same plan, same prompts, same boundaries." },
-                { title: "ADMIN LAYER", subtitle: "Attendance & Contact", text: "Permissions (DID), attendance, parent messaging, records—one system instead of many logins." },
+                { title: "CURRICULUM", subtitle: "Lesson Plans & Flow", text: "Generate standards-aligned lessons and daily plans in minutes." },
+                { title: "ASSESSMENT", subtitle: "Testing & Feedback", text: "Adaptive quizzes, grading support, and immediate feedback." },
+                { title: "CLASSROOM MODE", subtitle: "Substitute-Safe", text: "Any warm body can run class with guardrails." },
+                { title: "ADMIN LAYER", subtitle: "Attendance & Contact", text: "Permissions, attendance, parent messaging, records." },
               ].map((item, i) => (
                 <div key={i} className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
                   <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">{item.title}</p>
@@ -270,11 +264,10 @@ const Investors = () => {
                 </div>
               ))}
             </div>
-            <p className="text-center text-gray-500 text-sm">One platform now (Education). Future modules later, when the wedge is won.</p>
+            <p className="text-center text-gray-500 text-sm">One platform now (Education). Future modules later.</p>
           </div>
         )}
 
-        {/* Slide 7: ELL Superpower */}
         {currentSlide === 7 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">ELL SUPERPOWER</p>
@@ -288,7 +281,7 @@ const Investors = () => {
                   <li>• In-class translation + comprehension checks</li>
                   <li>• Homework support in native language</li>
                   <li>• Parent communication + conferences</li>
-                  <li>• Newcomer onboarding (no new subscriptions)</li>
+                  <li>• Newcomer onboarding</li>
                 </ul>
               </div>
               <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
@@ -297,7 +290,7 @@ const Investors = () => {
                   <li>• Started with Japanese TTS for SEMA showcar</li>
                   <li>• Built for real-time voice in noisy environments</li>
                   <li>• Consistent voice identity across languages</li>
-                  <li>• Works on existing Chromebooks + devices</li>
+                  <li>• Works on existing Chromebooks</li>
                 </ul>
               </div>
               <div className="space-y-4">
@@ -306,15 +299,14 @@ const Investors = () => {
                   <p className="text-gray-300 text-xs">Serve ELL students without sending data to the cloud</p>
                 </div>
                 <div className="bg-[#1bbdc5]/10 border border-[#1bbdc5]/30 rounded-lg p-4">
-                  <h3 className="text-[#1bbdc5] font-semibold text-sm mb-2">WHY THIS IS DIFFERENT</h3>
-                  <p className="text-gray-300 text-xs">Teachers keep one lesson flow; students hear it in their language. Parents get updates in the language they read.</p>
+                  <h3 className="text-[#1bbdc5] font-semibold text-sm mb-2">WHY DIFFERENT</h3>
+                  <p className="text-gray-300 text-xs">Teachers keep one lesson flow; students hear it in their language.</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Slide 8: The Product */}
         {currentSlide === 8 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE PRODUCT</p>
@@ -331,7 +323,7 @@ const Investors = () => {
                     "NVIDIA RTX 6000-class GPU with 48GB VRAM",
                     "Offline by default. No internet required.",
                     "Super-low latency. Instant responses.",
-                    "Works with any device. Chromebooks, tablets, laptops.",
+                    "Works with any device.",
                     "Portable. Fits in a carry-on case.",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-white text-sm">
@@ -339,18 +331,16 @@ const Investors = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="text-gray-500 text-xs mt-6">Pre-loaded with curated curriculum packs + offline knowledge base (you choose what's inside).</p>
               </div>
             </div>
           </div>
         )}
 
-        {/* Slide 9: ROI / The Math */}
         {currentSlide === 9 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">ROI / THE MATH</p>
             <h2 className="text-3xl font-bold text-white mb-1">For Most Florida Families,</h2>
-            <h2 className="text-4xl font-bold text-[#1bbdc5] mb-8">It's Essentially Free.</h2>
+            <h2 className="text-4xl font-bold text-[#1bbdc5] mb-8">It is Essentially Free.</h2>
             <div className="grid grid-cols-3 gap-6">
               <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
                 <h3 className="text-white font-semibold mb-2">Florida School Choice Stipend</h3>
@@ -367,28 +357,26 @@ const Investors = () => {
                 <div className="space-y-2 text-sm">
                   <p className="text-gray-300">2 Kids: <span className="text-[#1bbdc5]">$4K+ left over in Year 1</span></p>
                   <p className="text-gray-300">3 Kids: <span className="text-[#1bbdc5]">$12K+ surplus</span></p>
-                  <p className="text-gray-300">4+ Kids: <span className="text-[#1bbdc5]">Large families benefit most</span></p>
                 </div>
               </div>
             </div>
             <div className="mt-6 bg-[#1bbdc5]/10 border border-[#1bbdc5]/30 rounded-lg p-4 text-center">
-              <p className="text-white font-semibold">RENT-TO-OWN: ~$835/mo × 24 months</p>
-              <p className="text-gray-400 text-sm">Structured as tutoring subscription. Own forever. Replaces recurring tutoring + curriculum subscriptions.</p>
+              <p className="text-white font-semibold">RENT-TO-OWN: ~$835/mo x 24 months</p>
+              <p className="text-gray-400 text-sm">Structured as tutoring subscription. Own forever.</p>
             </div>
           </div>
         )}
 
-        {/* Slide 10: Go-to-Market */}
         {currentSlide === 10 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">GO-TO-MARKET</p>
             <h2 className="text-3xl font-bold text-white mb-8">FETC → Summer Implementation → Fall Paid Pilots</h2>
             <div className="grid grid-cols-4 gap-4 h-[calc(100%-140px)]">
               {[
-                { month: "JAN", title: "FETC Orlando", desc: "Dual-pronged: homeschool early adopters + charter decision-makers. Book demos and pilot scopes." },
-                { month: "FEB–MAY", title: "Close Pilots", desc: "Demos → LOIs → paid pilot agreements. Define success metrics and training plan." },
-                { month: "SUMMER", title: "Implement", desc: "Install towers, configure content, onboard staff. Charters can move quickly over summer." },
-                { month: "FALL", title: "Run Classrooms", desc: "Run classrooms safely with outcomes. Convert to multi-unit deployments and renewals." },
+                { month: "JAN", title: "FETC Orlando", desc: "Dual-pronged: homeschool early adopters + charter decision-makers." },
+                { month: "FEB-MAY", title: "Close Pilots", desc: "Demos → LOIs → paid pilot agreements." },
+                { month: "SUMMER", title: "Implement", desc: "Install towers, configure content, onboard staff." },
+                { month: "FALL", title: "Run Classrooms", desc: "Run classrooms safely with outcomes." },
               ].map((item, i) => (
                 <div key={i} className="bg-gray-900/50 border border-gray-800 rounded-lg p-5 flex flex-col">
                   <p className="text-[#1bbdc5] font-bold text-lg mb-2">{item.month}</p>
@@ -400,14 +388,13 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 11: Oakland Showroom */}
         {currentSlide === 11 && (
           <div className="absolute inset-0 p-8 md:p-12 flex flex-col items-center justify-center"
             style={{ background: "radial-gradient(ellipse at center, rgba(27,189,197,0.15) 0%, transparent 70%)" }}>
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-4">OAKLAND SHOWROOM</p>
             <h2 className="text-5xl font-bold text-white mb-6 text-center">"See it. Try it. Own it."</h2>
             <p className="text-gray-400 text-center max-w-2xl mb-8">
-              Convenient off-freeway demo space for local, affluent homeschool families. Unit assembly, service and repair also on-site.
+              Convenient off-freeway demo space for local, affluent homeschool families.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
               {[
@@ -424,7 +411,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 12: Traction */}
         {currentSlide === 12 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">TRACTION</p>
@@ -434,73 +420,64 @@ const Investors = () => {
                 <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
                   <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">VALIDATED AT SEMA 2025</p>
                   <h3 className="text-white font-semibold mb-2">240Z "Ace" Voice Demo</h3>
-                  <p className="text-gray-400 text-sm">Functional AI in a $110K show car. 6 languages, weather, nav, Spotify, vehicle specs. All offline, real-time.</p>
+                  <p className="text-gray-400 text-sm">Functional AI in a $110K show car. 6 languages, weather, nav, Spotify, vehicle specs. All offline.</p>
                 </div>
                 <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
                   <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">JANUARY 2026</p>
                   <h3 className="text-white font-semibold mb-2">FETC Orlando</h3>
-                  <p className="text-gray-400 text-sm">Dual-pronged lead gen: homeschool early adopters + charter decision-makers. Goal: 50+ qualified leads and summer install bookings.</p>
+                  <p className="text-gray-400 text-sm">Dual-pronged lead gen: homeschool early adopters + charter decision-makers.</p>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
                   <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">IN PIPELINE: 2026 SCHOOL YEAR</p>
                   <h3 className="text-white font-semibold mb-2">Charter Pilot Scoping</h3>
-                  <p className="text-gray-400 text-sm">Active conversations with charter leaders in Oakland and Reno. Defining paid fall pilots and implementation needs.</p>
+                  <p className="text-gray-400 text-sm">Active conversations with charter leaders in Oakland and Reno.</p>
                 </div>
                 <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
-                  <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">SPRING–SUMMER 2026</p>
+                  <p className="text-[#1bbdc5] text-xs tracking-wider mb-1">SPRING-SUMMER 2026</p>
                   <h3 className="text-white font-semibold mb-2">Implementation Window</h3>
-                  <p className="text-gray-400 text-sm">Charters can move fast over summer: installs, onboarding, and content setup ahead of fall paid pilots.</p>
+                  <p className="text-gray-400 text-sm">Charters can move fast over summer: installs, onboarding, and content setup.</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Slide 13: The Team */}
         {currentSlide === 13 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE TEAM</p>
             <h2 className="text-4xl font-bold text-white mb-8">Vision Meets Craft</h2>
             <div className="grid grid-cols-2 gap-8 h-[calc(100%-140px)]">
-              {[
-                {
-                  name: "Ben Adler",
-                  role: "Founder & CEO",
-                  img: "/pitch-deck/ben-adler.jpg",
-                  section: "THE WHY",
-                  bio: "MBA. Master's in Education. 5 years as Science Dept Head. Watched kids outsmart every digital safeguard. Knew exactly what tool they needed but couldn't build it. Born tinkerer. AI finally let him create the tutor he wished he'd had in his classroom.",
-                  builds: "Voice AI pipelines, GPU optimization, custom personas."
-                },
-                {
-                  name: "Ansel Iisaka",
-                  role: "Co-Founder & CDO",
-                  img: "/pitch-deck/ansel-iisaka.jpg",
-                  section: "THE HOW",
-                  bio: "ArtCenter College of Design, BS Industrial Design. Senior Industrial Designer at MTM Watch. Product Designer at Academy Design. Shipped to Disney and Fairmont. 5+ years taking concepts from sketch to factory-ready CAD.",
-                  builds: "Enclosure design, DFM, manufacturing partnerships."
-                },
-              ].map((person, i) => (
-                <div key={i} className="flex flex-col">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img src={person.img} alt={person.name} className="w-24 h-24 rounded-lg object-cover" />
-                    <div>
-                      <h3 className="text-white font-bold text-xl">{person.name}</h3>
-                      <p className="text-[#1bbdc5]">{person.role}</p>
-                    </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                  <img src="/pitch-deck/ben-adler.jpg" alt="Ben Adler" className="w-24 h-24 rounded-lg object-cover" />
+                  <div>
+                    <h3 className="text-white font-bold text-xl">Ben Adler</h3>
+                    <p className="text-[#1bbdc5]">Founder & CEO</p>
                   </div>
-                  <p className="text-[#1bbdc5] text-xs tracking-wider mb-2">{person.section}</p>
-                  <p className="text-gray-400 text-sm mb-3">{person.bio}</p>
-                  <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> {person.builds}</p>
                 </div>
-              ))}
+                <p className="text-[#1bbdc5] text-xs tracking-wider mb-2">THE WHY</p>
+                <p className="text-gray-400 text-sm mb-3">MBA. Master's in Education. 5 years as Science Dept Head. Watched kids outsmart every digital safeguard.</p>
+                <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> Voice AI pipelines, GPU optimization, custom personas.</p>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                  <img src="/pitch-deck/ansel-iisaka.jpg" alt="Ansel Iisaka" className="w-24 h-24 rounded-lg object-cover" />
+                  <div>
+                    <h3 className="text-white font-bold text-xl">Ansel Iisaka</h3>
+                    <p className="text-[#1bbdc5]">Co-Founder & CDO</p>
+                  </div>
+                </div>
+                <p className="text-[#1bbdc5] text-xs tracking-wider mb-2">THE HOW</p>
+                <p className="text-gray-400 text-sm mb-3">ArtCenter College of Design, BS Industrial Design. Senior Industrial Designer at MTM Watch. 5+ years taking concepts from sketch to factory-ready CAD.</p>
+                <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> Enclosure design, DFM, manufacturing partnerships.</p>
+              </div>
             </div>
             <p className="text-gray-500 text-sm mt-4">Next hire: Field Ops / Support (build + install + service).</p>
           </div>
         )}
 
-        {/* Slide 14: Trust + Defensibility */}
         {currentSlide === 14 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">TRUST + DEFENSIBILITY</p>
@@ -510,9 +487,9 @@ const Investors = () => {
                 <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
                   <h3 className="text-[#1bbdc5] font-semibold mb-3">CORE IP (PROVISIONALS FILED)</h3>
                   <ul className="space-y-2 text-sm">
-                    <li className="text-gray-300"><span className="text-white font-semibold">Voice Dubbing with Speaker Preservation</span> — Same voice, any language.</li>
-                    <li className="text-gray-300"><span className="text-white font-semibold">Decentralized Student Records</span> — Grades, IEPs, and likeness rights that kids own.</li>
-                    <li className="text-gray-300"><span className="text-white font-semibold">Classroom Roles & Permissions (DID)</span> — Simple access control without password chaos.</li>
+                    <li className="text-gray-300"><span className="text-white font-semibold">Voice Dubbing with Speaker Preservation</span></li>
+                    <li className="text-gray-300"><span className="text-white font-semibold">Decentralized Student Records</span></li>
+                    <li className="text-gray-300"><span className="text-white font-semibold">Classroom Roles & Permissions (DID)</span></li>
                   </ul>
                 </div>
               </div>
@@ -527,14 +504,13 @@ const Investors = () => {
                 </div>
                 <div className="bg-[#1bbdc5]/10 border border-[#1bbdc5]/30 rounded-lg p-5">
                   <h3 className="text-[#1bbdc5] font-semibold mb-3">PROCUREMENT TRUST (IN PROGRESS)</h3>
-                  <p className="text-gray-300 text-sm">Aligning with: 1EdTech TrustEd Apps • SDPC NDPA/State DPAs • COPPA Safe Harbor • Common Sense Privacy.</p>
+                  <p className="text-gray-300 text-sm">Aligning with: 1EdTech TrustEd Apps • SDPC NDPA • COPPA Safe Harbor</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Slide 15: The Ask */}
         {currentSlide === 15 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE ASK</p>
@@ -563,9 +539,9 @@ const Investors = () => {
                 <h3 className="text-white font-semibold text-xl mb-4">18-MONTH MILESTONES</h3>
                 <div className="space-y-4">
                   {[
-                    { title: "Paid pilots launched", desc: "January 2026 pilots with charters + sign up first homeschool cohorts" },
+                    { title: "Paid pilots launched", desc: "January 2026 pilots with charters + first homeschool cohorts" },
                     { title: "$2M+ in revenue", desc: "Hardware + services; 30%+ gross margin target" },
-                    { title: "Series A bar", desc: "Repeatable installs, retention/outcomes, scalable support, and multi-state charter rollout." },
+                    { title: "Series A bar", desc: "Repeatable installs, retention/outcomes, scalable support" },
                   ].map((item, i) => (
                     <div key={i} className="border-l-2 border-[#1bbdc5] pl-3">
                       <p className="text-white font-semibold text-sm">{item.title}</p>
@@ -578,7 +554,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Slide 16: Thank You */}
         {currentSlide === 16 && (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-12"
             style={{ background: "radial-gradient(ellipse at center, rgba(27,189,197,0.1) 0%, transparent 70%)" }}>
@@ -589,7 +564,6 @@ const Investors = () => {
             {!isGeneratingPDF && (
               <button
                 onClick={downloadPDF}
-                data-no-print
                 className="flex items-center gap-2 bg-[#1bbdc5] hover:bg-[#1bbdc5]/80 text-black font-semibold px-6 py-3 rounded-lg transition-colors"
               >
                 <Download size={20} />
@@ -599,7 +573,6 @@ const Investors = () => {
           </div>
         )}
 
-        {/* Navigation Controls */}
         {!isGeneratingPDF && (
           <>
             {currentSlide > 1 && (
@@ -619,7 +592,6 @@ const Investors = () => {
               </button>
             )}
             
-            {/* Slide indicator dots */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1">
               {Array.from({ length: TOTAL_SLIDES }, (_, i) => (
                 <button
@@ -632,7 +604,6 @@ const Investors = () => {
               ))}
             </div>
             
-            {/* Slide number */}
             <div className="absolute bottom-4 right-4 text-gray-500 text-sm">
               {currentSlide} / {TOTAL_SLIDES}
             </div>
