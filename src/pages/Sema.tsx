@@ -58,7 +58,7 @@ const Sema = () => {
             textShadow: `0 0 10px ${cyan}, 0 0 20px ${cyan}, 0 0 30px ${cyan}, 0 0 40px ${cyan}`
           }}
         >
-          Ace had a ton of fun talking with all of you at SEMA 2025! Can't wait for SEMA 2026!
+          Ace really enjoyed rocking out with you tonight! Keep in touch and check out all the fun things BESIDES talking cars we are exploring!
         </p>
       </div>
       
@@ -67,7 +67,7 @@ const Sema = () => {
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <p style={{ color: cyanDim, textShadow: `0 0 8px ${cyanDim}` }}>
-              Soul Interface © 2025
+              Soul Interface © 2026
             </p>
             
             <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
