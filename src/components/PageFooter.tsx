@@ -33,7 +33,7 @@ const PageFooter = ({
     <footer className="px-6 py-12 bg-[#0a0a0f]">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p style={{ color: dim }}>Soul Interface © 2025</p>
+          <p style={{ color: dim }}>Soul Interface © 2026</p>
           
           <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
             {navLinks.map((link) => {
