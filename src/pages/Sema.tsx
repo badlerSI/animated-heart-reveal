@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Extreme", path: "/extreme" },
 ];
 
-const Sema = () => {
+const Sema = () => { 
   const location = useLocation();
   const currentPath = location.pathname;
   const cyan = "#1bbdc5";
