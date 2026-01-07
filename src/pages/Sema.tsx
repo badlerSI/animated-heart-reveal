@@ -58,7 +58,16 @@ const Sema = () => {
             textShadow: `0 0 10px ${cyan}, 0 0 20px ${cyan}, 0 0 30px ${cyan}, 0 0 40px ${cyan}`
           }}
         >
-          Ace really enjoyed rocking out with you tonight! Keep in touch and check out all the fun things BESIDES talking cars we are exploring!
+          Ace really enjoyed rocking out with you tonight! Follow us on{' '}
+          <a 
+            href="https://www.linkedin.com/company/107125976/admin/dashboard/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="underline hover:opacity-80 transition-opacity"
+          >
+            LinkedIn
+          </a>
+          {' '}and check out our other innovative edge AI products below!
         </p>
       </div>
       
