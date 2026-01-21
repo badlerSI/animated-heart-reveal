@@ -68,24 +68,27 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
               the light
             </span>
             <span className="font-outfit text-xs tracking-[0.2em] text-white/30 group-hover:text-[#1bbdc5]/60 mt-3 transition-colors duration-300 relative z-10">
-              brilliance awaits
+              yours alone
             </span>
           </Link>
 
-          {/* Wave Divider SVG */}
+          {/* Wave Divider SVG - Authentic Soul Interface curve */}
           <svg
-            className="absolute left-1/2 top-0 h-full w-16 -translate-x-1/2 z-20 pointer-events-none transition-all duration-500"
-            viewBox="0 0 64 200"
+            className="absolute left-1/2 top-0 h-full w-20 -translate-x-1/2 z-20 pointer-events-none transition-all duration-500"
+            viewBox="0 0 80 200"
             preserveAspectRatio="none"
             style={{ filter: getWaveGlow() }}
           >
             <path
-              d="M 32,0 
-                 C 48,33 16,66 32,100 
-                 C 48,133 16,166 32,200"
+              d="M 40,0 
+                 Q 25,25 45,50 
+                 Q 65,75 35,100 
+                 Q 15,125 55,150 
+                 Q 75,175 40,200"
               stroke={getWaveStroke()}
-              strokeWidth="2"
+              strokeWidth="2.5"
               fill="none"
+              strokeLinecap="round"
               className="transition-all duration-500"
             />
           </svg>
@@ -113,7 +116,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
               The Heavy
             </span>
             <span className="font-playfair text-xs tracking-[0.15em] text-white/30 group-hover:text-[#d4a574]/60 mt-3 transition-colors duration-300 relative z-10 italic">
-              Built to endure.
+              serve the room
             </span>
           </Link>
         </div>
