@@ -9,28 +9,17 @@ interface DualWaveButtonProps {
 const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
 
-  // Wave glow color based on hover state
-  const getWaveGlow = () => {
-    if (hoveredSide === "left") return "drop-shadow(0 0 8px rgba(27, 189, 197, 0.8))";
-    if (hoveredSide === "right") return "drop-shadow(0 0 8px rgba(212, 165, 116, 0.8))";
-    return "none";
-  };
-
-  const getWaveStroke = () => {
+  // Wave colors based on hover state
+  const getTopLeftWaveColor = () => {
     if (hoveredSide === "left") return "#1bbdc5";
-    if (hoveredSide === "right") return "#d4a574";
-    return "rgba(255, 255, 255, 0.15)";
+    if (hoveredSide === "right") return "rgba(27, 189, 197, 0.15)";
+    return "rgba(27, 189, 197, 0.3)";
   };
 
-  // Corner accent colors
-  const getTopLeftAccent = () => {
-    if (hoveredSide === "left") return "#1bbdc5";
-    return "rgba(27, 189, 197, 0.2)";
-  };
-
-  const getBottomRightAccent = () => {
+  const getBottomRightWaveColor = () => {
     if (hoveredSide === "right") return "#d4a574";
-    return "rgba(212, 165, 116, 0.2)";
+    if (hoveredSide === "left") return "rgba(212, 165, 116, 0.15)";
+    return "rgba(212, 165, 116, 0.3)";
   };
 
   return (
@@ -54,32 +43,45 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative max-w-xl mx-auto"
       >
-        {/* Top-left decorative wave accent */}
+        {/* Top-left Soul Wave (Cyan) - reaching toward center */}
         <svg
-          className="absolute -top-3 -left-3 w-12 h-12 pointer-events-none transition-all duration-500"
-          viewBox="0 0 48 48"
-          style={{ filter: hoveredSide === "left" ? "drop-shadow(0 0 6px rgba(27, 189, 197, 0.6))" : "none" }}
+          className="absolute -top-4 -left-4 w-56 h-20 pointer-events-none transition-all duration-500 z-10"
+          viewBox="0 0 220 80"
+          preserveAspectRatio="xMinYMin meet"
+          style={{
+            filter: hoveredSide === "left"
+              ? "drop-shadow(0 0 12px rgba(27, 189, 197, 0.8)) drop-shadow(0 0 24px rgba(27, 189, 197, 0.4))"
+              : "none"
+          }}
         >
+          {/* Authentic Soul Wave path - flowing from top-left toward center-right */}
           <path
-            d="M 8,40 Q 8,20 24,16 Q 40,12 44,8"
-            stroke={getTopLeftAccent()}
-            strokeWidth="1.5"
+            d="M 0,50 C 30,50 45,15 90,20 C 135,25 165,55 210,45"
+            stroke={getTopLeftWaveColor()}
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             className="transition-all duration-500"
           />
         </svg>
 
-        {/* Bottom-right decorative wave accent */}
+        {/* Bottom-right Soul Wave (Amber) - mirrored, reaching toward center */}
         <svg
-          className="absolute -bottom-3 -right-3 w-12 h-12 pointer-events-none transition-all duration-500"
-          viewBox="0 0 48 48"
-          style={{ filter: hoveredSide === "right" ? "drop-shadow(0 0 6px rgba(212, 165, 116, 0.6))" : "none" }}
+          className="absolute -bottom-4 -right-4 w-56 h-20 pointer-events-none transition-all duration-500 z-10"
+          viewBox="0 0 220 80"
+          preserveAspectRatio="xMaxYMax meet"
+          style={{
+            filter: hoveredSide === "right"
+              ? "drop-shadow(0 0 12px rgba(212, 165, 116, 0.8)) drop-shadow(0 0 24px rgba(212, 165, 116, 0.4))"
+              : "none",
+            transform: "scaleX(-1) scaleY(-1)"
+          }}
         >
+          {/* Same Soul Wave path, flipped via CSS transform */}
           <path
-            d="M 4,40 Q 8,36 24,32 Q 40,28 40,8"
-            stroke={getBottomRightAccent()}
-            strokeWidth="1.5"
+            d="M 0,50 C 30,50 45,15 90,20 C 135,25 165,55 210,45"
+            stroke={getBottomRightWaveColor()}
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             className="transition-all duration-500"
@@ -113,22 +115,8 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             </span>
           </Link>
 
-          {/* Wave Divider SVG - Single clean sine wave */}
-          <svg
-            className="absolute left-1/2 top-0 h-full w-10 -translate-x-1/2 z-20 pointer-events-none transition-all duration-500"
-            viewBox="0 0 40 100"
-            preserveAspectRatio="none"
-            style={{ filter: getWaveGlow() }}
-          >
-            <path
-              d="M 20,0 C 35,25 5,25 20,50 C 35,75 5,75 20,100"
-              stroke={getWaveStroke()}
-              strokeWidth="1.5"
-              fill="none"
-              strokeLinecap="round"
-              className="transition-all duration-500"
-            />
-          </svg>
+          {/* Subtle center divider line */}
+          <div className="absolute left-1/2 top-1/4 bottom-1/4 w-px bg-white/[0.06] -translate-x-1/2 z-0" />
 
           {/* Right Half: The Heavy */}
           <Link
