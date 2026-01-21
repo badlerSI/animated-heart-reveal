@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../home/narrativeLink.css";
+import DualWaveButton from "../DualWaveButton";
 
 const ClosingCTASection = () => {
   return (
@@ -22,6 +23,7 @@ const ClosingCTASection = () => {
         Soul Interface is Powerful, Offline, Sovereign AI.
       </p>
 
+      <DualWaveButton accentColor="#1bbdc5" />
     </section>
   );
 };
