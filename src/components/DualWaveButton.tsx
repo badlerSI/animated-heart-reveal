@@ -9,19 +9,6 @@ interface DualWaveButtonProps {
 const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
 
-  // Wave colors based on hover state
-  const getTopLeftWaveColor = () => {
-    if (hoveredSide === "left") return "#1bbdc5";
-    if (hoveredSide === "right") return "rgba(27, 189, 197, 0.15)";
-    return "rgba(27, 189, 197, 0.3)";
-  };
-
-  const getBottomRightWaveColor = () => {
-    if (hoveredSide === "right") return "#d4a574";
-    if (hoveredSide === "left") return "rgba(212, 165, 116, 0.15)";
-    return "rgba(212, 165, 116, 0.3)";
-  };
-
   return (
     <section className="py-20 px-4">
       {/* Header */}
@@ -43,50 +30,32 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative max-w-xl mx-auto"
       >
-        {/* Top-left Soul Wave (Cyan) - reaching toward center */}
-        <svg
-          className="absolute -top-4 -left-4 w-56 h-20 pointer-events-none transition-all duration-500 z-10"
-          viewBox="0 0 220 80"
-          preserveAspectRatio="xMinYMin meet"
+        {/* Top-left Soul Wave - actual image */}
+        <img 
+          src="/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png"
+          alt=""
+          className="absolute -top-6 -left-6 w-40 h-auto pointer-events-none transition-all duration-500 z-10"
           style={{
-            filter: hoveredSide === "left"
-              ? "drop-shadow(0 0 12px rgba(27, 189, 197, 0.8)) drop-shadow(0 0 24px rgba(27, 189, 197, 0.4))"
+            opacity: hoveredSide === "right" ? 0.3 : hoveredSide === "left" ? 1 : 0.5,
+            filter: hoveredSide === "left" 
+              ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))" 
               : "none"
           }}
-        >
-          {/* Authentic Soul Wave path - flowing from top-left toward center-right */}
-          <path
-            d="M 0,50 C 30,50 45,15 90,20 C 135,25 165,55 210,45"
-            stroke={getTopLeftWaveColor()}
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            className="transition-all duration-500"
-          />
-        </svg>
+        />
 
-        {/* Bottom-right Soul Wave (Amber) - mirrored, reaching toward center */}
-        <svg
-          className="absolute -bottom-4 -right-4 w-56 h-20 pointer-events-none transition-all duration-500 z-10"
-          viewBox="0 0 220 80"
-          preserveAspectRatio="xMaxYMax meet"
+        {/* Bottom-right Soul Wave - mirrored actual image */}
+        <img 
+          src="/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png"
+          alt=""
+          className="absolute -bottom-6 -right-6 w-40 h-auto pointer-events-none transition-all duration-500 z-10"
           style={{
-            filter: hoveredSide === "right"
-              ? "drop-shadow(0 0 12px rgba(212, 165, 116, 0.8)) drop-shadow(0 0 24px rgba(212, 165, 116, 0.4))"
-              : "none",
-            transform: "scaleX(-1) scaleY(-1)"
+            transform: "scaleX(-1) scaleY(-1)",
+            opacity: hoveredSide === "left" ? 0.3 : hoveredSide === "right" ? 1 : 0.5,
+            filter: hoveredSide === "right" 
+              ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))" 
+              : "none"
           }}
-        >
-          {/* Same Soul Wave path, flipped via CSS transform */}
-          <path
-            d="M 0,50 C 30,50 45,15 90,20 C 135,25 165,55 210,45"
-            stroke={getBottomRightWaveColor()}
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            className="transition-all duration-500"
-          />
-        </svg>
+        />
 
         <div className="relative flex overflow-hidden rounded-xl border border-white/[0.08] bg-[#0a0a0c]">
           {/* Left Half: the light */}
