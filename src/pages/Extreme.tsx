@@ -29,6 +29,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PageFooter from "@/components/PageFooter";
+import DualWaveButton from "@/components/DualWaveButton";
 import bunkerBase from "@/assets/bunker-base.png";
 import truckHeart from "@/assets/truck-heart.png";
 import bunkerHeart from "@/assets/bunker-heart.png";
@@ -510,6 +511,9 @@ const Extreme = () => {
           </motion.a>
         </div>
       </section>
+
+      {/* Duality Teaser */}
+      <DualWaveButton accentColor="#4CAF7C" />
 
       <PageFooter 
         accentColor="#4CAF7C"
