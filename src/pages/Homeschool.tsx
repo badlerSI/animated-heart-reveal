@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import PageFooter from "@/components/PageFooter";
+import DualWaveButton from "@/components/DualWaveButton";
 
 const Homeschool = () => {
   const [showScrollPrompt, setShowScrollPrompt] = useState(false);
@@ -643,6 +644,9 @@ const Homeschool = () => {
           </form>
         </DialogContent>
       </Dialog>
+
+      {/* Duality Teaser */}
+      <DualWaveButton accentColor="#1bbdc5" />
 
       {/* Footer */}
       <PageFooter />
