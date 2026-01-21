@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Zap, Monitor, Briefcase, GraduationCap, Palette, Globe } from "lucide-react";
+import { Cpu, HardDrive, MemoryStick, Monitor, Box, Users, GraduationCap, Briefcase, Palette } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
@@ -11,39 +11,54 @@ const Light = () => {
     document.title = "the light | soul interface";
   }, []);
 
-  const features = [
+  const specs = [
+    {
+      icon: Cpu,
+      name: "gpu",
+      value: "NVIDIA RTX 5090, 32GB VRAM",
+    },
+    {
+      icon: MemoryStick,
+      name: "memory",
+      value: "64GB or 96GB system RAM",
+    },
+    {
+      icon: Cpu,
+      name: "processor",
+      value: "Intel Core i7",
+    },
+    {
+      icon: HardDrive,
+      name: "storage",
+      value: "4TB, 6TB, or 8TB SSD options",
+    },
+    {
+      icon: Box,
+      name: "case",
+      value: "polished metal enclosure",
+    },
     {
       icon: Monitor,
-      title: "vivid display",
-      description: "Crystal-clear LCD panel for intuitive interaction and visual feedback.",
-    },
-    {
-      icon: Zap,
-      title: "portable power",
-      description: "Compact form factor delivers full AI capabilities anywhere you go.",
-    },
-    {
-      icon: Globe,
-      title: "offline intelligence",
-      description: "Complete privacy with no cloud dependency. Your AI, truly yours.",
+      name: "display",
+      value: "crystal-clear LCD panel",
     },
   ];
 
   const useCases = [
     {
       icon: GraduationCap,
-      title: "education",
-      description: "Safe, offline AI tutoring for students of all ages.",
+      title: "homeschool",
+      description: "AI tutoring for 3-4 students simultaneously. No subscriptions, no surveillance.",
     },
     {
       icon: Briefcase,
       title: "home office",
-      description: "Professional AI assistance without corporate surveillance.",
+      description: "Private AI assistance for the whole family, running entirely offline.",
     },
     {
       icon: Palette,
-      title: "creative work",
-      description: "Generate, iterate, and create with private AI collaboration.",
+      title: "creative studio",
+      description: "Generate, render, and create with GPU power that stays in your space.",
     },
   ];
 
@@ -58,13 +73,16 @@ const Light = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h1 className="font-outfit text-6xl md:text-8xl font-light tracking-tight mb-4">
             <span className="text-[#1bbdc5]">the light</span>
           </h1>
-          <p className="text-xl md:text-2xl text-[#1a1a1a]/60 font-light tracking-wide">
-            brilliance. portable.
+          <p className="text-xl md:text-2xl text-[#1a1a1a]/60 font-light tracking-wide mb-2">
+            3-4 users. one machine.
+          </p>
+          <p className="text-sm text-[#1a1a1a]/40 tracking-widest uppercase">
+            polished metal. silent power.
           </p>
         </motion.div>
 
@@ -103,7 +121,7 @@ const Light = () => {
         </motion.div>
       </section>
 
-      {/* Features Section */}
+      {/* Specs Section */}
       <section className="px-6 py-24 bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -112,22 +130,22 @@ const Light = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light text-center mb-16"
           >
-            designed for <span className="text-[#1bbdc5]">clarity</span>
+            what's <span className="text-[#1bbdc5]">inside</span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {specs.map((spec, index) => (
               <motion.div
-                key={feature.title}
+                key={spec.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl bg-[#faf9f7] border border-[#1bbdc5]/20 hover:border-[#1bbdc5]/50 transition-colors"
+                transition={{ delay: index * 0.08 }}
+                className="p-6 rounded-2xl bg-[#faf9f7] border border-[#1bbdc5]/20 hover:border-[#1bbdc5]/50 transition-colors"
               >
-                <feature.icon className="w-10 h-10 text-[#1bbdc5] mb-4" strokeWidth={1.5} />
-                <h3 className="font-outfit text-xl font-medium mb-2">{feature.title}</h3>
-                <p className="text-[#1a1a1a]/60 leading-relaxed">{feature.description}</p>
+                <spec.icon className="w-8 h-8 text-[#1bbdc5] mb-3" strokeWidth={1.5} />
+                <p className="text-xs uppercase tracking-widest text-[#1a1a1a]/40 mb-1">{spec.name}</p>
+                <p className="text-sm text-[#1a1a1a]/80 leading-relaxed">{spec.value}</p>
               </motion.div>
             ))}
           </div>
@@ -143,7 +161,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light text-center mb-4"
           >
-            built for <span className="text-[#1bbdc5]">everyone</span>
+            built for <span className="text-[#1bbdc5]">small groups</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}

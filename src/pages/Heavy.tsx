@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Shield, Cpu, Building2, BookOpen, Music, Users } from "lucide-react";
+import { Cpu, HardDrive, MemoryStick, Wifi, Box, Server, Building2, BookOpen, Music } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
@@ -16,39 +16,59 @@ const Heavy = () => {
     document.title = "The Heavy | Soul Interface";
   }, []);
 
-  const craftsmanship = [
+  const specs = [
     {
-      icon: Shield,
-      title: "Walnut Enclosure",
-      description: "Hand-selected American black walnut, finished to perfection.",
+      icon: Cpu,
+      name: "GPU",
+      value: "NVIDIA RTX 6000 Blackwell, 96GB VRAM",
+    },
+    {
+      icon: MemoryStick,
+      name: "Memory",
+      value: "96GB system RAM",
     },
     {
       icon: Cpu,
-      title: "Laser-Cut Ventilation",
-      description: "Precision patterns merge form with thermal function.",
+      name: "Processor",
+      value: "AMD Ryzen 9, 5th Generation",
     },
     {
-      icon: Users,
-      title: "Chrome 心 Emblem",
-      description: "The kanji for 'heart/soul' — handcrafted in mirror chrome.",
+      icon: HardDrive,
+      name: "Primary Storage",
+      value: "4TB Gen 5 SSD for instant model switching",
+    },
+    {
+      icon: Server,
+      name: "Backup Storage",
+      value: "4TB Gen 4 SSD for redundancy",
+    },
+    {
+      icon: Wifi,
+      name: "Network",
+      value: "Commercial-grade router, broadcasts dedicated WiFi",
+    },
+    {
+      icon: Box,
+      name: "Case",
+      value: "Real wood enclosure with chrome 心 emblem",
     },
   ];
 
   const useCases = [
     {
       icon: Building2,
-      title: "Executive Offices",
-      description: "AI that matches the sophistication of your workspace.",
-    },
-    {
-      icon: BookOpen,
-      title: "Libraries & Studies",
-      description: "Timeless design for spaces of thought and reflection.",
+      title: "Classrooms",
+      description: "AI for an entire class. Every student, every device, one local network.",
     },
     {
       icon: Music,
       title: "Recording Studios",
-      description: "Warm aesthetics that complement creative environments.",
+      description: "Run multiple AI workstations off a single tower with zero latency.",
+    },
+    {
+      icon: BookOpen,
+      title: "Enterprise Offices",
+      description: "Air-gapped AI infrastructure for teams that can't touch the cloud.",
     },
   ];
 
@@ -73,8 +93,11 @@ const Heavy = () => {
           <h1 className="font-playfair text-6xl md:text-8xl font-normal tracking-tight mb-4">
             The <span className="text-amber-400">Heavy</span>
           </h1>
-          <p className="text-xl md:text-2xl text-[#faf7f2]/50 font-light tracking-wide">
-            Built to Last.
+          <p className="text-xl md:text-2xl text-[#faf7f2]/50 font-light tracking-wide mb-2">
+            Serve the Room.
+          </p>
+          <p className="text-sm text-[#faf7f2]/30 tracking-widest uppercase">
+            real wood. commercial power.
           </p>
         </motion.div>
 
@@ -159,7 +182,7 @@ const Heavy = () => {
         </motion.div>
       </section>
 
-      {/* Craftsmanship Section */}
+      {/* Specs Section */}
       <section className="px-6 py-24 bg-[#0a0908]">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -168,22 +191,22 @@ const Heavy = () => {
             viewport={{ once: true }}
             className="font-playfair text-4xl md:text-5xl font-normal text-center mb-16"
           >
-            Artisanal <span className="text-amber-400">Details</span>
+            Enterprise <span className="text-amber-400">Specifications</span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {craftsmanship.map((item, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {specs.map((spec, index) => (
               <motion.div
-                key={item.title}
+                key={spec.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl bg-[#13120f] border border-amber-900/30 hover:border-amber-700/50 transition-colors"
+                transition={{ delay: index * 0.08 }}
+                className="p-6 rounded-2xl bg-[#13120f] border border-amber-900/30 hover:border-amber-700/50 transition-colors"
               >
-                <item.icon className="w-10 h-10 text-amber-400 mb-4" strokeWidth={1.5} />
-                <h3 className="font-playfair text-xl font-medium mb-2">{item.title}</h3>
-                <p className="text-[#faf7f2]/50 leading-relaxed">{item.description}</p>
+                <spec.icon className="w-8 h-8 text-amber-400 mb-3" strokeWidth={1.5} />
+                <p className="text-xs uppercase tracking-widest text-[#faf7f2]/40 mb-1">{spec.name}</p>
+                <p className="text-sm text-[#faf7f2]/70 leading-relaxed">{spec.value}</p>
               </motion.div>
             ))}
           </div>
@@ -199,7 +222,7 @@ const Heavy = () => {
             viewport={{ once: true }}
             className="font-playfair text-4xl md:text-5xl font-normal text-center mb-4"
           >
-            Made for <span className="text-amber-400">Distinction</span>
+            Made for <span className="text-amber-400">Many</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
