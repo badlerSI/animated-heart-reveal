@@ -1,10 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Cpu, Building2, BookOpen, Music, Users } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
-import ProductReveal from "@/components/ProductReveal";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 const Heavy = () => {
+  const [isRevealed, setIsRevealed] = useState(false);
+  
+  // Preload both images
+  const woodLoaded = useImagePreloader("/lovable-uploads/heavy-wood.jpg");
+  const skeletonLoaded = useImagePreloader("/lovable-uploads/heavy-skeleton.jpg");
+  const imagesLoaded = woodLoaded && skeletonLoaded;
+
   useEffect(() => {
     document.title = "The Heavy | Soul Interface";
   }, []);
@@ -47,7 +54,7 @@ const Heavy = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0908] text-[#faf7f2] overflow-x-hidden">
-      {/* Hero Section */}
+      {/* Hero Section with Integrated Reveal */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20">
         {/* Warm gradient accent */}
         <div 
@@ -61,7 +68,7 @@ const Heavy = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h1 className="font-playfair text-6xl md:text-8xl font-normal tracking-tight mb-4">
             The <span className="text-amber-400">Heavy</span>
@@ -71,26 +78,72 @@ const Heavy = () => {
           </p>
         </motion.div>
 
-        {/* Product Image with Warm Glow */}
+        {/* Product Image with Hover-to-Reveal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative max-w-3xl w-full"
+          animate={{ opacity: imagesLoaded ? 1 : 0, scale: imagesLoaded ? 1 : 0.95 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative max-w-3xl w-full cursor-pointer"
+          onMouseEnter={() => setIsRevealed(true)}
+          onMouseLeave={() => setIsRevealed(false)}
+          onTouchStart={() => setIsRevealed(!isRevealed)}
         >
+          {/* Instruction text */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="text-center text-sm text-[#faf7f2]/40 mb-4 tracking-wide"
+          >
+            {isRevealed ? "the soul within" : "hover to reveal what's inside"}
+          </motion.p>
+
           <div className="relative">
-            {/* Warm amber glow effect */}
-            <div 
-              className="absolute inset-0 blur-3xl opacity-30"
+            {/* Warm amber glow effect - intensifies on reveal */}
+            <motion.div 
+              className="absolute inset-0 blur-3xl pointer-events-none"
+              animate={{
+                opacity: isRevealed ? 0.5 : 0.3,
+              }}
+              transition={{ duration: 0.6 }}
               style={{
                 background: "radial-gradient(ellipse at center, #d4a574 0%, transparent 70%)",
                 transform: "scale(1.1)",
               }}
             />
-            <img
+            
+            {/* Exterior Image (Wood) */}
+            <motion.img
               src="/lovable-uploads/heavy-wood.jpg"
               alt="The Heavy - Artisanal AI Device"
               className="relative w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
+              animate={{
+                opacity: isRevealed ? 0 : 1,
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            />
+            
+            {/* Interior Image (Skeleton) - revealed on hover */}
+            <motion.img
+              src="/lovable-uploads/heavy-skeleton.jpg"
+              alt="The Heavy - Internal Engineering"
+              className="absolute inset-0 w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: isRevealed ? 1 : 0,
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            />
+
+            {/* Inner glow overlay on reveal */}
+            <motion.div
+              className="absolute inset-0 rounded-lg pointer-events-none"
+              animate={{
+                boxShadow: isRevealed 
+                  ? "inset 0 0 60px rgba(212, 165, 116, 0.3)" 
+                  : "inset 0 0 0px rgba(212, 165, 116, 0)",
+              }}
+              transition={{ duration: 0.6 }}
             />
           </div>
         </motion.div>
@@ -104,35 +157,6 @@ const Heavy = () => {
         >
           <div className="w-px h-16 bg-gradient-to-b from-amber-400 to-transparent" />
         </motion.div>
-      </section>
-
-      {/* X-Ray Reveal Section */}
-      <section className="px-6 py-24 bg-[#0d0c0a]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-playfair text-4xl md:text-5xl font-normal text-center mb-4"
-          >
-            The Soul <span className="text-amber-400">Within</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-[#faf7f2]/40 mb-16 max-w-2xl mx-auto"
-          >
-            Beneath the handcrafted exterior lies precision engineering.
-          </motion.p>
-
-          <ProductReveal
-            exteriorSrc="/lovable-uploads/heavy-wood.jpg"
-            interiorSrc="/lovable-uploads/heavy-skeleton.jpg"
-            exteriorAlt="The Heavy wood enclosure"
-            interiorAlt="The Heavy internal skeleton"
-          />
-        </div>
       </section>
 
       {/* Craftsmanship Section */}

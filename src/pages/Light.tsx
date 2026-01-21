@@ -2,26 +2,29 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Zap, Monitor, Briefcase, GraduationCap, Palette, Globe } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 const Light = () => {
+  const imageLoaded = useImagePreloader("/lovable-uploads/light-product.jpg");
+
   useEffect(() => {
-    document.title = "The Light | Soul Interface";
+    document.title = "the light | soul interface";
   }, []);
 
   const features = [
     {
       icon: Monitor,
-      title: "Vivid Display",
+      title: "vivid display",
       description: "Crystal-clear LCD panel for intuitive interaction and visual feedback.",
     },
     {
       icon: Zap,
-      title: "Portable Power",
+      title: "portable power",
       description: "Compact form factor delivers full AI capabilities anywhere you go.",
     },
     {
       icon: Globe,
-      title: "Offline Intelligence",
+      title: "offline intelligence",
       description: "Complete privacy with no cloud dependency. Your AI, truly yours.",
     },
   ];
@@ -29,17 +32,17 @@ const Light = () => {
   const useCases = [
     {
       icon: GraduationCap,
-      title: "Education",
+      title: "education",
       description: "Safe, offline AI tutoring for students of all ages.",
     },
     {
       icon: Briefcase,
-      title: "Home Office",
+      title: "home office",
       description: "Professional AI assistance without corporate surveillance.",
     },
     {
       icon: Palette,
-      title: "Creative Work",
+      title: "creative work",
       description: "Generate, iterate, and create with private AI collaboration.",
     },
   ];
@@ -58,17 +61,17 @@ const Light = () => {
           className="text-center mb-12"
         >
           <h1 className="font-outfit text-6xl md:text-8xl font-light tracking-tight mb-4">
-            The <span className="text-[#1bbdc5]">Light</span>
+            <span className="text-[#1bbdc5]">the light</span>
           </h1>
           <p className="text-xl md:text-2xl text-[#1a1a1a]/60 font-light tracking-wide">
-            Brilliance. Portable.
+            brilliance. portable.
           </p>
         </motion.div>
 
         {/* Product Image with Cyan Glow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: imageLoaded ? 1 : 0, scale: imageLoaded ? 1 : 0.95 }}
           transition={{ duration: 1, delay: 0.3 }}
           className="relative max-w-3xl w-full"
         >
@@ -83,7 +86,7 @@ const Light = () => {
             />
             <img
               src="/lovable-uploads/light-product.jpg"
-              alt="The Light - Portable AI Device"
+              alt="the light - portable AI device"
               className="relative w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
             />
           </div>
@@ -109,7 +112,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light text-center mb-16"
           >
-            Designed for <span className="text-[#1bbdc5]">Clarity</span>
+            designed for <span className="text-[#1bbdc5]">clarity</span>
           </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -140,7 +143,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light text-center mb-4"
           >
-            Built for <span className="text-[#1bbdc5]">Everyone</span>
+            built for <span className="text-[#1bbdc5]">everyone</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -148,7 +151,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="text-center text-[#1a1a1a]/50 mb-16 max-w-2xl mx-auto"
           >
-            From students to professionals, The Light adapts to your world.
+            from students to professionals, the light adapts to your world.
           </motion.p>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -181,7 +184,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light mb-6"
           >
-            Illuminate Your <span className="text-[#1bbdc5]">Potential</span>
+            illuminate your <span className="text-[#1bbdc5]">potential</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -189,7 +192,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="text-white/60 mb-10 text-lg"
           >
-            Ready to experience AI that's truly yours?
+            ready to experience AI that's truly yours?
           </motion.p>
           <motion.a
             href="mailto:hello@soulinterface.com"
@@ -198,7 +201,7 @@ const Light = () => {
             viewport={{ once: true }}
             className="inline-block px-10 py-4 bg-[#1bbdc5] text-[#1a1a1a] font-medium rounded-full hover:bg-[#1bbdc5]/90 transition-colors"
           >
-            Get in Touch
+            get in touch
           </motion.a>
         </div>
       </section>
