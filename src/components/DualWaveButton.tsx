@@ -38,6 +38,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           style={{
             transform: "translate(-50%, -50%) rotate(-20deg)",
             opacity: hoveredSide ? 0.9 : 0.6,
+            mixBlendMode: "screen",
             filter: hoveredSide ? "drop-shadow(0 0 12px rgba(27, 189, 197, 0.6))" : "none"
           }}
         />
