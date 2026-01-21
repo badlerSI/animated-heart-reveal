@@ -16,6 +16,8 @@ import Vehicular from "./pages/Vehicular";
 import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
 import Autonomous from "./pages/Autonomous";
+import Light from "./pages/Light";
+import Heavy from "./pages/Heavy";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -41,6 +43,8 @@ const App = () => (
           <Route path="/work" element={<Work />} />
           <Route path="/extreme" element={<Extreme />} />
           <Route path="/autonomous" element={<Autonomous />} />
+          <Route path="/light" element={<Light />} />
+          <Route path="/heavy" element={<Heavy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

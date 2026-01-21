@@ -14,6 +14,8 @@ const navLinks = [
   { label: "Workplace", path: "/work" },
   { label: "Autonomous", path: "/autonomous" },
   { label: "Extreme", path: "/extreme" },
+  { label: "The Light", path: "/light" },
+  { label: "The Heavy", path: "/heavy" },
 ];
 
 const PageFooter = ({ 
