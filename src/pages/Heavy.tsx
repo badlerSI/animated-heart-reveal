@@ -50,7 +50,12 @@ const Heavy = () => {
     {
       icon: Box,
       name: "Case",
-      value: "Real wood enclosure with chrome 心 emblem",
+      value: "Real wood enclosure with built-in handle and chrome 心 emblem",
+    },
+    {
+      icon: Box,
+      name: "Portability",
+      value: "Carry-on compatible for easy transport or secure storage",
     },
   ];
 

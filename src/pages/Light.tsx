@@ -42,6 +42,11 @@ const Light = () => {
       name: "display",
       value: "crystal-clear LCD panel",
     },
+    {
+      icon: Box,
+      name: "portability",
+      value: "carry-on compatible for easy transport or secure storage",
+    },
   ];
 
   const useCases = [
