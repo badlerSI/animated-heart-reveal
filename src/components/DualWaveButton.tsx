@@ -30,17 +30,15 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative max-w-lg mx-auto h-64"
       >
-        {/* Ethereal Energy Whip Divider */}
+        {/* Original Wave.png with CSS filters for ethereal look */}
         <img 
-          src="/lovable-uploads/ethereal-energy-whip.png"
+          src="/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png"
           alt=""
           className="absolute left-1/2 top-1/2 w-[28rem] h-auto pointer-events-none transition-all duration-500 z-10"
           style={{
             transform: "translate(-50%, -50%) rotate(-20deg)",
-            opacity: hoveredSide ? 0.95 : 0.7,
-            filter: hoveredSide 
-              ? "drop-shadow(0 0 12px rgba(255, 255, 255, 0.5))" 
-              : "none"
+            opacity: hoveredSide ? 0.7 : 0.4,
+            filter: `brightness(2) saturate(0) contrast(0.7) ${hoveredSide ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))" : ""}`
           }}
         />
 
