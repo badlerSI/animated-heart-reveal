@@ -30,15 +30,14 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative max-w-lg mx-auto h-64"
       >
-        {/* Wave Divider - 50% bigger, using screen blend mode for transparency effect */}
+        {/* Wave Divider - Clean transparent PNG, 50% bigger */}
         <img 
-          src="/lovable-uploads/be3b360f-fe9c-45f7-aa45-4caff7512c78.png"
+          src="/lovable-uploads/wave-transparent-clean.png"
           alt=""
           className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none transition-all duration-500 z-10"
           style={{
             transform: "translate(-50%, -50%) rotate(-20deg)",
             opacity: hoveredSide ? 0.9 : 0.6,
-            mixBlendMode: "screen",
             filter: hoveredSide ? "drop-shadow(0 0 12px rgba(27, 189, 197, 0.6))" : "none"
           }}
         />
