@@ -36,7 +36,8 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           alt=""
           className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-10"
           style={{
-            transform: "translate(-50%, -50%) rotate(-20deg)"
+            transform: "translate(-50%, -50%) rotate(-20deg)",
+            mixBlendMode: "screen"
           }}
         />
 
