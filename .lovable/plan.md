@@ -1,26 +1,35 @@
 
-# Update "the light" Product Page
 
-## Changes to Make
+# Update The Heavy Product Page
 
-**File:** `src/pages/Light.tsx`
+## Overview
+Update specs, remove case blurb, and rework the CTA section to emphasize ownership and control rather than luxury investment.
 
-### 1. Update Hero Subtitle (Line 90)
-Replace the tagline text:
-- **Current:** `polished metal. silent power.`
-- **New:** `Enough compute for the whole family.`
+---
 
-### 2. Remove Case Spec (Lines 35-39)
-Delete the "case" entry from the specs array:
-```tsx
-{
-  icon: Box,
-  name: "case",
-  value: "polished metal enclosure",
-},
-```
+## Changes
 
-Also remove the unused `Box` import from lucide-react since it will no longer be needed after removing the case spec (the portability spec also uses `Box`, so we'll keep it).
+### 1. Combine Storage Specs into One
+**Current (two entries):**
+- Primary Storage: "4TB Gen 5 SSD for instant model switching"
+- Backup Storage: "4TB Gen 4 SSD for redundancy"
+
+**New (single entry):**
+- Storage: "8TB total: Gen 5 + Gen 4 SSDs. Hot swap models at blazing speed."
+
+### 2. Remove Case Spec
+Delete the "Case" entry entirely (lines 51-54). The portability spec already exists and the wood/emblem details are covered in the hero subtitle.
+
+### 3. Rework CTA Section
+**Current:**
+- Title: "Timeless Investment"
+- Subtitle: "Own a piece of the future, crafted for generations."
+
+**New:**
+- Title: "Your Infrastructure, Your Rules"
+- Subtitle: "No subscriptions. No cloud. Just the power to run AI on your terms."
+
+This ties directly into Soul Interface's sovereign AI positioning and emphasizes ownership/control rather than luxury.
 
 ---
 
@@ -28,7 +37,11 @@ Also remove the unused `Box` import from lucide-react since it will no longer be
 
 | Change | Location | Before | After |
 |--------|----------|--------|-------|
-| Hero tagline | Line 90 | `polished metal. silent power.` | `Enough compute for the whole family.` |
-| Specs array | Lines 35-39 | Case spec object | Removed entirely |
+| Storage spec | Lines 35-44 | Two separate entries | Single combined entry |
+| Case spec | Lines 51-54 | Case blurb | Removed |
+| CTA title | Line 271 | "Timeless Investment" | "Your Infrastructure, Your Rules" |
+| CTA subtitle | Line 279 | "Own a piece of the future..." | "No subscriptions. No cloud..." |
+| Icon imports | Line 3 | Includes `Server` | Remove `Server` (no longer needed) |
 
-The specs grid will now show 6 items instead of 7, which will display nicely in the 2-column (mobile) and 3-column (desktop) grid layout.
+The specs grid will show 6 items instead of 8, maintaining good visual balance in the 2/3/4 column grid.
+
