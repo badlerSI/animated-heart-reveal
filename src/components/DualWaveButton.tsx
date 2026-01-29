@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface DualWaveButtonProps {
   accentColor?: string;
@@ -8,7 +9,77 @@ interface DualWaveButtonProps {
 
 const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
+  const isMobile = useIsMobile();
 
+  // Mobile Layout - Clean vertical stack
+  if (isMobile) {
+    return (
+      <section className="py-20 px-4">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center text-xs tracking-[0.4em] uppercase mb-12 text-white/40"
+        >
+          Two expressions. One soul.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex flex-col items-center gap-6"
+        >
+          {/* the light - Mobile */}
+          <Link
+            to="/light"
+            className="flex flex-col items-center py-6 px-8 group"
+          >
+            <span
+              className="font-outfit text-2xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
+              style={{
+                textShadow: "0 0 30px rgba(27, 189, 197, 0.5)",
+              }}
+            >
+              the light
+            </span>
+            <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mt-2 transition-colors duration-300">
+              yours alone
+            </span>
+          </Link>
+
+          {/* Wave Divider - Horizontal on mobile */}
+          <img 
+            src="/lovable-uploads/wave-transparent-v3.png"
+            alt=""
+            className="w-48 h-auto opacity-60"
+          />
+
+          {/* The Heavy - Mobile */}
+          <Link
+            to="/heavy"
+            className="flex flex-col items-center py-6 px-8 group"
+          >
+            <span
+              className="font-playfair text-2xl font-normal tracking-wide text-white/60 group-hover:text-white transition-all duration-300"
+              style={{
+                textShadow: "0 0 30px rgba(212, 165, 116, 0.5)",
+              }}
+            >
+              The Heavy
+            </span>
+            <span className="font-playfair text-[10px] tracking-[0.2em] text-white/25 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic">
+              serve the room
+            </span>
+          </Link>
+        </motion.div>
+      </section>
+    );
+  }
+
+  // Desktop Layout - Original diagonal design (unchanged)
   return (
     <section className="py-20 px-4">
       {/* Header */}
