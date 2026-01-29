@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Cpu, HardDrive, MemoryStick, Wifi, Box, Server, Building2, BookOpen, Music } from "lucide-react";
+import { Cpu, HardDrive, MemoryStick, Wifi, Box, Building2, BookOpen, Music } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
@@ -34,23 +34,13 @@ const Heavy = () => {
     },
     {
       icon: HardDrive,
-      name: "Primary Storage",
-      value: "4TB Gen 5 SSD for instant model switching",
-    },
-    {
-      icon: Server,
-      name: "Backup Storage",
-      value: "4TB Gen 4 SSD for redundancy",
+      name: "Storage",
+      value: "8TB total: Gen 5 + Gen 4 SSDs. Hot swap models at blazing speed.",
     },
     {
       icon: Wifi,
       name: "Network",
       value: "Commercial-grade router, broadcasts dedicated WiFi",
-    },
-    {
-      icon: Box,
-      name: "Case",
-      value: "Real wood enclosure with built-in handle and chrome 心 emblem",
     },
     {
       icon: Box,
@@ -268,7 +258,7 @@ const Heavy = () => {
             viewport={{ once: true }}
             className="font-playfair text-4xl md:text-5xl font-normal mb-6"
           >
-            Timeless <span className="text-amber-700">Investment</span>
+            Your Infrastructure, <span className="text-amber-700">Your Rules</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -276,7 +266,7 @@ const Heavy = () => {
             viewport={{ once: true }}
             className="text-[#0a0908]/60 mb-10 text-lg"
           >
-            Own a piece of the future, crafted for generations.
+            No subscriptions. No cloud. Just the power to run AI on your terms.
           </motion.p>
           <motion.a
             href="mailto:hello@soulinterface.com"
