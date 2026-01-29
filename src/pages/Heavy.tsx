@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Cpu, HardDrive, MemoryStick, Wifi, Box, Building2, BookOpen, Music } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Heavy = () => {
   const [isRevealed, setIsRevealed] = useState(false);
+  const isMobile = useIsMobile();
   
   // Preload both images
   const woodLoaded = useImagePreloader("/lovable-uploads/heavy-wood.jpg");
@@ -113,7 +115,7 @@ const Heavy = () => {
             transition={{ delay: 1 }}
             className="text-center text-sm text-[#faf7f2]/40 mb-4 tracking-wide"
           >
-            {isRevealed ? "the soul within" : "hover to reveal.."}
+            {isRevealed ? "the soul within" : (isMobile ? "tap to reveal.." : "hover to reveal..")}
           </motion.p>
 
           <div className="relative">
