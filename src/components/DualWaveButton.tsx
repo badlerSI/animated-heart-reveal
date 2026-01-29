@@ -35,7 +35,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           {/* the light - Mobile - offset left */}
           <Link
             to="/light"
-            className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-12 group"
+            className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-20 group"
           >
             <span
               className="font-outfit text-2xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
@@ -60,7 +60,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           {/* The Heavy - Mobile - offset right */}
           <Link
             to="/heavy"
-            className="flex flex-col items-end self-end mr-0 pt-2 pb-6 px-8 -mt-8 group"
+            className="flex flex-col items-end self-end mr-0 pt-2 pb-6 px-8 -mt-12 group"
           >
             <span
               className="font-playfair text-2xl font-normal tracking-wide text-white/60 group-hover:text-white transition-all duration-300"
