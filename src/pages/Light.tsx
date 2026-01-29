@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Cpu, HardDrive, MemoryStick, Monitor, Box, Users, GraduationCap, Briefcase, Palette } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Light = () => {
   const imageLoaded = useImagePreloader("/lovable-uploads/light-product.jpg");
@@ -86,12 +87,19 @@ const Light = () => {
           </p>
         </motion.div>
 
+        {/* Skeleton placeholder while loading */}
+        {!imageLoaded && (
+          <div className="relative max-w-3xl w-full">
+            <Skeleton className="w-full aspect-[4/3] rounded-lg bg-[#1bbdc5]/10" />
+          </div>
+        )}
+
         {/* Product Image with Cyan Glow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: imageLoaded ? 1 : 0, scale: imageLoaded ? 1 : 0.95 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative max-w-3xl w-full"
+          transition={{ duration: 0.5 }}
+          className={`relative max-w-3xl w-full ${!imageLoaded ? 'absolute' : ''}`}
         >
           <div className="relative">
             {/* Cyan glow effect */}
@@ -106,6 +114,8 @@ const Light = () => {
               src="/lovable-uploads/light-product.jpg"
               alt="the light - portable AI device"
               className="relative w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
         </motion.div>
