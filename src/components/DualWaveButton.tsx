@@ -37,6 +37,9 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             to="/light"
             className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-20 group"
           >
+            <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300">
+              yours alone
+            </span>
             <span
               className="font-outfit text-2xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
               style={{
@@ -44,9 +47,6 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
               }}
             >
               the light
-            </span>
-            <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mt-2 transition-colors duration-300">
-              yours alone
             </span>
           </Link>
 
@@ -118,6 +118,9 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           onMouseEnter={() => setHoveredSide("left")}
           onMouseLeave={() => setHoveredSide(null)}
         >
+          <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300">
+            yours alone
+          </span>
           <span
             className="font-outfit text-2xl md:text-3xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
             style={{
@@ -125,9 +128,6 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             }}
           >
             the light
-          </span>
-          <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mt-2 transition-colors duration-300">
-            yours alone
           </span>
         </Link>
 
