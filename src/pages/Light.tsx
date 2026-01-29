@@ -33,11 +33,6 @@ const Light = () => {
       value: "4TB, 6TB, or 8TB SSD options",
     },
     {
-      icon: Box,
-      name: "case",
-      value: "polished metal enclosure",
-    },
-    {
       icon: Monitor,
       name: "display",
       value: "crystal-clear LCD panel",
@@ -87,7 +82,7 @@ const Light = () => {
             3-4 users. one machine.
           </p>
           <p className="text-sm text-[#1a1a1a]/40 tracking-widest uppercase">
-            polished metal. silent power.
+            Enough compute for the whole family.
           </p>
         </motion.div>
 
