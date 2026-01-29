@@ -113,7 +113,7 @@ const Heavy = () => {
             transition={{ delay: 1 }}
             className="text-center text-sm text-[#faf7f2]/40 mb-4 tracking-wide"
           >
-            {isRevealed ? "the soul within" : "hover to reveal what's inside"}
+            {isRevealed ? "the soul within" : "hover to reveal.."}
           </motion.p>
 
           <div className="relative">
