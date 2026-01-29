@@ -1,38 +1,21 @@
 
-# More Movement for Mobile Buttons
+# Shift Buttons: Desktop Heavy Left, Mobile Light Down
 
-## Current State
-- **"the light"**: `ml-6 mt-6` (left margin, top margin to push down)
-- **"The Heavy"**: `mr-6 -mt-2` (right margin, slight negative top margin)
-- **Gap**: `gap-4` between flex items
+## Changes Required
 
-## Requested Changes
-- **"the light"** → more SW (more left + more down)
-- **"The Heavy"** → more NE (more right + more up)
-- Tighten the gap that seems to have grown
+### 1. Desktop: Shift "The Heavy" 20px left
+- Current: `right-[72px]` on line 149
+- New: `right-[92px]` (72 + 20 = 92px from right edge)
 
-## Solution
+### 2. Mobile: Shift "the light" 20px down
+- Current: `mt-20` on line 38 (which is 5rem = 80px)
+- New: `mt-[100px]` (80 + 20 = 100px from current position)
 
-| Element | Current | New |
-|---------|---------|-----|
-| Flex container | `gap-4` | `gap-2` (tighter spacing) |
-| "the light" Link | `ml-6 mt-6` | `ml-4 mt-10` (slightly more left via less margin, more down via larger top margin) |
-| "The Heavy" Link | `mr-6 -mt-2` | `mr-4 -mt-4` (slightly more right via less margin, more up via larger negative margin) |
+## Technical Details
 
-Wait - to go more **left** we need a smaller left margin? No, the `self-start` pushes it left, and `ml-6` adds spacing from the edge. To go more left (closer to edge), we'd reduce `ml`, but the user said "more SW" which is more left AND down. Let me reconsider:
+| Target | Platform | Current | New |
+|--------|----------|---------|-----|
+| The Heavy | Desktop | `right-[72px]` | `right-[92px]` |
+| the light | Mobile | `mt-20` | `mt-[100px]` |
 
-Actually for a more pronounced diagonal effect:
-- **More left**: reduce `ml-6` to `ml-4` 
-- **More down**: increase `mt-6` to `mt-8`
-- **More right**: reduce `mr-6` to `mr-4`
-- **More up**: increase negative margin from `-mt-2` to `-mt-4`
-
-## Technical Changes
-
-| Element | Current | New |
-|---------|---------|-----|
-| Flex container | `gap-4` | `gap-2` |
-| "the light" Link | `ml-6 ... mt-6` | `ml-4 ... mt-8` |
-| "The Heavy" Link | `mr-6 ... -mt-2` | `mr-4 ... -mt-4` |
-
-Desktop layout remains completely unchanged.
+Both changes use Tailwind's arbitrary value syntax `[Xpx]` for precise pixel control.
