@@ -1,64 +1,48 @@
 
+# Adjust Vertical Positioning of Text Labels
 
-# Fix: "The Heavy" Text Visibility
-
-## Root Cause Identified
-The z-index is correct (`z-20`), but **the `clipPath` is cutting off the visible area** of "The Heavy" link. 
-
-Looking at line 85:
-```jsx
-clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
-```
-
-This creates a triangle in the bottom-right corner. Combined with the rotated wave image crossing through that area, the text appears behind the wave even though z-index says it should be on top.
-
-The issue: The wave PNG itself likely has visual content that extends into the bottom-right region where "The Heavy" text lives.
+## Current State
+- **"the light"**: Positioned at `top-0` with `pt-4` padding (anchored to top edge)
+- **"The Heavy"**: Positioned at `bottom-0` with `pb-4` padding (anchored to bottom edge)
 
 ## The Fix
-**Remove the `clipPath` from "The Heavy" link** and rely solely on z-index for layering. The text will render fully on top of the wave.
+Move both labels toward the center by the same amount:
+- Push "the light" **down** by changing `top-0` to `top-8`
+- Push "The Heavy" **up** by changing `bottom-0` to `bottom-8`
+
+This shifts each label 2rem (32px) toward the diagonal wave divider, creating a tighter, more balanced composition.
 
 ## Changes to Make
 
 **File:** `src/components/DualWaveButton.tsx`
 
-| Line | Change |
-|------|--------|
-| 84-86 | Remove the `clipPath` style from "The Heavy" Link |
+| Line | Current | Change To |
+|------|---------|-----------|
+| 46 | `top-0` | `top-8` |
+| 78 | `bottom-0` | `bottom-8` |
 
 ## Code Diff
-
-```diff
-  {/* Lower-Right Region: The Heavy */}
-  <Link
-    to="/heavy"
-    className="absolute bottom-0 right-0 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
-    onMouseEnter={() => setHoveredSide("right")}
-    onMouseLeave={() => setHoveredSide(null)}
--   style={{
--     clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
--   }}
-  >
-```
-
-## Optional: Remove clipPath from "the light" too
-For consistency, we can also remove the clipPath from "the light" link. The extended hover zones already handle the triangular click areas, so the visible text links don't need to be clipped.
 
 ```diff
   {/* Upper-Left Region: the light */}
   <Link
     to="/light"
-    className="absolute top-0 left-0 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
-    onMouseEnter={() => setHoveredSide("left")}
-    onMouseLeave={() => setHoveredSide(null)}
--   style={{
--     clipPath: "polygon(0 0, 100% 0, 0 100%)"
--   }}
+-   className="absolute top-0 left-0 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
++   className="absolute top-8 left-0 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
+    ...
+  >
+
+  {/* Lower-Right Region: The Heavy */}
+  <Link
+    to="/heavy"
+-   className="absolute bottom-0 right-0 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
++   className="absolute bottom-8 right-0 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
+    ...
   >
 ```
 
 ## Result
-- Both text labels render fully visible at `z-20`
-- Wave stays at `z-[1]` as background decoration
-- Extended hover zones at `z-0` still provide larger click targets
-- No clipping interferes with text visibility
-
+- "the light" moves down 32px from the top
+- "The Heavy" moves up 32px from the bottom
+- Both labels shift symmetrically toward the wave divider
+- The overall layout feels more centered and cohesive
