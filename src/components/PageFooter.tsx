@@ -5,6 +5,7 @@ interface PageFooterProps {
   accentColor?: string;
   mutedColor?: string;
   dimColor?: string;
+  excludeLinks?: string[];
 }
 
 const navLinks = [
@@ -22,7 +23,8 @@ const PageFooter = ({
   glowing = false,
   accentColor = "#1bbdc5",
   mutedColor = "#5BA8C4",
-  dimColor = "#4A8DA8"
+  dimColor = "#4A8DA8",
+  excludeLinks = []
 }: PageFooterProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -38,7 +40,9 @@ const PageFooter = ({
           <p style={{ color: dim }}>Soul Interface © 2026</p>
           
           <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {navLinks.map((link) => {
+            {navLinks
+              .filter(link => !excludeLinks.includes(link.path))
+              .map((link) => {
               const isActive = currentPath === link.path;
               const linkStyle = glowing
                 ? {

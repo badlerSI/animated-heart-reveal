@@ -7,7 +7,7 @@ import HowItWorksSection from "./home/HowItWorksSection";
 import ReasoningSection from "./home/ReasoningSection";
 import FAQSection from "./home/FAQSection";
 import ClosingCTASection from "./home/ClosingCTASection";
-import Footer from "./home/Footer";
+import PageFooter from "./PageFooter";
 import "./scrollContent.css";
 
 /*──────────────────────────────────────────────────────────────
@@ -136,7 +136,7 @@ const ScrollContent = () => {
       <FAQSection />
       <ClosingCTASection />
 
-      <Footer />
+      <PageFooter excludeLinks={["/light", "/heavy"]} />
     </div>
   );
 };
