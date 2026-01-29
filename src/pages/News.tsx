@@ -77,19 +77,38 @@ export default function News() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Client-side email validation
+    const trimmedEmail = email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!trimmedEmail) {
+      setMsg("⚠️ Please enter an email address.");
+      return;
+    }
+    
+    if (trimmedEmail.length > 254) {
+      setMsg("⚠️ Email address is too long.");
+      return;
+    }
+    
+    if (!emailRegex.test(trimmedEmail)) {
+      setMsg("⚠️ Please enter a valid email address.");
+      return;
+    }
+    
     setBusy(true);
     setMsg("Submitting…");
 
     try {
       await fetch(
-        `${WEB_APP_URL}?email=${encodeURIComponent(email)}`,
+        `${WEB_APP_URL}?email=${encodeURIComponent(trimmedEmail)}`,
         { mode: "no-cors" }
       );
 
       setMsg("🎉 Thanks for subscribing!");
       setEmail("");
     } catch (err) {
-      console.error(err);
       setMsg("⚠️ Network error. Please try later.");
     } finally {
       setBusy(false);
