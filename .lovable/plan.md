@@ -1,49 +1,55 @@
 
 
-# Shift Labels 20px More Toward Center (Both Axes)
+# Add PageFooter to Homepage (Without Light/Heavy Links)
 
-## Current State
-- **"the light"**: `top-8 left-8` (32px from top-left corner)
-- **"The Heavy"**: `bottom-8 right-8` (32px from bottom-right corner)
+## Overview
+Replace the simple Footer component on the homepage with the unified PageFooter component used on other pages, but exclude "The Light" and "The Heavy" navigation links.
 
-## The Change
-Add 20 pixels to each position, shifting both labels closer to the center:
-- **New total offset**: 32px + 20px = 52px
+## Changes
 
-Since 52px isn't a standard Tailwind spacing value, we'll use arbitrary values for precision.
+### 1. Update PageFooter Component
+**File:** `src/components/PageFooter.tsx`
 
-## Changes to Make
+Add an `excludeLinks` prop to allow filtering out specific navigation items:
 
-**File:** `src/components/DualWaveButton.tsx`
+```tsx
+interface PageFooterProps {
+  glowing?: boolean;
+  accentColor?: string;
+  mutedColor?: string;
+  dimColor?: string;
+  excludeLinks?: string[];  // NEW: paths to exclude from nav
+}
+```
 
-| Label | Current | New |
-|-------|---------|-----|
-| "the light" | `top-8 left-8` | `top-[52px] left-[52px]` |
-| "The Heavy" | `bottom-8 right-8` | `bottom-[52px] right-[52px]` |
+Filter the `navLinks` array when rendering to exclude any paths listed in `excludeLinks`.
 
-## Code Diff
+### 2. Update ScrollContent to Use PageFooter
+**File:** `src/components/ScrollContent.tsx`
 
-```diff
-  {/* Upper-Left Region: the light */}
-  <Link
-    to="/light"
--   className="absolute top-8 left-8 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
-+   className="absolute top-[52px] left-[52px] w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
-    ...
-  >
+- Import `PageFooter` instead of `Footer`
+- Render `PageFooter` with `excludeLinks={["/light", "/heavy"]}`
 
-  {/* Lower-Right Region: The Heavy */}
-  <Link
-    to="/heavy"
--   className="absolute bottom-8 right-8 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
-+   className="absolute bottom-[52px] right-[52px] w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
-    ...
-  >
+## Code Changes
+
+**PageFooter.tsx** - Add filtering logic:
+```tsx
+// In the nav rendering:
+{navLinks
+  .filter(link => !excludeLinks?.includes(link.path))
+  .map((link) => { ... })}
+```
+
+**ScrollContent.tsx** - Swap footer:
+```tsx
+import PageFooter from "../PageFooter";
+
+// At the bottom of the component:
+<PageFooter excludeLinks={["/light", "/heavy"]} />
 ```
 
 ## Result
-- Both labels shift 20px closer to the center on both axes
-- "the light" now 52px from top and left edges
-- "The Heavy" now 52px from bottom and right edges
-- Symmetric positioning maintained
+- Homepage gets the same unified navigation footer as other pages
+- "The Light" and "The Heavy" links are excluded from the homepage footer (since they're already accessible via the DualWaveButton)
+- Other pages continue to show all links as before
 
