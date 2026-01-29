@@ -1,67 +1,40 @@
 
+# Mobile "Tap to Reveal" Text on Heavy Page
 
-# Fix Mobile Overlap for "the light" / "The Heavy" Buttons
-
-## The Problem
-The DualWaveButton uses fixed pixel offsets in a 256px tall container. On mobile:
-- "the light" is at `top: 72px, left: 62px`
-- "The Heavy" is at `bottom: 72px, right: 72px`
-- Both have `w-1/2 h-1/2` sizing
-
-On narrow screens, the text collides in the middle.
-
-## Solution: Responsive Stacked Layout for Mobile
-
-On mobile, switch from the diagonal artistic layout to a clean **vertical stack** - keeping the wave divider as a horizontal separator between them.
-
-```text
-DESKTOP (keep as-is)          MOBILE (new)
-+------------------+          +------------------+
-|  the light       |          |                  |
-|       \          |          |    the light     |
-|        \~~~      |          |    yours alone   |
-|         ~~~\     |          |                  |
-|             \    |          |  ~~~~~~~~~~~~~~~  |
-|        The Heavy |          |                  |
-+------------------+          |    The Heavy     |
-                              |  serve the room  |
-                              |                  |
-                              +------------------+
-```
-
-## Implementation
-
-### 1. Add Mobile Detection
-Import the existing `useIsMobile` hook to conditionally render layouts.
-
-### 2. Create Two Layout Modes
-
-**Desktop (md and up):** Keep the current diagonal layout with wave image rotated -20deg.
-
-**Mobile:** 
-- Stack the two buttons vertically with flexbox
-- Wave divider sits horizontally between them (rotate 0deg, smaller width)
-- Remove absolute positioning - use natural flow
-- Add touch-friendly tap targets
-
-### 3. Preserve the Essence
-- Same fonts, colors, and glow effects
-- Same taglines ("yours alone" / "serve the room")
-- Wave still visually separates the two
-- Hover/tap states still work
+## Overview
+Update the X-Ray reveal instruction on /heavy to say "tap to reveal.." on mobile devices while keeping "hover to reveal.." on desktop.
 
 ---
 
-## Technical Changes
+## Changes
 
-| Aspect | Desktop | Mobile |
-|--------|---------|--------|
-| Container | `relative h-64` | `flex flex-col items-center` |
-| Wave rotation | `-20deg` | `0deg` (horizontal) |
-| Wave width | `w-[42rem]` | `w-64` or similar |
-| Button positions | Absolute with px offsets | Flex items, natural flow |
-| Hover zones | clipPath triangles | Not needed (simple tap) |
-| Container height | `h-64` fixed | Auto based on content |
+### 1. Import Mobile Hook
+Add the `useIsMobile` hook import to detect device type.
 
-The desktop experience remains completely unchanged - we only add mobile-specific styling using Tailwind's responsive prefixes and conditional rendering for the complex hover zones.
+### 2. Update Instruction Text
+Change line 116 to show device-appropriate text:
+- **Mobile**: "tap to reveal.."
+- **Desktop**: "hover to reveal.."
 
+---
+
+## Technical Details
+
+| Change | Location | Current | New |
+|--------|----------|---------|-----|
+| Import | Line 1-6 | No mobile hook | Add `useIsMobile` import |
+| Text | Line 116 | `"hover to reveal.."` | `isMobile ? "tap to reveal.." : "hover to reveal.."` |
+
+**Code change:**
+```tsx
+// Add import
+import { useIsMobile } from "@/hooks/use-mobile";
+
+// Inside component
+const isMobile = useIsMobile();
+
+// Update instruction text (line 116)
+{isRevealed ? "the soul within" : (isMobile ? "tap to reveal.." : "hover to reveal..")}
+```
+
+The "the soul within" revealed state text remains the same for both mobile and desktop.
