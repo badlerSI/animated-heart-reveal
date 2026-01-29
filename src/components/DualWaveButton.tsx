@@ -30,12 +30,12 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col items-center gap-6"
+        className="flex flex-col items-center gap-4"
         >
-          {/* the light - Mobile */}
+          {/* the light - Mobile - offset left */}
           <Link
             to="/light"
-            className="flex flex-col items-center py-6 px-8 group"
+            className="flex flex-col items-start self-start ml-6 py-6 px-8 group"
           >
             <span
               className="font-outfit text-2xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
@@ -57,10 +57,10 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             className="w-48 h-auto opacity-60"
           />
 
-          {/* The Heavy - Mobile */}
+          {/* The Heavy - Mobile - offset right */}
           <Link
             to="/heavy"
-            className="flex flex-col items-center py-6 px-8 group"
+            className="flex flex-col items-end self-end mr-6 py-6 px-8 group"
           >
             <span
               className="font-playfair text-2xl font-normal tracking-wide text-white/60 group-hover:text-white transition-all duration-300"

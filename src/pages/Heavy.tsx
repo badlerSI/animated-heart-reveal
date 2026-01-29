@@ -4,6 +4,7 @@ import { Cpu, HardDrive, MemoryStick, Wifi, Box, Building2, BookOpen, Music } fr
 import PageFooter from "@/components/PageFooter";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Heavy = () => {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -98,12 +99,19 @@ const Heavy = () => {
           </p>
         </motion.div>
 
+        {/* Skeleton placeholder while loading */}
+        {!imagesLoaded && (
+          <div className="relative max-w-3xl w-full">
+            <Skeleton className="w-full aspect-[4/3] rounded-lg bg-amber-900/20" />
+          </div>
+        )}
+
         {/* Product Image with Hover-to-Reveal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: imagesLoaded ? 1 : 0, scale: imagesLoaded ? 1 : 0.95 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative max-w-3xl w-full cursor-pointer"
+          transition={{ duration: 0.5 }}
+          className={`relative max-w-3xl w-full cursor-pointer ${!imagesLoaded ? 'absolute' : ''}`}
           onMouseEnter={() => setIsRevealed(true)}
           onMouseLeave={() => setIsRevealed(false)}
           onTouchStart={() => setIsRevealed(!isRevealed)}
@@ -112,7 +120,7 @@ const Heavy = () => {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 0.3 }}
             className="text-center text-sm text-[#faf7f2]/40 mb-4 tracking-wide"
           >
             {isRevealed ? "the soul within" : (isMobile ? "tap to reveal.." : "hover to reveal..")}
@@ -137,6 +145,8 @@ const Heavy = () => {
               src="/lovable-uploads/heavy-wood.jpg"
               alt="The Heavy - Artisanal AI Device"
               className="relative w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
+              loading="eager"
+              fetchPriority="high"
               animate={{
                 opacity: isRevealed ? 0 : 1,
               }}
@@ -148,6 +158,8 @@ const Heavy = () => {
               src="/lovable-uploads/heavy-skeleton.jpg"
               alt="The Heavy - Internal Engineering"
               className="absolute inset-0 w-full aspect-[4/3] object-cover object-center rounded-lg shadow-2xl"
+              loading="eager"
+              fetchPriority="high"
               initial={{ opacity: 0 }}
               animate={{
                 opacity: isRevealed ? 1 : 0,
