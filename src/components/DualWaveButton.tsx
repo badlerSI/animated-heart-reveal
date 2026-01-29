@@ -35,7 +35,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           {/* the light - Mobile - offset left */}
           <Link
             to="/light"
-            className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-20 group"
+            className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-[100px] group"
           >
             <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300">
               yours alone
@@ -146,7 +146,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         {/* Lower-Right Region: The Heavy */}
         <Link
           to="/heavy"
-          className="absolute bottom-[72px] right-[72px] w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
+          className="absolute bottom-[72px] right-[92px] w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
           onMouseEnter={() => setHoveredSide("right")}
           onMouseLeave={() => setHoveredSide(null)}
         >
