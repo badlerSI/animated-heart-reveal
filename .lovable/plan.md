@@ -1,55 +1,34 @@
 
+# Update "the light" Product Page
 
-# Add PageFooter to Homepage (Without Light/Heavy Links)
+## Changes to Make
 
-## Overview
-Replace the simple Footer component on the homepage with the unified PageFooter component used on other pages, but exclude "The Light" and "The Heavy" navigation links.
+**File:** `src/pages/Light.tsx`
 
-## Changes
+### 1. Update Hero Subtitle (Line 90)
+Replace the tagline text:
+- **Current:** `polished metal. silent power.`
+- **New:** `Enough compute for the whole family.`
 
-### 1. Update PageFooter Component
-**File:** `src/components/PageFooter.tsx`
-
-Add an `excludeLinks` prop to allow filtering out specific navigation items:
-
+### 2. Remove Case Spec (Lines 35-39)
+Delete the "case" entry from the specs array:
 ```tsx
-interface PageFooterProps {
-  glowing?: boolean;
-  accentColor?: string;
-  mutedColor?: string;
-  dimColor?: string;
-  excludeLinks?: string[];  // NEW: paths to exclude from nav
-}
+{
+  icon: Box,
+  name: "case",
+  value: "polished metal enclosure",
+},
 ```
 
-Filter the `navLinks` array when rendering to exclude any paths listed in `excludeLinks`.
+Also remove the unused `Box` import from lucide-react since it will no longer be needed after removing the case spec (the portability spec also uses `Box`, so we'll keep it).
 
-### 2. Update ScrollContent to Use PageFooter
-**File:** `src/components/ScrollContent.tsx`
+---
 
-- Import `PageFooter` instead of `Footer`
-- Render `PageFooter` with `excludeLinks={["/light", "/heavy"]}`
+## Technical Details
 
-## Code Changes
+| Change | Location | Before | After |
+|--------|----------|--------|-------|
+| Hero tagline | Line 90 | `polished metal. silent power.` | `Enough compute for the whole family.` |
+| Specs array | Lines 35-39 | Case spec object | Removed entirely |
 
-**PageFooter.tsx** - Add filtering logic:
-```tsx
-// In the nav rendering:
-{navLinks
-  .filter(link => !excludeLinks?.includes(link.path))
-  .map((link) => { ... })}
-```
-
-**ScrollContent.tsx** - Swap footer:
-```tsx
-import PageFooter from "../PageFooter";
-
-// At the bottom of the component:
-<PageFooter excludeLinks={["/light", "/heavy"]} />
-```
-
-## Result
-- Homepage gets the same unified navigation footer as other pages
-- "The Light" and "The Heavy" links are excluded from the homepage footer (since they're already accessible via the DualWaveButton)
-- Other pages continue to show all links as before
-
+The specs grid will now show 6 items instead of 7, which will display nicely in the 2-column (mobile) and 3-column (desktop) grid layout.
