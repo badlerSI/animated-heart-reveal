@@ -43,7 +43,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         {/* Upper-Left Region: the light */}
         <Link
           to="/light"
-          className="absolute top-[52px] left-[52px] w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
+          className="absolute top-[72px] left-[62px] w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
           onMouseEnter={() => setHoveredSide("left")}
           onMouseLeave={() => setHoveredSide(null)}
         >
@@ -75,7 +75,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         {/* Lower-Right Region: The Heavy */}
         <Link
           to="/heavy"
-          className="absolute bottom-[52px] right-[52px] w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
+          className="absolute bottom-[72px] right-[72px] w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
           onMouseEnter={() => setHoveredSide("right")}
           onMouseLeave={() => setHoveredSide(null)}
         >
