@@ -34,7 +34,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
         <img 
           src="/lovable-uploads/wave-transparent-v3.png"
           alt=""
-          className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-10"
+          className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-[1]"
           style={{
             transform: "translate(-50%, -50%) rotate(-20deg)"
           }}
