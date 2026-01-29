@@ -1,44 +1,64 @@
 
 
-# Fix: Move Wave to Back Layer
+# Fix: "The Heavy" Text Visibility
 
-## The Simple Fix
-Drop the wave image's `z-index` below the text labels. Since text links are at `z-20`, putting the wave at `z-1` (or even `z-0`) ensures it renders behind the text.
+## Root Cause Identified
+The z-index is correct (`z-20`), but **the `clipPath` is cutting off the visible area** of "The Heavy" link. 
+
+Looking at line 85:
+```jsx
+clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
+```
+
+This creates a triangle in the bottom-right corner. Combined with the rotated wave image crossing through that area, the text appears behind the wave even though z-index says it should be on top.
+
+The issue: The wave PNG itself likely has visual content that extends into the bottom-right region where "The Heavy" text lives.
+
+## The Fix
+**Remove the `clipPath` from "The Heavy" link** and rely solely on z-index for layering. The text will render fully on top of the wave.
 
 ## Changes to Make
 
 **File:** `src/components/DualWaveButton.tsx`
 
-| Line | Current | Change To |
-|------|---------|-----------|
-| 37 | `z-10` | `z-[1]` |
+| Line | Change |
+|------|--------|
+| 84-86 | Remove the `clipPath` style from "The Heavy" Link |
 
 ## Code Diff
 
 ```diff
-  {/* Wave Divider - Clean transparent PNG */}
-  <img 
-    src="/lovable-uploads/wave-transparent-v3.png"
-    alt=""
--   className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-10"
-+   className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-[1]"
-    style={{
-      transform: "translate(-50%, -50%) rotate(-20deg)"
-    }}
-  />
+  {/* Lower-Right Region: The Heavy */}
+  <Link
+    to="/heavy"
+    className="absolute bottom-0 right-0 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
+    onMouseEnter={() => setHoveredSide("right")}
+    onMouseLeave={() => setHoveredSide(null)}
+-   style={{
+-     clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
+-   }}
+  >
 ```
 
-## Final Z-Index Stack
+## Optional: Remove clipPath from "the light" too
+For consistency, we can also remove the clipPath from "the light" link. The extended hover zones already handle the triangular click areas, so the visible text links don't need to be clipped.
 
-| Layer | Z-Index | Element |
-|-------|---------|---------|
-| Bottom | `z-0` | Extended hover zones |
-| Middle | `z-[1]` | Wave image |
-| Top | `z-20` | Text links ("the light", "The Heavy") |
+```diff
+  {/* Upper-Left Region: the light */}
+  <Link
+    to="/light"
+    className="absolute top-0 left-0 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
+    onMouseEnter={() => setHoveredSide("left")}
+    onMouseLeave={() => setHoveredSide(null)}
+-   style={{
+-     clipPath: "polygon(0 0, 100% 0, 0 100%)"
+-   }}
+  >
+```
 
 ## Result
-- Wave renders behind everything visible
-- Text labels ("the light" and "The Heavy") are fully visible on top
-- Hover zones still work for expanded click areas
-- Wave still provides visual separation as a background decoration
+- Both text labels render fully visible at `z-20`
+- Wave stays at `z-[1]` as background decoration
+- Extended hover zones at `z-0` still provide larger click targets
+- No clipping interferes with text visibility
 
