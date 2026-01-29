@@ -1,47 +1,67 @@
 
 
-# Update The Heavy Product Page
+# Fix Mobile Overlap for "the light" / "The Heavy" Buttons
 
-## Overview
-Update specs, remove case blurb, and rework the CTA section to emphasize ownership and control rather than luxury investment.
+## The Problem
+The DualWaveButton uses fixed pixel offsets in a 256px tall container. On mobile:
+- "the light" is at `top: 72px, left: 62px`
+- "The Heavy" is at `bottom: 72px, right: 72px`
+- Both have `w-1/2 h-1/2` sizing
+
+On narrow screens, the text collides in the middle.
+
+## Solution: Responsive Stacked Layout for Mobile
+
+On mobile, switch from the diagonal artistic layout to a clean **vertical stack** - keeping the wave divider as a horizontal separator between them.
+
+```text
+DESKTOP (keep as-is)          MOBILE (new)
++------------------+          +------------------+
+|  the light       |          |                  |
+|       \          |          |    the light     |
+|        \~~~      |          |    yours alone   |
+|         ~~~\     |          |                  |
+|             \    |          |  ~~~~~~~~~~~~~~~  |
+|        The Heavy |          |                  |
++------------------+          |    The Heavy     |
+                              |  serve the room  |
+                              |                  |
+                              +------------------+
+```
+
+## Implementation
+
+### 1. Add Mobile Detection
+Import the existing `useIsMobile` hook to conditionally render layouts.
+
+### 2. Create Two Layout Modes
+
+**Desktop (md and up):** Keep the current diagonal layout with wave image rotated -20deg.
+
+**Mobile:** 
+- Stack the two buttons vertically with flexbox
+- Wave divider sits horizontally between them (rotate 0deg, smaller width)
+- Remove absolute positioning - use natural flow
+- Add touch-friendly tap targets
+
+### 3. Preserve the Essence
+- Same fonts, colors, and glow effects
+- Same taglines ("yours alone" / "serve the room")
+- Wave still visually separates the two
+- Hover/tap states still work
 
 ---
 
-## Changes
+## Technical Changes
 
-### 1. Combine Storage Specs into One
-**Current (two entries):**
-- Primary Storage: "4TB Gen 5 SSD for instant model switching"
-- Backup Storage: "4TB Gen 4 SSD for redundancy"
+| Aspect | Desktop | Mobile |
+|--------|---------|--------|
+| Container | `relative h-64` | `flex flex-col items-center` |
+| Wave rotation | `-20deg` | `0deg` (horizontal) |
+| Wave width | `w-[42rem]` | `w-64` or similar |
+| Button positions | Absolute with px offsets | Flex items, natural flow |
+| Hover zones | clipPath triangles | Not needed (simple tap) |
+| Container height | `h-64` fixed | Auto based on content |
 
-**New (single entry):**
-- Storage: "8TB total: Gen 5 + Gen 4 SSDs. Hot swap models at blazing speed."
-
-### 2. Remove Case Spec
-Delete the "Case" entry entirely (lines 51-54). The portability spec already exists and the wood/emblem details are covered in the hero subtitle.
-
-### 3. Rework CTA Section
-**Current:**
-- Title: "Timeless Investment"
-- Subtitle: "Own a piece of the future, crafted for generations."
-
-**New:**
-- Title: "Your Infrastructure, Your Rules"
-- Subtitle: "No subscriptions. No cloud. Just the power to run AI on your terms."
-
-This ties directly into Soul Interface's sovereign AI positioning and emphasizes ownership/control rather than luxury.
-
----
-
-## Technical Details
-
-| Change | Location | Before | After |
-|--------|----------|--------|-------|
-| Storage spec | Lines 35-44 | Two separate entries | Single combined entry |
-| Case spec | Lines 51-54 | Case blurb | Removed |
-| CTA title | Line 271 | "Timeless Investment" | "Your Infrastructure, Your Rules" |
-| CTA subtitle | Line 279 | "Own a piece of the future..." | "No subscriptions. No cloud..." |
-| Icon imports | Line 3 | Includes `Server` | Remove `Server` (no longer needed) |
-
-The specs grid will show 6 items instead of 8, maintaining good visual balance in the 2/3/4 column grid.
+The desktop experience remains completely unchanged - we only add mobile-specific styling using Tailwind's responsive prefixes and conditional rendering for the complex hover zones.
 
