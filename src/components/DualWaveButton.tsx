@@ -46,9 +46,6 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           className="absolute top-0 left-0 w-1/2 h-1/2 flex flex-col items-start justify-start pt-4 pl-4 group z-20"
           onMouseEnter={() => setHoveredSide("left")}
           onMouseLeave={() => setHoveredSide(null)}
-          style={{
-            clipPath: "polygon(0 0, 100% 0, 0 100%)"
-          }}
         >
           <span
             className="font-outfit text-2xl md:text-3xl font-extralight tracking-widest text-white/60 group-hover:text-white transition-all duration-300 lowercase"
@@ -81,9 +78,6 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           className="absolute bottom-0 right-0 w-1/2 h-1/2 flex flex-col items-end justify-end pb-4 pr-4 group z-20"
           onMouseEnter={() => setHoveredSide("right")}
           onMouseLeave={() => setHoveredSide(null)}
-          style={{
-            clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
-          }}
         >
           <span
             className="font-playfair text-2xl md:text-3xl font-normal tracking-wide text-white/60 group-hover:text-white transition-all duration-300"
