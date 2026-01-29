@@ -1,39 +1,38 @@
 
-
-# Adjust Mobile Button Vertical Spacing
+# More Movement for Mobile Buttons
 
 ## Current State
-The mobile buttons have horizontal offsets but are vertically equidistant from the wave divider. The user wants:
-- **"the light"** → move **down** by ~1 line height (~2rem for text-2xl)
-- **"The Heavy"** → move **up** by the same amount
+- **"the light"**: `ml-6 mt-6` (left margin, top margin to push down)
+- **"The Heavy"**: `mr-6 -mt-2` (right margin, slight negative top margin)
+- **Gap**: `gap-4` between flex items
+
+## Requested Changes
+- **"the light"** → more SW (more left + more down)
+- **"The Heavy"** → more NE (more right + more up)
+- Tighten the gap that seems to have grown
 
 ## Solution
-Add margin adjustments to push each button closer to the wave divider:
-
-```text
-CURRENT                          DESIRED
-                                  
-   the light                         the light
-   yours alone                       yours alone
-                                  
-       ↓ gap-4                           ↓ reduced gap (mt-6)
-                                  
-   ~~~~~~~~~~~~~~~                ~~~~~~~~~~~~~~~
-                                  
-       ↓ gap-4                           ↓ reduced gap (negative margin)
-                                  
-          The Heavy                      The Heavy
-        serve the room                 serve the room
-```
-
-## Technical Changes - DualWaveButton.tsx (Mobile Only)
 
 | Element | Current | New |
 |---------|---------|-----|
-| "the light" Link | `py-6 px-8` | `pt-6 pb-2 px-8 mt-6` (add top margin to push down, reduce bottom padding) |
-| "The Heavy" Link | `py-6 px-8` | `pt-2 pb-6 px-8 -mt-2` (negative top margin to pull up, reduce top padding) |
+| Flex container | `gap-4` | `gap-2` (tighter spacing) |
+| "the light" Link | `ml-6 mt-6` | `ml-4 mt-10` (slightly more left via less margin, more down via larger top margin) |
+| "The Heavy" Link | `mr-6 -mt-2` | `mr-4 -mt-4` (slightly more right via less margin, more up via larger negative margin) |
 
-The `text-2xl` class is approximately 1.5rem (24px). Adding `mt-6` (1.5rem) to "the light" pushes it down by roughly one line height. Using `-mt-2` on "The Heavy" pulls it up slightly toward the wave.
+Wait - to go more **left** we need a smaller left margin? No, the `self-start` pushes it left, and `ml-6` adds spacing from the edge. To go more left (closer to edge), we'd reduce `ml`, but the user said "more SW" which is more left AND down. Let me reconsider:
+
+Actually for a more pronounced diagonal effect:
+- **More left**: reduce `ml-6` to `ml-4` 
+- **More down**: increase `mt-6` to `mt-8`
+- **More right**: reduce `mr-6` to `mr-4`
+- **More up**: increase negative margin from `-mt-2` to `-mt-4`
+
+## Technical Changes
+
+| Element | Current | New |
+|---------|---------|-----|
+| Flex container | `gap-4` | `gap-2` |
+| "the light" Link | `ml-6 ... mt-6` | `ml-4 ... mt-8` |
+| "The Heavy" Link | `mr-6 ... -mt-2` | `mr-4 ... -mt-4` |
 
 Desktop layout remains completely unchanged.
-
