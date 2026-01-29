@@ -1,66 +1,44 @@
 
 
-# Fix: Simplify Z-Index Layering for Dual Wave Button
+# Fix: Move Wave to Back Layer
 
-## Root Cause
-The current component has **overlapping elements fighting for z-index priority**:
-1. Wave image at `z-0`
-2. Extended hover zones at `z-0` with full-size invisible Links covering the container
-3. Text links at `z-10` that should be on top
-
-The extended hover zones (lines 67-76 and 102-111) with `w-full h-full` are creating invisible blocking layers that interfere with the text visibility and click behavior.
-
-## The Fix
-Restructure z-index layers clearly:
-
-| Element | Current | New |
-|---------|---------|-----|
-| Extended hover zones | `z-0` | `z-0` |
-| Wave image | `z-0` | `z-10` |
-| Text Links ("the light", "The Heavy") | `z-10` | `z-20` |
-
-This ensures:
-1. Hover zones are at the bottom for expanded click areas
-2. Wave image renders above hover zones as visual decoration
-3. Text labels render on top of everything and are always visible/clickable
+## The Simple Fix
+Drop the wave image's `z-index` below the text labels. Since text links are at `z-20`, putting the wave at `z-1` (or even `z-0`) ensures it renders behind the text.
 
 ## Changes to Make
 
 **File:** `src/components/DualWaveButton.tsx`
 
-```text
-Line 37: Wave image
-  - Change: z-0 → z-10
+| Line | Current | Change To |
+|------|---------|-----------|
+| 37 | `z-10` | `z-[1]` |
 
-Line 46: "the light" Link
-  - Change: z-10 → z-20
+## Code Diff
 
-Line 81: "The Heavy" Link  
-  - Change: z-10 → z-20
+```diff
+  {/* Wave Divider - Clean transparent PNG */}
+  <img 
+    src="/lovable-uploads/wave-transparent-v3.png"
+    alt=""
+-   className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-10"
++   className="absolute left-1/2 top-1/2 w-[42rem] h-auto pointer-events-none z-[1]"
+    style={{
+      transform: "translate(-50%, -50%) rotate(-20deg)"
+    }}
+  />
 ```
 
-## Code Preview
+## Final Z-Index Stack
 
-```jsx
-{/* Wave Divider */}
-<img 
-  className="... z-10"  // Was z-0, now middle layer
-/>
-
-{/* Upper-Left: the light */}
-<Link className="... z-20">  // Was z-10, now top layer
-  ...
-</Link>
-
-{/* Lower-Right: The Heavy */}
-<Link className="... z-20">  // Was z-10, now top layer
-  ...
-</Link>
-```
+| Layer | Z-Index | Element |
+|-------|---------|---------|
+| Bottom | `z-0` | Extended hover zones |
+| Middle | `z-[1]` | Wave image |
+| Top | `z-20` | Text links ("the light", "The Heavy") |
 
 ## Result
-- Text labels ("the light" and "The Heavy") always render on top and are clickable
-- Wave image sits in the middle as visual decoration
-- Extended hover zones remain at bottom for larger click targets
-- No CSS blend mode hacks needed
+- Wave renders behind everything visible
+- Text labels ("the light" and "The Heavy") are fully visible on top
+- Hover zones still work for expanded click areas
+- Wave still provides visual separation as a background decoration
 
