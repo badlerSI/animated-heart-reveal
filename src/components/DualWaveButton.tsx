@@ -37,7 +37,10 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             to="/light"
             className="flex flex-col items-start self-start ml-0 pt-6 pb-2 px-8 mt-[160px] group"
           >
-            <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300">
+            <span 
+              className="font-outfit text-xs tracking-[0.3em] uppercase text-white/50 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300"
+              style={{ textShadow: "0 0 8px rgba(27, 189, 197, 0.3)" }}
+            >
               yours alone
             </span>
             <span
@@ -70,7 +73,10 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             >
               The Heavy
             </span>
-            <span className="font-playfair text-[10px] tracking-[0.2em] text-white/25 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic">
+            <span 
+              className="font-playfair text-xs tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
+              style={{ textShadow: "0 0 8px rgba(212, 165, 116, 0.3)" }}
+            >
               serve the room
             </span>
           </Link>
@@ -118,7 +124,10 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           onMouseEnter={() => setHoveredSide("left")}
           onMouseLeave={() => setHoveredSide(null)}
         >
-          <span className="font-outfit text-[10px] tracking-[0.3em] uppercase text-white/25 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300">
+          <span 
+            className="font-outfit text-xs md:text-[11px] tracking-[0.3em] uppercase text-white/50 group-hover:text-[#1bbdc5]/70 mb-2 transition-colors duration-300"
+            style={{ textShadow: "0 0 8px rgba(27, 189, 197, 0.3)" }}
+          >
             yours alone
           </span>
           <span
@@ -158,7 +167,10 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
           >
             The Heavy
           </span>
-          <span className="font-playfair text-[10px] tracking-[0.2em] text-white/25 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic">
+          <span 
+            className="font-playfair text-xs md:text-[11px] tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
+            style={{ textShadow: "0 0 8px rgba(212, 165, 116, 0.3)" }}
+          >
             serve the room
           </span>
         </Link>
