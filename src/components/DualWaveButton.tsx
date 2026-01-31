@@ -74,7 +74,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
               The Heavy
             </span>
             <span 
-              className="font-playfair text-xs tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
+              className="font-playfair text-sm tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
               style={{ textShadow: "0 0 8px rgba(212, 165, 116, 0.3)" }}
             >
               serve the room
@@ -168,7 +168,7 @@ const DualWaveButton = ({ accentColor = "#1bbdc5" }: DualWaveButtonProps) => {
             The Heavy
           </span>
           <span 
-            className="font-playfair text-xs md:text-[11px] tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
+            className="font-playfair text-xs md:text-[13px] tracking-[0.2em] text-white/50 group-hover:text-[#d4a574]/70 mt-2 transition-colors duration-300 italic"
             style={{ textShadow: "0 0 8px rgba(212, 165, 116, 0.3)" }}
           >
             serve the room
