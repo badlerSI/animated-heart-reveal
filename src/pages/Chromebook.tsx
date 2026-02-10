@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Monitor, Terminal, Copy, Check, LogOut, CheckCircle, Settings, Server, KeyRound, Download, HelpCircle, Laptop } from "lucide-react";
+import { Terminal, Copy, Check, LogOut, CheckCircle, Settings, Server, KeyRound, HelpCircle, Laptop, Download, Loader2 } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -8,11 +8,30 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PageFooter from "@/components/PageFooter";
-import DualWaveButton from "@/components/DualWaveButton";
 import { toast } from "sonner";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
+
+const ZIP_FILES = [
+  { path: "README.txt", zipPath: "README.txt" },
+  { path: "HOSTING.md", zipPath: "HOSTING.md" },
+  { path: "Dockerfile", zipPath: "Dockerfile" },
+  { path: "nginx.conf", zipPath: "nginx.conf" },
+  { path: "docker-compose.yml", zipPath: "docker-compose.yml" },
+  { path: "start-server.sh", zipPath: "start-server.sh" },
+  { path: "stop-server.sh", zipPath: "stop-server.sh" },
+  { path: "student-app/index.html", zipPath: "student-app/index.html" },
+  { path: "student-app/offline.html", zipPath: "student-app/offline.html" },
+  { path: "student-app/icon.svg", zipPath: "student-app/icon.svg" },
+  { path: "student-app/manifest.json", zipPath: "student-app/manifest.json" },
+  { path: "student-app/sw.js", zipPath: "student-app/sw.js" },
+  { path: "student-app/assets/index-BI9yYeNr.js", zipPath: "student-app/assets/index-BI9yYeNr.js" },
+  { path: "student-app/assets/index-Q5tyc_K_.css", zipPath: "student-app/assets/index-Q5tyc_K_.css" },
+];
 
 const Chromebook = () => {
   const [copied, setCopied] = useState(false);
+  const [zipping, setZipping] = useState(false);
 
   const curlCommand = "curl -fsSL https://soulinterface.ai/install.sh | bash";
 
@@ -21,6 +40,30 @@ const Chromebook = () => {
     setCopied(true);
     toast.success("Copied to clipboard");
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const downloadZip = async () => {
+    setZipping(true);
+    try {
+      const zip = new JSZip();
+      const results = await Promise.all(
+        ZIP_FILES.map(async (f) => {
+          const res = await fetch(`/downloads/${f.path}`);
+          if (!res.ok) throw new Error(`Failed to fetch ${f.path}`);
+          const blob = await res.blob();
+          return { zipPath: f.zipPath, blob };
+        })
+      );
+      results.forEach(({ zipPath, blob }) => zip.file(zipPath, blob));
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, "soul-server-package.zip");
+      toast.success("Download started");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to create download package");
+    } finally {
+      setZipping(false);
+    }
   };
 
   const cyan = "#1bbdc5";
@@ -76,25 +119,54 @@ const Chromebook = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       {/* Hero */}
-      <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="py-20 flex flex-col items-center justify-center px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <Laptop className="w-16 h-16 mx-auto mb-6" style={{ color: cyan }} />
+          <Laptop className="w-12 h-12 mx-auto mb-4" style={{ color: cyan }} />
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#f0f8ff]"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-[#f0f8ff]"
             style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
           >
-            SOUL for Chromebook
+            Chromebook Setup Guide
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl mt-6 max-w-2xl mx-auto" style={{ color: cyanMuted }}>
-            Turn any Chromebook into a locked-down learning station.
-            <br className="hidden sm:block" />
-            One command. No internet required after setup.
+          <p className="text-base sm:text-lg mt-4 max-w-xl mx-auto" style={{ color: cyanMuted }}>
+            Everything you need to turn Chromebooks into locked-down SOUL learning stations.
           </p>
         </motion.div>
+      </section>
+
+      {/* Download Package */}
+      <section className="px-6 pb-12">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.button
+            onClick={downloadZip}
+            disabled={zipping}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold transition-all disabled:opacity-60"
+            style={{
+              background: `linear-gradient(135deg, ${cyan}, #0e8a8f)`,
+              color: "#0a0a0f",
+              boxShadow: `0 0 30px ${cyan}40`,
+            }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {zipping ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Download className="w-5 h-5" />
+            )}
+            {zipping ? "Assembling package…" : "Download Server Package"}
+          </motion.button>
+          <p className="text-sm mt-3" style={{ color: cyanDim }}>
+            Includes Dockerfile, nginx config, compose file, startup scripts, student app, and docs.
+          </p>
+        </div>
       </section>
 
       {/* Quick Install */}
@@ -281,64 +353,6 @@ const Chromebook = () => {
           </Accordion>
         </div>
       </section>
-
-      {/* Downloads */}
-      <section className="px-6 py-20 bg-[#0d0d14]">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-[#f0f8ff]"
-            style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
-          >
-            Downloads
-          </motion.h2>
-
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-lg font-semibold mb-4 text-[#f0f8ff]">Setup Guides</h3>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <a
-                href="/downloads/README.txt"
-                download
-                className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
-                style={{ borderColor: `${cyan}40`, color: cyanMuted }}
-              >
-                <Download className="w-5 h-5" style={{ color: cyan }} />
-                README.txt
-              </a>
-              <a
-                href="/downloads/HOSTING.md"
-                download
-                className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
-                style={{ borderColor: `${cyan}40`, color: cyanMuted }}
-              >
-                <Download className="w-5 h-5" style={{ color: cyan }} />
-                HOSTING.md
-              </a>
-            </div>
-
-            <h3 className="text-lg font-semibold mb-4 text-[#f0f8ff]">Server Files</h3>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {["Dockerfile", "nginx.conf", "docker-compose.yml", "start-server.sh", "stop-server.sh"].map((file) => (
-                <a
-                  key={file}
-                  href={`/downloads/${file}`}
-                  download
-                  className="flex items-center gap-3 px-5 py-3 rounded-xl border transition-colors hover:bg-white/5"
-                  style={{ borderColor: `${cyan}40`, color: cyanMuted }}
-                >
-                  <Download className="w-4 h-4" style={{ color: cyan }} />
-                  {file}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Dual Wave Button */}
-      <DualWaveButton />
 
       {/* Footer */}
       <PageFooter />
