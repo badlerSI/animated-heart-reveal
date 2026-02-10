@@ -1,54 +1,39 @@
 
 
-# Simplify Chromebook Page: One-Click Download + Remove from Navigation
+# Fix Chromebook Setup Instructions
 
-## Overview
-Strip the `/chromebook` page down to a technical setup/support page (not a product page), bundle all download files into a single ZIP, and remove the page from site-wide navigation since it's only needed by people setting up Chromebooks.
+## Problem
+The setup steps on the `/chromebook` page don't accurately reflect what the installer actually does. The installer is a two-pass process (first run installs Docker and exits, second run after re-login does the actual setup), but the page presents it as a seamless 4-step flow.
 
 ## Changes
 
-### 1. Remove "Chromebook" from PageFooter navigation
+### Update the steps array in `src/pages/Chromebook.tsx`
 
-In `src/components/PageFooter.tsx`, remove line 18 (`{ label: "Chromebook", path: "/chromebook" }`). The route itself stays in `App.tsx` so the page is still accessible by direct URL -- it just won't appear in the footer nav on every page. This follows the same "archived but accessible" pattern used for `/news`, `/partner`, `/tech`, and `/investors`.
+Replace the current 4 steps with 5 steps that match reality:
 
-### 2. Create a single ZIP download containing all server files
+| Step | Current | Fixed |
+|------|---------|-------|
+| 1 | Enable Linux (Settings -> Advanced -> Developers) | Same -- no change needed |
+| 2 | "Run the Installer" -- paste the curl command | "Install Docker" -- paste the curl command. The installer will install Docker and then ask you to log out. |
+| 3 | "Log Out & Back In" -- Docker requires a new session | "Log Out & Back In" -- Log out of the Linux terminal and log back in for Docker permissions to take effect. |
+| 4 | "Launch SOUL" -- menu appears automatically, press 1 | "Run the Installer Again" -- paste the same curl command a second time. This time it builds the kiosk container and sets everything up. |
+| (new) 5 | -- | "Launch SOUL" -- Open Terminal. The SOUL menu appears automatically. Press 1 to start. |
 
-Bundle these files into one ZIP: `README.txt`, `HOSTING.md`, `Dockerfile`, `nginx.conf`, `docker-compose.yml`, `start-server.sh`, `stop-server.sh`, plus the entire `student-app/` folder. The ZIP will be placed at `public/downloads/soul-server-package.zip`.
+### Update the Quick Install section
 
-Since Lovable can't run shell commands to create a ZIP, we have two options:
-- **Option A**: Generate the ZIP programmatically using JSZip in a build step or edge function
-- **Option B (recommended)**: You provide the pre-built ZIP file and we host it, OR we add a "Download All" button that uses JSZip in the browser to bundle the files on-the-fly when clicked
+Add a note below the curl command:
+"Run this in the Linux terminal on your Chromebook. The first run installs Docker (you'll need to log out and back in, then run it again). The second run completes the setup."
 
-We'll go with **Option B (client-side ZIP)**: install `jszip` and `file-saver`, then create a "Download Complete Package" button that fetches all the files and zips them in the browser. This avoids needing to maintain a static ZIP file.
+### Update the "Custom Server URL" card
 
-### 3. Simplify the Chromebook page
+Add the install-time variant alongside the existing post-install command:
 
-Strip the page down to a focused setup/support page:
+- **During install:** `SOUL_URL=http://YOUR_IP:3000 curl -fsSL https://soulinterface.ai/install.sh | bash`
+- **After install:** `SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh`
 
-- **Keep**: Hero (but tone down -- it's a setup guide, not a product pitch), Quick Install command box, Setup Steps, Teacher/Admin section, Troubleshooting FAQ
-- **Remove**: The DualWaveButton (product-page element)
-- **Replace**: The multi-file Downloads section with a single prominent "Download Server Package" button that triggers the client-side ZIP download
-- **Keep**: PageFooter (for basic navigation back to the rest of the site)
-
-### 4. Dependencies to add
-
-- `jszip` -- for creating ZIP files in the browser
-- `file-saver` -- for triggering the download
-
-## Files Changed
+### File changed
 
 | File | Change |
 |------|--------|
-| `src/components/PageFooter.tsx` | Remove Chromebook from `navLinks` array |
-| `src/pages/Chromebook.tsx` | Replace Downloads section with single ZIP button, remove DualWaveButton, simplify hero |
-| `package.json` | Add `jszip` and `file-saver` dependencies |
+| `src/pages/Chromebook.tsx` | Update `steps` array (4 -> 5 steps), update Quick Install description, update Custom Server URL card |
 
-## Technical Detail: Client-Side ZIP Download
-
-When the user clicks "Download Server Package," the button handler will:
-1. Fetch all files from `/downloads/` (README.txt, HOSTING.md, Dockerfile, nginx.conf, docker-compose.yml, start-server.sh, stop-server.sh, and the student-app folder contents)
-2. Add them to a JSZip instance preserving the folder structure
-3. Generate the ZIP blob
-4. Trigger a download as `soul-server-package.zip`
-
-A loading spinner will show while the ZIP is being assembled.
