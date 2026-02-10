@@ -1,280 +1,352 @@
 #!/bin/bash
+# ═══════════════════════════════════════════════════════════════════════════
+# SOUL Learning System - Chromebook Installer
+# https://soulinterface.ai/chromebook
 #
-# SOUL Learning System Installer for Chromebook (ChromeOS Linux / Crostini)
-#
-# Usage:
+# One-line install:
 #   curl -fsSL https://soulinterface.ai/install.sh | bash
 #
-# This script:
-#   1. Installs Docker (if not present)
-#   2. Builds a Docker container with Chromium in kiosk mode
-#   3. Creates start/stop/boot-menu scripts
-#   4. Optionally sets SOUL to launch on login
-#
-# Requirements:
-#   - ChromeOS with Linux (Crostini) enabled
-#   - Internet connection (for initial setup only)
-#
+# With custom server URL:
+#   SOUL_URL=http://YOUR_IP:3000 curl -fsSL https://soulinterface.ai/install.sh | bash
+# ═══════════════════════════════════════════════════════════════════════════
 
 set -e
 
-# ──────────────────────────────────────────────
 # Configuration
-# ──────────────────────────────────────────────
-SOUL_URL="${SOUL_URL:-http://192.168.1.100:3000}"
-CONTAINER_NAME="soul-kiosk"
-IMAGE_NAME="soul-kiosk-image"
-INSTALL_DIR="$HOME/.soul"
-AUTOSTART_DIR="$HOME/.config/autostart"
+SOUL_URL="${SOUL_URL:-http://172.20.10.4:3000}"
+INSTALL_DIR="$HOME/soul"
 
-# ──────────────────────────────────────────────
-# Colors
-# ──────────────────────────────────────────────
-CYAN='\033[0;36m'
+# Colors for output
+RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-RED='\033[0;31m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
-BOLD='\033[1m'
 
-# ──────────────────────────────────────────────
-# Banner
-# ──────────────────────────────────────────────
 echo ""
-echo -e "${CYAN}╔══════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║                                              ║${NC}"
-echo -e "${CYAN}║     ${BOLD}SOUL Learning System${NC}${CYAN}                    ║${NC}"
-echo -e "${CYAN}║     Chromebook Kiosk Installer               ║${NC}"
-echo -e "${CYAN}║                                              ║${NC}"
-echo -e "${CYAN}║     Soul Interface © 2026                    ║${NC}"
-echo -e "${CYAN}╚══════════════════════════════════════════════╝${NC}"
+echo -e "${BLUE}╔═══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║         SOUL Learning System - Installer                  ║${NC}"
+echo -e "${BLUE}╚═══════════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "Server URL: ${GREEN}$SOUL_URL${NC}"
 echo ""
 
-# ──────────────────────────────────────────────
-# Helper functions
-# ──────────────────────────────────────────────
-info()    { echo -e "${CYAN}[INFO]${NC} $1"; }
-success() { echo -e "${GREEN}[OK]${NC} $1"; }
-warn()    { echo -e "${YELLOW}[WARN]${NC} $1"; }
-fail()    { echo -e "${RED}[ERROR]${NC} $1"; exit 1; }
-
-# ──────────────────────────────────────────────
-# Step 1: Check environment
-# ──────────────────────────────────────────────
-info "Checking environment..."
-
-if ! command -v apt-get &>/dev/null; then
-  fail "This installer requires a Debian-based Linux environment (ChromeOS Crostini)."
+# Check if running on Chromebook Linux (Crostini)
+if [ ! -f /etc/os-release ]; then
+    echo -e "${RED}Error: This doesn't appear to be a Linux environment.${NC}"
+    echo ""
+    echo "To enable Linux on your Chromebook:"
+    echo "  1. Open Settings"
+    echo "  2. Click 'Advanced' → 'Developers'"
+    echo "  3. Click 'Turn on' next to 'Linux development environment'"
+    echo "  4. Wait for setup to complete (~5-10 minutes)"
+    echo "  5. Run this installer again"
+    exit 1
 fi
 
-success "Debian-based environment detected."
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 1: Install Docker
+# ─────────────────────────────────────────────────────────────────────────────
+if ! command -v docker &> /dev/null; then
+    echo -e "${YELLOW}📦 Step 1: Installing Docker...${NC}"
+    echo "   This may ask for your password."
+    echo ""
 
-# ──────────────────────────────────────────────
-# Step 2: Install Docker if needed
-# ──────────────────────────────────────────────
-if command -v docker &>/dev/null; then
-  success "Docker is already installed."
-else
-  info "Installing Docker..."
-  sudo apt-get update -qq
-  sudo apt-get install -y -qq \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+    sudo apt-get update -qq
+    sudo apt-get install -y -qq docker.io
+    sudo usermod -aG docker "$USER"
 
-  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 2>/dev/null
-
-  echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-  sudo apt-get update -qq
-  sudo apt-get install -y -qq docker-ce docker-ce-cli containerd.io
-
-  sudo usermod -aG docker "$USER"
-  success "Docker installed. You may need to log out and back in for group changes."
+    echo ""
+    echo -e "${GREEN}═══════════════════════════════════════════════════════════${NC}"
+    echo -e "${GREEN}Docker installed successfully!${NC}"
+    echo ""
+    echo -e "${YELLOW}⚠️  IMPORTANT: You must LOG OUT and LOG BACK IN${NC}"
+    echo "   for Docker permissions to take effect."
+    echo ""
+    echo "After logging back in, run this command again:"
+    echo -e "  ${BLUE}curl -fsSL https://soulinterface.ai/install.sh | bash${NC}"
+    echo -e "${GREEN}═══════════════════════════════════════════════════════════${NC}"
+    exit 0
 fi
 
-# ──────────────────────────────────────────────
-# Step 3: Create install directory
-# ──────────────────────────────────────────────
-info "Creating install directory at $INSTALL_DIR..."
+# Check if docker is accessible
+if ! docker ps &> /dev/null; then
+    echo -e "${RED}Error: Docker is installed but not accessible.${NC}"
+    echo ""
+    echo "Please LOG OUT and LOG BACK IN, then run this installer again."
+    exit 1
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 2: Create installation directory
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}📁 Step 2: Creating SOUL directory...${NC}"
 mkdir -p "$INSTALL_DIR"
 
-# ──────────────────────────────────────────────
-# Step 4: Build Docker image
-# ──────────────────────────────────────────────
-info "Building SOUL kiosk Docker image..."
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 3: Create Docker image
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}🐳 Step 3: Building SOUL container...${NC}"
+echo "   This may take a few minutes on first install."
+echo ""
 
+# Create Dockerfile
 cat > "$INSTALL_DIR/Dockerfile" << 'DOCKERFILE'
 FROM debian:bookworm-slim
 
+# Install Chromium and dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
-    chromium-sandbox \
     fonts-liberation \
+    fonts-noto \
     fonts-noto-color-emoji \
-    libgbm1 \
     libnss3 \
+    libatk1.0-0 \
     libatk-bridge2.0-0 \
-    libgtk-3-0 \
-    libx11-xcb1 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
     libxcomposite1 \
     libxdamage1 \
+    libxfixes3 \
     libxrandr2 \
-    xdg-utils \
-    dbus-x11 \
-    && rm -rf /var/lib/apt/lists/*
+    libgbm1 \
+    libasound2 \
+    x11-utils \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
+# Kiosk startup script
+COPY start-kiosk.sh /start-kiosk.sh
+RUN chmod +x /start-kiosk.sh
+
+# Create non-root user
 RUN useradd -m -s /bin/bash kiosk
+USER kiosk
 
 ENV DISPLAY=:0
+ENV SOUL_URL=http://172.20.10.4:3000
 
-USER kiosk
-WORKDIR /home/kiosk
-
-ENTRYPOINT ["chromium", \
-  "--no-sandbox", \
-  "--disable-gpu", \
-  "--disable-software-rasterizer", \
-  "--disable-dev-shm-usage", \
-  "--kiosk", \
-  "--noerrdialogs", \
-  "--disable-infobars", \
-  "--disable-session-crashed-bubble", \
-  "--disable-translate", \
-  "--no-first-run"]
+CMD ["/start-kiosk.sh"]
 DOCKERFILE
 
-cd "$INSTALL_DIR"
-docker build -t "$IMAGE_NAME" . 2>&1 | tail -5
-success "Docker image built."
-
-# ──────────────────────────────────────────────
-# Step 5: Create start script
-# ──────────────────────────────────────────────
-info "Creating start script..."
-
-cat > "$INSTALL_DIR/start-soul.sh" << STARTSCRIPT
+# Create kiosk startup script
+cat > "$INSTALL_DIR/start-kiosk.sh" << 'KIOSK'
 #!/bin/bash
-# Start SOUL Learning System in kiosk mode
+# Wait for X display to be ready
+echo "Waiting for display..."
+attempts=0
+while ! xdpyinfo >/dev/null 2>&1; do
+    attempts=$((attempts + 1))
+    if [ $attempts -ge 30 ]; then
+        echo "Error: Display not available"
+        exit 1
+    fi
+    sleep 1
+done
 
-SOUL_URL="\${SOUL_URL:-$SOUL_URL}"
+echo "Launching SOUL at: ${SOUL_URL}"
 
-echo -e "${CYAN}Starting SOUL Learning System...${NC}"
-echo -e "Connecting to: \$SOUL_URL"
+# Launch Chromium in kiosk mode
+exec chromium \
+    --kiosk \
+    --no-first-run \
+    --disable-translate \
+    --disable-infobars \
+    --disable-session-crashed-bubble \
+    --disable-restore-session-state \
+    --noerrdialogs \
+    --disable-features=TranslateUI \
+    --disable-extensions \
+    --disable-background-networking \
+    --disable-sync \
+    --disable-default-apps \
+    --start-fullscreen \
+    --app="${SOUL_URL:-http://172.20.10.4:3000}"
+KIOSK
 
-# Stop existing container if running
-docker rm -f $CONTAINER_NAME 2>/dev/null
+# Build the image
+docker build -t soul-kiosk "$INSTALL_DIR" --quiet
 
-# Run kiosk container
-docker run -d \\
-  --name $CONTAINER_NAME \\
-  -e DISPLAY=\$DISPLAY \\
-  -v /tmp/.X11-unix:/tmp/.X11-unix \\
-  --shm-size=512m \\
-  $IMAGE_NAME \\
-  "\$SOUL_URL"
+echo -e "${GREEN}   ✓ Container built successfully${NC}"
 
-echo -e "${GREEN}SOUL is running.${NC}"
-echo -e "To stop: ~/.soul/stop-soul.sh"
-STARTSCRIPT
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 4: Create launcher scripts
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}🚀 Step 4: Creating launcher scripts...${NC}"
 
+# Main SOUL launcher
+cat > "$INSTALL_DIR/start-soul.sh" << EOF
+#!/bin/bash
+# SOUL Student App Launcher
+
+# Allow Docker to access X display
+xhost +local:docker 2>/dev/null || true
+
+echo "Starting SOUL Student App..."
+echo "Press Ctrl+Shift+Q to exit, or use ~/soul/stop-soul.sh"
+echo ""
+
+docker run --rm \\
+    -e DISPLAY=\$DISPLAY \\
+    -e SOUL_URL="$SOUL_URL" \\
+    -v /tmp/.X11-unix:/tmp/.X11-unix \\
+    --network host \\
+    --shm-size=256m \\
+    soul-kiosk
+EOF
 chmod +x "$INSTALL_DIR/start-soul.sh"
 
-# ──────────────────────────────────────────────
-# Step 6: Create stop script
-# ──────────────────────────────────────────────
-cat > "$INSTALL_DIR/stop-soul.sh" << 'STOPSCRIPT'
+# Stop script
+cat > "$INSTALL_DIR/stop-soul.sh" << 'EOF'
 #!/bin/bash
-# Stop SOUL Learning System
-echo "Stopping SOUL..."
-docker rm -f soul-kiosk 2>/dev/null
-echo "SOUL stopped."
-STOPSCRIPT
+# Stop SOUL Kiosk
 
+CONTAINER=$(docker ps -q --filter ancestor=soul-kiosk 2>/dev/null)
+
+if [ -n "$CONTAINER" ]; then
+    echo "Stopping SOUL..."
+    docker stop $CONTAINER >/dev/null
+    echo "SOUL stopped."
+else
+    echo "SOUL is not currently running."
+fi
+EOF
 chmod +x "$INSTALL_DIR/stop-soul.sh"
 
-# ──────────────────────────────────────────────
-# Step 7: Create boot menu script
-# ──────────────────────────────────────────────
-cat > "$INSTALL_DIR/soul-menu.sh" << 'MENUSCRIPT'
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 5: Create boot menu
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}📋 Step 5: Creating boot menu...${NC}"
+
+cat > "$INSTALL_DIR/menu.sh" << 'MENU'
 #!/bin/bash
 # SOUL Learning System - Boot Menu
 
-CYAN='\033[0;36m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-BOLD='\033[1m'
+show_menu() {
+    clear
+    echo ""
+    echo "  ╔═══════════════════════════════════════════════╗"
+    echo "  ║         SOUL Learning System                  ║"
+    echo "  ╠═══════════════════════════════════════════════╣"
+    echo "  ║                                               ║"
+    echo "  ║    [1]  📚  SOUL Student App                  ║"
+    echo "  ║    [2]  📝  Testing Mode (coming soon)        ║"
+    echo "  ║    [3]  ⚙️   Settings                          ║"
+    echo "  ║    [4]  💻  Exit to Terminal                  ║"
+    echo "  ║                                               ║"
+    echo "  ╚═══════════════════════════════════════════════╝"
+    echo ""
+}
 
-clear
-echo ""
-echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║  ${BOLD}SOUL Learning System${NC}${CYAN}               ║${NC}"
-echo -e "${CYAN}╚══════════════════════════════════════╝${NC}"
-echo ""
-echo -e "  ${GREEN}1)${NC} Start SOUL"
-echo -e "  ${GREEN}2)${NC} Stop SOUL"
-echo -e "  ${GREEN}3)${NC} Change server URL"
-echo -e "  ${GREEN}4)${NC} Exit to terminal"
-echo ""
-read -p "  Choose [1-4]: " choice
+show_settings() {
+    clear
+    echo ""
+    echo "  ╔═══════════════════════════════════════════════╗"
+    echo "  ║              Settings                         ║"
+    echo "  ╠═══════════════════════════════════════════════╣"
+    echo "  ║                                               ║"
+    echo "  ║  Current server: $(cat ~/soul/.server_url 2>/dev/null || echo 'default')  "
+    echo "  ║                                               ║"
+    echo "  ║    [1]  Change server URL                     ║"
+    echo "  ║    [2]  Reinstall SOUL                        ║"
+    echo "  ║    [3]  Back to main menu                     ║"
+    echo "  ║                                               ║"
+    echo "  ╚═══════════════════════════════════════════════╝"
+    echo ""
+    read -p "  Enter choice [1-3]: " setting_choice
 
-case $choice in
-  1) ~/.soul/start-soul.sh ;;
-  2) ~/.soul/stop-soul.sh ;;
-  3)
-    read -p "  Enter new SOUL URL: " new_url
-    export SOUL_URL="$new_url"
-    ~/.soul/start-soul.sh
-    ;;
-  4) exit 0 ;;
-  *) echo "Invalid choice"; sleep 1; exec "$0" ;;
-esac
-MENUSCRIPT
+    case $setting_choice in
+        1)
+            echo ""
+            read -p "  Enter new server URL: " new_url
+            if [ -n "$new_url" ]; then
+                echo "$new_url" > ~/soul/.server_url
+                sed -i "s|SOUL_URL=.*|SOUL_URL=\"$new_url\"|" ~/soul/start-soul.sh
+                echo "  Server URL updated!"
+            fi
+            sleep 2
+            ;;
+        2)
+            echo "  Reinstalling..."
+            curl -fsSL https://soulinterface.ai/install.sh | bash
+            exit 0
+            ;;
+    esac
+}
 
-chmod +x "$INSTALL_DIR/soul-menu.sh"
+while true; do
+    show_menu
+    read -p "  Enter choice [1-4]: " choice
 
-# ──────────────────────────────────────────────
-# Step 8: Ask about autostart
-# ──────────────────────────────────────────────
-echo ""
-echo -e "${CYAN}Would you like SOUL to start automatically when Linux launches?${NC}"
-read -p "  [y/N]: " autostart_choice
+    case $choice in
+        1)
+            ~/soul/start-soul.sh
+            ;;
+        2)
+            echo ""
+            echo "  Testing mode coming soon!"
+            sleep 2
+            ;;
+        3)
+            show_settings
+            ;;
+        4)
+            clear
+            echo "Exiting to terminal. Run ~/soul/menu.sh to return."
+            exit 0
+            ;;
+        *)
+            # Invalid input, just refresh menu
+            ;;
+    esac
+done
+MENU
+chmod +x "$INSTALL_DIR/menu.sh"
 
-if [[ "$autostart_choice" =~ ^[Yy]$ ]]; then
-  mkdir -p "$AUTOSTART_DIR"
-  cat > "$AUTOSTART_DIR/soul-kiosk.desktop" << DESKTOP
-[Desktop Entry]
-Type=Application
-Name=SOUL Learning System
-Exec=$INSTALL_DIR/start-soul.sh
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-DESKTOP
-  success "Autostart enabled."
-else
-  info "Skipping autostart. You can run SOUL manually with: ~/.soul/start-soul.sh"
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 6: Configure auto-start
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}⚙️  Step 6: Configuring auto-start...${NC}"
+
+# Add to .bashrc if not already there
+if ! grep -q "SOUL Learning System" ~/.bashrc 2>/dev/null; then
+    cat >> ~/.bashrc << 'BASHRC'
+
+# ═══════════════════════════════════════════════════════════
+# SOUL Learning System - Auto-start
+# ═══════════════════════════════════════════════════════════
+if [ -z "$SOUL_MENU_STARTED" ] && [ -f ~/soul/menu.sh ]; then
+    export SOUL_MENU_STARTED=1
+    ~/soul/menu.sh
+fi
+BASHRC
 fi
 
-# ──────────────────────────────────────────────
-# Done
-# ──────────────────────────────────────────────
+# Save the server URL for reference
+echo "$SOUL_URL" > "$INSTALL_DIR/.server_url"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Done!
+# ─────────────────────────────────────────────────────────────────────────────
 echo ""
-echo -e "${GREEN}╔══════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║  Installation complete!                      ║${NC}"
-echo -e "${GREEN}╚══════════════════════════════════════════════╝${NC}"
+echo -e "${GREEN}╔═══════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║            ✅ INSTALLATION COMPLETE!                      ║${NC}"
+echo -e "${GREEN}╠═══════════════════════════════════════════════════════════╣${NC}"
+echo -e "${GREEN}║                                                           ║${NC}"
+echo -e "${GREEN}║  The SOUL menu will appear when you open Terminal.        ║${NC}"
+echo -e "${GREEN}║                                                           ║${NC}"
+echo -e "${GREEN}║  Commands:                                                ║${NC}"
+echo -e "${GREEN}║    ~/soul/menu.sh      - Show boot menu                   ║${NC}"
+echo -e "${GREEN}║    ~/soul/start-soul.sh - Start SOUL directly            ║${NC}"
+echo -e "${GREEN}║    ~/soul/stop-soul.sh  - Stop SOUL                       ║${NC}"
+echo -e "${GREEN}║                                                           ║${NC}"
+echo -e "${GREEN}║  Teacher tip: Ctrl+Alt+T opens a new terminal            ║${NC}"
+echo -e "${GREEN}║                                                           ║${NC}"
+echo -e "${GREEN}╚═══════════════════════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "  ${BOLD}Quick start:${NC}"
-echo -e "    ~/.soul/start-soul.sh    Start SOUL"
-echo -e "    ~/.soul/stop-soul.sh     Stop SOUL"
-echo -e "    ~/.soul/soul-menu.sh     Boot menu"
-echo ""
-echo -e "  ${BOLD}Custom server:${NC}"
-echo -e "    SOUL_URL=http://10.0.0.5:3000 ~/.soul/start-soul.sh"
-echo ""
-echo -e "  ${CYAN}For help: https://soulinterface.ai/chromebook${NC}"
-echo ""
+
+read -p "Launch SOUL menu now? [Y/n]: " launch
+if [[ ! "$launch" =~ ^[Nn] ]]; then
+    exec ~/soul/menu.sh
+fi

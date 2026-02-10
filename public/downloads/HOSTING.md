@@ -1,116 +1,95 @@
-# SOUL Learning System — Self-Hosting Guide
+# Hosting SOUL Installer on soulinterface.ai
 
-**Soul Interface © 2026**
+## Option 1: GitHub Gist (Easiest)
+
+1. Go to https://gist.github.com
+2. Create a new gist with filename `install.sh`
+3. Paste the contents of `install.sh`
+4. Click "Create public gist"
+5. Click "Raw" button to get the raw URL
+6. Your install command becomes:
+   ```bash
+   curl -fsSL https://gist.githubusercontent.com/YOUR_USERNAME/GIST_ID/raw/install.sh | bash
+   ```
+
+Then on soulinterface.ai, add a redirect from `/install.sh` to the gist raw URL.
 
 ---
 
-## Overview
+## Option 2: GitHub Repository
 
-This guide explains how to host the SOUL Learning System installer
-and web interface on your own server, for schools or organizations
-that want full control over deployment.
+1. Create a new GitHub repo: `soul-chromebook-installer`
+2. Add `install.sh` to the repo
+3. Use GitHub Pages or raw file URL:
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/soul-chromebook-installer/main/install.sh | bash
+   ```
 
 ---
 
-## Architecture
+## Option 3: Cloudflare R2 / S3
 
+1. Upload `install.sh` to your bucket
+2. Make it publicly accessible
+3. Use the public URL
+
+---
+
+## Option 4: Add to Lovable Site (if supported)
+
+If Lovable allows static file hosting:
+1. Create a route `/install.sh` that serves the raw script
+2. Set Content-Type to `text/plain` or `application/x-sh`
+
+---
+
+## Adding a /chromebook Page to soulinterface.ai
+
+Create a page at `soulinterface.ai/chromebook` with this content:
+
+```html
+<h1>SOUL for Chromebook</h1>
+
+<h2>Quick Install</h2>
+<p>Open Terminal on your Chromebook and paste:</p>
+
+<pre><code>curl -fsSL https://soulinterface.ai/install.sh | bash</code></pre>
+
+<h2>First Time?</h2>
+<ol>
+  <li>On your Chromebook, open <strong>Settings</strong></li>
+  <li>Click <strong>Advanced</strong> → <strong>Developers</strong></li>
+  <li>Click <strong>Turn on</strong> next to "Linux development environment"</li>
+  <li>Wait for setup (~5-10 minutes)</li>
+  <li>When Terminal opens, paste the command above</li>
+</ol>
+
+<h2>Custom Server</h2>
+<p>If your teacher gave you a specific server address:</p>
+<pre><code>SOUL_URL=http://YOUR_SERVER:3000 curl -fsSL https://soulinterface.ai/install.sh | bash</code></pre>
 ```
-┌─────────────────┐     Wi-Fi      ┌──────────────────┐
-│   Chromebook     │ ◄────────────► │  Soul Interface  │
-│   (kiosk mode)   │                │  Tower (GPU)     │
-│   Docker+Chromium│                │  Local AI Server │
-└─────────────────┘                └──────────────────┘
-```
-
-- **Chromebooks** run a Docker container with Chromium in kiosk mode
-- **Soul Interface Tower** runs the AI and serves the learning interface
-- Everything stays on the **local network** — no cloud required
 
 ---
 
-## Hosting the Installer
+## Testing the Installer
 
-### Option 1: Use our hosted installer (recommended)
+You can test locally before hosting:
 
 ```bash
-curl -fsSL https://soulinterface.ai/install.sh | bash
-```
+# Test from local file
+bash /home/badler/soul-system/frontend/chromebook-kiosk/install.sh
 
-### Option 2: Host it yourself
-
-1. Download `install.sh` from https://soulinterface.ai/install.sh
-2. Place it on your internal web server
-3. Update the `SOUL_URL` default in the script to match your tower's IP
-4. Have students run:
-
-```bash
-curl -fsSL http://your-server/install.sh | bash
+# Or serve it locally
+cd /home/badler/soul-system/frontend/chromebook-kiosk
+python3 -m http.server 8888
+# Then: curl -fsSL http://localhost:8888/install.sh | bash
 ```
 
 ---
 
-## Configuring the Server URL
+## Updating the Installer
 
-The default server URL is `http://192.168.1.100:3000`. To change it:
-
-### Per-session
-```bash
-SOUL_URL=http://10.0.0.5:3000 ~/.soul/start-soul.sh
-```
-
-### Permanent change
-Edit `~/.soul/start-soul.sh` and change the `SOUL_URL` line.
-
-### During installation
-```bash
-SOUL_URL=http://10.0.0.5:3000 curl -fsSL https://soulinterface.ai/install.sh | bash
-```
-
----
-
-## Network Requirements
-
-| Port | Service | Direction |
-|------|---------|-----------|
-| 3000 | SOUL Web UI | Tower → Chromebooks |
-| 443  | HTTPS (installer download) | Chromebooks → Internet (one-time) |
-
-- Chromebooks need to reach the tower on port 3000
-- Internet access is only needed for the initial Docker setup
-- After installation, everything runs offline
-
----
-
-## Fleet Deployment
-
-For deploying to many Chromebooks at once:
-
-1. Set up one Chromebook manually using the installer
-2. Use ChromeOS's managed Linux container feature (if available)
-3. Or create a USB drive with the pre-built Docker image:
-
-```bash
-# On the configured Chromebook:
-docker save soul-kiosk-image > soul-image.tar
-
-# On a new Chromebook:
-docker load < soul-image.tar
-cp -r ~/.soul ~/  # Copy scripts
-```
-
----
-
-## Security Notes
-
-- The kiosk container runs Chromium with `--no-sandbox` inside Docker
-  (the container itself provides isolation)
-- Students cannot access the URL bar or open new tabs
-- To exit kiosk mode requires terminal access (Ctrl+Alt+T → crosh)
-- Report bypass vulnerabilities: contact@soulinterface.ai ($1K bounty)
-
----
-
-## Support
-
-- **Setup page**: https://soulinterface.ai/chromebook
-- **Email**: contact@soulinterface.ai
+When you update `install.sh`:
+1. Update the file in this folder
+2. Upload/push to wherever you're hosting it
+3. Users running the installer will get the new version automatically
