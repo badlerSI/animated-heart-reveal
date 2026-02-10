@@ -1,100 +1,54 @@
 
 
-# Update Chromebook Package with Student App and Server Files
+# Simplify Chromebook Page: One-Click Download + Remove from Navigation
 
 ## Overview
-Replace all existing Chromebook files with the updated versions and add the complete student app (PWA) and server-side Docker infrastructure as downloadable files. The `/chromebook` page gets updated to reflect new paths and architecture.
+Strip the `/chromebook` page down to a technical setup/support page (not a product page), bundle all download files into a single ZIP, and remove the page from site-wide navigation since it's only needed by people setting up Chromebooks.
 
-## What Gets Updated
+## Changes
 
-### 1. Replace existing static files
+### 1. Remove "Chromebook" from PageFooter navigation
 
-| File | Action |
+In `src/components/PageFooter.tsx`, remove line 18 (`{ label: "Chromebook", path: "/chromebook" }`). The route itself stays in `App.tsx` so the page is still accessible by direct URL -- it just won't appear in the footer nav on every page. This follows the same "archived but accessible" pattern used for `/news`, `/partner`, `/tech`, and `/investors`.
+
+### 2. Create a single ZIP download containing all server files
+
+Bundle these files into one ZIP: `README.txt`, `HOSTING.md`, `Dockerfile`, `nginx.conf`, `docker-compose.yml`, `start-server.sh`, `stop-server.sh`, plus the entire `student-app/` folder. The ZIP will be placed at `public/downloads/soul-server-package.zip`.
+
+Since Lovable can't run shell commands to create a ZIP, we have two options:
+- **Option A**: Generate the ZIP programmatically using JSZip in a build step or edge function
+- **Option B (recommended)**: You provide the pre-built ZIP file and we host it, OR we add a "Download All" button that uses JSZip in the browser to bundle the files on-the-fly when clicked
+
+We'll go with **Option B (client-side ZIP)**: install `jszip` and `file-saver`, then create a "Download Complete Package" button that fetches all the files and zips them in the browser. This avoids needing to maintain a static ZIP file.
+
+### 3. Simplify the Chromebook page
+
+Strip the page down to a focused setup/support page:
+
+- **Keep**: Hero (but tone down -- it's a setup guide, not a product pitch), Quick Install command box, Setup Steps, Teacher/Admin section, Troubleshooting FAQ
+- **Remove**: The DualWaveButton (product-page element)
+- **Replace**: The multi-file Downloads section with a single prominent "Download Server Package" button that triggers the client-side ZIP download
+- **Keep**: PageFooter (for basic navigation back to the rest of the site)
+
+### 4. Dependencies to add
+
+- `jszip` -- for creating ZIP files in the browser
+- `file-saver` -- for triggering the download
+
+## Files Changed
+
+| File | Change |
 |------|--------|
-| `public/install.sh` | Replace with updated installer (`install-2.sh`) -- new `~/soul/` paths, boot menu, `.bashrc` auto-start, 352 lines |
-| `public/downloads/README.txt` | Replace with complete package docs (`README-2.txt`) -- daily workflow, package sizes, uninstall instructions |
-| `public/downloads/HOSTING.md` | Replace with hosting options guide (`HOSTING-2.md`) -- GitHub Gist, R2, Lovable options |
+| `src/components/PageFooter.tsx` | Remove Chromebook from `navLinks` array |
+| `src/pages/Chromebook.tsx` | Replace Downloads section with single ZIP button, remove DualWaveButton, simplify hero |
+| `package.json` | Add `jszip` and `file-saver` dependencies |
 
-### 2. Add server-side Docker files
+## Technical Detail: Client-Side ZIP Download
 
-| File | Purpose |
-|------|---------|
-| `public/downloads/Dockerfile` | Nginx-based container for the student app |
-| `public/downloads/nginx.conf` | Nginx config with API proxy, WebSocket support, SPA routing, health check, security headers, gzip |
-| `public/downloads/docker-compose.yml` | Docker Compose for the teacher's server (port 3000 mapped to 8080) |
-| `public/downloads/start-server.sh` | Teacher server startup -- detects local IP, builds and runs the container |
-| `public/downloads/stop-server.sh` | Teacher server stop script |
+When the user clicks "Download Server Package," the button handler will:
+1. Fetch all files from `/downloads/` (README.txt, HOSTING.md, Dockerfile, nginx.conf, docker-compose.yml, start-server.sh, stop-server.sh, and the student-app folder contents)
+2. Add them to a JSZip instance preserving the folder structure
+3. Generate the ZIP blob
+4. Trigger a download as `soul-server-package.zip`
 
-### 3. Add the student app (PWA) bundle
-
-These are the pre-built files the teacher's Docker container serves to Chromebooks:
-
-| File | Purpose |
-|------|---------|
-| `public/downloads/student-app/index.html` | Main HTML with PWA meta tags, service worker registration |
-| `public/downloads/student-app/offline.html` | Offline fallback page ("You're Offline" with retry button) |
-| `public/downloads/student-app/icon.svg` | Blue "S" icon for PWA |
-| `public/downloads/student-app/manifest.json` | PWA manifest (standalone, education category) |
-| `public/downloads/student-app/sw.js` | Service worker -- network-first with cache fallback |
-| `public/downloads/student-app/assets/index-BI9yYeNr.js` | Built React app bundle |
-| `public/downloads/student-app/assets/index-Q5tyc_K_.css` | Built CSS bundle |
-
-### 4. Update the `/chromebook` page (`src/pages/Chromebook.tsx`)
-
-Changes to match the new installer and architecture:
-
-**Path updates throughout:**
-- `~/.soul/` becomes `~/soul/`
-- `~/.soul/soul-menu.sh` becomes `~/soul/menu.sh`
-- `~/.soul/start-soul.sh` becomes `~/soul/start-soul.sh`
-- `~/.soul/stop-soul.sh` becomes `~/soul/stop-soul.sh`
-
-**Step 4 text updated:**
-- Old: "Run ~/.soul/start-soul.sh -- your Chromebook is now a learning station."
-- New: "Open Terminal -- the SOUL menu appears automatically. Press 1 to launch."
-
-**Custom Server URL card updated:**
-- Command changes to: `SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh`
-- Boot menu reference: `~/soul/menu.sh`
-
-**Exit instructions updated:**
-- Add `Ctrl+Shift+Q` as force-close option
-- Stop command: `~/soul/stop-soul.sh`
-
-**FAQ updates:**
-- Add new question: "Linux option not available" with answer about Chromebook model requirements
-- Add new question: "Menu doesn't appear" with answer to run `~/soul/menu.sh`
-- Update "Can't reach the SOUL server" to mention checking `./start-server.sh` on teacher machine
-
-**Downloads section expanded into two groups:**
-- "Setup Guides": README.txt, HOSTING.md
-- "Server Files": Dockerfile, nginx.conf, docker-compose.yml, start-server.sh, stop-server.sh
-
-## Files Summary
-
-| File | Action |
-|------|--------|
-| `public/install.sh` | Replace |
-| `public/downloads/README.txt` | Replace |
-| `public/downloads/HOSTING.md` | Replace |
-| `public/downloads/Dockerfile` | Create |
-| `public/downloads/nginx.conf` | Create |
-| `public/downloads/docker-compose.yml` | Create |
-| `public/downloads/start-server.sh` | Create |
-| `public/downloads/stop-server.sh` | Create |
-| `public/downloads/student-app/index.html` | Create |
-| `public/downloads/student-app/offline.html` | Create |
-| `public/downloads/student-app/icon.svg` | Create |
-| `public/downloads/student-app/manifest.json` | Create |
-| `public/downloads/student-app/sw.js` | Create |
-| `public/downloads/student-app/assets/index-BI9yYeNr.js` | Create |
-| `public/downloads/student-app/assets/index-Q5tyc_K_.css` | Create |
-| `src/pages/Chromebook.tsx` | Update |
-
-## Technical Notes
-
-- The student app JS/CSS bundles are pre-built and served as-is -- they run on the teacher's Docker container, not in the Lovable site
-- The `chromebook-page-2.html` and `LOVABLE-INSTRUCTIONS-2.md` are internal reference files and will not be hosted
-- Total new download size: approximately 80 KB (the JS and CSS bundles are the largest files)
-- The Dockerfile expects the `student-app/` folder to be in the same directory, matching the teacher's workflow of downloading all files into one folder
-
+A loading spinner will show while the ZIP is being assembled.
