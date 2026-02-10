@@ -15,6 +15,7 @@ const navLinks = [
   { label: "Workplace", path: "/work" },
   { label: "Autonomous", path: "/autonomous" },
   { label: "Extreme", path: "/extreme" },
+  { label: "Chromebook", path: "/chromebook" },
 ];
 
 const PageFooter = ({ 
