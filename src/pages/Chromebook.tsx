@@ -46,7 +46,7 @@ const Chromebook = () => {
     {
       icon: CheckCircle,
       title: "Launch SOUL",
-      description: "Run ~/.soul/start-soul.sh — your Chromebook is now a learning station.",
+      description: "Open Terminal — the SOUL menu appears automatically. Press 1 to launch.",
     },
   ];
 
@@ -56,12 +56,16 @@ const Chromebook = () => {
       answer: "Log out of Linux and log back in. Docker group changes require a new session to take effect.",
     },
     {
-      question: "Chromium won't display anything",
-      answer: "Make sure Sommelier (the Wayland bridge) is running. Try: sommelier --peer-cmd-prefix=\"\" chromium --no-sandbox",
+      question: "Linux option not available",
+      answer: "Your Chromebook may not support Linux (Crostini). Most Chromebooks from 2019 or later support it. Check your model at chromeos.dev.",
+    },
+    {
+      question: "Menu doesn't appear",
+      answer: "Run ~/soul/menu.sh manually from the Terminal. If that works, the auto-start may not have been added to .bashrc — reinstall to fix.",
     },
     {
       question: "Can't reach the SOUL server",
-      answer: "Verify the tower is on and connected to the same network. Try pinging the IP from the Linux terminal: ping 192.168.1.100",
+      answer: "Check that ./start-server.sh is running on the teacher's machine and note the IP displayed. Verify the Chromebook is on the same network.",
     },
     {
       question: "Students found a way to exit kiosk mode",
@@ -203,10 +207,10 @@ const Chromebook = () => {
                 If your Soul Interface tower uses a different IP:
               </p>
               <code className="block text-sm font-mono p-3 rounded-lg bg-black/50 text-[#e0f4ff] border" style={{ borderColor: `${cyan}20` }}>
-                SOUL_URL=http://YOUR_IP:3000 ~/.soul/start-soul.sh
+                SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh
               </code>
               <p className="text-sm mt-3" style={{ color: cyanDim }}>
-                Or use the boot menu: <code className="font-mono" style={{ color: cyan }}>~/.soul/soul-menu.sh</code>
+                Or use the boot menu: <code className="font-mono" style={{ color: cyan }}>~/soul/menu.sh</code>
               </p>
             </motion.div>
 
@@ -226,11 +230,15 @@ const Chromebook = () => {
               <ul className="space-y-2 text-sm" style={{ color: cyanMuted }}>
                 <li className="flex items-start gap-2">
                   <span style={{ color: cyan }}>•</span>
+                  Press <code className="font-mono px-1 py-0.5 rounded bg-black/50 text-[#e0f4ff]">Ctrl+Shift+Q</code> to force-close
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{ color: cyan }}>•</span>
                   Press <code className="font-mono px-1 py-0.5 rounded bg-black/50 text-[#e0f4ff]">Ctrl+Alt+T</code> to open crosh
                 </li>
                 <li className="flex items-start gap-2">
                   <span style={{ color: cyan }}>•</span>
-                  Run the stop command: <code className="font-mono px-1 py-0.5 rounded bg-black/50 text-[#e0f4ff]">~/.soul/stop-soul.sh</code>
+                  Run: <code className="font-mono px-1 py-0.5 rounded bg-black/50 text-[#e0f4ff]">~/soul/stop-soul.sh</code>
                 </li>
                 <li className="flex items-start gap-2">
                   <span style={{ color: cyan }}>•</span>
@@ -287,25 +295,44 @@ const Chromebook = () => {
             Downloads
           </motion.h2>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/downloads/README.txt"
-              download
-              className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
-              style={{ borderColor: `${cyan}40`, color: cyanMuted }}
-            >
-              <Download className="w-5 h-5" style={{ color: cyan }} />
-              README.txt
-            </a>
-            <a
-              href="/downloads/HOSTING.md"
-              download
-              className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
-              style={{ borderColor: `${cyan}40`, color: cyanMuted }}
-            >
-              <Download className="w-5 h-5" style={{ color: cyan }} />
-              HOSTING.md
-            </a>
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold mb-4 text-[#f0f8ff]">Setup Guides</h3>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <a
+                href="/downloads/README.txt"
+                download
+                className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
+                style={{ borderColor: `${cyan}40`, color: cyanMuted }}
+              >
+                <Download className="w-5 h-5" style={{ color: cyan }} />
+                README.txt
+              </a>
+              <a
+                href="/downloads/HOSTING.md"
+                download
+                className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-colors hover:bg-white/5"
+                style={{ borderColor: `${cyan}40`, color: cyanMuted }}
+              >
+                <Download className="w-5 h-5" style={{ color: cyan }} />
+                HOSTING.md
+              </a>
+            </div>
+
+            <h3 className="text-lg font-semibold mb-4 text-[#f0f8ff]">Server Files</h3>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {["Dockerfile", "nginx.conf", "docker-compose.yml", "start-server.sh", "stop-server.sh"].map((file) => (
+                <a
+                  key={file}
+                  href={`/downloads/${file}`}
+                  download
+                  className="flex items-center gap-3 px-5 py-3 rounded-xl border transition-colors hover:bg-white/5"
+                  style={{ borderColor: `${cyan}40`, color: cyanMuted }}
+                >
+                  <Download className="w-4 h-4" style={{ color: cyan }} />
+                  {file}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

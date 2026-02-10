@@ -1,0 +1,21 @@
+{
+  "name": "SOUL System - Student Portal",
+  "short_name": "SOUL Student",
+  "description": "Student learning portal for SOUL System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education"],
+  "scope": "/",
+  "lang": "en"
+}
