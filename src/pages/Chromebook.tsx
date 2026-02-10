@@ -78,18 +78,23 @@ const Chromebook = () => {
     },
     {
       icon: Terminal,
-      title: "Run the Installer",
-      description: "Open the Linux terminal and paste the install command below.",
+      title: "Install Docker",
+      description: "Open the Linux terminal and paste the install command below. The installer will install Docker and then ask you to log out.",
     },
     {
       icon: LogOut,
       title: "Log Out & Back In",
-      description: "Docker requires a new session. Log out of Linux and log back in.",
+      description: "Log out of the Linux terminal and log back in for Docker permissions to take effect.",
+    },
+    {
+      icon: Terminal,
+      title: "Run the Installer Again",
+      description: "Paste the same curl command a second time. This time it builds the kiosk container and sets everything up.",
     },
     {
       icon: CheckCircle,
       title: "Launch SOUL",
-      description: "Open Terminal — the SOUL menu appears automatically. Press 1 to launch.",
+      description: "Open Terminal — the SOUL menu appears automatically. Press 1 to start.",
     },
   ];
 
@@ -205,7 +210,7 @@ const Chromebook = () => {
               </button>
             </div>
             <p className="text-sm mt-4" style={{ color: cyanDim }}>
-              Run this in the Linux terminal on your Chromebook. The installer handles everything.
+              Run this in the Linux terminal on your Chromebook. The first run installs Docker (you'll need to log out and back in, then run it again). The second run completes the setup.
             </p>
           </motion.div>
         </div>
@@ -221,7 +226,7 @@ const Chromebook = () => {
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-[#f0f8ff]"
             style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
           >
-            Setup in 4 Steps
+            Setup in 5 Steps
           </motion.h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -275,9 +280,14 @@ const Chromebook = () => {
             >
               <Server className="w-8 h-8 mb-4" style={{ color: cyan }} />
               <h3 className="font-bold text-lg mb-3 text-[#f0f8ff]">Custom Server URL</h3>
-              <p className="text-sm mb-4" style={{ color: cyanMuted }}>
+              <p className="text-sm mb-3" style={{ color: cyanMuted }}>
                 If your Soul Interface tower uses a different IP:
               </p>
+              <p className="text-xs font-semibold mb-1" style={{ color: cyan }}>During install:</p>
+              <code className="block text-sm font-mono p-3 rounded-lg bg-black/50 text-[#e0f4ff] border mb-3" style={{ borderColor: `${cyan}20` }}>
+                SOUL_URL=http://YOUR_IP:3000 curl -fsSL https://soulinterface.ai/install.sh | bash
+              </code>
+              <p className="text-xs font-semibold mb-1" style={{ color: cyan }}>After install:</p>
               <code className="block text-sm font-mono p-3 rounded-lg bg-black/50 text-[#e0f4ff] border" style={{ borderColor: `${cyan}20` }}>
                 SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh
               </code>
