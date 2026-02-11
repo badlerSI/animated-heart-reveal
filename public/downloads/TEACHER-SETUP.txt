@@ -3,19 +3,30 @@ SOUL Learning System - Teacher Setup Guide
 
 QUICK REFERENCE
 ---------------
+WiFi Network:       RUT_xxx_2G (share password with students!)
 Student App:        soul.local:3000
+Cert Downloads:     soul.local:3000/certs/
 Teacher Dashboard:  soul.local:3001  (HTTPS)
 Backup IP:          192.168.1.10
 
 
+IMPORTANT: SHARE THE WIFI PASSWORD
+------------------------------------
+Write the RUT_xxx_2G WiFi password on the board or tell students
+at the start of class. They need it to connect to the SOUL Tower.
+
+
 SECURITY CERTIFICATE SETUP
 ---------------------------
-Install the SOUL certificate on your device to avoid HTTPS warnings:
+Connect to RUT_xxx_2G WiFi first, then download certs from the
+local server at soul.local:3000/certs/
 
-  Windows:     Right-click install-windows.bat → "Run as administrator"
-  Mac:         Double-click install-ios.mobileconfig → approve in System Settings
-  Chromebook:  Open Terminal → Run: bash install-chromeos.sh
-  iPad:        Open install-ios.mobileconfig → Settings → enable trust
+  Windows:     Download install-windows.bat → Right-click → "Run as administrator"
+               (If SmartScreen blocks it: click "More info" → "Run anyway")
+  Mac:         Download install-mac.command → Double-click, enter password
+  Chromebook:  Download SOUL-Learning-CA.crt → chrome://settings/certificates
+               → Authorities → Import → Trust for websites
+  iPad:        Download install-ios.mobileconfig → Settings → enable trust
 
 Mac extra step (Ventura+):
   System Settings → Privacy & Security → Profiles → install the profile
@@ -24,19 +35,19 @@ iPad extra step:
   Settings → General → About → Certificate Trust Settings
   → Enable full trust for "SOUL Learning CA"
 
-Certificate installer files are in the cert-installers/ folder,
-or students can download them from the Student Setup page.
+Certificate files are served locally from soul.local:3000/certs/
+No internet connection needed!
 
 
-STUDENT SETUP (Simple!)
------------------------
+STUDENT SETUP (4 Steps - No Internet Needed!)
+----------------------------------------------
 Students just need to:
-1. Connect to classroom WiFi
+1. Connect to WiFi network RUT_xxx_2G (give them the password)
 2. Open Chrome and type: soul.local:3000
-3. Click "Install" when prompted
-4. Done - SOUL icon appears in their apps!
+3. Download and install the security certificate for their device
+4. Click "Install" when prompted — SOUL icon appears in their apps!
 
-No downloads, no Terminal, no Linux needed.
+Everything downloads from the SOUL Tower. No internet required.
 
 
 OPTIONAL: CAPTIVE PORTAL SETUP
@@ -57,12 +68,12 @@ To make it even easier (auto-opens SOUL when connecting to WiFi):
 
 5. Save and apply
 
-Result: When students connect to WiFi, SOUL opens automatically!
+Result: When students connect to RUT_xxx_2G, SOUL opens automatically!
 
 
 TEACHER DASHBOARD
 -----------------
-Access from any device on the network:
+Access from any device on the RUT_xxx_2G network:
   soul.local:3001
   or
   https://192.168.1.10:3001
@@ -74,11 +85,15 @@ TROUBLESHOOTING
   → Use IP address: https://192.168.1.10:3001
 
 - Students can't connect?
-  → Make sure they're on the classroom WiFi, not school network
+  → Make sure they're on RUT_xxx_2G, not school network
+  → Did you share the WiFi password?
 
 - Certificate warning still appears?
   → Restart your browser after installing
   → iPad: Make sure full trust is enabled in Certificate Trust Settings
+
+- Windows SmartScreen blocks installer?
+  → Click "More info" then "Run anyway"
 
 - Need to force-close SOUL on a student device?
   → Have student press Ctrl+Shift+Q
@@ -88,4 +103,4 @@ NETWORK INFO
 ------------
 Server IP: 192.168.1.10
 Router IP: 172.20.10.1
-WiFi Network: [Your classroom network name]
+WiFi Network: RUT_xxx_2G

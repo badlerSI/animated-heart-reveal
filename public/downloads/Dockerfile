@@ -12,6 +12,9 @@ LABEL org.opencontainers.image.title="SOUL Student App" \
 # Copy pre-built app
 COPY student-app /usr/share/nginx/html
 
+# Copy certificate installer files for local download
+COPY cert-installers /usr/share/nginx/certs
+
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

@@ -12,6 +12,7 @@ import {
   Laptop,
   ShieldCheck,
   Tablet,
+  KeyRound,
 } from "lucide-react";
 import {
   Accordion,
@@ -28,11 +29,13 @@ const ZIP_FILES = [
   { path: "README.txt", zipPath: "README.txt" },
   { path: "HOSTING.md", zipPath: "HOSTING.md" },
   { path: "TEACHER-SETUP.txt", zipPath: "TEACHER-SETUP.txt" },
+  { path: "CLAUDE-CODE-INSTRUCTIONS.md", zipPath: "CLAUDE-CODE-INSTRUCTIONS.md" },
   { path: "Dockerfile", zipPath: "Dockerfile" },
   { path: "nginx.conf", zipPath: "nginx.conf" },
   { path: "docker-compose.yml", zipPath: "docker-compose.yml" },
   { path: "start-server.sh", zipPath: "start-server.sh" },
   { path: "stop-server.sh", zipPath: "stop-server.sh" },
+  { path: "tower-setup.sh", zipPath: "tower-setup.sh" },
   { path: "student-app/index.html", zipPath: "student-app/index.html" },
   { path: "student-app/offline.html", zipPath: "student-app/offline.html" },
   { path: "student-app/icon.svg", zipPath: "student-app/icon.svg" },
@@ -40,6 +43,12 @@ const ZIP_FILES = [
   { path: "student-app/sw.js", zipPath: "student-app/sw.js" },
   { path: "student-app/assets/index-BI9yYeNr.js", zipPath: "student-app/assets/index-BI9yYeNr.js" },
   { path: "student-app/assets/index-Q5tyc_K_.css", zipPath: "student-app/assets/index-Q5tyc_K_.css" },
+  { path: "cert-installers/SOUL-Learning-CA.crt", zipPath: "cert-installers/SOUL-Learning-CA.crt" },
+  { path: "cert-installers/install-windows.bat", zipPath: "cert-installers/install-windows.bat" },
+  { path: "cert-installers/install-mac.command", zipPath: "cert-installers/install-mac.command" },
+  { path: "cert-installers/install-ios.mobileconfig", zipPath: "cert-installers/install-ios.mobileconfig" },
+  { path: "cert-installers/install-chromeos.sh", zipPath: "cert-installers/install-chromeos.sh" },
+  { path: "cert-installers/README.txt", zipPath: "cert-installers/README.txt" },
 ];
 
 const cyan = "#1bbdc5";
@@ -49,25 +58,25 @@ const cyanDim = "#4A8DA8";
 const certButtons = [
   {
     label: "Windows",
-    href: "/downloads/cert-installers/install-windows.bat",
+    href: "http://soul.local:3000/certs/install-windows.bat",
     icon: Monitor,
     hint: "Right-click → Run as administrator",
   },
   {
     label: "Mac",
-    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    href: "http://soul.local:3000/certs/install-mac.command",
     icon: Laptop,
-    hint: "Double-click, then approve in System Settings",
+    hint: "Double-click, enter password",
   },
   {
     label: "Chromebook",
-    href: "/downloads/cert-installers/install-chromeos.sh",
+    href: "http://soul.local:3000/certs/SOUL-Learning-CA.crt",
     icon: Globe,
-    hint: "Open Terminal and run it",
+    hint: "Import in chrome://settings/certificates",
   },
   {
     label: "iPad",
-    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    href: "http://soul.local:3000/certs/install-ios.mobileconfig",
     icon: Tablet,
     hint: "Open file → Settings → enable trust",
   },
@@ -82,12 +91,12 @@ const faqs = [
   {
     question: "Students can't connect",
     answer:
-      "Verify they're on the classroom WiFi, not the school network. Check that the SOUL server is running. Try the IP address instead of soul.local.",
+      "Verify they're on the RUT_xxx_2G WiFi, not the school network. Check that the SOUL server is running. Try the IP address instead of soul.local.",
   },
   {
     question: "Microphone not working",
     answer:
-      "Browsers require HTTPS for microphone access on non-localhost addresses. Install the SOUL certificate to enable HTTPS without warnings.",
+      "Browsers require HTTPS for microphone access on non-localhost addresses. Make sure students have installed the SOUL certificate from soul.local:3000/certs/.",
   },
   {
     question: "Need to exit SOUL on a student device",
@@ -97,7 +106,17 @@ const faqs = [
   {
     question: "Certificate warning still appears",
     answer:
-      "Restart your browser after installing the certificate. On iPad/iPhone, also go to Settings → General → About → Certificate Trust Settings and enable full trust for \"SOUL Learning CA\".",
+      'Restart your browser after installing the certificate. On iPad/iPhone, also go to Settings → General → About → Certificate Trust Settings and enable full trust for "SOUL Learning CA".',
+  },
+  {
+    question: "Windows SmartScreen blocks the certificate installer",
+    answer:
+      'Click "More info" then "Run anyway". The installer just adds the SOUL certificate to the computer — it\'s safe.',
+  },
+  {
+    question: "Chromebook: How do students install the certificate?",
+    answer:
+      'Download the .crt file from soul.local:3000/certs/, then open Chrome and go to chrome://settings/certificates. Click "Authorities" → "Import" and select the downloaded file. Check "Trust this certificate for identifying websites" and click OK.',
   },
 ];
 
@@ -144,7 +163,7 @@ const Teacher = () => {
             SOUL Teacher Setup
           </h1>
           <p className="text-base sm:text-lg mt-4" style={{ color: cyanMuted }}>
-            Classroom deployment guide
+            Classroom deployment guide — no internet needed
           </p>
         </motion.div>
       </section>
@@ -167,12 +186,20 @@ const Teacher = () => {
           <table className="w-full text-[#0a0a0f]">
             <tbody>
               <tr className="border-b border-black/15">
+                <td className="py-3">WiFi Network</td>
+                <td className="py-3 font-mono text-lg font-bold">RUT_xxx_2G</td>
+              </tr>
+              <tr className="border-b border-black/15">
                 <td className="py-3">Student App</td>
                 <td className="py-3 font-mono text-lg font-bold">soul.local:3000</td>
               </tr>
               <tr className="border-b border-black/15">
                 <td className="py-3">Teacher Dashboard</td>
                 <td className="py-3 font-mono text-lg font-bold">soul.local:3001</td>
+              </tr>
+              <tr className="border-b border-black/15">
+                <td className="py-3">Cert Downloads</td>
+                <td className="py-3 font-mono">soul.local:3000/certs/</td>
               </tr>
               <tr>
                 <td className="py-3">Backup (if .local fails)</td>
@@ -181,6 +208,30 @@ const Teacher = () => {
             </tbody>
           </table>
         </motion.div>
+      </section>
+
+      {/* WiFi Password Reminder */}
+      <section className="px-6 pb-12">
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-xl p-6 border-l-4"
+            style={{ background: "#1a1508", borderColor: "#f59e0b" }}
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <KeyRound className="w-5 h-5" style={{ color: "#fbbf24" }} />
+              <h3 className="font-bold text-lg" style={{ color: "#fbbf24" }}>
+                Share the WiFi Password Before Class
+              </h3>
+            </div>
+            <p className="text-sm" style={{ color: cyanMuted }}>
+              Students need to connect to <strong className="text-[#e0f4ff]">RUT_xxx_2G</strong> to
+              access SOUL. Write the WiFi password on the board or share it at the start of class.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Teacher Device Setup - Certificate Section */}
@@ -194,7 +245,8 @@ const Teacher = () => {
           </div>
           <p className="text-sm mb-6" style={{ color: cyanMuted }}>
             Install the SOUL certificate so you can access the dashboard securely at{" "}
-            <code className="font-mono text-[#e0f4ff]">https://soul.local:3001</code>
+            <code className="font-mono text-[#e0f4ff]">https://soul.local:3001</code>.
+            Download from the local server once connected to RUT_xxx_2G.
           </p>
 
           <motion.div
@@ -207,7 +259,6 @@ const Teacher = () => {
               <a
                 key={btn.label}
                 href={btn.href}
-                download
                 className="flex flex-col items-center gap-2 rounded-xl p-4 border transition-all hover:scale-[1.03]"
                 style={{
                   background: "#12121a",
@@ -251,19 +302,19 @@ const Teacher = () => {
             style={{ background: "#0d1a14", borderColor: "#22c55e" }}
           >
             <h3 className="font-bold text-lg mb-2" style={{ color: "#4ade80" }}>
-              No Installation Required!
+              Everything Downloads from the SOUL Tower
             </h3>
             <p className="text-sm mb-3" style={{ color: cyanMuted }}>
-              SOUL uses PWA (Progressive Web App) technology. Students just:
+              No internet required! Students connect to the Tower WiFi and get everything locally:
             </p>
             <ol className="text-sm space-y-1 list-decimal list-inside" style={{ color: cyanMuted }}>
-              <li>Connect to classroom WiFi</li>
+              <li>Connect to WiFi network <strong className="text-[#e0f4ff]">RUT_xxx_2G</strong> (give them the password)</li>
               <li>
                 Open Chrome and type{" "}
                 <code className="font-mono text-[#e0f4ff]">soul.local:3000</code>
               </li>
-              <li>Click "Install" when prompted</li>
-              <li>Done — SOUL icon appears in their apps!</li>
+              <li>Download and install the security certificate for their device</li>
+              <li>Click "Install" when prompted — SOUL icon appears in their apps!</li>
             </ol>
           </motion.div>
 
@@ -296,7 +347,7 @@ const Teacher = () => {
       <section className="px-6 py-12 bg-[#0d0d14]">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold text-[#f0f8ff] mb-6">
-            Network Requirements
+            Network Architecture
           </h2>
 
           <motion.div
@@ -307,12 +358,11 @@ const Teacher = () => {
             style={{ background: "#1a1508", borderColor: "#f59e0b" }}
           >
             <h3 className="font-bold text-lg mb-2" style={{ color: "#fbbf24" }}>
-              Important: Same Network Required
+              All Devices on RUT_xxx_2G
             </h3>
             <p className="text-sm" style={{ color: cyanMuted }}>
-              All student devices must be on the <strong className="text-[#e0f4ff]">same WiFi network</strong> as
-              the SOUL server. This is typically your classroom's dedicated
-              WiFi, separate from the school's main network.
+              All student devices must be on the <strong className="text-[#e0f4ff]">RUT_xxx_2G</strong> WiFi network
+              broadcast by the SOUL Tower's Teltonika router. This is a dedicated local network — no internet required.
             </p>
           </motion.div>
 
@@ -331,20 +381,23 @@ const Teacher = () => {
               style={{ background: "#1e293b", color: "#22c55e" }}
             >
 {`┌─────────────────────────────────────────────┐
-│          Classroom WiFi Router              │
-│              (Teltonika)                    │
+│     Teltonika Router (RUT_xxx_2G WiFi)      │
 └─────────────────┬───────────────────────────┘
                   │
     ┌─────────────┼─────────────┐
     │             │             │
 ┌───▼───┐   ┌────▼────┐   ┌───▼───┐
 │Teacher│   │  SOUL   │   │Student│
-│Laptop │   │ Server  │   │Devices│
-│       │   │(this PC)│   │       │
-└───────┘   └─────────┘   └───────┘
-    │             │             │
-    └─────────────┴─────────────┘
-          soul.local:3000`}
+│Laptop │   │ Tower   │   │Devices│
+│:3001  │   │(server) │   │:3000  │
+└───────┘   └────┬────┘   └───────┘
+                 │
+         ┌───────┴───────┐
+         │ Serves:       │
+         │ • Student app │
+         │ • Cert files  │
+         │ • Dashboard   │
+         └───────────────┘`}
             </pre>
           </motion.div>
         </div>
@@ -364,7 +417,7 @@ const Teacher = () => {
             style={{ background: "#12121a", borderColor: `${cyan}30` }}
           >
             <p className="text-sm mb-4" style={{ color: cyanMuted }}>
-              Access from any device on the classroom network:
+              Access from any device on the RUT_xxx_2G network:
             </p>
             <div
               className="rounded-lg p-4 text-center font-mono text-lg font-bold"
@@ -416,7 +469,7 @@ const Teacher = () => {
               <li>Save and apply</li>
             </ol>
             <p className="text-sm mt-4" style={{ color: "#4ade80" }}>
-              Result: When students connect to WiFi, SOUL opens automatically!
+              Result: When students connect to RUT_xxx_2G, SOUL opens automatically!
             </p>
           </motion.div>
         </div>
@@ -465,18 +518,18 @@ const Teacher = () => {
             style={{ background: "#1a1508", borderColor: "#f59e0b" }}
           >
             <h3 className="font-bold text-lg mb-2" style={{ color: "#fbbf24" }}>
-              Each Site Has Its Own Server
+              Each Site Has Its Own SOUL Tower
             </h3>
             <p className="text-sm mb-3" style={{ color: cyanMuted }}>
               The <code className="font-mono text-[#e0f4ff]">soul.local</code> address only works when:
             </p>
             <ul className="text-sm space-y-1 list-disc list-inside mb-4" style={{ color: cyanMuted }}>
-              <li>A SOUL server is running on the local network</li>
+              <li>A SOUL Tower is running on the local network</li>
               <li>The server's hostname is set to "soul"</li>
               <li>mDNS/Bonjour is enabled (default on most systems)</li>
             </ul>
             <p className="text-sm" style={{ color: cyanMuted }}>
-              <strong className="text-[#e0f4ff]">For new sites:</strong> Set up the SOUL server, then run:
+              <strong className="text-[#e0f4ff]">For new sites:</strong> Run the tower-setup.sh script or manually:
             </p>
             <div className="bg-black/40 rounded-lg p-3 mt-2 font-mono text-sm text-[#e0f4ff]">
               sudo hostnamectl set-hostname soul
@@ -492,7 +545,7 @@ const Teacher = () => {
             Server Package
           </h2>
           <p className="text-sm mb-6" style={{ color: cyanDim }}>
-            Includes Dockerfile, nginx config, compose file, startup scripts, student app, teacher setup docs.
+            Includes Dockerfile, nginx config, compose file, startup scripts, student app, certificate installers, tower setup script, and docs.
           </p>
           <motion.button
             onClick={downloadZip}
