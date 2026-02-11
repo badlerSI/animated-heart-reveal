@@ -78,23 +78,18 @@ const Chromebook = () => {
     },
     {
       icon: Terminal,
-      title: "Install Docker",
-      description: "Open the Linux terminal and paste the install command below. The installer will install Docker and then ask you to log out.",
+      title: "Run the Installer",
+      description: "Open the Linux terminal and paste the install command below. The first run installs Docker and may ask you to log out.",
     },
     {
       icon: LogOut,
       title: "Log Out & Back In",
-      description: "Log out of the Linux terminal and log back in for Docker permissions to take effect.",
-    },
-    {
-      icon: Terminal,
-      title: "Run the Installer Again",
-      description: "Paste the same curl command a second time. This time it builds the kiosk container and sets everything up.",
+      description: "Log out of the Linux terminal and log back in for Docker permissions to take effect. Then run the same command again.",
     },
     {
       icon: CheckCircle,
       title: "Launch SOUL",
-      description: "Open Terminal — the SOUL menu appears automatically. Press 1 to start.",
+      description: "A \"SOUL Learning\" icon appears on your desktop. Double-click it to launch! You can also use ~/soul/menu.sh from the terminal.",
     },
   ];
 
@@ -210,7 +205,7 @@ const Chromebook = () => {
               </button>
             </div>
             <p className="text-sm mt-4" style={{ color: cyanDim }}>
-              Run this in the Linux terminal on your Chromebook. The first run installs Docker (you'll need to log out and back in, then run it again). The second run completes the setup.
+              Run this in the Linux terminal on your Chromebook. You may need to log out and back in once for Docker permissions, then run it again to finish.
             </p>
           </motion.div>
         </div>
@@ -226,7 +221,7 @@ const Chromebook = () => {
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-[#f0f8ff]"
             style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
           >
-            Setup in 5 Steps
+            Setup in 4 Steps
           </motion.h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
