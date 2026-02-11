@@ -13,9 +13,12 @@ SECURITY CERTIFICATE SETUP
 Install the SOUL certificate on your device to avoid HTTPS warnings:
 
   Windows:     Right-click install-windows.bat → "Run as administrator"
-  Mac:         Double-click install-mac.command → Enter password
+  Mac:         Double-click install-ios.mobileconfig → approve in System Settings
   Chromebook:  Open Terminal → Run: bash install-chromeos.sh
   iPad:        Open install-ios.mobileconfig → Settings → enable trust
+
+Mac extra step (Ventura+):
+  System Settings → Privacy & Security → Profiles → install the profile
 
 iPad extra step:
   Settings → General → About → Certificate Trust Settings

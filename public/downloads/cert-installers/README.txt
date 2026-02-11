@@ -6,7 +6,7 @@ connections work without security warnings.
 
 Files:
   install-windows.bat      - Windows (run as Administrator)
-  install-mac.command       - macOS (double-click, enter password)
+  install-ios.mobileconfig  - macOS & iOS (double-click, approve in System Settings)
   install-chromeos.sh       - ChromeOS/Linux (run in Terminal)
   install-ios.mobileconfig  - iPad/iPhone (open file, then enable trust)
   SOUL-Learning-CA.crt      - The certificate file itself
@@ -17,7 +17,8 @@ Instructions by platform:
     Right-click install-windows.bat → "Run as administrator"
 
   MAC:
-    Double-click install-mac.command → Enter your password when asked
+    Double-click install-ios.mobileconfig → Approve in System Settings
+    On macOS Ventura+: System Settings → Privacy & Security → Profiles
 
   CHROMEBOOK:
     Open Terminal (Ctrl+Alt+T) → Run: bash install-chromeos.sh
