@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadCertificateFileName</key>
+            <string>SOUL-Learning-CA.crt</string>
+            <key>PayloadContent</key>
+            <data>
+            PLACEHOLDER_BASE64_CERT_DATA
+            </data>
+            <key>PayloadDescription</key>
+            <string>Installs the SOUL Learning CA certificate</string>
+            <key>PayloadDisplayName</key>
+            <string>SOUL Learning CA</string>
+            <key>PayloadIdentifier</key>
+            <string>com.soul-learning.ca-cert</string>
+            <key>PayloadType</key>
+            <string>com.apple.security.root</string>
+            <key>PayloadUUID</key>
+            <string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+        </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>SOUL Learning Security</string>
+    <key>PayloadIdentifier</key>
+    <string>com.soul-learning.profile</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>B2C3D4E5-F6A7-8901-BCDE-F12345678901</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadDescription</key>
+    <string>Installs the SOUL Learning CA certificate for secure HTTPS connections</string>
+</dict>
+</plist>

@@ -1,0 +1,4 @@
+-----BEGIN CERTIFICATE-----
+PLACEHOLDER: Replace this file with your actual SOUL Learning CA certificate.
+Generate one with: openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out SOUL-Learning-CA.crt
+-----END CERTIFICATE-----
