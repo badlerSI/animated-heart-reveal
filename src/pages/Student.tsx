@@ -22,7 +22,7 @@ const certButtons = [
     label: "Mac",
     href: "/downloads/cert-installers/install-mac.command",
     icon: Laptop,
-    hint: "Double-click and enter password",
+    hint: "Right-click → Open, then enter password",
   },
   {
     label: "Chromebook",
