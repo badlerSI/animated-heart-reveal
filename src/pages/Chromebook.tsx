@@ -77,38 +77,43 @@ const Chromebook = () => {
       description: "Go to Settings → Advanced → Developers and turn on \"Linux development environment.\"",
     },
     {
+      icon: Download,
+      title: "Download & Extract",
+      description: "Click the download button above. Open the Files app, go to Downloads, right-click the zip file and select \"Extract all.\"",
+    },
+    {
       icon: Terminal,
-      title: "Run the Installer",
-      description: "Open the Linux terminal and paste the install command below. The first run installs Docker and may ask you to log out.",
+      title: "Run Installer",
+      description: "Open Terminal (from the Linux apps folder) and run: bash ~/Downloads/install.sh",
     },
     {
       icon: LogOut,
       title: "Log Out & Back In",
-      description: "Log out of the Linux terminal and log back in for Docker permissions to take effect. Then run the same command again.",
+      description: "After the installer finishes, log out of your Chromebook and log back in. This is required for permissions to take effect.",
     },
     {
       icon: CheckCircle,
-      title: "Launch SOUL",
-      description: "A \"SOUL Learning\" icon appears on your desktop. Double-click it to launch! You can also use ~/soul/menu.sh from the terminal.",
+      title: "Done!",
+      description: "A \"SOUL Learning\" icon is now on your desktop! Just double-click it to launch SOUL.",
     },
   ];
 
   const faqs = [
     {
-      question: "Docker says \"permission denied\"",
-      answer: "Log out of Linux and log back in. Docker group changes require a new session to take effect.",
+      question: "\"Permission denied\" error",
+      answer: "Log out and log back in, then run the installer again.",
+    },
+    {
+      question: "SOUL shows \"Offline\"",
+      answer: "Make sure your Chromebook is connected to the classroom WiFi and the SOUL server is running.",
+    },
+    {
+      question: "Can't find the desktop icon",
+      answer: "Look in the Linux apps folder, or run ~/soul/start-soul.sh from Terminal.",
     },
     {
       question: "Linux option not available",
-      answer: "Your Chromebook may not support Linux (Crostini). Most Chromebooks from 2019 or later support it. Check your model at chromeos.dev.",
-    },
-    {
-      question: "Menu doesn't appear",
-      answer: "Run ~/soul/menu.sh manually from the Terminal. If that works, the auto-start may not have been added to .bashrc — reinstall to fix.",
-    },
-    {
-      question: "Can't reach the SOUL server",
-      answer: "Check that ./start-server.sh is running on the teacher's machine and note the IP displayed. Verify the Chromebook is on the same network.",
+      answer: "Your Chromebook may not support Linux. Most Chromebooks from 2019 or later support it.",
     },
     {
       question: "Students found a way to exit kiosk mode",
@@ -221,7 +226,7 @@ const Chromebook = () => {
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-[#f0f8ff]"
             style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
           >
-            Setup in 4 Steps
+            Setup in 5 Steps
           </motion.h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -274,21 +279,16 @@ const Chromebook = () => {
               style={{ borderColor: `${cyan}40` }}
             >
               <Server className="w-8 h-8 mb-4" style={{ color: cyan }} />
-              <h3 className="font-bold text-lg mb-3 text-[#f0f8ff]">Custom Server URL</h3>
+              <h3 className="font-bold text-lg mb-3 text-[#f0f8ff]">Running Your Own Server?</h3>
               <p className="text-sm mb-3" style={{ color: cyanMuted }}>
-                If your Soul Interface tower uses a different IP:
+                The installer is pre-configured for the default classroom server. To use a custom server, edit <code className="font-mono" style={{ color: cyan }}>install.sh</code> before running it:
               </p>
-              <p className="text-xs font-semibold mb-1" style={{ color: cyan }}>During install:</p>
-              <code className="block text-sm font-mono p-3 rounded-lg bg-black/50 text-[#e0f4ff] border mb-3" style={{ borderColor: `${cyan}20` }}>
-                SOUL_URL=http://YOUR_IP:3000 curl -fsSL https://soulinterface.ai/install.sh | bash
-              </code>
-              <p className="text-xs font-semibold mb-1" style={{ color: cyan }}>After install:</p>
-              <code className="block text-sm font-mono p-3 rounded-lg bg-black/50 text-[#e0f4ff] border" style={{ borderColor: `${cyan}20` }}>
-                SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh
-              </code>
-              <p className="text-sm mt-3" style={{ color: cyanDim }}>
-                Or use the boot menu: <code className="font-mono" style={{ color: cyan }}>~/soul/menu.sh</code>
-              </p>
+              <ol className="space-y-1 text-sm list-decimal list-inside mb-3" style={{ color: cyanMuted }}>
+                <li>Open the extracted <code className="font-mono text-[#e0f4ff]">install.sh</code> in a text editor</li>
+                <li>Change the line: <code className="font-mono text-[#e0f4ff]">SOUL_URL="http://192.168.1.10:3000"</code></li>
+                <li>Replace with your server's IP address</li>
+                <li>Save and run the installer</li>
+              </ol>
             </motion.div>
 
             <motion.div
