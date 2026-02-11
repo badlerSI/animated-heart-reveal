@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Download,
-  Loader2,
   Server,
   Wifi,
   Monitor,
@@ -21,35 +19,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PageFooter from "@/components/PageFooter";
-import { toast } from "sonner";
-import JSZip from "jszip";
-import { saveAs } from "file-saver";
-
-const ZIP_FILES = [
-  { path: "README.txt", zipPath: "README.txt" },
-  { path: "HOSTING.md", zipPath: "HOSTING.md" },
-  { path: "TEACHER-SETUP.txt", zipPath: "TEACHER-SETUP.txt" },
-  { path: "CLAUDE-CODE-INSTRUCTIONS.md", zipPath: "CLAUDE-CODE-INSTRUCTIONS.md" },
-  { path: "Dockerfile", zipPath: "Dockerfile" },
-  { path: "nginx.conf", zipPath: "nginx.conf" },
-  { path: "docker-compose.yml", zipPath: "docker-compose.yml" },
-  { path: "start-server.sh", zipPath: "start-server.sh" },
-  { path: "stop-server.sh", zipPath: "stop-server.sh" },
-  { path: "tower-setup.sh", zipPath: "tower-setup.sh" },
-  { path: "student-app/index.html", zipPath: "student-app/index.html" },
-  { path: "student-app/offline.html", zipPath: "student-app/offline.html" },
-  { path: "student-app/icon.svg", zipPath: "student-app/icon.svg" },
-  { path: "student-app/manifest.json", zipPath: "student-app/manifest.json" },
-  { path: "student-app/sw.js", zipPath: "student-app/sw.js" },
-  { path: "student-app/assets/index-BI9yYeNr.js", zipPath: "student-app/assets/index-BI9yYeNr.js" },
-  { path: "student-app/assets/index-Q5tyc_K_.css", zipPath: "student-app/assets/index-Q5tyc_K_.css" },
-  { path: "cert-installers/SOUL-Learning-CA.crt", zipPath: "cert-installers/SOUL-Learning-CA.crt" },
-  { path: "cert-installers/install-windows.bat", zipPath: "cert-installers/install-windows.bat" },
-  { path: "cert-installers/install-mac.command", zipPath: "cert-installers/install-mac.command" },
-  { path: "cert-installers/install-ios.mobileconfig", zipPath: "cert-installers/install-ios.mobileconfig" },
-  { path: "cert-installers/install-chromeos.sh", zipPath: "cert-installers/install-chromeos.sh" },
-  { path: "cert-installers/README.txt", zipPath: "cert-installers/README.txt" },
-];
 
 const cyan = "#1bbdc5";
 const cyanMuted = "#5BA8C4";
@@ -58,25 +27,25 @@ const cyanDim = "#4A8DA8";
 const certButtons = [
   {
     label: "Windows",
-    href: "http://soul.local:3000/certs/install-windows.bat",
+    href: "https://soul.local:3000/certs/install-windows.bat",
     icon: Monitor,
     hint: "Right-click → Run as administrator",
   },
   {
     label: "Mac",
-    href: "http://soul.local:3000/certs/install-mac.command",
+    href: "https://soul.local:3000/certs/install-mac.command",
     icon: Laptop,
     hint: "Double-click, enter password",
   },
   {
     label: "Chromebook",
-    href: "http://soul.local:3000/certs/SOUL-Learning-CA.crt",
+    href: "https://soul.local:3000/certs/SOUL-Learning-CA.crt",
     icon: Globe,
     hint: "Import in chrome://settings/certificates",
   },
   {
     label: "iPad",
-    href: "http://soul.local:3000/certs/install-ios.mobileconfig",
+    href: "https://soul.local:3000/certs/install-ios.mobileconfig",
     icon: Tablet,
     hint: "Open file → Settings → enable trust",
   },
@@ -121,32 +90,6 @@ const faqs = [
 ];
 
 const Teacher = () => {
-  const [zipping, setZipping] = useState(false);
-
-  const downloadZip = async () => {
-    setZipping(true);
-    try {
-      const zip = new JSZip();
-      const results = await Promise.all(
-        ZIP_FILES.map(async (f) => {
-          const res = await fetch(`/downloads/${f.path}`);
-          if (!res.ok) throw new Error(`Failed to fetch ${f.path}`);
-          const blob = await res.blob();
-          return { zipPath: f.zipPath, blob };
-        })
-      );
-      results.forEach(({ zipPath, blob }) => zip.file(zipPath, blob));
-      const content = await zip.generateAsync({ type: "blob" });
-      saveAs(content, "soul-server-package.zip");
-      toast.success("Download started");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to create download package");
-    } finally {
-      setZipping(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       {/* Hero */}
@@ -191,15 +134,15 @@ const Teacher = () => {
               </tr>
               <tr className="border-b border-black/15">
                 <td className="py-3">Student App</td>
-                <td className="py-3 font-mono text-lg font-bold">soul.local:3000</td>
+                <td className="py-3 font-mono text-lg font-bold">https://soul.local:3000</td>
               </tr>
               <tr className="border-b border-black/15">
                 <td className="py-3">Teacher Dashboard</td>
-                <td className="py-3 font-mono text-lg font-bold">soul.local:3001</td>
+                <td className="py-3 font-mono text-lg font-bold">https://soul.local:3001</td>
               </tr>
               <tr className="border-b border-black/15">
                 <td className="py-3">Cert Downloads</td>
-                <td className="py-3 font-mono">soul.local:3000/certs/</td>
+                <td className="py-3 font-mono">https://soul.local:3000/certs/</td>
               </tr>
               <tr>
                 <td className="py-3">Backup (if .local fails)</td>
@@ -311,7 +254,7 @@ const Teacher = () => {
               <li>Connect to WiFi network <strong className="text-[#e0f4ff]">RUT_xxx_2G</strong> (give them the password)</li>
               <li>
                 Open Chrome and type{" "}
-                <code className="font-mono text-[#e0f4ff]">soul.local:3000</code>
+                <code className="font-mono text-[#e0f4ff]">https://soul.local:3000</code>
               </li>
               <li>Download and install the security certificate for their device</li>
               <li>Click "Install" when prompted — SOUL icon appears in their apps!</li>
@@ -423,7 +366,7 @@ const Teacher = () => {
               className="rounded-lg p-4 text-center font-mono text-lg font-bold"
               style={{ background: "#1e293b", color: "#22c55e" }}
             >
-              soul.local:3001
+              https://soul.local:3001
             </div>
             <p className="text-sm mt-4" style={{ color: cyanDim }}>
               Or use the IP address:{" "}
@@ -538,34 +481,48 @@ const Teacher = () => {
         </div>
       </section>
 
-      {/* Download */}
+      {/* Downloads */}
       <section className="px-6 py-16">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-[#f0f8ff] mb-4">
-            Server Package
+            Downloads
           </h2>
-          <p className="text-sm mb-6" style={{ color: cyanDim }}>
-            Includes Dockerfile, nginx config, compose file, startup scripts, student app, certificate installers, tower setup script, and docs.
-          </p>
-          <motion.button
-            onClick={downloadZip}
-            disabled={zipping}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold transition-all disabled:opacity-60"
-            style={{
-              background: `linear-gradient(135deg, ${cyan}, #0e8a8f)`,
-              color: "#0a0a0f",
-              boxShadow: `0 0 30px ${cyan}40`,
-            }}
-          >
-            {zipping ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.a
+              href="/downloads/soul-teacher-setup.zip"
+              download
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold transition-all"
+              style={{
+                background: `linear-gradient(135deg, ${cyan}, #0e8a8f)`,
+                color: "#0a0a0f",
+                boxShadow: `0 0 30px ${cyan}40`,
+              }}
+            >
               <Download className="w-5 h-5" />
-            )}
-            {zipping ? "Assembling package…" : "Download Server Package"}
-          </motion.button>
+              Download Teacher Setup
+            </motion.a>
+            <motion.a
+              href="/downloads/soul-student-chromebook.zip"
+              download
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold transition-all"
+              style={{
+                background: `linear-gradient(135deg, ${cyan}, #0e8a8f)`,
+                color: "#0a0a0f",
+                boxShadow: `0 0 30px ${cyan}40`,
+              }}
+            >
+              <Download className="w-5 h-5" />
+              Download Chromebook Installer
+            </motion.a>
+          </div>
+          <p className="text-sm mt-4" style={{ color: cyanDim }}>
+            <strong className="text-[#e0f4ff]">Teacher Setup</strong> — server infrastructure, scripts, docs &amp; cert installers<br />
+            <strong className="text-[#e0f4ff]">Chromebook Installer</strong> — student app package for managed Chromebooks
+          </p>
         </div>
       </section>
 

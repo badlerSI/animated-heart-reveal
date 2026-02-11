@@ -14,25 +14,25 @@ const cyanMuted = "#5BA8C4";
 const certButtons = [
   {
     label: "Windows",
-    href: "http://soul.local:3000/certs/install-windows.bat",
+    href: "https://soul.local:3000/certs/install-windows.bat",
     icon: Monitor,
     hint: "Right-click → Run as administrator",
   },
   {
     label: "Mac",
-    href: "http://soul.local:3000/certs/install-mac.command",
+    href: "https://soul.local:3000/certs/install-mac.command",
     icon: Laptop,
     hint: "Double-click, enter password",
   },
   {
     label: "Chromebook",
-    href: "http://soul.local:3000/certs/SOUL-Learning-CA.crt",
+    href: "https://soul.local:3000/certs/SOUL-Learning-CA.crt",
     icon: Globe,
     hint: "Import in chrome://settings/certificates",
   },
   {
     label: "iPad",
-    href: "http://soul.local:3000/certs/install-ios.mobileconfig",
+    href: "https://soul.local:3000/certs/install-ios.mobileconfig",
     icon: Tablet,
     hint: "Open file, then enable trust in Settings",
   },
@@ -145,7 +145,7 @@ const Student = () => {
                   className="text-xl sm:text-2xl font-bold"
                   style={{ color: "#0e8a8f" }}
                 >
-                  soul.local:3000
+                  https://soul.local:3000
                 </code>
               </div>
             </div>
