@@ -1,39 +1,57 @@
 
 
-# Fix Chromebook Setup Instructions
+# Simplify Setup: Replace Chromebook Page with Student + Teacher Pages
 
-## Problem
-The setup steps on the `/chromebook` page don't accurately reflect what the installer actually does. The installer is a two-pass process (first run installs Docker and exits, second run after re-login does the actual setup), but the page presents it as a seamless 4-step flow.
+## Overview
+The current `/chromebook` page is a complex terminal-based installer guide. The new approach is much simpler: students just open a browser and install a PWA -- no Linux, no Terminal, no downloads. We'll replace the single Chromebook page with two focused pages and copy the uploaded teacher setup text into the downloads folder.
 
-## Changes
+## What Changes
 
-### Update the steps array in `src/pages/Chromebook.tsx`
+### 1. New Student Page (`src/pages/Student.tsx`) at `/student`
+A simple, friendly page with the site's dark theme and cyan accent. Content from the uploaded student HTML:
+- Hero: "SOUL Student Setup" -- "Get started in 2 minutes!"
+- 3 Easy Steps card: Connect WiFi, type `soul.local:3000`, click Install
+- Help/FAQ accordion: "site can't be reached", "soul.local doesn't work", microphone issues, no Install button
 
-Replace the current 4 steps with 5 steps that match reality:
+### 2. New Teacher Page (`src/pages/Teacher.tsx`) at `/teacher`
+A more detailed setup guide for classroom deployment. Content from the uploaded teacher HTML:
+- Quick Reference table: Student App (`soul.local:3000`), Teacher Dashboard (`soul.local:3002`), backup IP
+- Student Setup section: "No Installation Required!" -- PWA explanation, works-on list (Chromebooks, Windows, Mac, iPad, Android)
+- Network Requirements: same-network warning, ASCII network diagram
+- Teacher Dashboard access info
+- Optional Captive Portal setup (from TEACHER-SETUP.txt): Teltonika router instructions
+- Troubleshooting FAQ: .local not working, students can't connect, microphone, exit SOUL
+- Deploying to different sites: hostname setup
+- Server Package download button (keep the existing JSZip download logic from current Chromebook page)
 
-| Step | Current | Fixed |
-|------|---------|-------|
-| 1 | Enable Linux (Settings -> Advanced -> Developers) | Same -- no change needed |
-| 2 | "Run the Installer" -- paste the curl command | "Install Docker" -- paste the curl command. The installer will install Docker and then ask you to log out. |
-| 3 | "Log Out & Back In" -- Docker requires a new session | "Log Out & Back In" -- Log out of the Linux terminal and log back in for Docker permissions to take effect. |
-| 4 | "Launch SOUL" -- menu appears automatically, press 1 | "Run the Installer Again" -- paste the same curl command a second time. This time it builds the kiosk container and sets everything up. |
-| (new) 5 | -- | "Launch SOUL" -- Open Terminal. The SOUL menu appears automatically. Press 1 to start. |
+### 3. Save `TEACHER-SETUP.txt` to downloads
+Copy `TEACHER-SETUP.txt` into `public/downloads/` so it's included in the ZIP download package.
 
-### Update the Quick Install section
+### 4. Update Routes (`src/App.tsx`)
+- Add `/student` route pointing to Student page
+- Add `/teacher` route pointing to Teacher page
+- Redirect `/chromebook` to `/student` (preserves any existing links)
 
-Add a note below the curl command:
-"Run this in the Linux terminal on your Chromebook. The first run installs Docker (you'll need to log out and back in, then run it again). The second run completes the setup."
+### 5. Remove old Chromebook page
+Delete `src/pages/Chromebook.tsx` (replaced by the redirect).
 
-### Update the "Custom Server URL" card
+### 6. Update ZIP_FILES
+Add `TEACHER-SETUP.txt` to the ZIP file list in the Teacher page.
 
-Add the install-time variant alongside the existing post-install command:
+## Files
 
-- **During install:** `SOUL_URL=http://YOUR_IP:3000 curl -fsSL https://soulinterface.ai/install.sh | bash`
-- **After install:** `SOUL_URL=http://YOUR_IP:3000 ~/soul/start-soul.sh`
-
-### File changed
-
-| File | Change |
+| File | Action |
 |------|--------|
-| `src/pages/Chromebook.tsx` | Update `steps` array (4 -> 5 steps), update Quick Install description, update Custom Server URL card |
+| `src/pages/Student.tsx` | Create -- simple 3-step student setup page |
+| `src/pages/Teacher.tsx` | Create -- full teacher deployment guide with ZIP download |
+| `src/App.tsx` | Add `/student`, `/teacher` routes; redirect `/chromebook` to `/student` |
+| `src/pages/Chromebook.tsx` | Delete (replaced by redirect) |
+| `public/downloads/TEACHER-SETUP.txt` | Copy uploaded file |
+
+## Design Notes
+- Both pages use the existing dark theme (`bg-[#0a0a0f]`) and cyan accent (`#1bbdc5`) consistent with the rest of the site
+- Both include `PageFooter` for navigation
+- The Student page is intentionally minimal -- it's meant for kids
+- The Teacher page carries over the ZIP download button from the old Chromebook page
+- Neither page is added to the PageFooter nav links (same hidden-but-accessible pattern as `/news`, `/partner`, etc.)
 
