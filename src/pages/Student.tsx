@@ -20,9 +20,9 @@ const certButtons = [
   },
   {
     label: "Mac",
-    href: "/downloads/cert-installers/install-mac.command",
+    href: "/downloads/cert-installers/install-ios.mobileconfig",
     icon: Laptop,
-    hint: "Right-click → Open, then enter password",
+    hint: "Double-click, then approve in System Settings",
   },
   {
     label: "Chromebook",
