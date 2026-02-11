@@ -1,57 +1,84 @@
 
 
-# Simplify Setup: Replace Chromebook Page with Student + Teacher Pages
+# Add Per-Platform Certificate Installer Buttons to Student and Teacher Pages
 
 ## Overview
-The current `/chromebook` page is a complex terminal-based installer guide. The new approach is much simpler: students just open a browser and install a PWA -- no Linux, no Terminal, no downloads. We'll replace the single Chromebook page with two focused pages and copy the uploaded teacher setup text into the downloads folder.
+Both the Student and Teacher pages will get a new "Security Setup" section with per-platform download buttons. Each button directly downloads the appropriate certificate installer file for that device type -- no ZIPs, no complexity. This lets students and teachers install the SOUL CA certificate so HTTPS connections work without security warnings.
 
-## What Changes
+## Shared Assets
 
-### 1. New Student Page (`src/pages/Student.tsx`) at `/student`
-A simple, friendly page with the site's dark theme and cyan accent. Content from the uploaded student HTML:
-- Hero: "SOUL Student Setup" -- "Get started in 2 minutes!"
-- 3 Easy Steps card: Connect WiFi, type `soul.local:3000`, click Install
-- Help/FAQ accordion: "site can't be reached", "soul.local doesn't work", microphone issues, no Install button
+Copy the uploaded installer files to `public/downloads/cert-installers/`:
 
-### 2. New Teacher Page (`src/pages/Teacher.tsx`) at `/teacher`
-A more detailed setup guide for classroom deployment. Content from the uploaded teacher HTML:
-- Quick Reference table: Student App (`soul.local:3000`), Teacher Dashboard (`soul.local:3002`), backup IP
-- Student Setup section: "No Installation Required!" -- PWA explanation, works-on list (Chromebooks, Windows, Mac, iPad, Android)
-- Network Requirements: same-network warning, ASCII network diagram
-- Teacher Dashboard access info
-- Optional Captive Portal setup (from TEACHER-SETUP.txt): Teltonika router instructions
-- Troubleshooting FAQ: .local not working, students can't connect, microphone, exit SOUL
-- Deploying to different sites: hostname setup
-- Server Package download button (keep the existing JSZip download logic from current Chromebook page)
+| Source | Destination |
+|--------|-------------|
+| `install-windows.bat` | `public/downloads/cert-installers/install-windows.bat` |
+| `install-mac.command` | `public/downloads/cert-installers/install-mac.command` |
+| `install-chromeos.sh` | `public/downloads/cert-installers/install-chromeos.sh` |
+| `install-ios.mobileconfig.xml` | `public/downloads/cert-installers/install-ios.mobileconfig` |
+| `SOUL-Learning-CA.crt` | `public/downloads/cert-installers/SOUL-Learning-CA.crt` |
+| `README-6.txt` | `public/downloads/cert-installers/README.txt` |
 
-### 3. Save `TEACHER-SETUP.txt` to downloads
-Copy `TEACHER-SETUP.txt` into `public/downloads/` so it's included in the ZIP download package.
+## Student Page Changes (`src/pages/Student.tsx`)
 
-### 4. Update Routes (`src/App.tsx`)
-- Add `/student` route pointing to Student page
-- Add `/teacher` route pointing to Teacher page
-- Redirect `/chromebook` to `/student` (preserves any existing links)
+Add a new section between the "3 Easy Steps" and "Need Help?" sections:
 
-### 5. Remove old Chromebook page
-Delete `src/pages/Chromebook.tsx` (replaced by the redirect).
+**"First Time? Install Security Certificate"**
+- Brief kid-friendly explanation: "Your teacher may ask you to install this so SOUL works without warnings."
+- Four styled buttons in a 2x2 grid, one per platform:
+  - **Windows** -- downloads `install-windows.bat`
+  - **Mac** -- downloads `install-mac.command`
+  - **Chromebook** -- downloads `install-chromeos.sh`
+  - **iPad** -- downloads `install-ios.mobileconfig`
+- Each button uses an `<a>` tag with `download` attribute pointing to `/downloads/cert-installers/...`
+- Simple one-line instruction under each: "Run as administrator", "Double-click and enter password", "Open Terminal and run it", "Open file, then enable trust in Settings"
 
-### 6. Update ZIP_FILES
-Add `TEACHER-SETUP.txt` to the ZIP file list in the Teacher page.
+Also add a new FAQ entry:
+- "I see a security warning" -- "Ask your teacher to help you install the security certificate using the buttons above."
 
-## Files
+## Teacher Page Changes (`src/pages/Teacher.tsx`)
+
+**Update Teacher Dashboard port** from `3002` to `3001` (HTTPS) throughout:
+- Quick Reference table
+- Teacher Dashboard section
+- Backup IP references
+
+**Add "Teacher Device Setup" section** (after Quick Reference, before Student Setup):
+- Explanation: "Install the SOUL certificate so you can access the dashboard securely at https://soul.local:3001"
+- Same 4 per-platform buttons as the Student page, with slightly more detailed instructions per platform
+- Extra note for iOS about enabling Full Trust in Settings
+
+**Update/add troubleshooting FAQ**:
+- "Certificate warning still appears" -- restart browser; iOS full trust step
+
+**Update `TEACHER-SETUP.txt`**: Replace with the uploaded `TEACHER-SETUP-2.txt`.
+
+## Files Summary
 
 | File | Action |
 |------|--------|
-| `src/pages/Student.tsx` | Create -- simple 3-step student setup page |
-| `src/pages/Teacher.tsx` | Create -- full teacher deployment guide with ZIP download |
-| `src/App.tsx` | Add `/student`, `/teacher` routes; redirect `/chromebook` to `/student` |
-| `src/pages/Chromebook.tsx` | Delete (replaced by redirect) |
-| `public/downloads/TEACHER-SETUP.txt` | Copy uploaded file |
+| `public/downloads/cert-installers/install-windows.bat` | Create (copy) |
+| `public/downloads/cert-installers/install-mac.command` | Create (copy) |
+| `public/downloads/cert-installers/install-chromeos.sh` | Create (copy) |
+| `public/downloads/cert-installers/install-ios.mobileconfig` | Create (copy, renamed) |
+| `public/downloads/cert-installers/SOUL-Learning-CA.crt` | Create (copy) |
+| `public/downloads/cert-installers/README.txt` | Create (copy) |
+| `public/downloads/TEACHER-SETUP.txt` | Replace with uploaded version |
+| `src/pages/Student.tsx` | Add certificate download section + new FAQ |
+| `src/pages/Teacher.tsx` | Add certificate section, update ports to 3001/HTTPS, update FAQ |
 
-## Design Notes
-- Both pages use the existing dark theme (`bg-[#0a0a0f]`) and cyan accent (`#1bbdc5`) consistent with the rest of the site
-- Both include `PageFooter` for navigation
-- The Student page is intentionally minimal -- it's meant for kids
-- The Teacher page carries over the ZIP download button from the old Chromebook page
-- Neither page is added to the PageFooter nav links (same hidden-but-accessible pattern as `/news`, `/partner`, etc.)
+## Technical Details
+
+Each download button is a simple anchor link -- no JavaScript needed:
+
+```tsx
+<a
+  href="/downloads/cert-installers/install-windows.bat"
+  download
+  className="..."
+>
+  Windows
+</a>
+```
+
+The buttons will use platform-appropriate Lucide icons (Monitor for Windows, Laptop for Mac, etc.) and match the existing dark/cyan design language.
 
