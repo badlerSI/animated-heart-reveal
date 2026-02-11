@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Wifi, Globe, Download, HelpCircle } from "lucide-react";
+import { Wifi, Globe, Download, HelpCircle, Monitor, Laptop, ShieldCheck, Tablet } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +10,33 @@ import PageFooter from "@/components/PageFooter";
 
 const cyan = "#1bbdc5";
 const cyanMuted = "#5BA8C4";
+
+const certButtons = [
+  {
+    label: "Windows",
+    href: "/downloads/cert-installers/install-windows.bat",
+    icon: Monitor,
+    hint: "Right-click → Run as administrator",
+  },
+  {
+    label: "Mac",
+    href: "/downloads/cert-installers/install-mac.command",
+    icon: Laptop,
+    hint: "Double-click and enter password",
+  },
+  {
+    label: "Chromebook",
+    href: "/downloads/cert-installers/install-chromeos.sh",
+    icon: Globe,
+    hint: "Open Terminal and run it",
+  },
+  {
+    label: "iPad",
+    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    icon: Tablet,
+    hint: "Open file, then enable trust in Settings",
+  },
+];
 
 const faqs = [
   {
@@ -31,6 +58,11 @@ const faqs = [
     question: "Microphone isn't working",
     answer:
       "When SOUL asks for microphone permission, click Allow. Ask your teacher if you need help.",
+  },
+  {
+    question: "I see a security warning",
+    answer:
+      "Ask your teacher to help you install the security certificate using the buttons above.",
   },
 ];
 
@@ -120,6 +152,49 @@ const Student = () => {
           <p className="mt-6 text-lg font-semibold text-[#0a0a0f]">
             That's it! SOUL will appear in your apps.
           </p>
+        </motion.div>
+      </section>
+
+      {/* Certificate Install Section */}
+      <section className="px-6 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-lg mx-auto"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <ShieldCheck className="w-6 h-6" style={{ color: cyan }} />
+            <h2 className="text-xl font-bold text-[#f0f8ff]">
+              First Time? Install Security Certificate
+            </h2>
+          </div>
+          <p className="text-sm mb-6" style={{ color: cyanMuted }}>
+            Your teacher may ask you to install this so SOUL works without warnings.
+          </p>
+
+          <div className="grid grid-cols-2 gap-3">
+            {certButtons.map((btn) => (
+              <a
+                key={btn.label}
+                href={btn.href}
+                download
+                className="flex flex-col items-center gap-2 rounded-xl p-4 border transition-all hover:scale-[1.03]"
+                style={{
+                  background: "#12121a",
+                  borderColor: `${cyan}30`,
+                }}
+              >
+                <btn.icon className="w-7 h-7" style={{ color: cyan }} />
+                <span className="font-semibold text-[#f0f8ff] text-sm">
+                  {btn.label}
+                </span>
+                <span className="text-[10px] text-center leading-tight" style={{ color: cyanMuted }}>
+                  {btn.hint}
+                </span>
+              </a>
+            ))}
+          </div>
         </motion.div>
       </section>
 

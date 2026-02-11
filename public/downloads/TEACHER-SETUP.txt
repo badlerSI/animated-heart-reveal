@@ -1,6 +1,30 @@
 SOUL Learning System - Teacher Setup Guide
 ==========================================
 
+QUICK REFERENCE
+---------------
+Student App:        soul.local:3000
+Teacher Dashboard:  soul.local:3001  (HTTPS)
+Backup IP:          192.168.1.10
+
+
+SECURITY CERTIFICATE SETUP
+---------------------------
+Install the SOUL certificate on your device to avoid HTTPS warnings:
+
+  Windows:     Right-click install-windows.bat → "Run as administrator"
+  Mac:         Double-click install-mac.command → Enter password
+  Chromebook:  Open Terminal → Run: bash install-chromeos.sh
+  iPad:        Open install-ios.mobileconfig → Settings → enable trust
+
+iPad extra step:
+  Settings → General → About → Certificate Trust Settings
+  → Enable full trust for "SOUL Learning CA"
+
+Certificate installer files are in the cert-installers/ folder,
+or students can download them from the Student Setup page.
+
+
 STUDENT SETUP (Simple!)
 -----------------------
 Students just need to:
@@ -36,18 +60,22 @@ Result: When students connect to WiFi, SOUL opens automatically!
 TEACHER DASHBOARD
 -----------------
 Access from any device on the network:
-  soul.local:3002
+  soul.local:3001
   or
-  http://192.168.1.10:3002
+  https://192.168.1.10:3001
 
 
 TROUBLESHOOTING
 ---------------
 - "soul.local" not working?
-  → Use IP address: http://192.168.1.10:3000
+  → Use IP address: https://192.168.1.10:3001
 
 - Students can't connect?
   → Make sure they're on the classroom WiFi, not school network
+
+- Certificate warning still appears?
+  → Restart your browser after installing
+  → iPad: Make sure full trust is enabled in Certificate Trust Settings
 
 - Need to force-close SOUL on a student device?
   → Have student press Ctrl+Shift+Q

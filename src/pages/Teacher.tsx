@@ -9,6 +9,9 @@ import {
   HelpCircle,
   Globe,
   Router,
+  Laptop,
+  ShieldCheck,
+  Tablet,
 } from "lucide-react";
 import {
   Accordion,
@@ -43,11 +46,38 @@ const cyan = "#1bbdc5";
 const cyanMuted = "#5BA8C4";
 const cyanDim = "#4A8DA8";
 
+const certButtons = [
+  {
+    label: "Windows",
+    href: "/downloads/cert-installers/install-windows.bat",
+    icon: Monitor,
+    hint: "Right-click → Run as administrator",
+  },
+  {
+    label: "Mac",
+    href: "/downloads/cert-installers/install-mac.command",
+    icon: Laptop,
+    hint: "Double-click and enter your password",
+  },
+  {
+    label: "Chromebook",
+    href: "/downloads/cert-installers/install-chromeos.sh",
+    icon: Globe,
+    hint: "Open Terminal and run it",
+  },
+  {
+    label: "iPad",
+    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    icon: Tablet,
+    hint: "Open file → Settings → enable trust",
+  },
+];
+
 const faqs = [
   {
     question: '"soul.local" doesn\'t work on some devices',
     answer:
-      "Some older devices don't support .local addresses. Use the IP address instead: http://192.168.1.10:3000. You can find your server's IP by running hostname -I in terminal.",
+      "Some older devices don't support .local addresses. Use the IP address instead: https://192.168.1.10:3001. You can find your server's IP by running hostname -I in terminal.",
   },
   {
     question: "Students can't connect",
@@ -57,12 +87,17 @@ const faqs = [
   {
     question: "Microphone not working",
     answer:
-      "Browsers require HTTPS for microphone access on non-localhost addresses. If using IP address, students may need to accept a security warning.",
+      "Browsers require HTTPS for microphone access on non-localhost addresses. Install the SOUL certificate to enable HTTPS without warnings.",
   },
   {
     question: "Need to exit SOUL on a student device",
     answer:
       "Press Ctrl+Shift+Q (Chromebook) or Cmd+Q (Mac) to close the app.",
+  },
+  {
+    question: "Certificate warning still appears",
+    answer:
+      "Restart your browser after installing the certificate. On iPad/iPhone, also go to Settings → General → About → Certificate Trust Settings and enable full trust for \"SOUL Learning CA\".",
   },
 ];
 
@@ -137,7 +172,7 @@ const Teacher = () => {
               </tr>
               <tr className="border-b border-black/15">
                 <td className="py-3">Teacher Dashboard</td>
-                <td className="py-3 font-mono text-lg font-bold">soul.local:3002</td>
+                <td className="py-3 font-mono text-lg font-bold">soul.local:3001</td>
               </tr>
               <tr>
                 <td className="py-3">Backup (if .local fails)</td>
@@ -146,6 +181,59 @@ const Teacher = () => {
             </tbody>
           </table>
         </motion.div>
+      </section>
+
+      {/* Teacher Device Setup - Certificate Section */}
+      <section className="px-6 pb-12">
+        <div className="max-w-2xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <ShieldCheck className="w-6 h-6" style={{ color: cyan }} />
+            <h2 className="text-2xl font-bold text-[#f0f8ff]">
+              Teacher Device Setup
+            </h2>
+          </div>
+          <p className="text-sm mb-6" style={{ color: cyanMuted }}>
+            Install the SOUL certificate so you can access the dashboard securely at{" "}
+            <code className="font-mono text-[#e0f4ff]">https://soul.local:3001</code>
+          </p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+          >
+            {certButtons.map((btn) => (
+              <a
+                key={btn.label}
+                href={btn.href}
+                download
+                className="flex flex-col items-center gap-2 rounded-xl p-4 border transition-all hover:scale-[1.03]"
+                style={{
+                  background: "#12121a",
+                  borderColor: `${cyan}30`,
+                }}
+              >
+                <btn.icon className="w-7 h-7" style={{ color: cyan }} />
+                <span className="font-semibold text-[#f0f8ff] text-sm">
+                  {btn.label}
+                </span>
+                <span className="text-[10px] text-center leading-tight" style={{ color: cyanMuted }}>
+                  {btn.hint}
+                </span>
+              </a>
+            ))}
+          </motion.div>
+
+          <div
+            className="mt-4 rounded-xl p-4 border-l-4 text-sm"
+            style={{ background: "#1a1508", borderColor: "#f59e0b", color: cyanMuted }}
+          >
+            <strong className="text-[#fbbf24]">iPad/iPhone extra step:</strong>{" "}
+            After installing, go to Settings → General → About → Certificate Trust Settings
+            and enable full trust for "SOUL Learning CA".
+          </div>
+        </div>
       </section>
 
       {/* Student Setup */}
@@ -282,12 +370,12 @@ const Teacher = () => {
               className="rounded-lg p-4 text-center font-mono text-lg font-bold"
               style={{ background: "#1e293b", color: "#22c55e" }}
             >
-              soul.local:3002
+              soul.local:3001
             </div>
             <p className="text-sm mt-4" style={{ color: cyanDim }}>
               Or use the IP address:{" "}
               <code className="font-mono text-[#e0f4ff]">
-                http://192.168.1.10:3002
+                https://192.168.1.10:3001
               </code>
             </p>
           </motion.div>
