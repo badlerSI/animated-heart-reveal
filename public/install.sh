@@ -13,7 +13,7 @@
 set -e
 
 # Configuration
-SOUL_URL="${SOUL_URL:-http://172.20.10.4:3000}"
+SOUL_URL="${SOUL_URL:-http://192.168.1.10:3000}"
 INSTALL_DIR="$HOME/soul"
 
 # Colors for output
@@ -125,7 +125,7 @@ RUN useradd -m -s /bin/bash kiosk
 USER kiosk
 
 ENV DISPLAY=:0
-ENV SOUL_URL=http://172.20.10.4:3000
+ENV SOUL_URL=http://192.168.1.10:3000
 
 CMD ["/start-kiosk.sh"]
 DOCKERFILE
@@ -149,6 +149,7 @@ echo "Launching SOUL at: ${SOUL_URL}"
 
 # Launch Chromium in kiosk mode
 exec chromium \
+    --no-sandbox \
     --kiosk \
     --no-first-run \
     --disable-translate \
@@ -162,7 +163,7 @@ exec chromium \
     --disable-sync \
     --disable-default-apps \
     --start-fullscreen \
-    --app="${SOUL_URL:-http://172.20.10.4:3000}"
+    --app="${SOUL_URL:-http://192.168.1.10:3000}"
 KIOSK
 
 # Build the image
@@ -305,16 +306,56 @@ MENU
 chmod +x "$INSTALL_DIR/menu.sh"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Step 6: Configure auto-start
+# Step 6: Create desktop shortcut
 # ─────────────────────────────────────────────────────────────────────────────
-echo -e "${YELLOW}⚙️  Step 6: Configuring auto-start...${NC}"
+echo -e "${YELLOW}🖥️  Step 6: Creating desktop shortcut...${NC}"
+
+# Create Desktop directory if it doesn't exist
+mkdir -p ~/Desktop
+
+# Create a simple icon file (SVG)
+cat > "$INSTALL_DIR/soul-icon.svg" << 'ICON'
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="45" fill="#4A90D9"/>
+  <text x="50" y="65" text-anchor="middle" font-size="40" font-family="Arial" fill="white" font-weight="bold">S</text>
+</svg>
+ICON
+
+# Create .desktop file for the desktop
+cat > ~/Desktop/SOUL.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SOUL Learning
+Comment=Launch SOUL Student App
+Exec=$INSTALL_DIR/start-soul.sh
+Icon=$INSTALL_DIR/soul-icon.svg
+Terminal=false
+Categories=Education;
+StartupNotify=true
+EOF
+chmod +x ~/Desktop/SOUL.desktop
+
+# Also create in applications folder for app launcher
+mkdir -p ~/.local/share/applications
+cp ~/Desktop/SOUL.desktop ~/.local/share/applications/
+
+# Mark as trusted (Crostini/GNOME)
+gio set ~/Desktop/SOUL.desktop metadata::trusted true 2>/dev/null || true
+
+echo -e "${GREEN}   ✓ Desktop shortcut created${NC}"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 7: Configure auto-start (optional)
+# ─────────────────────────────────────────────────────────────────────────────
+echo -e "${YELLOW}⚙️  Step 7: Configuring menu auto-start...${NC}"
 
 # Add to .bashrc if not already there
 if ! grep -q "SOUL Learning System" ~/.bashrc 2>/dev/null; then
     cat >> ~/.bashrc << 'BASHRC'
 
 # ═══════════════════════════════════════════════════════════
-# SOUL Learning System - Auto-start
+# SOUL Learning System - App Selector (like state testing)
 # ═══════════════════════════════════════════════════════════
 if [ -z "$SOUL_MENU_STARTED" ] && [ -f ~/soul/menu.sh ]; then
     export SOUL_MENU_STARTED=1
@@ -334,19 +375,19 @@ echo -e "${GREEN}╔════════════════════
 echo -e "${GREEN}║            ✅ INSTALLATION COMPLETE!                      ║${NC}"
 echo -e "${GREEN}╠═══════════════════════════════════════════════════════════╣${NC}"
 echo -e "${GREEN}║                                                           ║${NC}"
-echo -e "${GREEN}║  The SOUL menu will appear when you open Terminal.        ║${NC}"
+echo -e "${GREEN}║  🖥️  A 'SOUL Learning' icon has been added to your        ║${NC}"
+echo -e "${GREEN}║     desktop. Just double-click to launch!                 ║${NC}"
 echo -e "${GREEN}║                                                           ║${NC}"
-echo -e "${GREEN}║  Commands:                                                ║${NC}"
-echo -e "${GREEN}║    ~/soul/menu.sh      - Show boot menu                   ║${NC}"
-echo -e "${GREEN}║    ~/soul/start-soul.sh - Start SOUL directly            ║${NC}"
+echo -e "${GREEN}║  You can also find it in the Linux apps folder.           ║${NC}"
+echo -e "${GREEN}║                                                           ║${NC}"
+echo -e "${GREEN}║  Commands (for teachers):                                 ║${NC}"
+echo -e "${GREEN}║    ~/soul/menu.sh       - Show boot menu                  ║${NC}"
 echo -e "${GREEN}║    ~/soul/stop-soul.sh  - Stop SOUL                       ║${NC}"
-echo -e "${GREEN}║                                                           ║${NC}"
-echo -e "${GREEN}║  Teacher tip: Ctrl+Alt+T opens a new terminal            ║${NC}"
 echo -e "${GREEN}║                                                           ║${NC}"
 echo -e "${GREEN}╚═══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-read -p "Launch SOUL menu now? [Y/n]: " launch
+read -p "Launch SOUL now? [Y/n]: " launch
 if [[ ! "$launch" =~ ^[Nn] ]]; then
-    exec ~/soul/menu.sh
+    exec ~/soul/start-soul.sh
 fi
