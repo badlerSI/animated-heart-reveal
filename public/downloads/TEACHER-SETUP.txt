@@ -1,0 +1,60 @@
+SOUL Learning System - Teacher Setup Guide
+==========================================
+
+STUDENT SETUP (Simple!)
+-----------------------
+Students just need to:
+1. Connect to classroom WiFi
+2. Open Chrome and type: soul.local:3000
+3. Click "Install" when prompted
+4. Done - SOUL icon appears in their apps!
+
+No downloads, no Terminal, no Linux needed.
+
+
+OPTIONAL: CAPTIVE PORTAL SETUP
+------------------------------
+To make it even easier (auto-opens SOUL when connecting to WiFi):
+
+1. Access Teltonika router admin:
+   - Open browser: http://172.20.10.1
+   - Login with admin credentials
+
+2. Navigate to: Services → Hotspot → General
+
+3. Enable Hotspot mode
+
+4. Set Landing Page settings:
+   - External landing page: http://192.168.1.10:3000
+   - Redirect mode: External redirect
+
+5. Save and apply
+
+Result: When students connect to WiFi, SOUL opens automatically!
+
+
+TEACHER DASHBOARD
+-----------------
+Access from any device on the network:
+  soul.local:3002
+  or
+  http://192.168.1.10:3002
+
+
+TROUBLESHOOTING
+---------------
+- "soul.local" not working?
+  → Use IP address: http://192.168.1.10:3000
+
+- Students can't connect?
+  → Make sure they're on the classroom WiFi, not school network
+
+- Need to force-close SOUL on a student device?
+  → Have student press Ctrl+Shift+Q
+
+
+NETWORK INFO
+------------
+Server IP: 192.168.1.10
+Router IP: 172.20.10.1
+WiFi Network: [Your classroom network name]
