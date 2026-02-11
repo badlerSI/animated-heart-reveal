@@ -4,24 +4,31 @@ SOUL Learning - Certificate Installers
 These files install the SOUL Learning CA certificate so HTTPS
 connections work without security warnings.
 
+These files are also served locally from the SOUL Tower at:
+  http://soul.local:3000/certs/
+
 Files:
   install-windows.bat      - Windows (run as Administrator)
-  install-ios.mobileconfig  - macOS & iOS (double-click, approve in System Settings)
+  install-mac.command       - macOS (double-click, enter password)
+  install-ios.mobileconfig  - iOS/iPadOS (open file, approve in Settings)
   install-chromeos.sh       - ChromeOS/Linux (run in Terminal)
-  install-ios.mobileconfig  - iPad/iPhone (open file, then enable trust)
   SOUL-Learning-CA.crt      - The certificate file itself
 
 Instructions by platform:
 
   WINDOWS:
     Right-click install-windows.bat → "Run as administrator"
+    If SmartScreen blocks it: click "More info" → "Run anyway"
 
   MAC:
-    Double-click install-ios.mobileconfig → Approve in System Settings
+    Double-click install-mac.command → Enter your password
     On macOS Ventura+: System Settings → Privacy & Security → Profiles
 
   CHROMEBOOK:
-    Open Terminal (Ctrl+Alt+T) → Run: bash install-chromeos.sh
+    Download SOUL-Learning-CA.crt
+    Open Chrome → chrome://settings/certificates
+    Click "Authorities" → "Import"
+    Select the .crt file → Check "Trust for websites" → OK
 
   iPAD / iPHONE:
     1. Open install-ios.mobileconfig

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Wifi, Globe, Download, HelpCircle, Monitor, Laptop, ShieldCheck, Tablet } from "lucide-react";
+import { Wifi, Globe, Download, HelpCircle, Monitor, Laptop, ShieldCheck, Tablet, Lock } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -14,25 +14,25 @@ const cyanMuted = "#5BA8C4";
 const certButtons = [
   {
     label: "Windows",
-    href: "/downloads/cert-installers/install-windows.bat",
+    href: "http://soul.local:3000/certs/install-windows.bat",
     icon: Monitor,
     hint: "Right-click → Run as administrator",
   },
   {
     label: "Mac",
-    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    href: "http://soul.local:3000/certs/install-mac.command",
     icon: Laptop,
-    hint: "Double-click, then approve in System Settings",
+    hint: "Double-click, enter password",
   },
   {
     label: "Chromebook",
-    href: "/downloads/cert-installers/install-chromeos.sh",
+    href: "http://soul.local:3000/certs/SOUL-Learning-CA.crt",
     icon: Globe,
-    hint: "Open Terminal and run it",
+    hint: "Import in chrome://settings/certificates",
   },
   {
     label: "iPad",
-    href: "/downloads/cert-installers/install-ios.mobileconfig",
+    href: "http://soul.local:3000/certs/install-ios.mobileconfig",
     icon: Tablet,
     hint: "Open file, then enable trust in Settings",
   },
@@ -42,7 +42,7 @@ const faqs = [
   {
     question: 'It says "site can\'t be reached"',
     answer:
-      "Make sure you're connected to the classroom WiFi (not your school's main network). Ask your teacher which WiFi to connect to.",
+      "Make sure you're connected to the SOUL Tower WiFi (RUT_xxx_2G), not your school's main network. Ask your teacher for the WiFi password.",
   },
   {
     question: '"soul.local" doesn\'t work',
@@ -57,12 +57,22 @@ const faqs = [
   {
     question: "Microphone isn't working",
     answer:
-      "When SOUL asks for microphone permission, click Allow. Ask your teacher if you need help.",
+      "Make sure you installed the security certificate (Step 3). The certificate lets your browser use the microphone. When SOUL asks for microphone permission, click Allow.",
+  },
+  {
+    question: "Windows SmartScreen blocks the certificate installer",
+    answer:
+      'Click "More info" then "Run anyway". The installer just adds the SOUL certificate to your computer — it\'s safe.',
+  },
+  {
+    question: "Chromebook: How do I install the certificate?",
+    answer:
+      'Download the .crt file, then open Chrome and go to chrome://settings/certificates. Click "Authorities" → "Import" and select the downloaded file. Check "Trust this certificate for identifying websites" and click OK.',
   },
   {
     question: "I see a security warning",
     answer:
-      "Ask your teacher to help you install the security certificate using the buttons above.",
+      "You need to install the security certificate first (Step 3). Download it for your device and follow the instructions.",
   },
 ];
 
@@ -83,12 +93,12 @@ const Student = () => {
             SOUL Student Setup
           </h1>
           <p className="text-lg sm:text-xl mt-4" style={{ color: cyanMuted }}>
-            Get started in 2 minutes!
+            Get started in 2 minutes — no internet needed!
           </p>
         </motion.div>
       </section>
 
-      {/* 3 Easy Steps */}
+      {/* 4 Steps */}
       <section className="px-6 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -101,7 +111,7 @@ const Student = () => {
           }}
         >
           <h2 className="text-2xl font-bold text-[#0a0a0f] mb-6">
-            3 Easy Steps
+            4 Easy Steps
           </h2>
 
           <div className="space-y-4 text-left">
@@ -111,8 +121,11 @@ const Student = () => {
               <div>
                 <span className="font-bold text-[#0a0a0f]">1.</span>{" "}
                 <span className="text-[#0a0a0f]">
-                  Connect to your classroom WiFi
+                  Connect to WiFi network <strong>RUT_xxx_2G</strong>
                 </span>
+                <p className="text-xs mt-1 text-[#0a0a0f]/70">
+                  Ask your teacher for the password
+                </p>
               </div>
             </div>
 
@@ -139,9 +152,23 @@ const Student = () => {
 
             {/* Step 3 */}
             <div className="flex items-start gap-4 bg-black/15 rounded-xl p-4">
-              <Download className="w-6 h-6 mt-0.5 flex-shrink-0 text-[#0a0a0f]" />
+              <ShieldCheck className="w-6 h-6 mt-0.5 flex-shrink-0 text-[#0a0a0f]" />
               <div>
                 <span className="font-bold text-[#0a0a0f]">3.</span>{" "}
+                <span className="text-[#0a0a0f]">
+                  Install the <strong>security certificate</strong> for your device
+                </span>
+                <p className="text-xs mt-1 text-[#0a0a0f]/70">
+                  Download it using the buttons below
+                </p>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="flex items-start gap-4 bg-black/15 rounded-xl p-4">
+              <Download className="w-6 h-6 mt-0.5 flex-shrink-0 text-[#0a0a0f]" />
+              <div>
+                <span className="font-bold text-[#0a0a0f]">4.</span>{" "}
                 <span className="text-[#0a0a0f]">
                   Click <strong>"Install"</strong> when asked
                 </span>
@@ -166,11 +193,11 @@ const Student = () => {
           <div className="flex items-center gap-3 mb-4">
             <ShieldCheck className="w-6 h-6" style={{ color: cyan }} />
             <h2 className="text-xl font-bold text-[#f0f8ff]">
-              First Time? Install Security Certificate
+              Step 3: Install Security Certificate
             </h2>
           </div>
           <p className="text-sm mb-6" style={{ color: cyanMuted }}>
-            Your teacher may ask you to install this so SOUL works without warnings.
+            Download the certificate for your device. This lets SOUL use your microphone without warnings.
           </p>
 
           <div className="grid grid-cols-2 gap-3">
@@ -178,7 +205,6 @@ const Student = () => {
               <a
                 key={btn.label}
                 href={btn.href}
-                download
                 className="flex flex-col items-center gap-2 rounded-xl p-4 border transition-all hover:scale-[1.03]"
                 style={{
                   background: "#12121a",
@@ -194,6 +220,15 @@ const Student = () => {
                 </span>
               </a>
             ))}
+          </div>
+
+          <div
+            className="mt-4 rounded-xl p-4 border-l-4 text-sm"
+            style={{ background: "#1a1508", borderColor: "#f59e0b", color: cyanMuted }}
+          >
+            <strong className="text-[#fbbf24]">iPad/iPhone extra step:</strong>{" "}
+            After installing, go to Settings → General → About → Certificate Trust Settings
+            and enable full trust for "SOUL Learning CA".
           </div>
         </motion.div>
       </section>
