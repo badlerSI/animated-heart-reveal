@@ -200,6 +200,27 @@ const TRANSLATIONS = {
     allPlaced: "All continents placed! Answer the questions below.",
     fossilEvidence: "Fossil Evidence",
     mountainEvidence: "Mountain Evidence",
+    foundIn: "Found in",
+    fossilTranslations: {
+      mesosaurus: {name:"Mesosaurus", type:"Freshwater reptile", desc:"A small swimming reptile that lived in freshwater lakes. Its fossils are found in both South America and Africa, which tells us these continents were once connected."},
+      cynognathus: {name:"Cynognathus", type:"Land reptile", desc:"A dog-sized predator with powerful jaws. Found in South America and Africa, it could not have swum across the ocean, so the land must have been joined."},
+      glossopteris: {name:"Glossopteris", type:"Seed fern (plant)", desc:"A large fern-like plant with tongue-shaped leaves. Its seeds were too heavy to blow across an ocean. Found on five continents that were once joined."},
+      lystrosaurus: {name:"Lystrosaurus", type:"Land reptile", desc:"A squat, tusked plant-eater about the size of a pig. Found in Africa, India, and Antarctica — proof these distant lands were once neighbors."},
+      allosaurus: {name:"Allosaurus", type:"Theropod dinosaur", desc:"A large meat-eating dinosaur that roamed both North America and Eurasia when they were joined as Laurasia."},
+      stegosaurus: {name:"Stegosaurus", type:"Armored dinosaur", desc:"Famous for its back plates and spiked tail. Found in both North America and Eurasia, showing these landmasses were still connected."},
+      iguanodon: {name:"Iguanodon", type:"Plant-eating dinosaur", desc:"A large plant-eater with a distinctive thumb spike. Found across North America and Eurasia before the Atlantic fully opened."},
+      titanosaur: {name:"Titanosaurs", type:"Giant sauropod", desc:"The biggest land animals ever. They spread across the southern continents of South America, Africa, and India."},
+      nothofagus: {name:"Nothofagus", type:"Southern beech tree", desc:"Southern beech trees are found in Australia, Antarctica (as fossils), and South America. Their seeds cannot cross oceans, proving Australia and Antarctica were still joined in the Cretaceous."},
+      cryo: {name:"Cryolophosaurus", type:"Theropod dinosaur", desc:"The 'frozen-crested lizard' found in Antarctica shows it was once warm enough for large dinosaurs to live there."},
+      coal: {name:"Coal Deposits", type:"Fossilized tropical swamps", desc:"Coal forms in warm, swampy areas. Finding coal in Antarctica and other southern continents means they were once near the equator."}
+    },
+    mountainTranslations: {
+      "Appalachian Mountains": {name:"Appalachian Mountains", desc:"Eastern seaboard — once connected to mountains in Europe"},
+      "Caledonian Mountains": {name:"Caledonian Mountains", desc:"Scotland/Scandinavia — matched the Appalachians in Pangea"},
+      "Ural Mountains": {name:"Ural Mountains", desc:"Dividing line between Europe and Asia"},
+      "Sierra de la Ventana": {name:"Sierra de la Ventana", desc:"Southern range that matched Africa's Cape Fold Belt"},
+      "Cape Fold Belt": {name:"Cape Fold Belt", desc:"Southern Africa — once lined up with South America's mountains"}
+    },
     hints: {
       pangea: {namerica:"Try placing North America in the upper-left area of the target region.", samerica:"South America's east coast fits snugly against Africa's west coast.", africa:"Africa goes in the center — its western bulge matches South America.", eurasia:"Eurasia is the biggest piece — it goes along the top.", india:"India was tucked between Africa and Antarctica.", australia:"Australia was next to Antarctica in the southeast.", antarctica:"Antarctica sat at the bottom of the supercontinent."},
       breakapart: {namerica:"North America stays with Eurasia as Laurasia — drag them both north!", samerica:"Gondwana stays together in the south.", africa:"Africa stays with Gondwana — just nudge it south.", eurasia:"Eurasia stays with North America as Laurasia — drag them both north!", india:"India stays with Gondwana in the south.", australia:"Australia stays with Gondwana — nudge it south.", antarctica:"Antarctica stays with Gondwana in the south."},
@@ -248,6 +269,27 @@ const TRANSLATIONS = {
     allPlaced: "¡Todos los continentes colocados! Responde las preguntas a continuación.",
     fossilEvidence: "Evidencia Fósil",
     mountainEvidence: "Evidencia de Montañas",
+    foundIn: "Encontrado en",
+    fossilTranslations: {
+      mesosaurus: {name:"Mesosaurus", type:"Reptil de agua dulce", desc:"Un pequeño reptil nadador que vivía en lagos de agua dulce. Sus fósiles se encuentran en América del Sur y África, lo que nos dice que estos continentes estuvieron una vez conectados."},
+      cynognathus: {name:"Cynognathus", type:"Reptil terrestre", desc:"Un depredador del tamaño de un perro con mandíbulas poderosas. Encontrado en América del Sur y África, no podía haber nadado a través del océano, así que la tierra debió haber estado unida."},
+      glossopteris: {name:"Glossopteris", type:"Helecho con semillas (planta)", desc:"Una planta grande parecida a un helecho con hojas en forma de lengua. Sus semillas eran demasiado pesadas para cruzar un océano por el viento. Encontrada en cinco continentes que estuvieron una vez unidos."},
+      lystrosaurus: {name:"Lystrosaurus", type:"Reptil terrestre", desc:"Un herbívoro rechoncho con colmillos, del tamaño de un cerdo. Encontrado en África, India y la Antártida — prueba de que estas tierras distantes fueron una vez vecinas."},
+      allosaurus: {name:"Allosaurus", type:"Dinosaurio terópodo", desc:"Un gran dinosaurio carnívoro que vagaba por América del Norte y Eurasia cuando estaban unidas como Laurasia."},
+      stegosaurus: {name:"Stegosaurus", type:"Dinosaurio acorazado", desc:"Famoso por sus placas dorsales y cola con púas. Encontrado en América del Norte y Eurasia, mostrando que estas masas de tierra aún estaban conectadas."},
+      iguanodon: {name:"Iguanodon", type:"Dinosaurio herbívoro", desc:"Un gran herbívoro con un distintivo pulgar en forma de púa. Encontrado en América del Norte y Eurasia antes de que el Atlántico se abriera completamente."},
+      titanosaur: {name:"Titanosaurios", type:"Saurópodo gigante", desc:"Los animales terrestres más grandes que han existido. Se extendieron por los continentes del sur: América del Sur, África e India."},
+      nothofagus: {name:"Nothofagus", type:"Haya del sur", desc:"Los árboles de haya del sur se encuentran en Australia, la Antártida (como fósiles) y América del Sur. Sus semillas no pueden cruzar océanos, lo que prueba que Australia y la Antártida aún estaban unidas en el Cretácico."},
+      cryo: {name:"Cryolophosaurus", type:"Dinosaurio terópodo", desc:"El 'lagarto de cresta congelada' encontrado en la Antártida muestra que alguna vez fue lo suficientemente cálido para que grandes dinosaurios vivieran allí."},
+      coal: {name:"Depósitos de Carbón", type:"Pantanos tropicales fosilizados", desc:"El carbón se forma en áreas cálidas y pantanosas. Encontrar carbón en la Antártida y otros continentes del sur significa que alguna vez estuvieron cerca del ecuador."}
+    },
+    mountainTranslations: {
+      "Appalachian Mountains": {name:"Montañas Apalaches", desc:"Costa este — una vez conectadas a montañas en Europa"},
+      "Caledonian Mountains": {name:"Montañas Caledonianas", desc:"Escocia/Escandinavia — coincidían con los Apalaches en Pangea"},
+      "Ural Mountains": {name:"Montañas Urales", desc:"Línea divisoria entre Europa y Asia"},
+      "Sierra de la Ventana": {name:"Sierra de la Ventana", desc:"Cordillera del sur que coincidía con el Cinturón Plegado del Cabo de África"},
+      "Cape Fold Belt": {name:"Cinturón Plegado del Cabo", desc:"Sur de África — una vez alineado con las montañas de América del Sur"}
+    },
     hints: {
       pangea: {namerica:"Intenta colocar América del Norte en el área superior izquierda de la región objetivo.", samerica:"La costa este de América del Sur encaja perfectamente contra la costa oeste de África.", africa:"África va en el centro — su saliente occidental coincide con América del Sur.", eurasia:"Eurasia es la pieza más grande — va a lo largo de la parte superior.", india:"India estaba escondida entre África y la Antártida.", australia:"Australia estaba al lado de la Antártida en el sureste.", antarctica:"La Antártida se sentaba en la parte inferior del supercontinente."},
       breakapart: {namerica:"¡América del Norte se queda con Eurasia como Laurasia — arrástralos hacia el norte!", samerica:"Gondwana se mantiene unida en el sur.", africa:"África se queda con Gondwana — muévela un poco al sur.", eurasia:"¡Eurasia se queda con América del Norte como Laurasia — arrástralos hacia el norte!", india:"India se queda con Gondwana en el sur.", australia:"Australia se queda con Gondwana — muévela un poco al sur.", antarctica:"La Antártida se queda con Gondwana en el sur."},
@@ -873,18 +915,19 @@ function renderPanel() {
     if (fossils.length > 0) {
       html += `<div class="section-title">${trans.fossilEvidence}</div>`;
       fossils.forEach(f => {
+        const ft = trans.fossilTranslations[f.id] || f;
         const continentNames = f.continents.map(c => contNames[c]).join(', ');
         html += `<div class="fossil-card" onclick="this.classList.toggle('open')">
           <div class="fossil-card-header">
             <span class="fossil-dot" style="background:${f.color}"></span>
             <span class="fossil-icon">${f.icon}</span>
-            <span class="fossil-name">${f.name}</span>
+            <span class="fossil-name">${ft.name}</span>
             <span class="fossil-expand">\u25BC</span>
           </div>
           <div class="fossil-detail">
-            <div class="fossil-meta">${f.type} | ${f.age}</div>
-            <div class="fossil-meta">Found in: ${continentNames}</div>
-            <p style="margin-top:4px">${f.desc}</p>
+            <div class="fossil-meta">${ft.type} | ${f.age}</div>
+            <div class="fossil-meta">${trans.foundIn || 'Found in'}: ${continentNames}</div>
+            <p style="margin-top:4px">${ft.desc}</p>
           </div>
         </div>`;
       });
@@ -898,7 +941,8 @@ function renderPanel() {
     if (allMtns.length > 0) {
       html += `<div class="section-title">${trans.mountainEvidence}</div>`;
       allMtns.forEach(m => {
-        html += `<div class="mtn-item"><span class="mtn-marker"></span><span><strong>${m.name}</strong> (${m.continent}) — ${m.desc}</span></div>`;
+        const mt = (trans.mountainTranslations && trans.mountainTranslations[m.name]) || m;
+        html += `<div class="mtn-item"><span class="mtn-marker"></span><span><strong>${mt.name}</strong> (${m.continent}) — ${mt.desc}</span></div>`;
       });
     }
 
