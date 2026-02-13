@@ -717,7 +717,7 @@ function snapContinent(id, target) {
       el.classList.add('locked');
       // Change fill to group color on lock
       const lockedColor = getLockedColor(currentStep, id);
-      const path = el.querySelector('path');
+      const path = el.querySelector(':scope > path');
       if (path) path.setAttribute('fill', lockedColor);
       el.style.setProperty('--glow-color', lockedColor);
       el.classList.add('lock-burst');
@@ -758,7 +758,7 @@ function goToStep(step) {
     el.classList.remove('locked','pulse','lock-burst');
     setTransform(el, pos.x, pos.y, pos.r);
     // Reset fill to OG color for unlocked; group color for exit ticket (locked)
-    const path = el.querySelector('path');
+    const path = el.querySelector(':scope > path');
     if (currentStep === 3) {
       el.classList.add('locked');
       el.style.opacity = '1';
