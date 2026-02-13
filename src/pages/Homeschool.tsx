@@ -333,12 +333,12 @@ const Homeschool = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="text-center text-sm mt-8 max-w-2xl mx-auto"
-            style={{ color: cyanMuted }}
+            className="text-center text-lg mt-10 max-w-2xl mx-auto"
+            style={{ color: '#e0f4ff' }}
           >
-            The Chromebook Supercharger lets students run heavy creative tools they never could before, or lightweight{" "}
-            <Link to="/pangea" className="narrative-link">esoteric simulations</Link>{" "}
-            you vibe coded yourself for one lesson.
+            Host your own{" "}
+            <Link to="/pangea" className="narrative-link">esoteric vibe-coded apps</Link>{" "}
+            for any lesson
           </motion.p>
         </div>
       </section>
