@@ -1063,6 +1063,70 @@ function changeLanguage(lang) {
 
   renderProgress();
   renderPanel();
+  restoreQuizState();
+}
+
+function restoreQuizState() {
+  const trans = TRANSLATIONS[currentLang];
+
+  if (currentStep < 3) {
+    // Re-unlock quiz if all continents are locked
+    const allLocked = Object.values(continentState).every(s => s.locked);
+    if (allLocked) {
+      const successMsg = document.querySelector('.success-msg');
+      if (successMsg) successMsg.classList.add('show');
+      const quizSection = document.querySelector('.quiz-section');
+      if (quizSection) quizSection.classList.remove('locked');
+    }
+
+    // Re-apply answered quiz button states
+    const stepKey = STEP_KEYS[currentStep];
+    const questions = trans.quizzes[stepKey] || [];
+    Object.entries(answeredQuizzes).forEach(([qi, oi]) => {
+      const qIdx = parseInt(qi);
+      const correctIdx = questions[qIdx] ? questions[qIdx].ans : -1;
+      const allBtns = document.querySelectorAll(`.quiz-opt[data-q="${qIdx}"]`);
+      allBtns.forEach(b => {
+        b.classList.add('chosen');
+        const idx = parseInt(b.dataset.o);
+        if (idx === correctIdx) b.classList.add('correct');
+        else if (idx === parseInt(oi)) b.classList.add('wrong');
+      });
+    });
+
+    // Re-show continue button if all answered
+    if (questions.length > 0 && Object.keys(answeredQuizzes).length >= questions.length) {
+      const continueBtn = document.getElementById('continueBtn');
+      if (continueBtn) continueBtn.classList.add('show');
+    }
+  } else {
+    // Exit ticket (step 3) — re-apply answered states
+    const questions = trans.quizzes.exit;
+    Object.entries(answeredQuizzes).forEach(([qi, oi]) => {
+      const qIdx = parseInt(qi);
+      const correctIdx = questions[qIdx] ? questions[qIdx].ans : -1;
+      const allBtns = document.querySelectorAll(`.quiz-opt[data-q="${qIdx}"]`);
+      allBtns.forEach(b => {
+        b.classList.add('chosen');
+        const idx = parseInt(b.dataset.o);
+        if (idx === correctIdx) b.classList.add('correct');
+        else if (idx === parseInt(oi)) b.classList.add('wrong');
+      });
+    });
+
+    // Re-render score if all exit questions answered
+    if (questions.length > 0 && Object.keys(answeredQuizzes).length >= questions.length) {
+      let correct = 0;
+      Object.entries(answeredQuizzes).forEach(([q, a]) => {
+        if (a === questions[q].ans) correct++;
+      });
+      let scoreMsg = trans.scoreMessages.okay;
+      if (correct === questions.length) scoreMsg = trans.scoreMessages.perfect;
+      else if (correct >= 3) scoreMsg = trans.scoreMessages.great;
+      const area = document.getElementById('scoreArea');
+      if (area) area.innerHTML = `<div class="score-display">${correct} ${trans.outOf} ${questions.length}<div class="score-sub">${scoreMsg}</div><button class="restart-btn" onclick="restart()">${trans.restartBtn}</button></div>`;
+    }
+  }
 }
 
 // ─── Hint System ───
