@@ -208,7 +208,30 @@ const TRANSLATIONS = {
     restartBtn: "Start Over",
     scoreMessages: {perfect:"Perfect score! You really understand plate tectonics.", great:"Great job! You have a solid understanding of continental drift.", okay:"Keep studying! Review the evidence from each step."},
     outOf: "out of",
-    tethysSea: "Tethys Sea"
+    tethysSea: "Tethys Sea",
+    quizzes: {
+      pangea: [
+        {q:"Mesosaurus was a freshwater reptile found in both South America and Africa. What does this tell us?", opts:["Those continents were once connected","Mesosaurus could fly across the ocean","The fossils were placed there by people","The ocean was freshwater back then"], ans:0},
+        {q:"Glossopteris fern seeds were too heavy to travel by wind. Why do we find them on five continents?", opts:["Birds carried them across the ocean","The continents were joined together","They floated across on icebergs","Scientists are mistaken about the fossils"], ans:1},
+        {q:"The Appalachian Mountains in North America line up with the Caledonian Mountains in Europe. What does this suggest?", opts:["Mountains can move on their own","Both formed when these continents collided as part of Pangea","It is just a coincidence","Humans built them to match"], ans:1}
+      ],
+      breakapart: [
+        {q:"What were the two large landmasses called after Pangea first split apart?", opts:["Laurasia and Gondwana","Europe and Africa","Atlantic and Pacific","Pangea Junior and Pangea Senior"], ans:0},
+        {q:"Why is the Tethys Sea important?", opts:["It was the first ocean on Earth","It separated Laurasia and Gondwana and became today's Mediterranean region","It was where all dinosaurs lived","It contained freshwater only"], ans:1}
+      ],
+      cretaceous: [
+        {q:"During the Cretaceous, which major ocean was beginning to form between the Americas and Africa?", opts:["Pacific Ocean","Indian Ocean","Atlantic Ocean","Arctic Ocean"], ans:2},
+        {q:"Cryolophosaurus fossils in Antarctica suggest that:", opts:["Dinosaurs could survive in extreme cold","Antarctica was once much warmer and in a different position","Someone transported the fossils there","Dinosaurs lived underground"], ans:1},
+        {q:"Coal deposits in Antarctica come from ancient tropical swamps. What does this prove?", opts:["It snowed coal in Antarctica","Antarctica was once near the equator where it was warm and swampy","Coal can form in freezing temperatures","Antarctica has active volcanoes"], ans:1}
+      ],
+      exit: [
+        {q:"What was the supercontinent that contained all landmasses about 335 million years ago?", opts:["Gondwana","Laurasia","Pangea","Atlantis"], ans:2},
+        {q:"Which piece of evidence would BEST support the idea that two continents were once joined?", opts:["They are both surrounded by water","The same land animal fossils are found on both","They are roughly the same color on a map","They both have mountains"], ans:1},
+        {q:"India was once part of Gondwana in the south. Where is it today?", opts:["Still in the Southern Hemisphere","Crashed into Eurasia in the north, forming the Himalayas","Floating in the Indian Ocean","Connected to Africa"], ans:1},
+        {q:"What force moves the continents across Earth's surface?", opts:["Wind and ocean currents","Earth's magnetic field pulling them","Convection currents in the mantle pushing tectonic plates","Gravity from the Moon"], ans:2},
+        {q:"About how fast do tectonic plates move each year?", opts:["A few centimeters — about as fast as your fingernails grow","Several meters — as fast as a car","Hundreds of kilometers — faster than an airplane","They do not move at all anymore"], ans:0}
+      ]
+    }
   },
   es: {
     pageTitle: "Constructor de Supercontinentes",
@@ -233,7 +256,30 @@ const TRANSLATIONS = {
     restartBtn: "Comenzar de Nuevo",
     scoreMessages: {perfect:"¡Puntuación perfecta! Realmente entiendes la tectónica de placas.", great:"¡Buen trabajo! Tienes una comprensión sólida de la deriva continental.", okay:"¡Sigue estudiando! Revisa la evidencia de cada paso."},
     outOf: "de",
-    tethysSea: "Mar de Tetis"
+    tethysSea: "Mar de Tetis",
+    quizzes: {
+      pangea: [
+        {q:"Mesosaurus era un reptil de agua dulce encontrado en América del Sur y África. ¿Qué nos dice esto?", opts:["Esos continentes estuvieron una vez conectados","Mesosaurus podía volar a través del océano","Los fósiles fueron colocados allí por personas","El océano era de agua dulce en ese entonces"], ans:0},
+        {q:"Las semillas de helecho Glossopteris eran demasiado pesadas para viajar por el viento. ¿Por qué las encontramos en cinco continentes?", opts:["Las aves las llevaron a través del océano","Los continentes estaban unidos","Flotaron a través de icebergs","Los científicos están equivocados sobre los fósiles"], ans:1},
+        {q:"Las Montañas Apalaches en América del Norte se alinean con las Montañas Caledonianas en Europa. ¿Qué sugiere esto?", opts:["Las montañas pueden moverse solas","Ambas se formaron cuando estos continentes chocaron como parte de Pangea","Es solo una coincidencia","Los humanos las construyeron para que coincidieran"], ans:1}
+      ],
+      breakapart: [
+        {q:"¿Cómo se llamaban las dos grandes masas de tierra después de que Pangea se separó?", opts:["Laurasia y Gondwana","Europa y África","Atlántico y Pacífico","Pangea Junior y Pangea Senior"], ans:0},
+        {q:"¿Por qué es importante el Mar de Tetis?", opts:["Fue el primer océano de la Tierra","Separó Laurasia y Gondwana y se convirtió en la región del Mediterráneo actual","Fue donde vivían todos los dinosaurios","Solo contenía agua dulce"], ans:1}
+      ],
+      cretaceous: [
+        {q:"Durante el Cretácico, ¿qué océano importante comenzaba a formarse entre las Américas y África?", opts:["Océano Pacífico","Océano Índico","Océano Atlántico","Océano Ártico"], ans:2},
+        {q:"Los fósiles de Cryolophosaurus en la Antártida sugieren que:", opts:["Los dinosaurios podían sobrevivir en frío extremo","La Antártida fue una vez mucho más cálida y estaba en una posición diferente","Alguien transportó los fósiles allí","Los dinosaurios vivían bajo tierra"], ans:1},
+        {q:"Los depósitos de carbón en la Antártida provienen de pantanos tropicales antiguos. ¿Qué demuestra esto?", opts:["Nevó carbón en la Antártida","La Antártida estuvo una vez cerca del ecuador donde era cálida y pantanosa","El carbón puede formarse en temperaturas bajo cero","La Antártida tiene volcanes activos"], ans:1}
+      ],
+      exit: [
+        {q:"¿Cuál fue el supercontinente que contenía todas las masas terrestres hace unos 335 millones de años?", opts:["Gondwana","Laurasia","Pangea","Atlántida"], ans:2},
+        {q:"¿Qué evidencia apoyaría MEJOR la idea de que dos continentes estuvieron una vez unidos?", opts:["Ambos están rodeados de agua","Los mismos fósiles de animales terrestres se encuentran en ambos","Son aproximadamente del mismo color en un mapa","Ambos tienen montañas"], ans:1},
+        {q:"India fue una vez parte de Gondwana en el sur. ¿Dónde está hoy?", opts:["Todavía en el hemisferio sur","Chocó con Eurasia en el norte, formando el Himalaya","Flotando en el Océano Índico","Conectada a África"], ans:1},
+        {q:"¿Qué fuerza mueve los continentes a través de la superficie de la Tierra?", opts:["Viento y corrientes oceánicas","El campo magnético de la Tierra tirando de ellos","Corrientes de convección en el manto empujando las placas tectónicas","La gravedad de la Luna"], ans:2},
+        {q:"¿Aproximadamente qué tan rápido se mueven las placas tectónicas cada año?", opts:["Unos pocos centímetros — tan rápido como crecen tus uñas","Varios metros — tan rápido como un auto","Cientos de kilómetros — más rápido que un avión","Ya no se mueven en absoluto"], ans:0}
+      ]
+    }
   }
 };
 
@@ -861,7 +907,7 @@ function renderPanel() {
 
     // Quiz
     const quizKey = STEP_KEYS[currentStep];
-    const questions = QUIZZES[quizKey] || [];
+    const questions = trans.quizzes[quizKey] || [];
     html += `<div class="quiz-section locked">`;
     questions.forEach((q, qi) => {
       html += `<div class="quiz-q"><p>${qi+1}. ${q.q}</p>`;
@@ -877,7 +923,7 @@ function renderPanel() {
 
   } else {
     // Exit ticket
-    const questions = QUIZZES.exit;
+    const questions = trans.quizzes.exit;
     html += `<div class="quiz-section">`;
     questions.forEach((q, qi) => {
       html += `<div class="quiz-q"><p>${qi+1}. ${q.q}</p>`;
@@ -909,7 +955,7 @@ function answerQuiz(btn, qi, oi, correctIdx) {
 
   // Check if all answered
   const stepKey = STEP_KEYS[currentStep];
-  const totalQ = (QUIZZES[stepKey] || []).length;
+  const totalQ = (TRANSLATIONS[currentLang].quizzes[stepKey] || []).length;
   if (Object.keys(answeredQuizzes).length >= totalQ) {
     document.getElementById('continueBtn').classList.add('show');
   }
@@ -927,14 +973,13 @@ function answerExitQuiz(btn, qi, oi, correctIdx) {
     else if (idx === oi) b.classList.add('wrong');
   });
 
-  const totalQ = QUIZZES.exit.length;
+  const trans = TRANSLATIONS[currentLang];
+  const totalQ = trans.quizzes.exit.length;
   if (Object.keys(answeredQuizzes).length >= totalQ) {
-    // Show score
     let correct = 0;
     Object.entries(answeredQuizzes).forEach(([q, a]) => {
-      if (a === QUIZZES.exit[q].ans) correct++;
+      if (a === trans.quizzes.exit[q].ans) correct++;
     });
-    const trans = TRANSLATIONS[currentLang];
     let scoreMsg = trans.scoreMessages.okay;
     if (correct === totalQ) scoreMsg = trans.scoreMessages.perfect;
     else if (correct >= 3) scoreMsg = trans.scoreMessages.great;
