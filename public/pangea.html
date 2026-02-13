@@ -96,7 +96,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .continent:not(.locked){mix-blend-mode:screen}
 .continent:hover{opacity:.75!important}
 .continent.dragging{opacity:1!important;cursor:grabbing}
-.continent.locked{cursor:default;opacity:.9!important}
+.continent.locked{cursor:default;opacity:1!important}
 .continent.locked path{filter:drop-shadow(0 0 10px var(--glow-color, rgba(0,180,216,.5)))}
 .continent.pulse{animation:pulse-glow 1s ease-in-out infinite}
 @keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 12px rgba(0,180,216,.6))}}
@@ -163,12 +163,24 @@ const NAMES = {
   antarctica: "Antarctica"
 };
 
-// Era-based color palettes (warm → cooling → vivid modern)
-const ERA_COLORS = {
-  0: { namerica:"#e88050", samerica:"#50c068", africa:"#e0a838", eurasia:"#6898d8", india:"#c868b8", australia:"#d86060", antarctica:"#90c0e0" },
-  1: { namerica:"#d07040", samerica:"#40a858", africa:"#c89828", eurasia:"#5080c8", india:"#b050a0", australia:"#c84848", antarctica:"#78a8c8" },
-  2: { namerica:"#e07848", samerica:"#48b860", africa:"#d8a030", eurasia:"#6090d0", india:"#c060b0", australia:"#d05858", antarctica:"#88b8d8" }
-};
+// Group colors for locking
+const PANGEA_COLOR = "#9060c8";       // unified purple for Pangea
+const LAURASIA_COLOR = "#6898d8";     // cool blue for Laurasia
+const GONDWANA_COLOR = "#9060c8";     // pangea purple carries into Gondwana
+
+const LAURASIA = ["namerica","eurasia"];
+const GONDWANA = ["samerica","africa","india","australia","antarctica"];
+
+// When locked, continent gets this fill based on current step
+function getLockedColor(step, id) {
+  if (step === 0) return PANGEA_COLOR;
+  if (step === 1) return LAURASIA.includes(id) ? LAURASIA_COLOR : GONDWANA_COLOR;
+  // Step 2 (Cretaceous): OG colors except Australia & Antarctica keep Gondwana purple
+  if (id === "australia" || id === "antarctica") return GONDWANA_COLOR;
+  return COLORS[id];
+}
+
+// Unlocked continents use OG colors always
 const OCEAN_COLORS = { 0:"#091a30", 1:"#0a1e2e", 2:"#081e28" };
 
 // ─── Language Support ───
@@ -671,7 +683,7 @@ function onPointerUp(e) {
 
   const cid = g.id.replace('cont-','');
   dragTarget = null;
-  g.style.opacity = continentState[cid].locked ? '0.9' : '0.55';
+  g.style.opacity = continentState[cid].locked ? '1' : '0.55';
 }
 
 function snapContinent(id, target) {
@@ -703,9 +715,14 @@ function snapContinent(id, target) {
       st.r = target.r;
       st.locked = true;
       el.classList.add('locked');
+      // Change fill to group color on lock
+      const lockedColor = getLockedColor(currentStep, id);
+      const path = el.querySelector('path');
+      if (path) path.setAttribute('fill', lockedColor);
+      el.style.setProperty('--glow-color', lockedColor);
       el.classList.add('lock-burst');
       setTimeout(() => el.classList.remove('lock-burst'), 600);
-      el.style.opacity = '0.9';
+      el.style.opacity = '1';
       setTransform(el, st.x, st.y, st.r);
       checkAllPlaced();
     }
@@ -734,19 +751,25 @@ function goToStep(step) {
 
   // Reset continent states
   const startPos = getStartPositions();
-  const eraColors = ERA_COLORS[Math.min(step, 2)];
   Object.keys(PATHS).forEach(id => {
     const pos = startPos[id];
     continentState[id] = {x: pos.x, y: pos.y, r: pos.r, locked: currentStep === 3};
     const el = continentEls[id];
     el.classList.remove('locked','pulse','lock-burst');
     setTransform(el, pos.x, pos.y, pos.r);
-    el.style.opacity = currentStep === 3 ? '0.9' : '0.55';
-    if (currentStep === 3) el.classList.add('locked');
-    // Era color shift
+    // Reset fill to OG color for unlocked; group color for exit ticket (locked)
     const path = el.querySelector('path');
-    if (path && eraColors[id]) path.setAttribute('fill', eraColors[id]);
-    el.style.setProperty('--glow-color', eraColors[id] || COLORS[id]);
+    if (currentStep === 3) {
+      el.classList.add('locked');
+      el.style.opacity = '1';
+      const lockedColor = getLockedColor(2, id); // use Cretaceous colors for exit
+      if (path) path.setAttribute('fill', lockedColor);
+      el.style.setProperty('--glow-color', lockedColor);
+    } else {
+      el.style.opacity = '0.55';
+      if (path) path.setAttribute('fill', COLORS[id]); // OG color when unlocked
+      el.style.setProperty('--glow-color', COLORS[id]);
+    }
   });
 
   // Ocean background transition
