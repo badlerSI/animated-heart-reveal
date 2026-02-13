@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "@/components/home/narrativeLink.css";
 import { motion } from "framer-motion";
 import { Shield, Wifi, Settings, BookOpen, Brain, Languages, Gamepad2, LayoutDashboard, ChevronDown, AlertTriangle, Eye, Radio, Skull, ShieldCheck, UserCheck, Bell, Bug, Cpu, Library, BookText, ImagePlus, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -325,6 +327,19 @@ const Homeschool = () => {
               </motion.div>
             ))}
           </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center text-sm mt-8 max-w-2xl mx-auto"
+            style={{ color: cyanMuted }}
+          >
+            The Chromebook Supercharger lets students run heavy creative tools they never could before, or lightweight{" "}
+            <Link to="/pangea" className="narrative-link">esoteric simulations</Link>{" "}
+            you vibe coded yourself for one lesson.
+          </motion.p>
         </div>
       </section>
 

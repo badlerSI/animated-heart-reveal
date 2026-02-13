@@ -20,6 +20,7 @@ import Light from "./pages/Light";
 import Heavy from "./pages/Heavy";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
+import Pangea from "./pages/Pangea";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/heavy" element={<Heavy />} />
           <Route path="/student" element={<Student />} />
           <Route path="/teacher" element={<Teacher />} />
+          <Route path="/pangea" element={<Pangea />} />
           <Route path="/chromebook" element={<Navigate to="/student" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
