@@ -1,39 +1,37 @@
 
 
-# Replace Client-Side ZIP with Pre-Built Download Files
+# Add /pangea Easter Egg Page
 
 ## Overview
-Replace the current client-side ZIP assembly (using JSZip/file-saver) with two pre-built ZIP files uploaded by the user. Also fix all `soul.local` URLs to use `https://` as specified.
+Create the Pangea game as a hidden page and weave a subtle link into the education page's features section using the existing `narrative-link` style (glowing cyan text that turns white on hover).
 
 ## Changes
 
-### 1. Copy uploaded ZIP files to `public/downloads/`
-- `soul-teacher-setup-2.zip` -> `public/downloads/soul-teacher-setup.zip`
-- `soul-student-chromebook-2.zip` -> `public/downloads/soul-student-chromebook.zip`
+### 1. Create the game page
+- Copy `Pangea.html` to `public/pangea.html`
+- Create `src/pages/Pangea.tsx` as a full-viewport iframe wrapper loading `/pangea.html` with a dark `#080e1a` background and no visible UI chrome
 
-### 2. Simplify `src/pages/Teacher.tsx`
-- Remove the `ZIP_FILES` array, `useState`, JSZip import, file-saver import, and `downloadZip` function
-- Remove `Loader2` from lucide imports
-- Replace the "Server Package" download section with **two static download links**:
-  - "Download Teacher Setup" -> `/downloads/soul-teacher-setup.zip`
-  - "Download Chromebook Student Installer" -> `/downloads/soul-student-chromebook.zip`
-- Each link includes a description of what's inside
-- Fix all `soul.local` URLs from `http://` to `https://` in the Quick Reference table and throughout
+### 2. Add the route
+- Add `import Pangea` and a `/pangea` route in `src/App.tsx` (no nav links anywhere)
 
-### 3. Update `src/pages/Student.tsx`
-- Fix `soul.local` cert button URLs from `http://` to `https://` (the cert buttons point to the local server, but per the instructions these should use `https://`)
-- Update the step 2 URL display from `soul.local:3000` to `https://soul.local:3000`
+### 3. Add the easter egg on the education page (`src/pages/Homeschool.tsx`)
+- Import `Link` from `react-router-dom` and the `narrativeLink.css` stylesheet
+- After the features grid closing `</div>` (line 327), add a small paragraph like:
 
-### 4. URL corrections (both pages)
-Per the uploaded instructions, all soul.local references should use `https://`:
-- Student App: `https://soul.local:3000`
-- Teacher Dashboard: `https://soul.local:3001`
+  *"The Chromebook Supercharger lets students run heavy creative tools they never could before, or lightweight esoteric simulations you vibe coded yourself for one lesson."*
+
+  Where **"esoteric simulations"** is a `<Link to="/pangea" className="narrative-link">` styled identically to the homepage narrative links (glowing cyan, white on hover)
+- The paragraph will be a `motion.p` with fade-in animation, styled in `cyanMuted` color to match surrounding body text, centered under the feature cards
+
+## Technical Details
+- Reuses the existing `narrative-link` CSS class from `src/components/home/narrativeLink.css`
+- Matches the `Link` + `className="narrative-link"` pattern used in `ClosingCTASection.tsx`
+- The paragraph blends naturally into the features section as a closing thought about the Chromebook Supercharger feature
+
+## Files Created
+- `public/pangea.html` (uploaded game)
+- `src/pages/Pangea.tsx` (iframe wrapper)
 
 ## Files Modified
-- `src/pages/Teacher.tsx` -- remove JSZip logic, add two static download buttons, fix URLs to https
-- `src/pages/Student.tsx` -- fix URLs to https
-
-## Files Copied
-- `user-uploads://soul-teacher-setup-2.zip` -> `public/downloads/soul-teacher-setup.zip`
-- `user-uploads://soul-student-chromebook-2.zip` -> `public/downloads/soul-student-chromebook.zip`
-
+- `src/App.tsx` (add route)
+- `src/pages/Homeschool.tsx` (add paragraph with easter egg link, import Link and CSS)
