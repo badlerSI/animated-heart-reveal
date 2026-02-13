@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Supercontinent Builder</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#080e1a;color:#d8dee9;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+.app{display:flex;flex-direction:column;height:100vh;width:100vw}
+
+/* Progress Bar */
+.progress{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:#0b1420;border-bottom:1px solid #15283d}
+.step-btn{padding:8px 18px;border-radius:6px;border:1px solid #1a3050;background:#0f1e30;color:#5a7a9a;font-size:13px;font-weight:600;cursor:default;transition:all .3s}
+.step-btn.active{background:#00b4d8;color:#080e1a;border-color:#00b4d8;box-shadow:0 0 12px rgba(0,180,216,.3)}
+.step-btn.done{background:#15283d;color:#7eb8d0;border-color:#1e4060;cursor:pointer}
+.step-btn.done:hover{background:#1e3a55}
+.step-arrow{color:#2a4a65;font-size:16px}
+.lang-btn{padding:4px 10px;border-radius:4px;border:1px solid #1a3050;background:#0f1e30;color:#5a7a9a;font-size:11px;font-weight:700;cursor:pointer;margin-left:8px;transition:all .3s}
+.lang-btn.active{background:#00b4d8;color:#080e1a;border-color:#00b4d8}
+
+/* Main Area */
+.main{display:flex;flex:1;overflow:hidden}
+.map-area{flex:1;position:relative;background:#080e1a}
+.map-area svg{width:100%;height:100%;display:block}
+
+/* Side Panel */
+.panel{width:320px;min-width:320px;background:#0b1420;border-left:1px solid #15283d;display:flex;flex-direction:column;overflow:hidden}
+.panel-header{padding:18px 20px 14px;border-bottom:1px solid #15283d}
+.panel-header h2{font-size:17px;color:#00b4d8;margin-bottom:2px}
+.panel-header .era{font-size:12px;color:#5a7a9a;letter-spacing:.5px;text-transform:uppercase}
+.panel-body{flex:1;overflow-y:auto;padding:16px 20px}
+.panel-body::-webkit-scrollbar{width:5px}
+.panel-body::-webkit-scrollbar-track{background:transparent}
+.panel-body::-webkit-scrollbar-thumb{background:#1e3a55;border-radius:3px}
+
+.desc{font-size:13.5px;line-height:1.6;color:#a0b4c8;margin-bottom:14px}
+.think-prompt{font-size:13px;color:#7eb8d0;font-style:italic;margin-bottom:16px;padding:10px 14px;background:#0f1e30;border-left:3px solid #00b4d8;border-radius:0 6px 6px 0}
+
+/* Toggle row */
+.toggles{display:flex;gap:12px;margin-bottom:16px}
+.toggle-label{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#7a9ab5;cursor:pointer}
+.toggle-label input{accent-color:#00b4d8}
+
+/* Hint Button */
+.hint-btn{width:100%;padding:10px;border:1px dashed #1e4060;border-radius:6px;background:transparent;color:#5a9ab5;font-size:13px;cursor:pointer;margin-bottom:16px;transition:all .3s}
+.hint-btn:hover{background:#0f1e30;border-color:#00b4d8;color:#00b4d8}
+.hint-text{font-size:12.5px;color:#7eb8d0;margin-top:8px;padding:8px 12px;background:#0a1825;border-radius:4px;display:none}
+.hint-text.show{display:block}
+
+/* Fossil cards */
+.section-title{font-size:11px;color:#4a6a85;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;padding-top:12px;border-top:1px solid #15283d}
+.fossil-card{background:#0f1e30;border:1px solid #15283d;border-radius:6px;margin-bottom:6px;overflow:hidden;transition:all .3s}
+.fossil-card-header{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px}
+.fossil-card-header:hover{background:#132840}
+.fossil-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.fossil-icon{font-size:14px;flex-shrink:0;color:#5a7a9a}
+.fossil-name{font-weight:600;color:#a0c4d8}
+.fossil-expand{margin-left:auto;color:#3a5a75;font-size:10px;transition:transform .2s}
+.fossil-card.open .fossil-expand{transform:rotate(180deg)}
+.fossil-detail{display:none;padding:8px 12px 10px;font-size:12px;line-height:1.5;color:#7a9ab5;border-top:1px solid #15283d}
+.fossil-card.open .fossil-detail{display:block}
+.fossil-meta{font-size:11px;color:#4a6a85;margin-bottom:4px}
+
+/* Mountain list */
+.mtn-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12.5px;color:#8aa0b5}
+.mtn-marker{width:6px;height:6px;background:#6a5a3a;border-radius:1px;margin-top:5px;flex-shrink:0}
+
+/* Quiz */
+.quiz-section{margin-top:16px;padding-top:16px;border-top:1px solid #15283d}
+.quiz-section.locked{display:none}
+.quiz-q{margin-bottom:14px}
+.quiz-q p{font-size:13px;font-weight:600;color:#b8d0e0;margin-bottom:8px}
+.quiz-opt{display:block;width:100%;padding:8px 12px;margin-bottom:4px;border:1px solid #1a3050;border-radius:5px;background:#0a1825;color:#8aa0b5;font-size:12.5px;cursor:pointer;text-align:left;transition:all .2s}
+.quiz-opt:hover:not(.chosen){background:#0f2235;border-color:#2a5070}
+.quiz-opt.correct{background:#0a2a1a;border-color:#1a8a4a;color:#4ae88a}
+.quiz-opt.wrong{background:#2a0a0a;border-color:#8a1a1a;color:#e84a4a}
+.quiz-opt.chosen{cursor:default}
+
+.continue-btn{display:none;width:100%;padding:12px;border:none;border-radius:6px;background:#00b4d8;color:#080e1a;font-size:14px;font-weight:700;cursor:pointer;margin-top:16px;transition:all .3s}
+.continue-btn:hover{background:#00d4f5;box-shadow:0 0 16px rgba(0,180,216,.3)}
+.continue-btn.show{display:block}
+
+.success-msg{display:none;padding:12px;background:#0a2a1a;border:1px solid #1a5a3a;border-radius:6px;color:#4ae88a;font-size:13px;text-align:center;margin-bottom:12px}
+.success-msg.show{display:block}
+
+/* Exit ticket score */
+.score-display{text-align:center;padding:20px;font-size:18px;color:#00b4d8;font-weight:700}
+.score-sub{font-size:13px;color:#7a9ab5;margin-top:8px;font-weight:400}
+.restart-btn{display:inline-block;margin-top:16px;padding:10px 24px;border:1px solid #00b4d8;border-radius:6px;background:transparent;color:#00b4d8;font-size:13px;cursor:pointer;transition:all .3s}
+.restart-btn:hover{background:#00b4d8;color:#080e1a}
+
+/* Continent styling */
+.continent{cursor:grab;transition:opacity .15s}
+.continent:hover{opacity:.75!important}
+.continent.dragging{opacity:1!important;cursor:grabbing}
+.continent.locked{cursor:default;opacity:.75!important}
+.continent.pulse{animation:pulse-glow 1s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 12px rgba(0,180,216,.6))}}
+
+/* SVG text */
+.sea-label{fill:#1a3a58;font-size:13px;font-style:italic;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="progress" id="progressBar"></div>
+  <div class="main">
+    <div class="map-area">
+      <svg id="mapSvg" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid meet">
+        <rect width="960" height="540" fill="#091a30"/>
+        <g id="outlines"></g>
+        <g id="continents"></g>
+      </svg>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h2 id="panelTitle"></h2>
+        <div class="era" id="panelEra"></div>
+      </div>
+      <div class="panel-body" id="panelBody"></div>
+    </div>
+  </div>
+</div>
+<script>
+// ─── Continent Path Data ───
+// Detailed SVG paths centered on (0,0), scaled proportionally
+const PATHS = {
+  namerica: "M-124.8,-57.6 L-111.6,-47.5 L-96.1,-33.6 L-85.1,-38.1 L-74.0,-42.8 L-63.0,-33.6 L-58.5,-25.1 L-51.9,-16.9 L-40.9,-13.0 L-36.5,-1.9 L-29.8,8.5 L-27.6,18.3 L-23.2,30.6 L-18.8,42.2 L-14.4,53.1 L-12.2,58.4 L-7.7,63.5 L-1.1,68.6 L3.3,78.4 L12.2,87.9 L16.6,92.6 L25.4,97.2 L34.2,101.8 L43.1,101.8 L51.9,106.4 L60.8,110.9 L65.2,113.1 L69.6,115.3 L74.0,113.1 L69.6,110.9 L65.2,106.4 L60.8,101.8 L56.3,97.2 L51.9,92.6 L47.5,87.9 L51.9,83.2 L58.5,76.0 L65.2,76.0 L69.6,73.5 L67.4,63.5 L69.6,58.4 L74.0,50.4 L78.4,42.2 L82.8,36.5 L87.3,30.6 L91.7,27.6 L96.1,21.5 L100.5,18.3 L104.9,15.1 L113.8,11.9 L120.4,5.1 L124.8,-1.9 L118.2,-9.2 L113.8,-16.9 L104.9,-25.1 L96.1,-33.6 L80.6,-42.8 L74.0,-33.6 L65.2,-25.1 L56.3,-16.9 L51.9,-13.0 L43.1,-16.9 L36.5,-25.1 L43.1,-42.8 L51.9,-52.5 L65.2,-63.0 L74.0,-74.3 L87.3,-86.6 L74.0,-100.2 L47.5,-115.3 L25.4,-100.2 L3.3,-86.6 L-18.8,-100.2 L-40.9,-86.6 L-67.4,-74.3 L-89.5,-63.0 L-107.2,-52.5 L-124.8,-57.6 Z",
+  samerica: "M-45.3,-75.5 L-36.5,-82.3 L-27.6,-84.5 L-18.8,-80.0 L-9.9,-80.0 L-1.1,-73.3 L7.7,-68.9 L16.6,-62.2 L25.4,-53.4 L34.2,-49.0 L43.1,-44.5 L49.7,-40.1 L49.7,-31.1 L45.3,-24.3 L40.9,-17.4 L38.7,-8.0 L34.2,-3.2 L29.8,1.7 L21.0,6.7 L16.6,11.7 L12.2,16.9 L3.3,22.2 L-1.1,27.6 L-5.5,33.1 L-9.9,38.8 L-14.4,44.6 L-18.8,50.7 L-23.2,63.4 L-27.6,77.2 L-23.2,84.5 L-32.0,77.2 L-36.5,63.4 L-36.5,50.7 L-32.0,38.8 L-32.0,27.6 L-32.0,16.9 L-32.0,6.7 L-27.6,-3.2 L-27.6,-12.7 L-27.6,-22.0 L-40.9,-31.1 L-45.3,-40.1 L-49.7,-49.0 L-49.7,-57.8 L-45.3,-66.6 L-40.9,-71.1 L-45.3,-75.5 Z",
+  africa: "M-84.8,-84.7 L-68.9,-91.1 L-55.7,-97.5 L-42.4,-97.5 L-29.2,-100.8 L-15.9,-100.8 L-2.7,-84.7 L10.6,-84.7 L23.9,-81.6 L37.1,-81.6 L42.4,-78.6 L50.4,-72.5 L53.0,-60.7 L58.3,-49.2 L68.9,-38.1 L74.2,-27.2 L84.8,-16.4 L90.1,-5.7 L90.1,4.9 L84.8,10.2 L68.9,15.5 L63.6,26.2 L58.3,31.5 L63.6,42.4 L58.3,53.4 L53.0,64.7 L47.7,76.3 L42.4,82.3 L37.1,88.3 L31.8,94.5 L26.5,100.8 L15.9,100.8 L5.3,100.8 L0.0,88.3 L-10.6,70.5 L-10.6,53.4 L-15.9,42.4 L-21.2,26.2 L-15.9,10.2 L-15.9,-0.4 L-21.2,-8.4 L-31.8,-8.4 L-37.1,-8.4 L-53.0,-8.4 L-63.6,-11.1 L-74.2,-16.4 L-84.8,-21.8 L-90.1,-27.2 L-84.8,-32.6 L-84.8,-43.6 L-84.8,-54.9 L-79.5,-66.5 L-74.2,-72.5 L-68.9,-78.6 L-79.5,-84.7 L-84.8,-84.7 Z",
+  eurasia: "M-190.0,33.9 L-194.0,26.0 L-198.0,16.0 L-200.0,6.0 L-198.0,-4.0 L-196.0,-14.0 L-192.0,-24.0 L-186.0,-32.0 L-178.0,-36.0 L-172.0,-36.1 L-163.5,-36.1 L-156.9,-44.7 L-154.7,-53.8 L-150.2,-63.6 L-141.4,-74.0 L-137.0,-85.4 L-128.1,-97.7 L-114.9,-104.3 L-101.6,-97.7 L-92.8,-91.4 L-84.0,-85.4 L-75.1,-85.4 L-57.4,-74.0 L-35.3,-85.4 L-13.3,-111.3 L8.8,-97.7 L30.9,-111.3 L53.0,-126.4 L75.1,-111.3 L97.2,-97.7 L119.3,-85.4 L141.4,-53.8 L152.4,-36.1 L163.5,-28.0 L174.5,-13.0 L181.2,-6.0 L185.6,-13.0 L190.0,-28.0 L185.6,-36.1 L174.5,-20.3 L163.5,-6.0 L145.8,7.3 L130.3,19.6 L123.7,31.1 L119.3,36.6 L114.9,42.0 L110.5,42.0 L101.6,47.3 L97.2,52.5 L92.8,57.5 L88.4,67.3 L75.1,76.9 L70.7,86.2 L66.3,95.3 L61.9,104.3 L57.4,113.1 L61.9,117.6 L66.3,122.0 L61.9,126.4 L57.4,117.6 L53.0,108.7 L53.0,104.3 L48.6,95.3 L44.2,86.2 L35.3,76.9 L26.5,72.1 L19.9,67.3 L-8.8,67.3 L-22.1,67.3 L-35.3,62.5 L-44.2,67.3 L-53.0,72.1 L-61.9,57.5 L-70.7,52.5 L-79.5,52.5 L-88.4,42.0 L-97.2,36.6 L-101.6,31.1 L-106.0,25.4 L-112.0,30.0 L-118.0,34.0 L-126.0,32.0 L-134.0,28.0 L-142.0,22.0 L-150.0,16.0 L-158.0,10.0 L-164.0,8.0 L-170.0,14.0 L-176.0,22.0 L-183.0,30.0 L-190.0,33.9 Z",
+  india: "M-34.0,-21.9 L-21.7,-36.2 L-9.3,-43.6 L3.1,-43.6 L15.5,-21.9 L27.8,-14.9 L40.2,-1.4 L27.8,5.2 L9.3,18.2 L3.1,31.0 L3.1,43.6 L-3.1,43.6 L-9.3,37.3 L-15.5,24.6 L-21.7,11.8 L-27.8,-1.4 L-34.0,-8.1 L-40.2,-8.1 L-34.0,-21.9 Z",
+  australia: "M-10.6,-41.9 L0.0,-41.9 L10.6,-36.5 L21.2,-41.9 L31.8,-36.5 L37.1,-31.0 L42.4,-25.4 L47.7,-14.2 L53.0,-2.5 L50.4,3.4 L47.7,15.7 L42.4,22.0 L37.1,35.1 L31.8,41.9 L26.5,35.1 L15.9,28.5 L10.6,22.0 L0.0,22.0 L-10.6,15.7 L-21.2,22.0 L-31.8,22.0 L-42.4,22.0 L-47.7,15.7 L-53.0,3.4 L-53.0,-8.4 L-53.0,-14.2 L-47.7,-25.4 L-37.1,-31.0 L-26.5,-36.5 L-15.9,-36.5 L-10.6,-41.9 Z",
+  antarctica: "M-95.4,-36.5 L-88.1,-31.1 L-78.4,-25.3 L-62.6,-19.1 L-44.4,-12.3 L-26.1,-12.3 L-7.9,-19.1 L10.3,-25.3 L28.6,-25.3 L46.8,-25.3 L62.6,-25.3 L74.7,-25.3 L86.9,-25.3 L95.4,-19.1 L89.3,3.5 L65.0,23.7 L34.6,36.5 L4.3,36.5 L-26.1,23.7 L-50.4,12.9 L-68.7,3.5 L-83.2,-4.9 L-90.5,-19.1 L-95.4,-36.5 Z"
+};
+
+// Continent colors
+const COLORS = {
+  namerica: "#e07848",
+  samerica: "#48b860",
+  africa:   "#d8a030",
+  eurasia:  "#6090d0",
+  india:    "#c060b0",
+  australia:"#d05858",
+  antarctica:"#88b8d8"
+};
+
+const NAMES = {
+  namerica: "N. America",
+  samerica: "S. America",
+  africa: "Africa",
+  eurasia: "Eurasia",
+  india: "India",
+  australia: "Australia",
+  antarctica: "Antarctica"
+};
+
+// ─── Language Support ───
+const TRANSLATIONS = {
+  en: {
+    pageTitle: "Supercontinent Builder",
+    pangea: {title:"Build Pangea", era:"~335 million years ago", desc:"About 335 million years ago, all the continents were smashed together in one giant supercontinent called Pangea (meaning 'all lands'). Drag each continent to build Pangea. Look for clues like matching coastlines and fossils to figure out where each piece goes!", think:"Look at the east coast of South America and the west coast of Africa. Do they look like puzzle pieces that fit together?"},
+    breakapart: {title:"The Great Breakup", era:"~200 million years ago", desc:"Pangea did not last forever. Around 200 million years ago, it cracked into two big pieces: Laurasia in the north and Gondwana in the south. A shallow sea called the Tethys Sea formed between them. Drag the continents to split Pangea apart.", think:"Which continents ended up in the northern group (Laurasia) and which stayed in the south (Gondwana)?"},
+    cretaceous: {title:"Age of Dinosaurs", era:"~100 million years ago (Cretaceous)", desc:"By 100 million years ago, during the Age of Dinosaurs, the continents had drifted even further apart. The Atlantic Ocean was opening up between the Americas and Africa. India had broken away from Gondwana and was heading north toward Asia. The continents are drifting toward where they are today. Try dragging each continent toward its position on a modern map!", think:"India is on a collision course with Asia. When it finally crashes in, what do you think will happen? (Hint: the Himalayas!)"},
+    exit: {title:"Exit Ticket", era:"Review", desc:"Great work! You have traveled through hundreds of millions of years of Earth's history. Now answer these review questions to show what you have learned about plate tectonics and continental drift.", think:""},
+    continentNames: {namerica: "N. America", samerica: "S. America", africa: "Africa", eurasia: "Eurasia", india: "India", australia: "Australia", antarctica: "Antarctica"},
+    stepNames: ["Pangea","Break Apart","Cretaceous","Exit Ticket"],
+    toggleFossils: "Fossils",
+    toggleMountains: "Mountains",
+    needHint: "Need a Hint?",
+    continueBtn: "Continue →",
+    allPlaced: "All continents placed! Answer the questions below.",
+    fossilEvidence: "Fossil Evidence",
+    mountainEvidence: "Mountain Evidence",
+    hints: {
+      pangea: {namerica:"Try placing North America in the upper-left area of the target region.", samerica:"South America's east coast fits snugly against Africa's west coast.", africa:"Africa goes in the center — its western bulge matches South America.", eurasia:"Eurasia is the biggest piece — it goes along the top.", india:"India was tucked between Africa and Antarctica.", australia:"Australia was next to Antarctica in the southeast.", antarctica:"Antarctica sat at the bottom of the supercontinent."},
+      breakapart: {namerica:"North America stays with Eurasia as Laurasia — drag them both north!", samerica:"Gondwana stays together in the south.", africa:"Africa stays with Gondwana — just nudge it south.", eurasia:"Eurasia stays with North America as Laurasia — drag them both north!", india:"India stays with Gondwana in the south.", australia:"Australia stays with Gondwana — nudge it south.", antarctica:"Antarctica stays with Gondwana in the south."},
+      cretaceous: {namerica:"Drag North America toward the upper-left — that's where it is today!", samerica:"South America is pulling away from Africa to the west.", africa:"Africa is moving slightly eastward.", eurasia:"Eurasia remains in the north.", india:"India is racing north toward Eurasia — the Himalayas are coming!", australia:"Australia is still connected to Antarctica — keep them together in the south!", antarctica:"Antarctica stays connected to Australia — they won't separate for another 55 million years!"}
+    },
+    restartBtn: "Start Over",
+    scoreMessages: {perfect:"Perfect score! You really understand plate tectonics.", great:"Great job! You have a solid understanding of continental drift.", okay:"Keep studying! Review the evidence from each step."},
+    outOf: "out of",
+    tethysSea: "Tethys Sea"
+  },
+  es: {
+    pageTitle: "Constructor de Supercontinentes",
+    pangea: {title:"Construir Pangea", era:"~335 millones de años", desc:"Hace aproximadamente 335 millones de años, todos los continentes estaban unidos en un supercontinente gigante llamado Pangea (que significa 'todas las tierras'). Arrastra cada continente para construir Pangea. Busca pistas como costas coincidentes y fósiles para descubrir dónde va cada pieza.", think:"Mira la costa este de América del Sur y la costa oeste de África. ¿Parecen piezas de un rompecabezas que encajan?"},
+    breakapart: {title:"La Gran Ruptura", era:"~200 millones de años", desc:"Pangea no duró para siempre. Hace alrededor de 200 millones de años, se rompió en dos grandes piezas: Laurasia en el norte y Gondwana en el sur. Se formó un mar poco profundo llamado Mar de Tetis entre ellas. Arrastra los continentes para dividir Pangea.", think:"¿Qué continentes terminaron en el grupo del norte (Laurasia) y cuáles se quedaron en el sur (Gondwana)?"},
+    cretaceous: {title:"La Era de los Dinosaurios", era:"~100 millones de años (Cretácico)", desc:"Hace 100 millones de años, durante la Era de los Dinosaurios, los continentes se habían alejado aún más. El Océano Atlántico se estaba abriendo entre las Américas y África. La India se había separado de Gondwana y se dirigía hacia Asia. Los continentes se desplazan hacia donde están hoy. ¡Intenta arrastar cada continente hacia su posición en un mapa moderno!", think:"India se dirige hacia una colisión con Asia. Cuando finalmente choque, ¿qué crees que pasará? (¡Pista: ¡Las Montañas del Himalaya!)"},
+    exit: {title:"Boleto de Salida", era:"Revisión", desc:"¡Excelente trabajo! Has viajado a través de cientos de millones de años de la historia de la Tierra. Ahora responde estas preguntas de revisión para mostrar lo que has aprendido sobre tectónica de placas y deriva continental.", think:""},
+    continentNames: {namerica: "América del Norte", samerica: "América del Sur", africa: "África", eurasia: "Eurasia", india: "India", australia: "Australia", antarctica: "Antártida"},
+    stepNames: ["Pangea","Ruptura","Cretácico","Boleto de Salida"],
+    toggleFossils: "Fósiles",
+    toggleMountains: "Montañas",
+    needHint: "¿Necesitas una pista?",
+    continueBtn: "Continuar →",
+    allPlaced: "¡Todos los continentes colocados! Responde las preguntas a continuación.",
+    fossilEvidence: "Evidencia Fósil",
+    mountainEvidence: "Evidencia de Montañas",
+    hints: {
+      pangea: {namerica:"Intenta colocar América del Norte en el área superior izquierda de la región objetivo.", samerica:"La costa este de América del Sur encaja perfectamente contra la costa oeste de África.", africa:"África va en el centro — su saliente occidental coincide con América del Sur.", eurasia:"Eurasia es la pieza más grande — va a lo largo de la parte superior.", india:"India estaba escondida entre África y la Antártida.", australia:"Australia estaba al lado de la Antártida en el sureste.", antarctica:"La Antártida se sentaba en la parte inferior del supercontinente."},
+      breakapart: {namerica:"¡América del Norte se queda con Eurasia como Laurasia — arrástralos hacia el norte!", samerica:"Gondwana se mantiene unida en el sur.", africa:"África se queda con Gondwana — muévela un poco al sur.", eurasia:"¡Eurasia se queda con América del Norte como Laurasia — arrástralos hacia el norte!", india:"India se queda con Gondwana en el sur.", australia:"Australia se queda con Gondwana — muévela un poco al sur.", antarctica:"La Antártida se queda con Gondwana en el sur."},
+      cretaceous: {namerica:"¡Arrastra América del Norte hacia la parte superior izquierda — ese es el lugar donde está hoy!", samerica:"América del Sur se está alejando de África hacia el oeste.", africa:"África se está moviendo ligeramente hacia el este.", eurasia:"Eurasia permanece en el norte.", india:"¡India se dirige rápidamente hacia Eurasia — ¡Las Montañas del Himalaya vienen!", australia:"¡Australia sigue conectada a la Antártida — mantenlas juntas en el sur!", antarctica:"¡La Antártida sigue conectada a Australia — no se separarán por otros 55 millones de años!"}
+    },
+    restartBtn: "Comenzar de Nuevo",
+    scoreMessages: {perfect:"¡Puntuación perfecta! Realmente entiendes la tectónica de placas.", great:"¡Buen trabajo! Tienes una comprensión sólida de la deriva continental.", okay:"¡Sigue estudiando! Revisa la evidencia de cada paso."},
+    outOf: "de",
+    tethysSea: "Mar de Tetis"
+  }
+};
+
+let currentLang = 'en';
+
+// ─── Step Configuration ───
+// Positions: {x, y, r} for each continent at each stage
+const POSITIONS = {
+  start: {
+    namerica:   {x:130, y:170, r:0},
+    samerica:   {x:250, y:380, r:0},
+    africa:     {x:488, y:289, r:0},
+    eurasia:    {x:592, y:128, r:0},
+    india:      {x:601, y:244, r:0},
+    australia:  {x:783, y:401, r:0},
+    antarctica: {x:462, y:489, r:0}
+  },
+  pangea: {
+    namerica:   {x:270, y:185, r:30},
+    samerica:   {x:406, y:387, r:-25},
+    africa:     {x:456, y:338, r:-8},
+    eurasia:    {x:520, y:190, r:10},
+    india:      {x:552, y:364, r:15},
+    australia:  {x:575, y:440, r:107},
+    antarctica: {x:568, y:394, r:-40}
+  },
+  breakapart: {
+    namerica:   {x:270, y:55, r:30},
+    samerica:   {x:406, y:417, r:-25},
+    africa:     {x:456, y:368, r:-8},
+    eurasia:    {x:520, y:60, r:10},
+    india:      {x:552, y:394, r:15},
+    australia:  {x:575, y:470, r:107},
+    antarctica: {x:568, y:424, r:-40}
+  },
+  cretaceous: {
+    namerica:   {x:160, y:140, r:8},
+    samerica:   {x:280, y:380, r:-5},
+    africa:     {x:470, y:310, r:-2},
+    eurasia:    {x:650, y:110, r:2},
+    india:      {x:590, y:290, r:5},
+    australia:  {x:620, y:460, r:80},
+    antarctica: {x:530, y:490, r:-15}
+  }
+};
+
+const PANGEA_OUTLINE = "M200,60 Q340,40 430,50 Q560,40 640,80 Q700,130 710,200 Q720,280 690,360 Q660,420 630,460 Q590,500 530,510 Q440,530 360,510 Q290,480 250,420 Q220,360 210,290 Q200,230 200,160 Q200,110 200,60 Z";
+const LAURASIA_OUTLINE = "M120,40 Q260,20 420,30 Q580,20 680,55 Q740,90 760,150 Q770,220 730,280 Q660,310 560,300 Q440,310 340,300 Q240,310 180,280 Q140,250 130,190 Q120,140 120,40 Z";
+const GONDWANA_OUTLINE = "M190,300 Q300,270 420,280 Q550,270 640,310 Q720,350 750,410 Q770,460 750,510 Q720,550 640,560 Q540,580 430,570 Q320,560 250,520 Q200,480 190,420 Q180,370 190,300 Z";
+
+// ─── Fossil Data ───
+const FOSSILS = {
+  pangea: [
+    {id:"mesosaurus", name:"Mesosaurus", type:"Freshwater reptile", age:"300–280 Ma", color:"#ff6b6b", desc:"A small swimming reptile that lived in freshwater lakes. Its fossils are found in both South America and Africa, which tells us these continents were once connected.", icon:"~", continents:["samerica","africa"]},
+    {id:"cynognathus", name:"Cynognathus", type:"Land reptile", age:"240–220 Ma", color:"#ffa94d", desc:"A dog-sized predator with powerful jaws. Found in South America and Africa, it could not have swum across the ocean, so the land must have been joined.", icon:"*", continents:["samerica","africa"]},
+    {id:"glossopteris", name:"Glossopteris", type:"Seed fern (plant)", age:"300–200 Ma", color:"#51cf66", desc:"A large fern-like plant with tongue-shaped leaves. Its seeds were too heavy to blow across an ocean. Found on five continents that were once joined.", icon:"+", continents:["samerica","africa","india","australia","antarctica"]},
+    {id:"lystrosaurus", name:"Lystrosaurus", type:"Land reptile", age:"260–230 Ma", color:"#cc5de8", desc:"A squat, tusked plant-eater about the size of a pig. Found in Africa, India, and Antarctica — proof these distant lands were once neighbors.", icon:"#", continents:["africa","india","antarctica"]}
+  ],
+  breakapart: [
+    {id:"allosaurus", name:"Allosaurus", type:"Theropod dinosaur", age:"155–145 Ma", color:"#ff6b6b", desc:"A large meat-eating dinosaur that roamed both North America and Eurasia when they were joined as Laurasia.", icon:"!", continents:["namerica","eurasia"]},
+    {id:"stegosaurus", name:"Stegosaurus", type:"Armored dinosaur", age:"155–150 Ma", color:"#4dabf7", desc:"Famous for its back plates and spiked tail. Found in both North America and Eurasia, showing these landmasses were still connected.", icon:"^", continents:["namerica","eurasia"]}
+  ],
+  cretaceous: [
+    {id:"iguanodon", name:"Iguanodon", type:"Plant-eating dinosaur", age:"130–110 Ma", color:"#20c997", desc:"A large plant-eater with a distinctive thumb spike. Found across North America and Eurasia before the Atlantic fully opened.", icon:"%", continents:["namerica","eurasia"]},
+    {id:"titanosaur", name:"Titanosaurs", type:"Giant sauropod", age:"100–66 Ma", color:"#f06595", desc:"The biggest land animals ever. They spread across the southern continents of South America, Africa, and India.", icon:"&", continents:["samerica","africa","india"]},
+    {id:"nothofagus", name:"Nothofagus", type:"Southern beech tree", age:"80–present Ma", color:"#8bc34a", desc:"Southern beech trees are found in Australia, Antarctica (as fossils), and South America. Their seeds cannot cross oceans, proving Australia and Antarctica were still joined in the Cretaceous.", icon:"T", continents:["australia","antarctica","samerica"]},
+    {id:"cryo", name:"Cryolophosaurus", type:"Theropod dinosaur", age:"194–188 Ma", color:"#74c0fc", desc:"The 'frozen-crested lizard' found in Antarctica shows it was once warm enough for large dinosaurs to live there.", icon:"@", continents:["antarctica"]},
+    {id:"coal", name:"Coal Deposits", type:"Fossilized tropical swamps", age:"360–300 Ma", color:"#495057", desc:"Coal forms in warm, swampy areas. Finding coal in Antarctica and other southern continents means they were once near the equator.", icon:"=", continents:["samerica","africa","india","australia","antarctica"]}
+  ]
+};
+
+// ─── Mountain Data ───
+const MOUNTAINS = {
+  namerica: [{name:"Appalachian Mountains", desc:"Eastern seaboard — once connected to mountains in Europe", dx:60, dy:45, w:12, h:75}],
+  eurasia: [{name:"Caledonian Mountains", desc:"Scotland/Scandinavia — matched the Appalachians in Pangea", dx:-135, dy:-82, w:12, h:45},{name:"Ural Mountains", desc:"Dividing line between Europe and Asia", dx:-82, dy:-45, w:9, h:75}],
+  samerica: [{name:"Sierra de la Ventana", desc:"Southern range that matched Africa's Cape Fold Belt", dx:-22, dy:52, w:18, h:9}],
+  africa: [{name:"Cape Fold Belt", desc:"Southern Africa — once lined up with South America's mountains", dx:-8, dy:80, w:25, h:11}]
+};
+
+// Fossil overlay positions within each continent (relative offsets)
+const FOSSIL_POS = {
+  mesosaurus:   {samerica:{dx:8,dy:0}, africa:{dx:-15,dy:5}},
+  cynognathus:  {samerica:{dx:0,dy:15}, africa:{dx:-10,dy:20}},
+  glossopteris: {samerica:{dx:-5,dy:-10}, africa:{dx:5,dy:-5}, india:{dx:0,dy:0}, australia:{dx:0,dy:0}, antarctica:{dx:0,dy:0}},
+  lystrosaurus: {africa:{dx:10,dy:10}, india:{dx:0,dy:5}, antarctica:{dx:-10,dy:0}},
+  allosaurus:   {namerica:{dx:0,dy:0}, eurasia:{dx:-40,dy:0}},
+  stegosaurus:  {namerica:{dx:5,dy:15}, eurasia:{dx:-30,dy:15}},
+  iguanodon:    {namerica:{dx:0,dy:-10}, eurasia:{dx:-50,dy:5}},
+  titanosaur:   {samerica:{dx:0,dy:0}, africa:{dx:0,dy:10}, india:{dx:0,dy:5}},
+  nothofagus:   {australia:{dx:-5,dy:5}, antarctica:{dx:15,dy:-5}, samerica:{dx:-8,dy:10}},
+  cryo:         {antarctica:{dx:0,dy:-3}},
+  coal:         {samerica:{dx:-5,dy:5}, africa:{dx:-5,dy:-15}, india:{dx:2,dy:-5}, australia:{dx:5,dy:0}, antarctica:{dx:10,dy:0}}
+};
+
+// ─── Quiz Data ───
+const QUIZZES = {
+  pangea: [
+    {q:"Mesosaurus was a freshwater reptile found in both South America and Africa. What does this tell us?", opts:["Those continents were once connected","Mesosaurus could fly across the ocean","The fossils were placed there by people","The ocean was freshwater back then"], ans:0},
+    {q:"Glossopteris fern seeds were too heavy to travel by wind. Why do we find them on five continents?", opts:["Birds carried them across the ocean","The continents were joined together","They floated across on icebergs","Scientists are mistaken about the fossils"], ans:1},
+    {q:"The Appalachian Mountains in North America line up with the Caledonian Mountains in Europe. What does this suggest?", opts:["Mountains can move on their own","Both formed when these continents collided as part of Pangea","It is just a coincidence","Humans built them to match"], ans:1}
+  ],
+  breakapart: [
+    {q:"What were the two large landmasses called after Pangea first split apart?", opts:["Laurasia and Gondwana","Europe and Africa","Atlantic and Pacific","Pangea Junior and Pangea Senior"], ans:0},
+    {q:"Why is the Tethys Sea important?", opts:["It was the first ocean on Earth","It separated Laurasia and Gondwana and became today's Mediterranean region","It was where all dinosaurs lived","It contained freshwater only"], ans:1}
+  ],
+  cretaceous: [
+    {q:"During the Cretaceous, which major ocean was beginning to form between the Americas and Africa?", opts:["Pacific Ocean","Indian Ocean","Atlantic Ocean","Arctic Ocean"], ans:2},
+    {q:"Cryolophosaurus fossils in Antarctica suggest that:", opts:["Dinosaurs could survive in extreme cold","Antarctica was once much warmer and in a different position","Someone transported the fossils there","Dinosaurs lived underground"], ans:1},
+    {q:"Coal deposits in Antarctica come from ancient tropical swamps. What does this prove?", opts:["It snowed coal in Antarctica","Antarctica was once near the equator where it was warm and swampy","Coal can form in freezing temperatures","Antarctica has active volcanoes"], ans:1}
+  ],
+  exit: [
+    {q:"What was the supercontinent that contained all landmasses about 335 million years ago?", opts:["Gondwana","Laurasia","Pangea","Atlantis"], ans:2},
+    {q:"Which piece of evidence would BEST support the idea that two continents were once joined?", opts:["They are both surrounded by water","The same land animal fossils are found on both","They are roughly the same color on a map","They both have mountains"], ans:1},
+    {q:"India was once part of Gondwana in the south. Where is it today?", opts:["Still in the Southern Hemisphere","Crashed into Eurasia in the north, forming the Himalayas","Floating in the Indian Ocean","Connected to Africa"], ans:1},
+    {q:"What force moves the continents across Earth's surface?", opts:["Wind and ocean currents","Earth's magnetic field pulling them","Convection currents in the mantle pushing tectonic plates","Gravity from the Moon"], ans:2},
+    {q:"About how fast do tectonic plates move each year?", opts:["A few centimeters — about as fast as your fingernails grow","Several meters — as fast as a car","Hundreds of kilometers — faster than an airplane","They do not move at all anymore"], ans:0}
+  ]
+};
+
+// ─── Step descriptions ───
+const STEP_INFO = [
+  {title:"Build Pangea", era:"~335 million years ago", desc:"About 335 million years ago, all the continents were smashed together in one giant supercontinent called Pangea (meaning 'all lands'). Drag each continent to build Pangea. Look for clues like matching coastlines and fossils to figure out where each piece goes!", think:"Look at the east coast of South America and the west coast of Africa. Do they look like puzzle pieces that fit together?"},
+  {title:"The Great Breakup", era:"~200 million years ago", desc:"Pangea did not last forever. Around 200 million years ago, it cracked into two big pieces: Laurasia in the north and Gondwana in the south. A shallow sea called the Tethys Sea formed between them. Drag the continents to split Pangea apart.", think:"Which continents ended up in the northern group (Laurasia) and which stayed in the south (Gondwana)?"},
+  {title:"Age of Dinosaurs", era:"~100 million years ago (Cretaceous)", desc:"By 100 million years ago, during the Age of Dinosaurs, the continents had drifted even further apart. The Atlantic Ocean was opening up between the Americas and Africa. India had broken away from Gondwana and was heading north toward Asia. The continents are drifting toward where they are today. Try dragging each continent toward its position on a modern map!", think:"India is on a collision course with Asia. When it finally crashes in, what do you think will happen? (Hint: the Himalayas!)"},
+  {title:"Exit Ticket", era:"Review", desc:"Great work! You have traveled through hundreds of millions of years of Earth's history. Now answer these review questions to show what you have learned about plate tectonics and continental drift.", think:""}
+];
+
+const STEP_NAMES = ["Pangea","Break Apart","Cretaceous","Exit Ticket"];
+const STEP_KEYS = ["pangea","breakapart","cretaceous","exit"];
+
+// ─── State ───
+let currentStep = 0;
+let completedSteps = new Set();
+let continentEls = {};
+let continentState = {};
+let dragTarget = null;
+let dragOffset = {x:0, y:0};
+let showFossils = false;
+let showMountains = false;
+let answeredQuizzes = {};
+let hintShown = false;
+
+const svg = document.getElementById('mapSvg');
+const outlinesG = document.getElementById('outlines');
+const continentsG = document.getElementById('continents');
+
+// ─── Build Progress Bar ───
+function renderProgress() {
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = '';
+
+  // Language toggle buttons
+  const langContainer = document.createElement('div');
+  langContainer.style.display = 'flex';
+  langContainer.style.marginRight = 'auto';
+  const enBtn = document.createElement('button');
+  enBtn.className = 'lang-btn' + (currentLang === 'en' ? ' active' : '');
+  enBtn.textContent = 'EN';
+  enBtn.onclick = () => changeLanguage('en');
+  const esBtn = document.createElement('button');
+  esBtn.className = 'lang-btn' + (currentLang === 'es' ? ' active' : '');
+  esBtn.textContent = 'ES';
+  esBtn.onclick = () => changeLanguage('es');
+  langContainer.appendChild(enBtn);
+  langContainer.appendChild(esBtn);
+  bar.appendChild(langContainer);
+
+  const trans = TRANSLATIONS[currentLang];
+  const stepNames = trans.stepNames;
+
+  STEP_NAMES.forEach((name, i) => {
+    if (i > 0) {
+      const arrow = document.createElement('span');
+      arrow.className = 'step-arrow';
+      arrow.textContent = '\u25B6';
+      bar.appendChild(arrow);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'step-btn' + (i === currentStep ? ' active' : '') + (completedSteps.has(i) ? ' done' : '');
+    btn.textContent = `${i+1}. ${stepNames[i]}`;
+    if (completedSteps.has(i) && i !== currentStep) {
+      btn.onclick = () => goToStep(i);
+    }
+    bar.appendChild(btn);
+  });
+}
+
+// ─── SVG Helpers ───
+function svgPoint(e) {
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX;
+  pt.y = e.clientY;
+  const ctm = svg.getScreenCTM().inverse();
+  return pt.matrixTransform(ctm);
+}
+
+function setTransform(el, x, y, r) {
+  el.setAttribute('transform', `translate(${x},${y}) rotate(${r})`);
+}
+
+// ─── Create Continents ───
+function buildContinents() {
+  continentsG.innerHTML = '';
+  const order = ["antarctica","australia","india","eurasia","africa","samerica","namerica"];
+  order.forEach(id => {
+    const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+    g.id = 'cont-' + id;
+    g.classList.add('continent');
+
+    // Clip path
+    const clipId = 'clip-' + id;
+    const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
+    const clip = document.createElementNS("http://www.w3.org/2000/svg","clipPath");
+    clip.id = clipId;
+    const clipPath = document.createElementNS("http://www.w3.org/2000/svg","path");
+    clipPath.setAttribute('d', PATHS[id]);
+    clip.appendChild(clipPath);
+    defs.appendChild(clip);
+    g.appendChild(defs);
+
+    // Main shape
+    const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+    path.setAttribute('d', PATHS[id]);
+    path.setAttribute('fill', COLORS[id]);
+    path.setAttribute('stroke', '#ffffff18');
+    path.setAttribute('stroke-width', '1');
+    g.appendChild(path);
+
+    // Mountain overlays (clipped)
+    const mtnG = document.createElementNS("http://www.w3.org/2000/svg","g");
+    mtnG.classList.add('mtn-overlay');
+    mtnG.setAttribute('clip-path', `url(#${clipId})`);
+    mtnG.style.display = 'none';
+    if (MOUNTAINS[id]) {
+      MOUNTAINS[id].forEach(m => {
+        const rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+        rect.setAttribute('x', m.dx - m.w/2);
+        rect.setAttribute('y', m.dy - m.h/2);
+        rect.setAttribute('width', m.w);
+        rect.setAttribute('height', m.h);
+        rect.setAttribute('fill', '#8a7a5a');
+        rect.setAttribute('opacity', '0.5');
+        rect.setAttribute('rx', '2');
+        mtnG.appendChild(rect);
+      });
+    }
+    g.appendChild(mtnG);
+
+    // Fossil overlay group (clipped)
+    const fossilG = document.createElementNS("http://www.w3.org/2000/svg","g");
+    fossilG.classList.add('fossil-overlay');
+    fossilG.setAttribute('clip-path', `url(#${clipId})`);
+    fossilG.style.display = 'none';
+    g.appendChild(fossilG);
+
+    // Label
+    const label = document.createElementNS("http://www.w3.org/2000/svg","text");
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('y', '4');
+    label.setAttribute('fill', '#fff');
+    label.setAttribute('font-size', '9');
+    label.setAttribute('opacity', '0.7');
+    label.setAttribute('pointer-events', 'none');
+    label.textContent = TRANSLATIONS[currentLang].continentNames[id];
+    g.appendChild(label);
+
+    g.style.opacity = '0.55';
+    continentsG.appendChild(g);
+    continentEls[id] = g;
+
+    // Pointer events for drag
+    g.addEventListener('pointerdown', onPointerDown);
+  });
+}
+
+// ─── Fossil Overlays ───
+function updateFossilOverlays() {
+  // Clear existing
+  Object.keys(continentEls).forEach(id => {
+    const fg = continentEls[id].querySelector('.fossil-overlay');
+    fg.innerHTML = '';
+  });
+
+  const stepKey = STEP_KEYS[currentStep];
+  const fossils = FOSSILS[stepKey] || [];
+  fossils.forEach(f => {
+    f.continents.forEach(cid => {
+      const fg = continentEls[cid].querySelector('.fossil-overlay');
+      const pos = (FOSSIL_POS[f.id] && FOSSIL_POS[f.id][cid]) || {dx:0, dy:0};
+
+      // Ellipse (larger and more visible)
+      const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+      ellipse.setAttribute('cx', pos.dx);
+      ellipse.setAttribute('cy', pos.dy);
+      ellipse.setAttribute('rx', '16');
+      ellipse.setAttribute('ry', '12');
+      ellipse.setAttribute('fill', f.color);
+      ellipse.setAttribute('opacity', '0.45');
+      fg.appendChild(ellipse);
+
+      // Center dot (larger with white ring)
+      const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      dot.setAttribute('cx', pos.dx);
+      dot.setAttribute('cy', pos.dy);
+      dot.setAttribute('r', '5');
+      dot.setAttribute('fill', f.color);
+      dot.setAttribute('opacity', '1.0');
+      dot.setAttribute('stroke', '#fff');
+      dot.setAttribute('stroke-width', '1');
+      fg.appendChild(dot);
+
+      // Fossil icon text
+      const icon = document.createElementNS("http://www.w3.org/2000/svg","text");
+      icon.setAttribute('x', pos.dx + 10);
+      icon.setAttribute('y', pos.dy + 4);
+      icon.setAttribute('font-size', '11');
+      icon.setAttribute('font-weight', 'bold');
+      icon.setAttribute('fill', f.color);
+      icon.setAttribute('pointer-events', 'none');
+      icon.textContent = f.icon;
+      fg.appendChild(icon);
+    });
+  });
+}
+
+// ─── Toggle Overlays ───
+function toggleFossils(on) {
+  showFossils = on;
+  Object.values(continentEls).forEach(g => {
+    g.querySelector('.fossil-overlay').style.display = on ? '' : 'none';
+  });
+}
+function toggleMountains(on) {
+  showMountains = on;
+  Object.values(continentEls).forEach(g => {
+    g.querySelector('.mtn-overlay').style.display = on ? '' : 'none';
+  });
+}
+
+// ─── Outlines ───
+function renderOutlines() {
+  outlinesG.innerHTML = '';
+  if (currentStep === 0) {
+    const p = document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute('d', PANGEA_OUTLINE);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', '#00b4d820');
+    p.setAttribute('stroke-width', '2');
+    p.setAttribute('stroke-dasharray', '8,6');
+    outlinesG.appendChild(p);
+  } else if (currentStep === 1) {
+    [LAURASIA_OUTLINE, GONDWANA_OUTLINE].forEach(d => {
+      const p = document.createElementNS("http://www.w3.org/2000/svg","path");
+      p.setAttribute('d', d);
+      p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', '#00b4d820');
+      p.setAttribute('stroke-width', '2');
+      p.setAttribute('stroke-dasharray', '8,6');
+      outlinesG.appendChild(p);
+    });
+    // Tethys Sea label
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute('x1', '200'); line.setAttribute('y1', '260');
+    line.setAttribute('x2', '700'); line.setAttribute('y2', '260');
+    line.setAttribute('stroke', '#1a3a5830');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke-dasharray', '4,4');
+    outlinesG.appendChild(line);
+    const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+    txt.setAttribute('x', '480'); txt.setAttribute('y', '255');
+    txt.setAttribute('text-anchor', 'middle');
+    txt.classList.add('sea-label');
+    txt.textContent = TRANSLATIONS[currentLang].tethysSea;
+    outlinesG.appendChild(txt);
+  }
+}
+
+// ─── Drag System ───
+function getTargetPositions() {
+  if (currentStep === 0) return POSITIONS.pangea;
+  if (currentStep === 1) return POSITIONS.breakapart;
+  if (currentStep === 2) return POSITIONS.cretaceous;
+  return null;
+}
+
+function getStartPositions() {
+  if (currentStep === 0) return POSITIONS.start;
+  if (currentStep === 1) return POSITIONS.pangea;
+  if (currentStep === 2) return POSITIONS.breakapart;
+  return POSITIONS.pangea; // exit ticket shows pangea
+}
+
+function onPointerDown(e) {
+  const g = e.currentTarget;
+  const id = g.id.replace('cont-','');
+  if (continentState[id].locked || currentStep === 3) return;
+
+  e.preventDefault();
+  g.setPointerCapture(e.pointerId);
+
+  const pt = svgPoint(e);
+  const st = continentState[id];
+  dragOffset.x = pt.x - st.x;
+  dragOffset.y = pt.y - st.y;
+  dragTarget = id;
+
+  g.classList.add('dragging');
+  // Move to top
+  continentsG.appendChild(g);
+
+  g.addEventListener('pointermove', onPointerMove);
+  g.addEventListener('pointerup', onPointerUp);
+  g.addEventListener('pointercancel', onPointerUp);
+}
+
+function onPointerMove(e) {
+  if (!dragTarget) return;
+  e.preventDefault();
+  const pt = svgPoint(e);
+  const st = continentState[dragTarget];
+  st.x = pt.x - dragOffset.x;
+  st.y = pt.y - dragOffset.y;
+  setTransform(continentEls[dragTarget], st.x, st.y, st.r);
+}
+
+function onPointerUp(e) {
+  if (!dragTarget) return;
+  const g = continentEls[dragTarget];
+  g.classList.remove('dragging');
+  g.removeEventListener('pointermove', onPointerMove);
+  g.removeEventListener('pointerup', onPointerUp);
+  g.removeEventListener('pointercancel', onPointerUp);
+
+  // Check snap
+  const targets = getTargetPositions();
+  if (targets) {
+    const t = targets[dragTarget];
+    const st = continentState[dragTarget];
+    const dx = t.x - st.x;
+    const dy = t.y - st.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 65) {
+      snapContinent(dragTarget, t);
+    }
+  }
+
+  const cid = g.id.replace('cont-','');
+  dragTarget = null;
+  g.style.opacity = continentState[cid].locked ? '0.75' : '0.55';
+}
+
+function snapContinent(id, target) {
+  const st = continentState[id];
+  const el = continentEls[id];
+  const startX = st.x, startY = st.y, startR = st.r;
+  const startTime = performance.now();
+  const duration = 300;
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+  }
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = easeInOutQuad(progress);
+
+    st.x = startX + (target.x - startX) * ease;
+    st.y = startY + (target.y - startY) * ease;
+    st.r = startR + (target.r - startR) * ease;
+    setTransform(el, st.x, st.y, st.r);
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      st.x = target.x;
+      st.y = target.y;
+      st.r = target.r;
+      st.locked = true;
+      el.classList.add('locked');
+      el.style.opacity = '0.75';
+      setTransform(el, st.x, st.y, st.r);
+      checkAllPlaced();
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+function checkAllPlaced() {
+  const allLocked = Object.values(continentState).every(s => s.locked);
+  if (allLocked && currentStep < 3) {
+    document.querySelector('.success-msg').classList.add('show');
+    document.querySelector('.quiz-section').classList.remove('locked');
+  }
+}
+
+// ─── Initialize Step ───
+function goToStep(step) {
+  currentStep = step;
+  hintShown = false;
+  answeredQuizzes = {};
+
+  // Reset continent states
+  const startPos = getStartPositions();
+  Object.keys(PATHS).forEach(id => {
+    const pos = startPos[id];
+    continentState[id] = {x: pos.x, y: pos.y, r: pos.r, locked: currentStep === 3};
+    const el = continentEls[id];
+    el.classList.remove('locked','pulse');
+    setTransform(el, pos.x, pos.y, pos.r);
+    el.style.opacity = currentStep === 3 ? '0.75' : '0.55';
+    if (currentStep === 3) el.classList.add('locked');
+  });
+
+  // Reset overlays
+  showFossils = false;
+  showMountains = false;
+  toggleFossils(false);
+  toggleMountains(false);
+  updateFossilOverlays();
+
+  renderOutlines();
+  renderProgress();
+  renderPanel();
+}
+
+// ─── Render Side Panel ───
+function renderPanel() {
+  const trans = TRANSLATIONS[currentLang];
+  const stepKeys = ['pangea', 'breakapart', 'cretaceous', 'exit'];
+  const stepKey = stepKeys[currentStep];
+  const info = trans[stepKey];
+  const contNames = trans.continentNames;
+
+  document.getElementById('panelTitle').textContent = info.title;
+  document.getElementById('panelEra').textContent = info.era;
+
+  const body = document.getElementById('panelBody');
+  let html = '';
+
+  // Description
+  html += `<p class="desc">${info.desc}</p>`;
+
+  // Thinking prompt
+  if (info.think) {
+    html += `<div class="think-prompt">${info.think}</div>`;
+  }
+
+  if (currentStep < 3) {
+    // Toggles
+    html += `<div class="toggles">
+      <label class="toggle-label"><input type="checkbox" id="togFossil" onchange="toggleFossils(this.checked)"> ${trans.toggleFossils}</label>
+      <label class="toggle-label"><input type="checkbox" id="togMtn" onchange="toggleMountains(this.checked)"> ${trans.toggleMountains}</label>
+    </div>`;
+
+    // Hint
+    html += `<button class="hint-btn" onclick="showHint()">${trans.needHint}</button>`;
+    html += `<div class="hint-text" id="hintText"></div>`;
+
+    // Fossil cards
+    const stepKeyFossil = STEP_KEYS[currentStep];
+    const fossils = FOSSILS[stepKeyFossil] || [];
+    if (fossils.length > 0) {
+      html += `<div class="section-title">${trans.fossilEvidence}</div>`;
+      fossils.forEach(f => {
+        const continentNames = f.continents.map(c => contNames[c]).join(', ');
+        html += `<div class="fossil-card" onclick="this.classList.toggle('open')">
+          <div class="fossil-card-header">
+            <span class="fossil-dot" style="background:${f.color}"></span>
+            <span class="fossil-icon">${f.icon}</span>
+            <span class="fossil-name">${f.name}</span>
+            <span class="fossil-expand">\u25BC</span>
+          </div>
+          <div class="fossil-detail">
+            <div class="fossil-meta">${f.type} | ${f.age}</div>
+            <div class="fossil-meta">Found in: ${continentNames}</div>
+            <p style="margin-top:4px">${f.desc}</p>
+          </div>
+        </div>`;
+      });
+    }
+
+    // Mountain evidence
+    const allMtns = [];
+    Object.entries(MOUNTAINS).forEach(([cid, mtns]) => {
+      mtns.forEach(m => allMtns.push({...m, continent: contNames[cid]}));
+    });
+    if (allMtns.length > 0) {
+      html += `<div class="section-title">${trans.mountainEvidence}</div>`;
+      allMtns.forEach(m => {
+        html += `<div class="mtn-item"><span class="mtn-marker"></span><span><strong>${m.name}</strong> (${m.continent}) — ${m.desc}</span></div>`;
+      });
+    }
+
+    // Success message
+    html += `<div class="success-msg" id="successMsg">${trans.allPlaced}</div>`;
+
+    // Quiz
+    const quizKey = STEP_KEYS[currentStep];
+    const questions = QUIZZES[quizKey] || [];
+    html += `<div class="quiz-section locked">`;
+    questions.forEach((q, qi) => {
+      html += `<div class="quiz-q"><p>${qi+1}. ${q.q}</p>`;
+      q.opts.forEach((opt, oi) => {
+        html += `<button class="quiz-opt" data-q="${qi}" data-o="${oi}" onclick="answerQuiz(this,${qi},${oi},${q.ans})">${opt}</button>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+
+    // Continue button
+    html += `<button class="continue-btn" id="continueBtn" onclick="nextStep()">${trans.continueBtn}</button>`;
+
+  } else {
+    // Exit ticket
+    const questions = QUIZZES.exit;
+    html += `<div class="quiz-section">`;
+    questions.forEach((q, qi) => {
+      html += `<div class="quiz-q"><p>${qi+1}. ${q.q}</p>`;
+      q.opts.forEach((opt, oi) => {
+        html += `<button class="quiz-opt" data-q="${qi}" data-o="${oi}" onclick="answerExitQuiz(this,${qi},${oi},${q.ans})">${opt}</button>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+    html += `<div id="scoreArea"></div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+// ─── Quiz Logic ───
+function answerQuiz(btn, qi, oi, correctIdx) {
+  if (answeredQuizzes[qi] !== undefined) return;
+  answeredQuizzes[qi] = oi;
+
+  // Mark all options for this question
+  const allBtns = document.querySelectorAll(`.quiz-opt[data-q="${qi}"]`);
+  allBtns.forEach(b => {
+    b.classList.add('chosen');
+    const idx = parseInt(b.dataset.o);
+    if (idx === correctIdx) b.classList.add('correct');
+    else if (idx === oi) b.classList.add('wrong');
+  });
+
+  // Check if all answered
+  const stepKey = STEP_KEYS[currentStep];
+  const totalQ = (QUIZZES[stepKey] || []).length;
+  if (Object.keys(answeredQuizzes).length >= totalQ) {
+    document.getElementById('continueBtn').classList.add('show');
+  }
+}
+
+function answerExitQuiz(btn, qi, oi, correctIdx) {
+  if (answeredQuizzes[qi] !== undefined) return;
+  answeredQuizzes[qi] = oi;
+
+  const allBtns = document.querySelectorAll(`.quiz-opt[data-q="${qi}"]`);
+  allBtns.forEach(b => {
+    b.classList.add('chosen');
+    const idx = parseInt(b.dataset.o);
+    if (idx === correctIdx) b.classList.add('correct');
+    else if (idx === oi) b.classList.add('wrong');
+  });
+
+  const totalQ = QUIZZES.exit.length;
+  if (Object.keys(answeredQuizzes).length >= totalQ) {
+    // Show score
+    let correct = 0;
+    Object.entries(answeredQuizzes).forEach(([q, a]) => {
+      if (a === QUIZZES.exit[q].ans) correct++;
+    });
+    const trans = TRANSLATIONS[currentLang];
+    let scoreMsg = trans.scoreMessages.okay;
+    if (correct === totalQ) scoreMsg = trans.scoreMessages.perfect;
+    else if (correct >= 3) scoreMsg = trans.scoreMessages.great;
+    const area = document.getElementById('scoreArea');
+    area.innerHTML = `<div class="score-display">${correct} ${trans.outOf} ${totalQ}<div class="score-sub">${scoreMsg}</div><button class="restart-btn" onclick="restart()">${trans.restartBtn}</button></div>`;
+  }
+}
+
+function nextStep() {
+  completedSteps.add(currentStep);
+  goToStep(currentStep + 1);
+}
+
+function restart() {
+  completedSteps.clear();
+  goToStep(0);
+}
+
+// ─── Language Support ───
+function changeLanguage(lang) {
+  currentLang = lang;
+  document.title = TRANSLATIONS[currentLang].pageTitle;
+
+  // Update continent labels
+  Object.keys(NAMES).forEach(id => {
+    const label = continentEls[id].querySelector('text');
+    if (label) {
+      label.textContent = TRANSLATIONS[currentLang].continentNames[id];
+    }
+  });
+
+  // Update Tethys Sea label if visible
+  const tethysText = outlinesG.querySelector('text');
+  if (tethysText) {
+    tethysText.textContent = TRANSLATIONS[currentLang].tethysSea;
+  }
+
+  renderProgress();
+  renderPanel();
+}
+
+// ─── Hint System ───
+function showHint() {
+  const targets = getTargetPositions();
+  if (!targets) return;
+
+  // Find first unlocked continent
+  const unlocked = Object.keys(PATHS).find(id => !continentState[id].locked);
+  if (!unlocked) {
+    document.getElementById('hintText').textContent = 'All continents are placed!';
+    document.getElementById('hintText').classList.add('show');
+    return;
+  }
+
+  // Pulse it
+  Object.values(continentEls).forEach(el => el.classList.remove('pulse'));
+  continentEls[unlocked].classList.add('pulse');
+
+  const trans = TRANSLATIONS[currentLang];
+  const stepKeys = ['pangea', 'breakapart', 'cretaceous'];
+  const stepKey = stepKeys[currentStep];
+  const hints = trans.hints[stepKey] || {};
+  const contNames = trans.continentNames;
+
+  document.getElementById('hintText').textContent = hints[unlocked] || 'Try moving ' + contNames[unlocked] + ' closer to the outline.';
+  document.getElementById('hintText').classList.add('show');
+}
+
+// ─── Init ───
+document.title = TRANSLATIONS[currentLang].pageTitle;
+document.getElementById('pageTitle').textContent = TRANSLATIONS[currentLang].pageTitle;
+buildContinents();
+goToStep(0);
+</script>
+</body>
+</html>
