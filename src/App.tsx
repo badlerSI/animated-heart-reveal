@@ -21,6 +21,7 @@ import Heavy from "./pages/Heavy";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
 import Pangea from "./pages/Pangea";
+import Privacy from "./pages/Privacy";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
