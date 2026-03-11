@@ -25,7 +25,20 @@ import Privacy from "./pages/Privacy";
 import Support from "./pages/Support";
 import ScrollToTop from "./components/ScrollToTop";
 
+// SOUL Tools pages (si.tools / soulinterface.tools)
+import LearnPage from "./pages/soul-tools/LearnPage";
+import TeachPage from "./pages/soul-tools/TeachPage";
+import CreatePage from "./pages/soul-tools/CreatePage";
+import YearbookPage from "./pages/soul-tools/YearbookPage";
+import AdminPage from "./pages/soul-tools/AdminPage";
+import EtcherPage from "./pages/soul-tools/EtcherPage";
+import SoulToolsNotFound from "./pages/soul-tools/SoulToolsNotFound";
+
 const queryClient = new QueryClient();
+
+const isToolsDomain = ["si.tools", "soulinterface.tools"].includes(
+  window.location.hostname
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -34,31 +47,45 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/tech" element={<Tech />} />
-          <Route path="/partner" element={<Partner />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/sema" element={<Navigate to="/education" replace />} />
-          
-          <Route path="/investors" element={<Investors />} />
-          <Route path="/education" element={<Homeschool />} />
-          <Route path="/vehicular" element={<Vehicular />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/extreme" element={<Extreme />} />
-          <Route path="/autonomous" element={<Autonomous />} />
-          <Route path="/light" element={<Light />} />
-          <Route path="/heavy" element={<Heavy />} />
-          <Route path="/student" element={<Student />} />
-          <Route path="/teacher" element={<Teacher />} />
-           <Route path="/pangea" element={<Pangea />} />
-           <Route path="/privacy" element={<Privacy />} />
-           <Route path="/support" element={<Support />} />
-           <Route path="/chromebook" element={<Navigate to="/student" replace />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        {isToolsDomain ? (
+          <Routes>
+            <Route path="/learn" element={<LearnPage />} />
+            <Route path="/teach" element={<TeachPage />} />
+            <Route path="/create" element={<CreatePage />} />
+            <Route path="/yearbook" element={<YearbookPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/etcher" element={<EtcherPage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="*" element={<SoulToolsNotFound />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/partner" element={<Partner />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/vision" element={<Vision />} />
+            <Route path="/sema" element={<Navigate to="/education" replace />} />
+            
+            <Route path="/investors" element={<Investors />} />
+            <Route path="/education" element={<Homeschool />} />
+            <Route path="/vehicular" element={<Vehicular />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/extreme" element={<Extreme />} />
+            <Route path="/autonomous" element={<Autonomous />} />
+            <Route path="/light" element={<Light />} />
+            <Route path="/heavy" element={<Heavy />} />
+            <Route path="/student" element={<Student />} />
+            <Route path="/teacher" element={<Teacher />} />
+             <Route path="/pangea" element={<Pangea />} />
+             <Route path="/privacy" element={<Privacy />} />
+             <Route path="/support" element={<Support />} />
+             <Route path="/chromebook" element={<Navigate to="/student" replace />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        )}
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
