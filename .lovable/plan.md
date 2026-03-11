@@ -1,22 +1,26 @@
 
 
-## Support Page (`/support`)
+# Fix: Quiz Questions Vanishing on Language Switch
 
-Create a simple, clean support page matching the Privacy page style. Apple App Store requires a working support URL with contact info — the provided content covers this well.
+## Problem
+When the language is toggled after quiz questions are visible, `changeLanguage()` calls `renderPanel()` which rebuilds the entire panel HTML. The quiz section is always created with `class="quiz-section locked"` (line 955), so even if all continents were already placed and the quiz was unlocked, it gets re-locked and hidden. Additionally, any already-answered quiz buttons lose their visual state (correct/wrong highlighting).
 
-### What to build
+## Solution
+After `renderPanel()` is called inside `changeLanguage()`, restore the quiz state:
 
-1. **`src/pages/Support.tsx`** — New page mirroring `Privacy.tsx` structure:
-   - Header: "SOUL Support"
-   - Contact line with `contact@soulinterface.ai` mailto link
-   - Small FAQ accordion (1-2 items) using the existing `Accordion` component, covering the WiFi/server connection tip
-   - Privacy policy link to `/privacy`
-   - `PageFooter` with matching cyan accent colors
-   - Same dark bg (`#0a0a0f`), cyan headings (`#1bbdc5`), gray body text
+1. **Re-unlock the quiz section** if all continents for the current step are already locked in place
+2. **Re-apply answered quiz button states** by replaying the `answeredQuizzes` object -- marking chosen answers as correct/wrong
+3. **Re-show the continue button** if all questions were already answered
+4. **For the exit ticket (step 3)**, re-apply answered states and re-show the score if it was already calculated
 
-2. **`src/App.tsx`** — Add route: `<Route path="/support" element={<Support />} />`
+## Technical Detail
 
-### Privacy page review for Apple
+In `changeLanguage()` (line 1046), after the existing `renderPanel()` call on line 1065, add a call to a new `restoreQuizState()` function that:
 
-The current Privacy page content is solid for Apple review — it covers data collection, children's privacy, COPPA compliance, contact info, and deletion rights. One small addition worth making: add a line about **third-party services** (confirming none are used) since Apple reviewers look for this. The current "Information We Do NOT Collect" section already covers this well, so no changes needed.
+- Checks if all continents are locked for the current step; if so, removes "locked" class from `.quiz-section` and shows the success message
+- Iterates over `answeredQuizzes` and for each answered question, marks the buttons with `chosen`, `correct`, or `wrong` classes
+- If all questions are answered, shows the continue button (steps 0-2) or re-renders the score area (step 3)
+
+### Files Modified
+- `public/pangea.html` -- add `restoreQuizState()` function and call it from `changeLanguage()`
 
