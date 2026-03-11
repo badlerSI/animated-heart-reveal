@@ -54,6 +54,7 @@ const App = () => (
           <Route path="/teacher" element={<Teacher />} />
            <Route path="/pangea" element={<Pangea />} />
            <Route path="/privacy" element={<Privacy />} />
+           <Route path="/support" element={<Support />} />
            <Route path="/chromebook" element={<Navigate to="/student" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
