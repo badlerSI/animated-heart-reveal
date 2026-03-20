@@ -1,26 +1,41 @@
 
 
-# Fix: Quiz Questions Vanishing on Language Switch
+# Plan: Generate Website Sitemap Documentation
 
-## Problem
-When the language is toggled after quiz questions are visible, `changeLanguage()` calls `renderPanel()` which rebuilds the entire panel HTML. The quiz section is always created with `class="quiz-section locked"` (line 955), so even if all continents were already placed and the quiz was unlocked, it gets re-locked and hidden. Additionally, any already-answered quiz buttons lose their visual state (correct/wrong highlighting).
+Generate a detailed markdown file documenting every page of the Soul Interface website (both the `soulinterface.ai` domain and the `si.tools`/`soulinterface.tools` domain).
 
-## Solution
-After `renderPanel()` is called inside `changeLanguage()`, restore the quiz state:
+## What I'll create
 
-1. **Re-unlock the quiz section** if all continents for the current step are already locked in place
-2. **Re-apply answered quiz button states** by replaying the `answeredQuizzes` object -- marking chosen answers as correct/wrong
-3. **Re-show the continue button** if all questions were already answered
-4. **For the exit ticket (step 3)**, re-apply answered states and re-show the score if it was already calculated
+A comprehensive `.md` file saved to `/mnt/documents/` covering:
 
-## Technical Detail
+**soulinterface.ai domain** (18 pages):
+- `/` — Homepage (animated logo, hero, how it works, reasoning, FAQ, closing CTA)
+- `/vision` — Company manifesto
+- `/tech` — Technology teaser
+- `/partner` — Partnership page (AiSha LLC, SEMA)
+- `/news` — Newsletter signup (Soul Dispatch)
+- `/investors` — 16-slide pitch deck
+- `/education` — Education vertical (formerly /homeschool)
+- `/vehicular` — Automotive AI vertical
+- `/work` — Enterprise/professional vertical
+- `/extreme` — Preparedness/off-grid vertical
+- `/autonomous` — Robotaxi vertical (coming soon)
+- `/light` — Product page (consumer device)
+- `/heavy` — Product page (enterprise device)
+- `/student` — Student setup guide
+- `/teacher` — Teacher deployment guide
+- `/pangea` — Embedded iframe app
+- `/privacy` — Privacy policy
+- `/support` — Support/about page
 
-In `changeLanguage()` (line 1046), after the existing `renderPanel()` call on line 1065, add a call to a new `restoreQuizState()` function that:
+**si.tools / soulinterface.tools domain** (8 pages):
+- `/learn`, `/teach`, `/create`, `/yearbook`, `/admin`, `/etcher` — 6 SOUL app landing pages
+- `/privacy`, `/support` — Reused from main site
+- `*` (catch-all) — Funny "wrong network" 404 page
 
-- Checks if all continents are locked for the current step; if so, removes "locked" class from `.quiz-section` and shows the success message
-- Iterates over `answeredQuizzes` and for each answered question, marks the buttons with `chosen`, `correct`, or `wrong` classes
-- If all questions are answered, shows the continue button (steps 0-2) or re-renders the score area (step 3)
+Each entry will include: route, page title, description, key sections/content, color scheme, and notable features.
 
-### Files Modified
-- `public/pangea.html` -- add `restoreQuizState()` function and call it from `changeLanguage()`
+## Approach
+- Run a script to write the markdown to `/mnt/documents/site-map.md`
+- No code changes needed
 
