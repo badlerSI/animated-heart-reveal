@@ -16,7 +16,7 @@ const Privacy = () => {
     ["Creator", "Students (ages ~6-18)", "Drawing, image generation, yearbook pages, gallery", "Creations, SDXL generation prompts, drawing history"],
     ["Yearbook", "Students", "Yearbook page composition, peer pages, code studio widgets", "Yearbook contributions, widget state"],
     ["Etcher", "Students (opted-in biometric)", "Capture photos of the student for personalized LoRA training; camera is used", "Raw facial photographs (deleted within 7 days of LoRA completion), captured timestamps"],
-    ["Wander (formerly Quest)", "Students", "Exploratory 16-bit adventure space incorporating classroom content", "Character state, game progress"],
+    ["Wander", "Students", "Exploratory 16-bit adventure space incorporating classroom content", "Character state, game progress"],
     ["Counselor", "School counselors / on-duty mandated reporters", "Crisis-flag review, student case notes, alert queue", "Counselor notes, alert dispositions, caseload records"],
     ["Guardian", "Parents / guardians", "View child's progress, consent management, messages", "Guardian profile, consent decisions, messages with teachers"],
     ["Admin", "School administrators", "Deployment configuration, user management, device fleet, policy controls", "Admin profile, configuration changes (all logged)"],
