@@ -1,55 +1,75 @@
 
 
-# Update Privacy Policy Page
+# Soul Interface Site Revamp — Phased Plan
 
-## Overview
+This is a major rewrite. Rather than one giant commit, I'll execute it as **16 sequential prompts** matching the brief's §8 sequence. Each is one approved change, one clean commit, easy to roll back. You approve this overall plan once, then we work through them.
 
-Replace the existing Privacy Policy at `src/pages/Privacy.tsx` with the new comprehensive version dated April 22, 2026. The new policy covers 9 SOUL apps (adding Wander, Counselor, and Guardian), detailed data retention schedules, expanded parental rights, and COPPA compliance aligned with the amended FTC rule.
+## Memory rule conflicts (need your call before we start)
 
-## Changes to Make
+Two things in the brief contradict locked project memory rules. I want you to pick one before I start writing copy:
 
-### 1. Update header metadata
-- Change "Last updated: March 10, 2026" → "Effective: April 22, 2026"
-- Add "Version: 2026-04-22"
-- Update entity name to "Soul Interface Inc. (Delaware Public Benefit Corporation)"
-- Add contact email: privacy@soulinterface.ai
+1. **Em dashes (—)** — Memory says never use them ("emblematic of AI writing"). The brief uses them everywhere ("Buy once. Own forever.", "AI that amplifies great teaching — without the sharks", etc.). Your call: keep memory rule (rewrite all em dashes as periods/commas/colons) OR allow them in this rewrite.
+2. **Emojis in app stub taglines** — Memory says "Lucide icons, NEVER emojis". The brief specifies emoji taglines ("🎲", "💙", "👪") for new Wander/Counselor/Guardian stubs, matching existing stubs which already use emojis. Your call: drop emojis (use Lucide-only) OR allow them since existing stubs already have them.
 
-### 2. Replace all section content
+I'll default to **honoring memory** (no em dashes, no emojis) unless you say otherwise.
 
-**New sections to add:**
-1. **Who we are** — Company description, local AI processing explanation
-2. **The SOUL apps** — Table of 9 apps (Learner, Teacher, Creator, Yearbook, Etcher, Wander, Counselor, Guardian, Admin) with audience, purpose, and data collected
-3. **What we collect, why, and how long we keep it** — 8 subsections with detailed retention schedules:
-   - 3.1 Account and session data (30 days for tokens)
-   - 3.2 Educational content and tutor interactions (6 months full logs → summary)
-   - 3.3 Flow posts and social content (enrollment + 90 days)
-   - 3.4 Creator output and Yearbook pages (enrollment + 90 days, export option)
-   - 3.5 Assessment, mastery, and competency data (enrollment + 7 years)
-   - 3.6 Biometric/facial data for LoRA (photos deleted in 7 days, LoRA kept +30 days after revocation)
-   - 3.7 Attendance, behavior, classroom-operational data (3-7 years per state)
-   - 3.8 Crisis-detection flags and counselor records (enrollment + 7 years)
+## Phase order (16 commits)
 
-4. **How SOUL uses data — and what it does not do** — Local AI, no cloud, no ads, no commercial use, no proactive monitoring
-5. **Third-party services** — Google Classroom, Cloudflare Tunnel, Resend (with air-gapped option)
-6. **Parental and guardian rights** — 6 rights: review, refuse collection, consent without disclosure, request deletion, revoke biometric consent, receive updated notice
-7. **School-as-agent model** — COPPA carve-out explanation, biometric exception
-8. **Information security** — Link to security policy, key safeguards
-9. **Contact** — privacy@soulinterface.ai, security@soulinterface.ai, mailing address, security officer
-10. **Changes to this policy** — Version archiving in docs/legal/
+Each phase is one approval cycle. Brief copy block in parens.
 
-### 3. Maintain styling consistency
-- Keep dark background `#0a0a0f`
-- Keep cyan accent `#1bbdc5` for headings
-- Keep Section/SubSection component pattern
-- Add table styling for the apps table and third-party services table
-- Add code styling for `docs/legal/` reference
+1. **Global fixes** — email domain (`.com` → `.ai`), default meta title/description, footer entity name (`Soul Interface Inc.`), SOUL backronym (+ "Interface"). Pure find/replace.
+2. **App naming** — rename Learn→Learner, Teach→Teacher, Create→Creator, Administrator→Admin in stub configs and Support page. Add 3 new stubs (Wander, Counselor, Guardian) reusing `SoulAppPage`. Register routes for both apex and `si.tools` route trees.
+3. **Retire pages** — delete `Autonomous.tsx`, `Sema.tsx`, `Partner.tsx`, `Tech.tsx`. Add `<Navigate>` redirects to `/heritage` (`/tech` → `/for-investors`).
+4. **Vehicular → Heritage** — rename route to `/heritage` with `/vehicular` redirect, replace copy with brief §5.9, fold in AiSha paragraph.
+5. **Homepage rewrite** — replace `ScrollContent` sections (HeroSection/HowItWorks/etc.) with new sections per §4: tagline, 3 audience cards (Schools/Homeschool/Business), manifesto snippet, Soul Stack, news/CTA. Keep `AnimatedLogo` and `#0d0d12` bg untouched. Update meta tags.
+6. **New `/towers` page** — index for Heavy/Light/Extreme. Hero, 3 cards, comparison table, Soul Stack section. Reuse existing tower images.
+7. **New `/the-suite` page** — 9-app grid with Lucide icons matching existing stub configs, Practice/Explore explainer, Alma section, teacher widgets section.
+8. **Homeschool → /schools** — keep shark hero verbatim. Add audience-selector (Homeschool/Charter/Alternative tabs). Add institutional pilot section. Update demo modal options (drop FETC, add Virtual/Bay Area/Pilot). Rename Parent Dashboard → Parent & Teacher Dashboard. Add "Assessment System of Record" feature card. Update founder bio. Redirect `/homeschool` → `/schools` (and existing `/education` still resolves).
+9. **Work expansion** — add 2 industry cards (Dental/Clinical, Small Firms), "Tax math that actually works" section, donate-at-upgrade callout. Pure additions.
+10. **Investors minimum surgery** — remove Ansel from Slide 13, recenter Ben card, add `TODO(ben):` placeholders for FETC + Florida $8K stipend slides, update meta title. Don't touch nav/PDF/keyboard logic.
+11. **Support page** — replace 6-app list with 9-app, update About paragraph, update backronym.
+12. **Vision → /about** — one phrase swap ("vehicle or carryon" → "classroom, a clinic, or a carryon"), add Shares for Shares paragraph, page title "About Soul Interface", route `/about` with `/vision` redirect.
+13. **News update** — add Recent Updates section above signup form with placeholder dated items. Form untouched.
+14. **Pilots page (optional)** — `/pilots` with placeholder cards (Mariposa, ROP1, Spring 2026 charter). Skip if you say to defer.
+15. **`<SiteHeader />`** — shared top nav (Schools/At Work/Towers/The Suite/About) on marketing pages only. Excludes Student/Teacher setup, Privacy, app stubs, Investors deck. Cyan accent for active route, mobile hamburger.
+16. **Final audit** — verify meta tags, emails, entity name, nav rendering, route resolution, mobile responsiveness on new pages.
 
-## Files to Edit
-- `src/pages/Privacy.tsx` — Complete rewrite with new content
+## Locked-down preservation list
 
-## Approach
-- Replace entire file content with new comprehensive privacy policy
-- Maintain existing component structure (Section, SubSection helpers)
-- Add table components for structured data display
-- Keep PageFooter with existing accent colors
+I will NOT touch any of these (per brief §6.1 and memory):
+- `AnimatedLogo` and all its assets
+- All existing images in `/public/lovable-uploads/` and `/src/assets/`
+- Per-page color themes (Heavy amber, Light cyan-on-light, Extreme seafoam, Schools/Work cyan)
+- Per-page fonts (Playfair on Heavy, Outfit on Light, Helvetica on edu pages)
+- Heavy wood/skeleton hover, Light cyan glow, shark + wave machine pulse, Extreme twin-node pulse animations
+- `Privacy.tsx` (already current)
+- `Pangea.tsx` iframe wrapper
+- `Student.tsx` / `Teacher.tsx` setup docs (light copy audit only if needed)
+
+## Routing summary (final state)
+
+```
+/                  Index (rewritten)
+/about             Vision (renamed)        /vision → /about
+/schools           Homeschool (expanded)   /homeschool → /schools, /education → /schools
+/work              Work (expanded)
+/towers            NEW index page
+/the-suite         NEW 9-app page
+/heavy /light /extreme   unchanged content, light edits
+/heritage          Vehicular (reframed)    /vehicular /autonomous /sema /partner → /heritage
+/pilots            NEW (optional)
+/news              expanded
+/for-investors     Investors (Ansel removed, TODOs added)   /tech → /for-investors
+/support /privacy /student /teacher /pangea   minor or no changes
+/learn /teach /create /yearbook /etcher /admin   stubs renamed in config
+/wander /counselor /guardian   NEW stubs
+*                  NotFound
+```
+
+## How we proceed
+
+After you approve this plan and answer the two memory-rule questions:
+- I'll start with **Phase 1 (Global fixes)** as the first commit. Smallest, lowest-risk, sets the meta foundation.
+- Each subsequent phase requires its own approval (Lovable's normal flow).
+- If anything mid-phase needs your input (e.g., pricing numbers for Heavy/Light, exact Mariposa pilot date), I'll add a `TODO(ben):` comment and keep moving.
 
