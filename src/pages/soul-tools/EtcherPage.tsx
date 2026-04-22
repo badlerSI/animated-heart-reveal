@@ -5,9 +5,9 @@ const config: SoulAppConfig = {
   name: "SOUL Etcher",
   primary: "#F97316",
   accent: "#FB923C",
-  tagline: "Training AI models, one selfie at a time. 🤖",
+  tagline: "Training AI models, one selfie at a time.",
   connectionMessage:
-    "Camera ready? You need the school network first! SOUL Etcher captures training data on the school's private server — your images never leave campus. Connect to WiFi and start training!",
+    "Camera ready? You need the school network first. SOUL Etcher captures training data on the school's private server. Your images never leave campus. Connect to WiFi and start training.",
   MainIcon: Cpu,
   features: [
     { icon: Camera, title: "Training Capture", description: "Take photos for AI model training (LoRA). Capture multiple angles and expressions to build your custom AI model." },

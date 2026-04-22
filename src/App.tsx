@@ -32,6 +32,9 @@ import CreatePage from "./pages/soul-tools/CreatePage";
 import YearbookPage from "./pages/soul-tools/YearbookPage";
 import AdminPage from "./pages/soul-tools/AdminPage";
 import EtcherPage from "./pages/soul-tools/EtcherPage";
+import WanderPage from "./pages/soul-tools/WanderPage";
+import CounselorPage from "./pages/soul-tools/CounselorPage";
+import GuardianPage from "./pages/soul-tools/GuardianPage";
 import SoulToolsNotFound from "./pages/soul-tools/SoulToolsNotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +58,9 @@ const App = () => (
             <Route path="/yearbook" element={<YearbookPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/etcher" element={<EtcherPage />} />
+            <Route path="/wander" element={<WanderPage />} />
+            <Route path="/counselor" element={<CounselorPage />} />
+            <Route path="/guardian" element={<GuardianPage />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/support" element={<Support />} />
             <Route path="*" element={<SoulToolsNotFound />} />
