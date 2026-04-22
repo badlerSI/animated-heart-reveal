@@ -283,7 +283,7 @@ const Heavy = () => {
             No subscriptions. No cloud. Just the power to run AI on your terms.
           </motion.p>
           <motion.a
-            href="mailto:hello@soulinterface.com"
+            href="mailto:contact@soulinterface.ai"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

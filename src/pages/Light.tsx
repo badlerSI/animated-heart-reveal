@@ -223,7 +223,7 @@ const Light = () => {
             ready to experience AI that's truly yours?
           </motion.p>
           <motion.a
-            href="mailto:hello@soulinterface.com"
+            href="mailto:contact@soulinterface.ai"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

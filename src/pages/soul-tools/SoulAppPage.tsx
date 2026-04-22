@@ -110,7 +110,7 @@ const SoulAppPage = ({ config }: { config: SoulAppConfig }) => {
 
         {/* Footer */}
         <footer className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2026 SOUL Interface</p>
+          <p>Soul Interface Inc. © 2026</p>
           <nav className="flex items-center gap-5">
             <a
               href="https://soulinterface.ai/privacy"
