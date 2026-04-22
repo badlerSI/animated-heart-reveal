@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import PageFooter from "@/components/PageFooter";
+import SiteHeader from "@/components/SiteHeader";
 import DualWaveButton from "@/components/DualWaveButton";
 
 const Homeschool = () => {
