@@ -2,12 +2,12 @@ import { Settings, Users, School, Server, ShieldCheck } from "lucide-react";
 import SoulAppPage, { type SoulAppConfig } from "./SoulAppPage";
 
 const config: SoulAppConfig = {
-  name: "SOUL Administrator",
+  name: "SOUL Admin",
   primary: "#22C55E",
   accent: "#4ADE80",
-  tagline: "Someone's gotta keep the lights on. 🔧",
+  tagline: "Someone's gotta keep the lights on.",
   connectionMessage:
-    "Admin access requires the school network! SOUL Administrator runs on the local SOUL server and manages everything behind the scenes. Connect to the school LAN to access the dashboard.",
+    "Admin access requires the school network. SOUL Admin runs on the local SOUL server and manages everything behind the scenes. Connect to the school LAN to access the dashboard.",
   MainIcon: Settings,
   features: [
     { icon: Users, title: "User Management", description: "Create and manage student and teacher accounts. Set roles, reset passwords, handle the people stuff." },

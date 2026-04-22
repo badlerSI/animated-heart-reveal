@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import PageFooter from "@/components/PageFooter";
 
 const apps = [
-  { name: "SOUL Learn", desc: "AI-assisted learning for students" },
-  { name: "SOUL Teach", desc: "Classroom management for educators" },
-  { name: "SOUL Create", desc: "AI content creation tools" },
+  { name: "SOUL Learner", desc: "AI-assisted learning for students" },
+  { name: "SOUL Teacher", desc: "Classroom management for educators" },
+  { name: "SOUL Creator", desc: "AI content creation tools" },
   { name: "SOUL Yearbook", desc: "Digital yearbook platform" },
-  { name: "SOUL Administrator", desc: "School admin dashboard" },
+  { name: "SOUL Admin", desc: "School admin dashboard" },
   { name: "SOUL Etcher", desc: "AI image generation & LoRA training" },
+  { name: "SOUL Wander", desc: "Open-ended exploration and curiosity" },
+  { name: "SOUL Counselor", desc: "Private student wellbeing and support" },
+  { name: "SOUL Guardian", desc: "Parent and guardian visibility" },
 ];
 
 const Support = () => {
@@ -37,7 +40,7 @@ const Support = () => {
             About
           </h2>
           <p className="leading-relaxed">
-            SOUL is a suite of six AI-powered learning applications designed for K–12 schools. The entire platform runs on a school's local network with no cloud dependency — student data never leaves the building. SOUL is built with privacy at its core, fully COPPA-compliant, and designed offline-first so learning continues regardless of internet availability.
+            SOUL is a suite of nine AI-powered learning applications designed for K–12 schools. The entire platform runs on a school's local network with no cloud dependency — student data never leaves the building. SOUL is built with privacy at its core, fully COPPA-compliant, and designed offline-first so learning continues regardless of internet availability.
           </p>
         </section>
 
