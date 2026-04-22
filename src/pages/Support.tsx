@@ -15,7 +15,7 @@ const Support = () => {
   useEffect(() => {
     document.title = "Support | SOUL Interface";
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", "SOUL Interface — Secure Offline Unified Learning. Support and information for the SOUL suite of K-12 educational apps.");
+    if (meta) meta.setAttribute("content", "SOUL Interface. Secure Offline Unified Learning Interface. Support and information for the SOUL suite of K-12 educational apps.");
   }, []);
 
   return (
@@ -27,7 +27,7 @@ const Support = () => {
             SOUL Interface
           </h1>
           <p className="text-lg text-gray-400 tracking-wide">
-            Secure Offline Unified Learning
+            Secure Offline Unified Learning Interface
           </p>
         </header>
 
@@ -81,7 +81,7 @@ const Support = () => {
 
         {/* Footer */}
         <footer className="pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2026 SOUL Interface. All rights reserved.</p>
+          <p>Soul Interface Inc. © 2026. All rights reserved.</p>
           <Link
             to="/privacy"
             className="transition-colors"

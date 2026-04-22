@@ -12,7 +12,7 @@ const Footer = () => {
         
         <div className="text-center md:text-right">
           <p className="text-sm text-gray-500">
-            © 2026 Soul Interface
+            Soul Interface Inc. © 2026
           </p>
           <p className="text-xs text-gray-600 mt-1">
             NVIDIA is a registered trademark of NVIDIA Corporation.
