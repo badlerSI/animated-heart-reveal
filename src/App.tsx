@@ -6,8 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import Tech from "./pages/Tech";
-import Partner from "./pages/Partner";
 import News from "./pages/News";
 import Vision from "./pages/Vision";
 import Investors from "./pages/Investors";
@@ -15,7 +13,6 @@ import Homeschool from "./pages/Homeschool";
 import Vehicular from "./pages/Vehicular";
 import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
-import Autonomous from "./pages/Autonomous";
 import Light from "./pages/Light";
 import Heavy from "./pages/Heavy";
 import Student from "./pages/Student";
@@ -68,26 +65,28 @@ const App = () => (
         ) : (
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/tech" element={<Tech />} />
-            <Route path="/partner" element={<Partner />} />
             <Route path="/news" element={<News />} />
             <Route path="/vision" element={<Vision />} />
-            <Route path="/sema" element={<Navigate to="/education" replace />} />
-            
             <Route path="/investors" element={<Investors />} />
             <Route path="/education" element={<Homeschool />} />
             <Route path="/vehicular" element={<Vehicular />} />
             <Route path="/work" element={<Work />} />
             <Route path="/extreme" element={<Extreme />} />
-            <Route path="/autonomous" element={<Autonomous />} />
             <Route path="/light" element={<Light />} />
             <Route path="/heavy" element={<Heavy />} />
             <Route path="/student" element={<Student />} />
             <Route path="/teacher" element={<Teacher />} />
-             <Route path="/pangea" element={<Pangea />} />
-             <Route path="/privacy" element={<Privacy />} />
-             <Route path="/support" element={<Support />} />
-             <Route path="/chromebook" element={<Navigate to="/student" replace />} />
+            <Route path="/pangea" element={<Pangea />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/chromebook" element={<Navigate to="/student" replace />} />
+
+            {/* Phase 3 retired-page redirects. Targets will be renamed in Phase 4 (/heritage) and Phase 10 (/for-investors). */}
+            <Route path="/autonomous" element={<Navigate to="/vehicular" replace />} />
+            <Route path="/sema" element={<Navigate to="/vehicular" replace />} />
+            <Route path="/partner" element={<Navigate to="/vehicular" replace />} />
+            <Route path="/tech" element={<Navigate to="/investors" replace />} />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
