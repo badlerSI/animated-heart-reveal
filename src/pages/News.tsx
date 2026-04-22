@@ -131,6 +131,24 @@ export default function News() {
           />
         </div>
 
+        <div className="max-w-2xl w-full mb-12 text-left">
+          <h2 className="text-2xl font-bold text-cyan-white mb-4">Recent Updates</h2>
+          <ul className="space-y-4 text-cyan-white/85">
+            <li className="border-l-2 border-cyan-500/50 pl-4">
+              <p className="text-sm text-cyan-400">{/* TODO(ben): replace with real dates */}Spring 2026</p>
+              <p>Charter pilot scoping in Florida. ELL focus, parent-dashboard rollout.</p>
+            </li>
+            <li className="border-l-2 border-cyan-500/50 pl-4">
+              <p className="text-sm text-cyan-400">January 2026</p>
+              <p>Soul Interface at FETC Orlando, January 11-14.</p>
+            </li>
+            <li className="border-l-2 border-cyan-500/50 pl-4">
+              <p className="text-sm text-cyan-400">November 2025</p>
+              <p>Ace, our 240Z prototype, debuted at SEMA 2025 with offline voice AI in 6 languages.</p>
+            </li>
+          </ul>
+        </div>
+
         <div className="max-w-4xl text-center mb-8">
           <p className="text-lg md:text-xl text-cyan-white/90">
             Sign up for the Soul Dispatch and be first to know about updates!
