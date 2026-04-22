@@ -71,36 +71,36 @@ export default function HeartNavigation() {
             style={{ cursor: "pointer" }}
           />
 
-          {/* Tech path - Top stroke of 心 (50% larger, moved up 5%) */}
+          {/* Top stroke -> Investors */}
           <path
             d="M 90 44 L 230 44 L 260 74 L 230 104 L 90 104 L 60 74 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("tech")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => handleNavigation("tech", "/tech")}
+            onClick={() => handleNavigation("tech", "/for-investors")}
             style={{ cursor: "pointer" }}
           />
 
-          {/* Vision path - Right stroke of 心 (50% larger, moved up 10%) */}
+          {/* Right stroke -> About */}
           <path
             d="M 285 80 L 315 110 L 300 170 L 315 230 L 285 260 L 255 230 L 240 170 L 255 110 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("vision")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => handleNavigation("vision", "/vision")}
+            onClick={() => handleNavigation("vision", "/about")}
             style={{ cursor: "pointer" }}
           />
 
-          {/* Partner path - Central large stroke of 心 (50% larger, moved up 10%) */}
+          {/* Central stroke -> Heritage */}
           <path
             d="M 90 168 L 230 168 L 260 198 L 245 258 L 230 318 L 160 348 L 90 318 L 75 258 L 60 198 Z"
             fill="transparent"
             pointerEvents="all"
             onMouseEnter={() => setHovered("partner")}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => handleNavigation("partner", "/partner")}
+            onClick={() => handleNavigation("partner", "/heritage")}
             style={{ cursor: "pointer" }}
           />
         </svg>
