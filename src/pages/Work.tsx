@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageFooter from "@/components/PageFooter";
+import SiteHeader from "@/components/SiteHeader";
 
 const Work = () => {
   useEffect(() => {
@@ -172,6 +173,7 @@ const Work = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
+      <SiteHeader />
       {/* Tight radius glow - small blur values for iOS Safari compatibility */}
       <style>
         {`

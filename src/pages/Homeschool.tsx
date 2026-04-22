@@ -92,6 +92,7 @@ const Homeschool = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
+      <SiteHeader />
       {/* Section 1: Text Hero */}
       <section className="min-h-[70vh] md:min-h-[60vh] pt-12 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-[#0a0a0f]">
         <div className="max-w-4xl">
