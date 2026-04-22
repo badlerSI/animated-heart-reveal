@@ -13,7 +13,6 @@ const navLinks = [
   { label: "Educational", path: "/education" },
   { label: "Vehicular", path: "/vehicular" },
   { label: "Workplace", path: "/work" },
-  { label: "Autonomous", path: "/autonomous" },
   { label: "Extreme", path: "/extreme" },
   
 ];
