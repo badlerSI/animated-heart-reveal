@@ -7,14 +7,17 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import News from "./pages/News";
-import Vision from "./pages/Vision";
+import About from "./pages/About";
 import Investors from "./pages/Investors";
 import Homeschool from "./pages/Homeschool";
-import Vehicular from "./pages/Vehicular";
+import Heritage from "./pages/Heritage";
 import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
 import Light from "./pages/Light";
 import Heavy from "./pages/Heavy";
+import Towers from "./pages/Towers";
+import TheSuite from "./pages/TheSuite";
+import Pilots from "./pages/Pilots";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
 import Pangea from "./pages/Pangea";
@@ -66,14 +69,17 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/news" element={<News />} />
-            <Route path="/vision" element={<Vision />} />
-            <Route path="/investors" element={<Investors />} />
-            <Route path="/education" element={<Homeschool />} />
-            <Route path="/vehicular" element={<Vehicular />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/for-investors" element={<Investors />} />
+            <Route path="/schools" element={<Homeschool />} />
+            <Route path="/heritage" element={<Heritage />} />
             <Route path="/work" element={<Work />} />
             <Route path="/extreme" element={<Extreme />} />
             <Route path="/light" element={<Light />} />
             <Route path="/heavy" element={<Heavy />} />
+            <Route path="/towers" element={<Towers />} />
+            <Route path="/the-suite" element={<TheSuite />} />
+            <Route path="/pilots" element={<Pilots />} />
             <Route path="/student" element={<Student />} />
             <Route path="/teacher" element={<Teacher />} />
             <Route path="/pangea" element={<Pangea />} />
@@ -81,11 +87,16 @@ const App = () => (
             <Route path="/support" element={<Support />} />
             <Route path="/chromebook" element={<Navigate to="/student" replace />} />
 
-            {/* Phase 3 retired-page redirects. Targets will be renamed in Phase 4 (/heritage) and Phase 10 (/for-investors). */}
-            <Route path="/autonomous" element={<Navigate to="/vehicular" replace />} />
-            <Route path="/sema" element={<Navigate to="/vehicular" replace />} />
-            <Route path="/partner" element={<Navigate to="/vehicular" replace />} />
-            <Route path="/tech" element={<Navigate to="/investors" replace />} />
+            {/* Renames from earlier phases. */}
+            <Route path="/vision" element={<Navigate to="/about" replace />} />
+            <Route path="/homeschool" element={<Navigate to="/schools" replace />} />
+            <Route path="/education" element={<Navigate to="/schools" replace />} />
+            <Route path="/investors" element={<Navigate to="/for-investors" replace />} />
+            <Route path="/vehicular" element={<Navigate to="/heritage" replace />} />
+            <Route path="/autonomous" element={<Navigate to="/heritage" replace />} />
+            <Route path="/sema" element={<Navigate to="/heritage" replace />} />
+            <Route path="/partner" element={<Navigate to="/heritage" replace />} />
+            <Route path="/tech" element={<Navigate to="/for-investors" replace />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

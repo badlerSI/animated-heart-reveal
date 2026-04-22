@@ -17,10 +17,10 @@ const Investors = () => {
   const slideContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.title = "Soul Interface | Investor Pitch Deck";
+    document.title = "For Investors | Soul Interface";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Soul Interface investor pitch deck. Sovereign AI for education.");
+      metaDescription.setAttribute("content", "Soul Interface for investors. Sovereign AI for education, with paid pilots, IP, and a clear path to scale.");
     }
   }, []);
 
@@ -447,34 +447,18 @@ const Investors = () => {
         {currentSlide === 13 && (
           <div className="absolute inset-0 p-8 md:p-12">
             <p className="text-[#1bbdc5] text-sm tracking-wider mb-2">THE TEAM</p>
-            <h2 className="text-4xl font-bold text-white mb-8">Vision Meets Craft</h2>
-            <div className="grid grid-cols-2 gap-8 h-[calc(100%-140px)]">
-              <div className="flex flex-col">
-                <div className="flex items-center gap-4 mb-4">
-                  <img src="/pitch-deck/ben-adler.jpg" alt="Ben Adler" className="w-24 h-24 rounded-lg object-cover" />
-                  <div>
-                    <h3 className="text-white font-bold text-xl">Ben Adler</h3>
-                    <p className="text-[#1bbdc5]">Founder & CEO</p>
-                  </div>
-                </div>
+            <h2 className="text-4xl font-bold text-white mb-8">Founder</h2>
+            <div className="flex justify-center h-[calc(100%-140px)]">
+              <div className="flex flex-col max-w-md text-center items-center">
+                <img src="/pitch-deck/ben-adler.jpg" alt="Ben Adler" className="w-32 h-32 rounded-lg object-cover mb-4" />
+                <h3 className="text-white font-bold text-2xl">Ben Adler</h3>
+                <p className="text-[#1bbdc5] mb-4">Founder & CEO</p>
                 <p className="text-[#1bbdc5] text-xs tracking-wider mb-2">THE WHY</p>
                 <p className="text-gray-400 text-sm mb-3">MBA. Master's in Education. 5 years as Science Dept Head. Watched kids outsmart every digital safeguard.</p>
-                <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> Voice AI pipelines, GPU optimization, custom personas.</p>
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-4 mb-4">
-                  <img src="/pitch-deck/ansel-iisaka.jpg" alt="Ansel Iisaka" className="w-24 h-24 rounded-lg object-cover" />
-                  <div>
-                    <h3 className="text-white font-bold text-xl">Ansel Iisaka</h3>
-                    <p className="text-[#1bbdc5]">Co-Founder & CDO</p>
-                  </div>
-                </div>
-                <p className="text-[#1bbdc5] text-xs tracking-wider mb-2">THE HOW</p>
-                <p className="text-gray-400 text-sm mb-3">ArtCenter College of Design, BS Industrial Design. Senior Industrial Designer at MTM Watch. 5+ years taking concepts from sketch to factory-ready CAD.</p>
-                <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> Enclosure design, DFM, manufacturing partnerships.</p>
+                <p className="text-gray-500 text-xs"><span className="text-[#1bbdc5]">Builds:</span> Voice AI pipelines, GPU optimization, custom personas, classroom product.</p>
               </div>
             </div>
-            <p className="text-gray-500 text-sm mt-4">Next hire: Field Ops / Support (build + install + service).</p>
+            <p className="text-gray-500 text-sm mt-4 text-center">{/* TODO(ben): add FETC outcomes slide and Florida $8K stipend deep-dive slide */}Next hires: Field Ops / Support, Industrial Design partner.</p>
           </div>
         )}
 

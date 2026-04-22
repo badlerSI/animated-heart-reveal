@@ -10,14 +10,12 @@ const ClosingCTASection = () => {
       </h2>
       
       <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-        Whether you're{" "}
-        <Link to="/vehicular" className="narrative-link">on the move</Link>,
-        helping your{" "}
-        <Link to="/education" className="narrative-link">kids learn safely</Link>,
-        managing sensitive data{" "}
-        <Link to="/work" className="narrative-link">at work</Link>,
-        riding{" "}
-        <Link to="/autonomous" className="narrative-link">in a robotaxi</Link>,
+        Whether you're equipping a{" "}
+        <Link to="/schools" className="narrative-link">classroom</Link>,
+        running a{" "}
+        <Link to="/work" className="narrative-link">private workplace</Link>,
+        choosing a{" "}
+        <Link to="/towers" className="narrative-link">tower for your space</Link>,
         or{" "}
         <Link to="/extreme" className="narrative-link">getting prepared for anything</Link>,
         Soul Interface is Powerful, Offline, Sovereign AI.

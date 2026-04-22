@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import PageFooter from "@/components/PageFooter";
+import SiteHeader from "@/components/SiteHeader";
 import DualWaveButton from "@/components/DualWaveButton";
 
 const Homeschool = () => {
@@ -25,10 +26,10 @@ const Homeschool = () => {
   });
 
   useEffect(() => {
-    document.title = "Soul Interface | Safe AI for Education";
+    document.title = "Schools | Soul Interface";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "A private, offline AI tutor with Wikipedia, classic literature, and a massive curated library. Patent pending. No cloud. No ads. Works with any Chromebook.");
+      metaDescription.setAttribute("content", "Sovereign AI for homeschools, charters, microschools, and alternative learning. Offline. Private. No subscriptions. Works with any Chromebook.");
     }
 
     const timer = setTimeout(() => setShowScrollPrompt(true), 10000);
@@ -66,10 +67,11 @@ const Homeschool = () => {
   const features = [
     { icon: Brain, title: "AI Tutor", description: "Step-by-step help in any subject" },
     { icon: BookOpen, title: "Adaptive Assessments", description: "Quizzes that meet them where they are" },
+    { icon: ShieldCheck, title: "Assessment System of Record", description: "Standards-aligned, exportable, parent and admin ready" },
     { icon: Languages, title: "Multilingual Support", description: "Explains in your family's languages" },
     { icon: Gamepad2, title: "Story & Game Engine", description: "Turns lessons into adventures" },
-    { icon: Palette, title: "AI Creative Labs", description: "Make games, music, and art — AI as copilot" },
-    { icon: LayoutDashboard, title: "Parent Dashboard", description: "See progress, set limits" },
+    { icon: Palette, title: "AI Creative Labs", description: "Make games, music, and art with AI as copilot" },
+    { icon: LayoutDashboard, title: "Parent & Teacher Dashboard", description: "See progress, set limits, share with educators" },
     { icon: Bug, title: "$1K Bad Behavior Bug Bounty", description: "Report bypasses, get paid" },
     { icon: Cpu, title: "Chromebook Supercharger", description: "Run Blender, simulations, and advanced apps" },
   ];
@@ -90,6 +92,7 @@ const Homeschool = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
+      <SiteHeader />
       {/* Section 1: Text Hero */}
       <section className="min-h-[70vh] md:min-h-[60vh] pt-12 md:pt-8 flex flex-col items-center justify-center px-6 text-center relative bg-[#0a0a0f]">
         <div className="max-w-4xl">
@@ -451,9 +454,9 @@ const Homeschool = () => {
             className="text-lg leading-relaxed"
             style={{ color: cyanMuted }}
           >
-            Soul Interface was founded by Ben Adler, an 8th-grade science teacher from Oakland. 
-            He spent years watching kids circumvent every safeguard and get up to shockingly bad behavior on supposedly safe school computers. 
-            This is his answer: AI that amplifies great teaching — without the sharks.
+            Soul Interface was founded by Ben Adler, an MBA with a Master's in Education and 5 years as a Science Department Head in Oakland.
+            He spent years watching kids circumvent every safeguard and get up to shockingly bad behavior on supposedly safe school computers.
+            This is his answer: AI that amplifies great teaching, without the sharks.
           </motion.p>
         </div>
       </section>
