@@ -16,16 +16,8 @@ const FAQSection = () => {
       answer: "You can push one-way updates from your phone when connected. Data flows in, never back out. Your offline knowledge vault stays current on your terms."
     },
     {
-      question: "Can I create custom personas?",
-      answer: "Absolutely! We don't limit you to 4 options, mix and blend different voice, accent and character traits until you create your ideal AI companion's persona. And create and save as many as you like!"
-    },
-    {
       question: "Is it really completely offline?",
       answer: "Yes. A cutting-edge GPU handles all inference locally, but is also capable of filtering web searches when connected to the internet, to give you the information you want, and none of the junk."
-    },
-    {
-      question: "How do I back up my data?",
-      answer: "Secure encrypted backups can be stored locally or on your own storage. Transfer your AI personas and preferences to a new device whenever you upgrade."
     },
     {
       question: "What languages are supported?",

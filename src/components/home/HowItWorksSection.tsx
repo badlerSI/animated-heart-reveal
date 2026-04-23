@@ -17,7 +17,7 @@ const HowItWorksSection = () => {
     },
     {
       title: "Defends Your Data",
-      description: "Encrypted storage, secure backups, and zero external transmission.",
+      description: "Encrypted local storage and zero external transmission.",
       image: "/lovable-uploads/3ac401c6-c7e0-4317-935c-d3a24965b910.png"
     }
   ];

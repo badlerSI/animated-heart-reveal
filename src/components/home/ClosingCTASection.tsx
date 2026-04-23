@@ -14,10 +14,8 @@ const ClosingCTASection = () => {
         <Link to="/schools" className="narrative-link">classroom</Link>,
         running a{" "}
         <Link to="/work" className="narrative-link">private workplace</Link>,
-        choosing a{" "}
+        or choosing a{" "}
         <Link to="/towers" className="narrative-link">tower for your space</Link>,
-        or{" "}
-        <Link to="/extreme" className="narrative-link">getting prepared for anything</Link>,
         Soul Interface is Powerful, Offline, Sovereign AI.
       </p>
 
