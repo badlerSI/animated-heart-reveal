@@ -75,8 +75,8 @@ const SuperHeavy = () => {
             <div
               className="absolute inset-0 blur-3xl pointer-events-none"
               style={{
-                background: `radial-gradient(ellipse at center, ${accent}40 0%, transparent 70%)`,
-                transform: "scale(1.15)",
+                background: `radial-gradient(ellipse at center, ${accent}99 0%, ${accent}33 40%, transparent 70%)`,
+                animation: "superheavy-pulse 3s ease-in-out infinite",
               }}
             />
             <img
@@ -85,6 +85,12 @@ const SuperHeavy = () => {
               className="relative w-full h-auto"
             />
           </div>
+          <style>{`
+            @keyframes superheavy-pulse {
+              0%, 100% { opacity: 0.55; transform: scale(1.18); }
+              50% { opacity: 1; transform: scale(1.4); }
+            }
+          `}</style>
         </motion.div>
 
         <motion.div
