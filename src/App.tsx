@@ -15,6 +15,7 @@ import Work from "./pages/Work";
 import Extreme from "./pages/Extreme";
 import Light from "./pages/Light";
 import Heavy from "./pages/Heavy";
+import SuperHeavy from "./pages/SuperHeavy";
 import Towers from "./pages/Towers";
 import TheSuite from "./pages/TheSuite";
 import Pilots from "./pages/Pilots";
@@ -77,6 +78,8 @@ const App = () => (
             <Route path="/extreme" element={<Extreme />} />
             <Route path="/light" element={<Light />} />
             <Route path="/heavy" element={<Heavy />} />
+            <Route path="/superheavy" element={<SuperHeavy />} />
+            <Route path="/SUPERheavy" element={<Navigate to="/superheavy" replace />} />
             <Route path="/towers" element={<Towers />} />
             <Route path="/the-suite" element={<TheSuite />} />
             <Route path="/pilots" element={<Pilots />} />
