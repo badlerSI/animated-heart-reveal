@@ -11,7 +11,6 @@ import {
   HeartHandshake,
   ShieldCheck,
   CheckCircle2,
-  Users,
 } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 
@@ -87,29 +86,6 @@ const TheSuite = () => {
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Alma */}
-      <section className="px-6 py-20">
-        <div className="max-w-3xl mx-auto text-center">
-          <Sparkles className="w-10 h-10 mx-auto mb-4" style={{ color: "#1bbdc5" }} strokeWidth={1.5} />
-          <h2 className="text-3xl font-bold text-white mb-4">Meet Alma</h2>
-          <p className="text-gray-400 leading-relaxed text-lg">
-            Alma is the voice and personality at the heart of the Suite. Patient, curious, accurate, and customizable to your school's values. {/* TODO(ben): finalize Alma description and pronoun policy */}
-          </p>
-        </div>
-      </section>
-
-      {/* Teacher widgets */}
-      <section className="px-6 py-20 bg-[#0d0d14]">
-        <div className="max-w-4xl mx-auto">
-          <Users className="w-10 h-10 mb-4" style={{ color: "#1bbdc5" }} strokeWidth={1.5} />
-          <h2 className="text-3xl font-bold text-white mb-4">Teacher Widgets</h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Drop-in components teachers actually use: a live classroom dashboard, attendance, exit-ticket builders, ELL translation, parent-letter drafting, and substitute-safe class flow.
-          </p>
-          <p className="text-sm text-gray-500">{/* TODO(ben): list specific widgets shipped at v1 */}Full widget list coming soon.</p>
         </div>
       </section>
 
