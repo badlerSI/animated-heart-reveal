@@ -476,25 +476,6 @@ const Homeschool = () => {
             Ready to take your kids offline?
           </h2>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mb-8 p-6 rounded-xl border"
-            style={{ 
-              background: `linear-gradient(135deg, rgba(47, 197, 237, 0.08) 0%, rgba(139, 90, 43, 0.08) 100%)`,
-              borderColor: `${cyan}30`
-            }}
-          >
-            <p className="text-lg sm:text-xl font-bold mb-2" style={{ color: cyan }}>
-              Pre-Order Pioneer Edition Now for Q1 2026 Delivery
-            </p>
-            <p className="text-sm sm:text-base text-[#c4a574]">
-              Limited Edition Launch Case With Real Wood Veneer
-            </p>
-          </motion.div>
-
           <Button
             onClick={() => setDemoModalOpen(true)}
             size="lg"
@@ -532,7 +513,7 @@ const Homeschool = () => {
             </DialogTitle>
             <DialogDescription className="text-center space-y-2 pt-2">
               <p style={{ color: cyanMuted }}>
-                Join us at <span style={{ color: cyan }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+                Tell us about your school or program and we'll be in touch to schedule a demo.
               </p>
             </DialogDescription>
           </DialogHeader>
