@@ -99,7 +99,6 @@ const Towers = () => {
                   ["GPU", "RTX 5090, 32GB VRAM", "RTX 6000 Blackwell, 96GB VRAM", "Ruggedized GPU node"],
                   ["Form factor", "Polished metal, carry-on", "Real wood, commercial chassis", "Twin-node: vehicle + base"],
                   ["Best for", "Homes, small studios", "Schools, studios, enterprise", "Off-grid, maritime, prep"],
-                  ["Pricing", "TODO(ben): light price", "TODO(ben): heavy price", "TODO(ben): extreme price"],
                 ].map((row, i) => (
                   <tr key={i} className="border-b border-white/5">
                     {row.map((cell, j) => (

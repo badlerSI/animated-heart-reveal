@@ -37,10 +37,6 @@ const About = () => {
                 <p className="mb-6">
                   We dream of a future where every household and place of gathering has its own Sovereign AI. For now, we are going out into the world, and showing everyone the astounding utility of our personal, edge-reasoning machines.
                 </p>
-                <h2 className="text-2xl font-semibold text-[#1bbdc5] mt-8 mb-3">Shares for Shares</h2>
-                <p>
-                  We extend an open invitation to teachers, school leaders, and pilot partners: share Soul Interface with your community, and share in our equity. We believe the people who help us prove this technology in real classrooms deserve to participate in the upside. {/* TODO(ben): finalize Shares for Shares program details and link */}
-                </p>
               </div>
             </div>
 
@@ -71,8 +67,6 @@ const About = () => {
               <p>At Soul Interface, you are never the product. We believe in owning your own AI systems outright. With a reasoning layer you can examine for any answer, and hardware that fits in a classroom, a clinic, or a carryon, it is Personal, Private, Sovereign AI.</p>
               <p>No subscriptions, no ads, no way for your data to leave, and free updates as long as you own the system.</p>
               <p>We dream of a future where every household and place of gathering has its own Sovereign AI.</p>
-              <h2 className="text-xl font-semibold text-[#1bbdc5] mt-4">Shares for Shares</h2>
-              <p>We extend an open invitation to teachers, school leaders, and pilot partners: share Soul Interface with your community, and share in our equity.</p>
             </div>
           </div>
         </div>
