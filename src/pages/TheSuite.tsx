@@ -11,7 +11,6 @@ import {
   HeartHandshake,
   ShieldCheck,
   CheckCircle2,
-  Users,
 } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
 
