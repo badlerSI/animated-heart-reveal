@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Cpu, HardDrive, MemoryStick, Users, Server, Box, Building2, GraduationCap, Network } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
-import superHeavyTower from "@/assets/superheavy-tower.png";
+import superHeavyTower from "@/assets/superheavy-silhouette.png";
 
 const accent = "#7DD9A8";
 
@@ -23,18 +23,18 @@ const SuperHeavy = () => {
   const useCases = [
     {
       icon: Building2,
-      title: "Districts & Campuses",
-      description: "One tower serves an entire building. Every classroom, every student, on the same local fabric.",
+      title: "Schools",
+      description: "One tower serves up to 150 students and staff at once. Add more as enrollment grows.",
     },
     {
       icon: GraduationCap,
-      title: "Universities & Labs",
+      title: "Departments & Labs",
       description: "Research-grade compute that never leaves the room. No cloud bills, no data exfiltration.",
     },
     {
       icon: Server,
       title: "Enterprise & Government",
-      description: "Air-gapped AI infrastructure for organizations that cannot touch the public cloud.",
+      description: "Air-gapped AI infrastructure for teams that cannot touch the public cloud.",
     },
   ];
 
@@ -60,7 +60,7 @@ const SuperHeavy = () => {
             Serve the building.
           </p>
           <p className="text-sm text-white/40 tracking-widest uppercase">
-            150 users. one tower. zero cloud.
+            150 concurrent users. scales with your population.
           </p>
         </motion.div>
 
@@ -83,17 +83,6 @@ const SuperHeavy = () => {
               src={superHeavyTower}
               alt="The SUPER Heavy tower silhouette"
               className="relative w-full h-auto"
-              style={{
-                filter: "brightness(0) saturate(100%)",
-                opacity: 0.92,
-              }}
-            />
-            {/* Edge accent glow */}
-            <div
-              className="absolute inset-0 pointer-events-none mix-blend-screen"
-              style={{
-                background: `linear-gradient(135deg, ${accent}20 0%, transparent 50%, ${accent}10 100%)`,
-              }}
             />
           </div>
         </motion.div>
@@ -193,7 +182,7 @@ const SuperHeavy = () => {
             viewport={{ once: true }}
             className="font-outfit text-4xl md:text-5xl font-light mb-6 text-white"
           >
-            One tower. <span style={{ color: accent }}>Whole building.</span>
+            One tower. <span style={{ color: accent }}>150 users.</span> Add more as you grow.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
