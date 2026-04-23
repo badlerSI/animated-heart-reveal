@@ -27,12 +27,12 @@ const Towers = () => {
       accent: "#d4a574",
     },
     {
-      slug: "/extreme",
-      name: "Just in Case",
-      tagline: "When the grid goes dark, your AI stays on.",
-      desc: "Ruggedized twin-node architecture for off-grid, maritime, and emergency use.",
+      slug: "/superheavy",
+      name: "The SUPER Heavy",
+      tagline: "Serve the building.",
+      desc: "Building-scale infrastructure for districts, campuses, universities, and enterprise.",
       icon: Mountain,
-      accent: "#4CAF7C",
+      accent: "#7DD9A8",
     },
   ];
 
@@ -90,15 +90,13 @@ const Towers = () => {
                   <th className="py-4 pr-4 text-gray-500 font-medium"></th>
                   <th className="py-4 px-4 text-[#1bbdc5] font-semibold">the light</th>
                   <th className="py-4 px-4 text-amber-400 font-semibold">The Heavy</th>
-                  <th className="py-4 px-4 text-[#7DD9A8] font-semibold">Just in Case</th>
+                  <th className="py-4 px-4 text-[#7DD9A8] font-semibold">The SUPER Heavy</th>
                 </tr>
               </thead>
               <tbody className="text-gray-300">
                 {[
-                  ["Users", "3–4", "Whole classroom or office", "Field team / household"],
-                  ["GPU", "RTX 5090, 32GB VRAM", "RTX 6000 Blackwell, 96GB VRAM", "Ruggedized GPU node"],
-                  ["Form factor", "Polished metal, carry-on", "Real wood, commercial chassis", "Twin-node: vehicle + base"],
-                  ["Best for", "Homes, small studios", "Schools, studios, enterprise", "Off-grid, maritime, prep"],
+                  ["Users", "3–4", "Whole classroom or office", "150 concurrent, scalable"],
+                  ["GPU", "RTX 5090, 32GB VRAM", "RTX 6000 Blackwell, 96GB VRAM", "2x RTX 6000 Blackwell Max-Q"],
                 ].map((row, i) => (
                   <tr key={i} className="border-b border-white/5">
                     {row.map((cell, j) => (
