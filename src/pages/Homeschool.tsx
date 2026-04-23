@@ -513,7 +513,7 @@ const Homeschool = () => {
             </DialogTitle>
             <DialogDescription className="text-center space-y-2 pt-2">
               <p style={{ color: cyanMuted }}>
-                Join us at <span style={{ color: cyan }}>FETC 2026</span> in Orlando (January 11-14) or book an in-person Pioneer Edition demo in Florida the 3rd week of January.
+                Tell us about your school or program and we'll be in touch to schedule a demo.
               </p>
             </DialogDescription>
           </DialogHeader>
