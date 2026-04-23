@@ -44,7 +44,7 @@ const HeroSection = () => {
           <HeartPulse className="w-12 h-12 mx-auto mb-4" style={{ color: "#1bbdc5" }} />
           <h3 className="text-xl font-semibold text-white mb-2">Yours, Truly</h3>
           <p className="text-gray-400">
-            Create custom personas, voices, and knowledge bases. Your AI reflects you, not a corporate template.
+            Build your own knowledge bases and curate what your AI knows. It reflects you, not a corporate template.
           </p>
         </div>
       </div>
